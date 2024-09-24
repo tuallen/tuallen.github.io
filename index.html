@@ -1,18 +1,237 @@
----
-layout: default
----
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description"
+        content="Allen Tu's personal website.">
+    <meta name="keywords"
+        content="Allen Tu, Tu Allen, allentu, tuallen, atu1, allen.tu.3, number.tu">
+    <title>Allen Tu</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/extra_min_styles.css">
+    <link rel="stylesheet" href="stylesheets/video_container.css">
+
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="stylesheets/css/academicons.css" />
+    <link rel="stylesheet" href="stylesheets/css/font-awesome.css" />
+    <link rel="stylesheet" href="stylesheets/css/academicons.min.css" />
+    <link rel="stylesheet" href="stylesheets/style-svg.html">
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+</head>
+
+<body data-new-gr-c-s-check-loaded="8.876.0" data-gr-ext-installed="">
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <header>
+            <h1 align="center">Allen Tu</h1>
+
+            <!-- Picture + Links + News -->
+            <div style="margin-bottom: 10px" align="center">
+
+                <!-- Portrait -->
+                <img src="./files/Headshot.png" alt="Portrait" class="portrait">
+
+                <!-- Email -->
+                <center>
+                    <p>
+                        <a href="mailto: atu1@umd.edu"> atu1@umd.edu </a>
+                    </p>
+                </center>
+
+                <!-- CV -->
+                <a href="./files/AllenTu_CV.pdf" style="margin-right:14px;"><i class="ai ai-cv"
+                        style="font-size: 32px;"></i>
+                </a>
+
+                <!-- Git -->
+                <a href="https://github.com/tuallen" style="margin-right:14px;">
+                    <i class="fa fa-github" style="font-size:32px;"></i>
+                    <!-- color: #A7A499" -->
+                </a>
+
+                <!-- Scholar -->
+                <a href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl=en" style="margin-right:14px;">
+                    <i class="ai ai-google-scholar big-icon" style="font-size:32px;"></i>
+                </a>
+                <!-- Linkedin -->
+                <a href="https://www.linkedin.com/in/allentu/" style="margin-right:14px;">
+                    <i class="fa fa-linkedin-square" style="font-size:32px;"></i>
+                </a>
+                <br>
+                <br>
+            </div>
 
 
-{% include career-profile.html %}
+            <!-- Put "nav" here for side bar nav -->
+            <ul class="navbar">
+                <li class="navbar_li" id="selected"><a href="https://tuallen.github.io/index.html">Home</a></li>
+                <li class="navbar_li" id="selected"><a href="https://www.cs.umd.edu/people/atu1">Official Profile</a>
+                </li>
+            </ul>
 
-{% unless site.data.data.sidebar.education %}
-  {% include education.html %}
-{% endunless %}
 
-{% include experiences.html %}
+        </header>
+        <section>
+            <h1>About Me</h1>
 
-{% include projects.html %}
 
-{% include publications.html %}
+            <p>
+                I am a second-year graduate student in Computer Science at the University of Maryland, College Park
+                advised by <a href="https://www.cs.umd.edu/~tomg/"> Professor Tom Goldstein</a>.
 
-{% include skills.html %}
+            <p> I am broadly interested in the intersection of deep learning, computer vision, and graphics. My recent
+                work focuses on 3D neural scene reconstruction and multimodal biometric recognition.
+            </p>
+            <p>
+                I am currently funded by the IARPA Walk-through Rendering from Images of Varying Altitude (WRIVA)
+                program.
+            </p>
+
+
+            <h3>Recent News</h3>
+
+            <ul>
+                <li> September 2024: Published our PUP 3D-GS <a
+                        href="https://github.com/j-alex-hanson/gaussian-splatting-pup/tree/main">code</a> and <a
+                        href="https://github.com/j-alex-hanson/gaussian-splatting-pup/tree/main">website</a>.</li>
+                <li> August 2024: Started my second year as a graduate student at UMD.</li>
+                <li> June 2024: Released our PUP 3D-GS <a href="https://pup3dgs.github.io/">preprint</a> to arXiv.</li>
+                <li> May 2024: Returned to STR as a Computer Vision Research Intern.</li>
+                <li> May 2024: Finished my BS/MS in Computer Science! 🎉 <i>Extended to transfer to the PhD program.</i>
+                </li>
+            </ul>
+            <section>
+                <h1> Research Highlights </h1>
+                <!-- Work -->
+                <table style="margin-top:-12px;">
+                    <!-- Work -->
+                    <tbody>
+                        <tr style="border-bottom:1px solid #e5e5e5;">
+                            <!-- IMAGE -->
+                            <td>
+                                <div class="video-container">
+                                    <video class="video-thumbnail" src="projects/kitchen.mp4" muted></video>
+                                </div>
+                                <center>
+                                    <p><i>Hover to play video.</i></p>
+                                </center>
+                            </td>
+
+                            <!-- TITLE AND INFO -->
+                            <td>
+                                <br>
+                                <div id="indexWorkText">
+                                    <!-- Title + Link -->
+                                    <b><a href="https://pup3dgs.github.io/"> PUP 3D-GS: Principled Uncertainty Pruning
+                                            for
+                                            3D Gaussian Splatting
+                                        </a></b>
+                                    <br>
+                                    <i>Preprint</i>, 2024.
+                                </div>
+                                <div class="indexWorkText">
+                                    <a href="https://arxiv.org/abs/2406.10219" class="button" target="_blank">PAPER</a>
+                                    <a href="https://github.com/j-alex-hanson/gaussian-splatting-pup/tree/main"
+                                        class="button" target="_blank">CODE</a>
+                                    <!-- <a href="" class="button" target="_blank">VIDEO</a> -->
+                                </div>
+                                <br>
+                                <!-- One sentence description -->
+                                <div id="indexWorkText">
+                                    Prune 88.44% of primitives from 3D Gaussiance Splatting (3D-GS) scenes using a
+                                    mathematically principled sensitivity pruning score, tripling rendering speed with
+                                    minimal loss of visual fidelity.
+                                </div>
+                                <br>
+
+                                <!-- Collaborators -->
+                                <div id="indexWorkText">
+                                    <a href="https://www.cs.umd.edu/~hanson/">Alex Hanson*</a>, <strong>Allen
+                                        Tu*</strong>,
+                                    <a href="https://vasusingla.github.io/">Vasu Singla</a>,
+                                    <a href="https://www.cs.umd.edu/people/mayukaj">Mayuka Jayawardhana</a>,
+                                    <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>,
+                                    <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>.
+                                </div>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom:1px solid #e5e5e5;"></tr>
+                        <!-- IMAGE -->
+                        <td>
+                            <a href="https://str.us/"><img class="workPicture" src="projects/str.png"
+                                    alt="STR Logo"></a>
+                        </td>
+
+                        <!-- TITLE AND INFO -->
+                        <td>
+                            <br>
+                            <div id="indexWorkText">
+                                <!-- Title + Link -->
+                                <b><a href="https://pup3dgs.github.io/">IARPA Biometric Recognition and Identification
+                                        at
+                                        Altitude and Range (BRIAR)
+                                    </a></b>
+                                <br>
+                                <a href="https://str.us/"><i>Systems & Technology Research</i></a>, 2022-2024
+                                <br>
+                                Computer Vision Research Intern/Co-Op
+                            </div>
+                            <br>
+                            <!-- One sentence description -->
+                            <div id="indexWorkText">
+                                I contributed to our SOTA face, body, and multimodal recognition system. Ask me about:
+                                <ul>
+                                    <li>Knowledge distillation for face probe-to-gallery feature similarity prediction.
+                                        (2024)</li>
+                                    <li>Feature clustering and aggregation for face recognition from videos. (2024)</li>
+                                    <li>Training operating condition-invariant face encoders. (2023)</li>
+                                    <li>Model ensembling and mixed-voting classifiers for open search. (2023)</li>
+                                    <li>Data augmentation via garment transfer for training clothing-invariant body
+                                        encoders. (2022)</li>
+                                </ul>
+                            </div>
+                            <br>
+
+                            <!-- Collaborators -->
+                            <div id="indexWorkText">
+                                <strong>Mentors:</strong>
+                                <a href="https://www.linkedin.com/in/jenxu">Dr. Jennifer Xu</a>,
+                                <a href="https://engineering.jhu.edu/faculty/vishal-patel/">Prof. Vishal Patel</a>,
+                                <a href="https://engineering.jhu.edu/faculty/rama-chellappa/">Prof. Rama Chellappa</a>,
+                                <a href="https://www.linkedin.com/in/noam-eshed-156454101">Noam Eshed</a>,
+                                <a href="https://www.linkedin.com/in/matthew-meyn-579784157">Matthew Meyn</a>,
+                                <a href="https://www.linkedin.com/in/mark-keck-b640598">Dr. Mark Keck</a>,
+                                <a href="https://www.linkedin.com/in/nathan-shnidman">Dr. Nathan Shnidman</a>.
+                            </div>
+                            <br>
+                            <br>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <footer>
+                <br>
+                <p style="line-height: 1.2;" align="center"><small>Website is based</a> on <a
+                            href="https://github.com/orderedlist/minimal">minimal</a> <br>and inspired by Gowthami
+                        Somepalli's <a href="https://somepago.github.io/">website</a> <br>
+                        &copy; Allen Tu 2024
+                    </small></p>
+            </footer>
+    </div>
+    <script src="static/js/video-zoom.js"></script>
+</body>
+
+</html>

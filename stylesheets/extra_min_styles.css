@@ -1,0 +1,286 @@
+/* --------------- */
+/* --- Portrait --- */
+/* --------------- */
+
+.portrait {
+  width:160px;
+  margin-bottom: 8px;
+  /*border-radius: 10px;*/
+  border-radius: 50%;
+}
+
+/* --------------- */
+/* --- NAV BAR --- */
+/* --------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body
+{
+  background-color: #fff;
+  padding:50px;
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color:#595959;
+  font-weight:400;
+}
+
+/* Change some things if user is on a phone */
+
+.navbar.navbar
+{
+  width:260px;
+  margin-top:-16px;
+  font-size: 18px;
+  text-align: center;
+  list-style-type: none;
+  white-space: nowrap;
+}
+
+.navbar_li.navbar_li
+{
+  /*display: inline;*/
+  margin-bottom: 7px; /* Adds space between each nav item */
+  /*font-weight: lighter;*/
+  margin-right:36px;
+}
+
+.navbar_li a:hover,
+.navbar_li a:focus
+{
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-width: 1px;
+  color: #f88c99;
+}
+
+#selected
+{
+  text-decoration: underline;
+}
+
+.workPicture
+{
+  width: 240px;
+  margin-right:24px;
+}
+
+/* -------------- 
+/* --- PAPERS --- */
+/* -------------- */
+
+
+/* PAPERS PAGE */
+.paper_line
+{
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-right: 20px;
+  text-align: left;
+}
+
+.paper_title
+{
+  margin-left: 60px;
+  margin-right: 20px;
+  padding-right: 20px;
+  text-align: left;
+  font-weight: 800;
+}
+
+
+#bibtexFont
+{
+  font-size: 10px;
+  color:#9AC39D !important;
+}
+
+#appendixFont
+{
+  color:#E8AB6B !important; 
+}
+
+
+/* ---------------- */
+/* --- PICTURES --- */
+/* ---------------- */
+.colPortrait
+{
+  margin-bottom: 8px;
+  border-radius: 10px;
+}
+
+#collaboratorWrapper
+{
+  text-align: center;
+  margin-left: -30%;
+}
+
+/* ------------ */
+/* --- BLOG --- */
+/* ------------ */
+
+
+h4
+{
+  font-size:18px;
+}
+
+h5
+{
+  font-size:13px;
+}
+
+
+#blognav
+{
+  float:right;
+  padding:14px;
+  border-radius: 10px;
+  border-color: #cdcccc;
+  border:dotted;
+  border-width: 1px;
+  margin-left:38px;
+  margin-top:10px;
+  margin-right:36px;
+  margin-bottom:40px;
+  width:195px;
+}
+
+#allPostList
+{
+  /*margin-left:20px;*/
+  line-height: 24px;
+  /*text-align: justify;*/
+}
+
+#blognavHeader
+{
+  margin-top: -2px;
+  font-style: italic;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.blognav_element
+{
+  margin-left:16px;
+  font-size: 16px;
+}
+
+.blognav_element a:hover,
+.blognav_element a:focus
+{
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-width: 1px;
+  color: #f88c99;
+}
+
+#blog_selected
+{
+  text-decoration: underline;
+}
+
+
+/* TUTORIAL */
+
+skinnycode
+{
+  font-family: monospace;
+  background:#F8F8FF;
+  border:black dashed 1px;
+  padding:6px;
+  margin-right: auto;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display:inline-block;
+  max-width:75%;
+}
+
+code
+{
+  font-family: monospace;
+  background:#F8F8FF;
+  border:black dashed 1px;
+  padding:6px;
+  margin-right: auto;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display:block;
+  max-width:75%;
+}
+
+mathcode
+{
+  font-family: monospace;
+  background:#F8F8FF;
+  border:black dashed 1px;
+  padding:6px;
+  margin-left: 80px;
+  display:inline-block;
+  max-width:60%;
+}
+
+#tutorialP
+{
+  max-width:80%;
+}
+
+#definition
+{
+  margin-left: 40px;
+  margin-bottom: 10px;
+  margin-right: 160px;
+  text-align: left;
+  font-family: serif;
+  padding: 15px;
+  max-width: 95%;
+  min-width: 200px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#definition_no_b
+{
+  margin-left: 40px;
+  margin-right: 160px;
+  text-align: left;
+  font-family: serif;
+  /*padding: 15px;*/
+  max-width: 95%;
+  min-width: 200px;
+}
+
+#narrow_definition
+{
+  margin-left: 40px;
+  margin-bottom: 20px;
+  margin-right: 280px;
+  text-align: left;
+  font-family: serif;
+  padding: 15px;
+  max-width: 95%;
+  min-width: 200px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+
+/* -------------- */
+/* --- MOBILE --- */
+/* -------------- */
+
+@media only screen  and (max-device-width: 600px)
+{
+ .navbar_li.navbar_li {
+    margin-left:48px !important;
+    /*margin-right:20px !important;*/
+    text-align: left;
+ }
+ .workPicture {
+  width: 0px !important;
+  margin-right:0px;
+ }
+}

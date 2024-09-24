@@ -1,0 +1,326 @@
+@import url(//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,500);
+@import url(reset.css);
+
+body, html {
+  padding:0;
+  margin:0;
+  font:300 18px/1.5 Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:#fff;
+  color:#818181;
+}
+
+strong {
+  font-weight:500;
+  color:#727272;
+}
+
+em {
+  font-style:italic;
+}
+
+a {
+  text-decoration:none;
+  color:#42B6F3;
+  transition:all 0.2s ease;
+}
+
+
+a:hover, a:focus {
+  color:#222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight:500;
+  letter-spacing:-1px;
+  line-height:1.1;
+}
+
+p, ul, ol, h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 20px;
+}
+
+h1 {
+  font-size:34px;
+  color:#222;
+}
+
+h1 a {
+  color:#222;
+}
+
+h1 a:hover, h1 a:focus {
+  color:#42B6F3;
+}
+
+h2 {
+  font-size:28px;
+  color:#222;
+}
+
+h3 {
+  font-size:24px;
+}
+
+p.date {
+  text-transform:uppercase;
+  font-size:13px;
+  line-height:1;
+}
+
+body {
+  border-top:5px solid #42B6F3;
+  padding:50px 0;
+}
+
+.content {
+  max-width:900px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+header, footer, section, article {
+  display:block;
+  width:100%;
+}
+
+header {
+  font-size:100%;
+  text-align:right;
+}
+
+header h2 {
+  font-size:100%;
+  letter-spacing: 0;
+  float:left;
+  margin:0;
+  line-height:1;
+}
+
+header h2 a {
+  color:#222;
+}
+
+header h2 a span {
+  color:#42B6F3;
+}
+
+header p {
+  margin:0;
+  line-height:1;
+}
+
+blockquote {
+  margin:50px 0 50px -24px;
+  padding:0 0 0 24px;
+  font-size:34px;
+  font-weight:300;
+  line-height:1.3;
+  color:#42B6F3;
+  border-left:3px solid #42B6F3;
+}
+
+.pullquote {
+  width:290px;
+}
+
+.pullquote-right {
+  float:right;
+  margin:0 -120px 20px 20px;
+}
+
+.pullquote-left {
+  float:left;
+  margin:0 20px 20px -120px;
+}
+
+footer {
+  font-weight:300;
+  color:#a5a5a5;
+  font-size:13px;
+  margin:50px auto 0;
+  padding-top:0;
+}
+
+article {
+  margin:50px 0;
+}
+
+.excerpt {
+  font-size:28px;
+  line-height:1.3;
+  font-weight:300;
+}
+
+.button {
+  display:inline-block;
+  font-weight:500;
+  color:#a5a5a5;
+  padding:0 20px;
+  border-radius:18px;
+  height:36px;
+  line-height:36px;
+  border:1px solid #e2e2e2;
+  font-size:13px;
+}
+
+.button-previous:before {
+  content:'←';
+  position:relative;
+  top:-1px;
+  margin-right:8px;
+}
+
+.button-next:after {
+  content:'→';
+  position:relative;
+  top:-1px;
+  margin-left:8px;
+}
+
+.button:hover {
+  color:#42B6F3;
+}
+
+.button-disabled {
+  opacity:0.4;
+}
+
+.button-disabled:hover {
+  color:inherit;
+}
+
+.pagination {
+  line-height:36px;
+  text-align:center;
+  overflow:hidden;
+}
+
+.pagination p.date {
+  line-height:36px;
+}
+
+.pagination .button-previous {
+  float:left;
+}
+
+.pagination .button-next {
+  float:right;
+}
+
+@media print, screen and (max-width: 860px) {
+  .pullquote-right {
+    float:right;
+    margin:0 -60px 20px 20px;
+  }
+
+  .pullquote-left {
+    float:left;
+    margin:0 20px -60px 20px;
+  }
+}
+
+@media print, screen and (max-width: 640px) {
+  .pullquote {
+    display:none;
+  }
+}
+
+@media print, screen and (max-width: 420px) {
+  body {
+    font-size:16px;
+    padding:20px 0;
+  }
+
+  .excerpt {
+    font-size:22px;
+    font-weight:300;
+  }
+
+  blockquote {
+    font-size:24px;
+    margin:20px 0;
+    border:none;
+    padding:0;
+    font-weight:300;
+  }
+
+  article {
+    margin:24px 0;
+  }
+
+  article + article {
+    padding-top:30px;
+  }
+
+  footer {
+    font-size:11px;
+  }
+
+  .pagination .button {
+    box-sizing:border-box;
+    text-align:center;
+    float:none;
+    margin-bottom:20px;
+    display:block;
+  }
+
+  .pagination .button-disabled {
+    display:none;
+  }
+}
+
+nav_justify {
+  margin-top: 5px;
+  /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.highlight {
+  background-color: #efefef;
+  padding: 7px 7px 7px 10px;
+  border: 1px solid #ddd;
+  -moz-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+  margin: 24px 0 24px 0;
+  max-height: 450px;
+  overflow: scroll;
+  line-height: 18px;
+}
+
+
+.highlight .c {
+  color: #586E75;
+}
+
+code {
+  font-family: 'Bitstream Vera Sans Mono','Courier', monospace;
+  font-size: 14px;
+  /* margin:24px 0; */
+}
+
+.sup {
+  position: relative;
+  bottom: 0.5em;
+  color: black;
+  font-size: 0.8em;
+}
+
+img {
+  /* margin:24px 0; */
+  width: 100%;
+  height: auto;
+}
+
+/* p.nav {
+  text-transform:uppercase;
+  font-size:15px;
+} */
+
+a.nav {
+  text-transform:uppercase;
+  font-size:20px;
+}
+
