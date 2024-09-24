@@ -128,13 +128,13 @@
                 <tbody>
                     <tr style="border-bottom:1px solid #e5e5e5;">
                         <!-- IMAGE -->
-                        <td>
+                        <td style="text-align: center;">
                             <div class="video-container">
                                 <video class="video-thumbnail" src="projects/kitchen.mp4" muted></video>
                             </div>
-                            <center>
-                                <p><i>Hover to play video.</i></p>
-                            </center>
+                            <!-- <center> -->
+                            <p><i>Hover to play video.</i></p>
+                            <!-- </center> -->
                         </td>
 
                         <!-- TITLE AND INFO -->
@@ -180,9 +180,20 @@
 
                     <tr style="border-bottom:1px solid #e5e5e5;"></tr>
                     <!-- IMAGE -->
-                    <td>
-                        <center><a href="projects/briar.png"><img class="workPicture" src="projects/briar.png"
-                                    alt="BRIAR Diagram" width="100%"></a></center>
+                    <td style="text-align: center;">
+                        <div class="image-container">
+                            <a href="projects/predict_and_aggregate.png"><img class="image-thumbnail" src="projects/predict_and_aggregate.png" alt="Zoomable Image"></a>
+                        </div>
+
+                        <p>
+                            <i>Hover to zoom in.</i> <br>
+                            
+                        </p>
+                        <p style="text-align:left;">
+                            Predict and Aggregate [1, 2] improves the CMC and ROC performance of the SOTA face recognition
+                            system by an empirical upper bound of 11.54% at the evaluation thresholds.
+                        </p>
+
                     </td>
 
                     <!-- TITLE AND INFO -->
@@ -200,7 +211,7 @@
                         <div id="indexWorkText">
                             I researched face recognition, body recognition, and multimodal fusion for our SOTA system.
                             Ask me about:
-                            <ul>
+                            <ol>
                                 <li>Knowledge distillation for face probe-to-gallery feature similarity prediction.
                                     (2024)</li>
                                 <li>Feature clustering and aggregation for face recognition from videos. (2024)</li>
@@ -208,7 +219,7 @@
                                 <li>Model ensembling and mixed-voting classifiers for open search. (2023)</li>
                                 <li>Data augmentation via garment transfer for training clothing-invariant body
                                     encoders. (2022)</li>
-                            </ul>
+                            </ol>
                         </div>
                         <!-- <br> -->
 
@@ -232,7 +243,8 @@
 
             <h1>Related Organizations</h1>
             <p>
-                I am always open to collaborations — please email me if you would like to chat or get involved! <br>See my
+                I am always open to collaborations — please email me if you would like to chat or get involved! <br>See
+                my
                 <a href="files/AllenTu_CV.pdf">CV</a> for full details and other experiences.
             </p>
 
