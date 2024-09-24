@@ -39,7 +39,7 @@ h3, h4, h5, h6 {
 }
 
 a {
-  color:#a21942;
+  color:#b03b3b;
   text-decoration:none;
 }
 
@@ -147,12 +147,12 @@ footer {
 .button {
   display:inline-block;
   font-weight:300;
-  color:#a21942;
+  color:#b03b3b;
   padding:0 10px;
   border-radius:2px;
   height:20;
   line-height:20px;
-  border:1px solid #d1174f;
+  border:1px solid #b03b3b;
   font-size:11px;
 }
 
