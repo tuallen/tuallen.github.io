@@ -88,9 +88,10 @@
             <!-- Put "nav" here for side bar nav -->
             <ul class="navbar">
                 <!-- <li class="navbar_li" id="selected"><a href="https://tuallen.github.io/index.html">Home</a></li> -->
-                <li class="navbar_li"><a href="https://www.cs.umd.edu/people/atu1">Department Profile</a>
                 <li class="navbar_li"><a href="https://www.semanticscholar.org/author/Allen-Tu/2306782092">Semantic
                         Scholar</a>
+                    <!-- <span id="s2-author-cites"></span> -->
+                <li class="navbar_li"><a href="https://www.cs.umd.edu/people/atu1">Department Profile</a>
                 <li class="navbar_li"><a href="files/references.bib">BibTeX</a>
                 <li class="navbar_li"><a href="static/images/WeChat.jpg">WeChat</a>
                 <li class="navbar_li"><a href="static/images/QRcode.png">QR Code</a>
@@ -152,9 +153,10 @@
                                 <i>Preprint</i>, 2025. <br>
                             </div>
                             <div class="indexWorkText">
-                                <a href="https://arxiv.org/abs/2506.07917" class="button" target="_blank">PAPER</a>
-                                <a href="https://github.com/tuallen/speede3dgs" class="button"
-                                    target="_blank">CODE <span id="stars-tuallen-speede3dgs">★</span></a>
+                                <a href="https://arxiv.org/abs/2506.07917" class="button" target="_blank">PAPER<span
+                                        id="cites-speede3dgs"></span></a>
+                                <a href="https://github.com/tuallen/speede3dgs" class="button" target="_blank">CODE
+                                    <span id="stars-tuallen-speede3dgs">★</span></a>
                             </div>
                             <br>
                             <!-- One sentence description -->
@@ -198,12 +200,14 @@
                                 <i>CVPR</i>, 2025.
                             </div>
                             <div class="indexWorkText">
-                                <a href="https://arxiv.org/abs/2412.00578" class="button" target="_blank">PAPER</a>
-                                <a href="https://speedysplat.github.io/static/files/speedysplat_poster.pdf"
-                                    class="button" target="_blank">POSTER</a>
-                                <a href="https://youtu.be/jqtqVHKRrfw" class="button" target="_blank">VIDEO</a>
+                                <a href="https://arxiv.org/abs/2412.00578" class="button" target="_blank">PAPER<span
+                                        id="cites-speedy-splat"></span></a>
                                 <a href="https://github.com/j-alex-hanson/speedy-splat" class="button"
                                     target="_blank">CODE <span id="stars-j-alex-hanson-speedy-splat">★</span></a>
+                                <!-- <a href="https://speedysplat.github.io/static/files/speedysplat_poster.pdf" -->
+                                <!-- class="button" target="_blank">POSTER</a> -->
+                                <a href="https://youtu.be/jqtqVHKRrfw" class="button" target="_blank">VIDEO<span
+                                        id="views-jqtqVHKRrfw"></span></a>
                             </div>
                             <br>
                             <!-- One sentence description -->
@@ -251,14 +255,15 @@
                                 <i>CVPR</i>, 2025.
                             </div>
                             <div class="indexWorkText">
-                                <a href="https://arxiv.org/abs/2406.10219" class="button" target="_blank">PAPER</a>
-                                <a href="https://pup3dgs.github.io/static/files/pup3dgs_poster.pdf" class="button"
-                                    target="_blank">POSTER</a>
-                                <a href="https://youtu.be/CceTvf70JZs" class="button" target="_blank">VIDEO</a>
+                                <a href="https://arxiv.org/abs/2406.10219" class="button" target="_blank">PAPER<span
+                                        id="cites-pup3dgs"></span></a>
                                 <a href="https://github.com/j-alex-hanson/gaussian-splatting-pup" class="button"
                                     target="_blank">CODE <span
                                         id="stars-j-alex-hanson-gaussian-splatting-pup">★</span></a>
-                                <!-- <a href="" class="button" target="_blank">VIDEO</a> -->
+                                <!-- <a href="https://pup3dgs.github.io/static/files/pup3dgs_poster.pdf" class="button" -->
+                                <!-- target="_blank">POSTER</a> -->
+                                <a href="https://youtu.be/CceTvf70JZs" class="button" target="_blank">VIDEO<span
+                                        id="views-CceTvf70JZs"></span></a>
                             </div>
                             <br>
                             <!-- One sentence description -->
@@ -366,7 +371,7 @@
                                 Video and Image Understanding Group<br>
                             </div>
                             <ul>
-                                <li><b>Computer Vision Research Intern:</b> Summers 2022 — 2025, Spring 2023<br>
+                                <li><b>Computer Vision Research Intern:</b> May 2022 — December 2025<br>
                                     Mentors:
                                     <a href="https://www.linkedin.com/in/joshua-gleason-25aa3971/">Dr. Joshua
                                         Gleason</a>,
@@ -426,7 +431,7 @@
             })
             .catch(error => {
                 console.error("Failed to fetch stars for tuallen/speede3dgs", error);
-                document.getElementById("stars-tuallen-speede3dgs").textContent = "★ N/A";
+                document.getElementById("stars-tuallen-speede3dgs").textContent = "";
             });
 
         fetch("https://api.github.com/repos/j-alex-hanson/speedy-splat")
@@ -436,7 +441,7 @@
             })
             .catch(error => {
                 console.error("Failed to fetch stars for j-alex-hanson/speedy-splat", error);
-                document.getElementById("stars-j-alex-hanson-speedy-splat").textContent = "★ N/A";
+                document.getElementById("stars-j-alex-hanson-speedy-splat").textContent = "";
             });
 
         fetch("https://api.github.com/repos/j-alex-hanson/gaussian-splatting-pup")
@@ -446,9 +451,136 @@
             })
             .catch(error => {
                 console.error("Failed to fetch stars for j-alex-hanson/gaussian-splatting-pup", error);
-                document.getElementById("stars-j-alex-hanson-gaussian-splatting-pup").textContent = "★ N/A";
+                document.getElementById("stars-j-alex-hanson-gaussian-splatting-pup").textContent = "";
             });
     </script>
+
+    <script>
+        /* ---- Semantic Scholar citation widgets ---- */
+        const S2_PAPERS = {
+            "speede3dgs": "e3e599bd7dbf757e85483a21bbadaed3d4de1fcb",
+            "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
+            "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9"
+        };
+
+        async function fetchCites(id) {
+            const r = await fetch(
+                `https://api.semanticscholar.org/graph/v1/paper/${id}?fields=citationCount`
+            );
+            if (!r.ok) throw new Error(r.status);
+            const { citationCount } = await r.json();
+            return citationCount ?? 0;
+        }
+
+        (async () => {
+            const key = "s2-cite-cache", ttl = 1000 * 60 * 60 * 12;          /* 12 h */
+            const now = Date.now();
+            let cache = JSON.parse(sessionStorage.getItem(key) || "{}");
+
+            for (const [slug, id] of Object.entries(S2_PAPERS)) {
+                const span = document.getElementById(`cites-${slug}`);
+                if (!span) continue;
+
+                /* cached and fresh → use it */
+                if (cache[id] && now - cache[id].ts < ttl) {
+                    if (cache[id].c > 0) span.textContent = ` ❞ ${cache[id].c}`;
+                    continue;
+                }
+
+                try {
+                    const c = await fetchCites(id);
+                    if (c > 0) {                      /* show only if >0 */
+                        span.textContent = ` ❞ ${c}`;
+                        cache[id] = { c, ts: now };
+                    }
+                } catch (err) {
+                    console.warn(`S² fetch failed for ${slug}`, err);       /* show nothing */
+                }
+            }
+            sessionStorage.setItem(key, JSON.stringify(cache));
+        })();
+    </script>
+
+    <!-- <script>
+        (async () => {
+            const AUTHOR_ID = "2306782092";                 // Allen Tu
+            const TARGET = document.getElementById("s2-author-cites");
+            if (!TARGET) return;                              // safety check
+
+            /* ---- simple 12-hour cache to save API calls ---- */
+            const key = "s2-author-cites";
+            const ttl = 1000 * 60 * 60 * 12;                // 12 h
+            const now = Date.now();
+            const cache = JSON.parse(sessionStorage.getItem(key) || "{}");
+
+            if (cache.v && now - cache.t < ttl) {
+                TARGET.textContent = ` (❞ ${cache.v})`;
+                return;
+            }
+
+            try {
+                const url = `https://api.semanticscholar.org/graph/v1/author/${AUTHOR_ID}` +
+                    `?fields=citationCount`;
+                const r = await fetch(url);
+                if (!r.ok) throw new Error(r.status);
+                const json = await r.json();
+                const n = json.citationCount ?? null;
+                if (n !== null) {
+                    TARGET.textContent = ` (❞ ${n})`;
+                    sessionStorage.setItem(key, JSON.stringify({ v: n, t: now }));
+                }
+            } catch (err) {
+                console.warn("Semantic Scholar author-cite fetch failed:", err);
+                /* leave TARGET.textContent empty so nothing shows */
+            }
+        })();
+    </script> -->
+
+    <script>
+        /* ---------------- VIDEO view-count widgets ---------------- */
+        const YT_API_KEY = "AIzaSyB0AdZ0AnAuxb0AoDuhuSmMNQFsxV-Lz4g";          // 1️⃣
+        const VIDEOS = [                                      // 2️⃣
+            "jqtqVHKRrfw",     // Speedy-Splat video
+            "CceTvf70JZs"      // PUP 3D-GS video
+        ];
+
+        async function fetchViews(id) {
+            const url = `https://www.googleapis.com/VIDEO/v3/videos` +
+                `?part=statistics&id=${id}&key=${YT_API_KEY}`;
+            const r = await fetch(url);
+            if (!r.ok) throw new Error(r.status);
+            const data = await r.json();
+            return Number(data.items[0].statistics.viewCount || 0);
+        }
+
+        (async () => {
+            const key = "yt-views-cache", ttl = 1000 * 60 * 60 * 3;   /* 3-hour cache */
+            const now = Date.now();
+            let cache = JSON.parse(sessionStorage.getItem(key) || "{}");
+
+            for (const id of VIDEOS) {
+                const span = document.getElementById(`views-${id}`);
+                if (!span) continue;
+
+                /* reuse fresh cache */
+                if (cache[id] && now - cache[id].ts < ttl) {
+                    span.textContent = ` ▶ ${cache[id].v.toLocaleString()}`;
+                    continue;
+                }
+
+                try {
+                    const v = await fetchViews(id);
+                    span.textContent = ` ▶ ${v.toLocaleString()}`;
+                    cache[id] = { v, ts: now };
+                } catch (e) {
+                    console.warn("VIDEO view-count fetch failed:", e);
+                    /* leave span empty on failure */
+                }
+            }
+            sessionStorage.setItem(key, JSON.stringify(cache));
+        })();
+    </script>
+
 </body>
 
 </html>
