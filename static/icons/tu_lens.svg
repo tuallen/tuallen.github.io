@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1F2A44"/>
+      <stop offset="100%" stop-color="#0E1322"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6EA8FF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect x="0" y="0" width="256" height="256" rx="44" fill="url(#g1)"/>
+  <!-- Lens outer ring -->
+  <circle cx="128" cy="128" r="92" fill="none" stroke="#6EA8FF" stroke-width="6" opacity="0.6"/>
+  <circle cx="128" cy="128" r="96" fill="none" stroke="#6EA8FF" stroke-width="2" opacity="0.35"/>
+  <!-- Aperture blades -->
+  <g fill="#6EA8FF" opacity="0.18">
+    <path d="M128,36 L166,120 L90,120 Z"/>
+    <path d="M220,128 L136,166 L136,90 Z"/>
+    <path d="M128,220 L90,136 L166,136 Z"/>
+    <path d="M36,128 L120,90 L120,166 Z"/>
+  </g>
+  <!-- Glass highlight -->
+  <ellipse cx="98" cy="86" rx="56" ry="34" fill="url(#glass)" transform="rotate(-20 98 86)" opacity="0.6"/>
+  <!-- TU -->
+  <g fill="#FFFFFF">
+    <text x="128" y="150" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="84" font-weight="800" text-anchor="middle" letter-spacing="2">
+      TU
+    </text>
+  </g>
+</svg>
