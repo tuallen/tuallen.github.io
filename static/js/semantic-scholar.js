@@ -1,5 +1,6 @@
 /* ---- Semantic Scholar citation widgets ---- */
 const S2_PAPERS = {
+    "transfira": "333a9c5cb722e495e475d93ccc7dc04cbec3aae4",
     "speede3dgs": "e3e599bd7dbf757e85483a21bbadaed3d4de1fcb",
     "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
     "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9"
