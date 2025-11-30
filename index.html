@@ -38,67 +38,45 @@
         <!-- HEADER -->
         <header>
             <h1 align="center">Allen Tu</h1>
-            <!-- <p align="center">
-                <img src="./static/images/allentu_red.png" alt="Allen Tu" width="200">
-            </p> -->
-
-            <!-- Picture + Links + News -->
             <div style="margin-bottom: 10px" align="center">
-
-                <!-- Portrait -->
                 <a href="./static/images/Headshot.png">
                     <picture>
                         <source srcset="./static/images/Headshot_Square_Background.webp" type="image/webp">
                         <img src="./static/images/Headshot_Square_Background.jpg" alt="Portrait" class="portrait">
                     </picture>
                 </a>
-
-                <!-- Email -->
                 <center>
                     <p>
                         <a href="mailto:atu1@umd.edu"> atu1@umd.edu </a>
                     </p>
                 </center>
 
-                <!-- CV -->
-                <a href="./files/AllenTu_CV.pdf" style="margin-right:14px;"><i class="ai ai-cv"
-                        style="font-size: 32px;"></i>
-                </a>
-
-                <!-- Scholar -->
-                <a href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl" style="margin-right:14px;">
-                    <i class="ai ai-google-scholar big-icon" style="font-size:32px;"></i>
-                </a>
-                <!-- Linkedin -->
-                <a href="https://www.linkedin.com/in/allentu/" style="margin-right:14px;">
-                    <i class="fa fa-linkedin-square" style="font-size:32px;"></i>
-                </a>
-
-                <!-- Git -->
-                <a href="https://github.com/tuallen" style="margin-right:14px;">
-                    <i class="fa fa-github" style="font-size:32px;"></i>
-                </a>
-
-                <!-- Twitter -->
-                <a href="https://twitter.com/tuallen_">
-                    <i class="fa fa-twitter" style="font-size:32px;"></i>
-                </a>
-                <br>
+                <div class="icon-grid">
+                    <a href="./files/AllenTu_CV.pdf"><i class="ai ai-cv"></i></a>
+                    <a href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
+                            class="ai ai-google-scholar"></i></a>
+                    <a href="https://www.linkedin.com/in/allentu/"><i class="fa fa-linkedin-square"></i></a>
+                    <a href="https://github.com/tuallen"><i class="fa fa-github"></i></a>
+                    <a href="https://www.youtube.com/@tuallen"><i class="fa fa-youtube"></i></a>
+                    <a href="https://twitter.com/tuallen_"><i class="fa fa-twitter"></i></a>
+                    <a href="static/images/WeChat.jpg"><i class="fa fa-wechat"></i></a>
+                    <a href="static/images/QRCode.png"><i class="fa fa-qrcode"></i></a>
+                </div>
                 <br>
             </div>
 
             <ul class="navbar">
+                <!-- <li class="navbar_li" id="selected"><a href="https://tuallen.github.io/index.html">Home</a></li> -->
                 <li class="navbar_li"><a href="https://www.semanticscholar.org/author/Allen-Tu/2306782092">Semantic
                         Scholar</a>
+                <li class="navbar_li"><a href="https://www.researchgate.net/profile/Allen-Tu-3/research">Research
+                        Gate</a>
                 <li class="navbar_li"><a href="https://www.cs.umd.edu/people/atu1">Department Profile</a>
-                <li class="navbar_li"><a href="https://www.youtube.com/@tuallen">YouTube</a>
-                <li class="navbar_li"><a href="static/images/WeChat.jpg">WeChat</a>
-                <li class="navbar_li"><a href="static/images/QRcode.png">QR Code</a>
-                <!-- <li class="navbar_li" id="selected"><a href="https://tuallen.github.io/index.html">Home</a></li> -->
-                <!-- <li class="navbar_li"><a href="files/references.bib">BibTeX</a> -->
-                <!-- <li class="navbar_li"><a href="https://www.researchgate.net/profile/Allen-Tu-3/research">Research
-                        Gate</a> -->
-                <!-- <li class="navbar_li"><a href="https://orcid.org/my-orcid?orcid=0009-0002-6532-2863">ORCID</a> -->
+                <li class="navbar_li"><a
+                        href="https://drive.google.com/drive/u/1/folders/1u32o79dgsN40e7VXFEqPQ54McBpV5oTP">Annotated
+                        PhD Application</a>
+                    <!-- <li class="navbar_li"><a href="files/references.bib">BibTeX</a> -->
+                    <!-- <li class="navbar_li"><a href="https://orcid.org/my-orcid?orcid=0009-0002-6532-2863">ORCID</a> -->
             </ul>
         </header>
 
@@ -129,10 +107,12 @@
 
             <h3>News</h3>
             <ul>
+                <li><b>November 2025:</b> Applying to PhD programs? Here are my <a
+                        href="https://drive.google.com/drive/u/1/folders/1u32o79dgsN40e7VXFEqPQ54McBpV5oTP">annotated UMD
+                        application materials</a>!</li>
                 <li><b>November 2025:</b> Released our updated <a href="https://speede3dgs.github.io/">SpeeDe3DGS</a>
                     paper and code.</li>
-                <li><b>October 2025:</b> Released our <a href="https://transfira.github.io/">TransFIRA</a> preprint.
-                </li>
+                <li><b>October 2025:</b> Released our <a href="https://transfira.github.io/">TransFIRA</a> paper.</li>
                 <li><b>September 2025:</b> STR has opened internships for Summer 2026. Reach out for a <a
                         href="https://grnh.se/810664b66us">referral</a>!</li>
                 <li><b>June 2025:</b> Thank you for coming to see <a href="https://pup3dgs.github.io/">PUP 3D-GS</a> and
@@ -645,8 +625,8 @@
                                 <b>Undergraduate Researcher:</b> January 2021 — December 2022<br>
                             </div>
                             <ul>
-                                <li>Mentors: 
-                                    <a href='https://www.cs.umd.edu/~tomg/'>Professor Tom Goldstein</a>, 
+                                <li>Mentors:
+                                    <a href='https://www.cs.umd.edu/~tomg/'>Professor Tom Goldstein</a>,
                                     <a href='https://huahongtu.me/'>Dr. Raymond Tu</a>
                                 </li>
                                 <li><a href="https://arxiv.org/abs/2203.04937">Addressing Bias in Visualization

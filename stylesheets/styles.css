@@ -235,3 +235,28 @@ footer {
     color:#444;
   }
 }
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 10px 0px;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.icon-grid a {
+  color: #b03b3b;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.icon-grid i {
+  font-size: 32px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.icon-grid a:hover i {
+  transform: scale(1.15);
+}
