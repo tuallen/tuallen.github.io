@@ -9,6 +9,16 @@ fetch("https://api.github.com/repos/tuallen/speede3dgs")
         document.getElementById("stars-tuallen-speede3dgs").textContent = "";
     });
 
+fetch("https://api.github.com/repos/pranav-asthana/splatsure")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("stars-pranav-asthana-splatsure").textContent = `★ ${data.stargazers_count}`;
+    })
+    .catch(error => {
+        console.error("Failed to fetch stars for pranav-asthana/splatsure", error);
+        document.getElementById("stars-pranav-asthana-splatsure").textContent = "";
+    });
+
 fetch("https://api.github.com/repos/j-alex-hanson/speedy-splat")
     .then(response => response.json())
     .then(data => {
