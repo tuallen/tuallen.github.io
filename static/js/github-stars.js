@@ -19,6 +19,16 @@ fetch("https://api.github.com/repos/pranav-asthana/splatsure")
         document.getElementById("stars-pranav-asthana-splatsure").textContent = "";
     });
 
+fetch("https://api.github.com/repos/tuallen/transfira")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("stars-tuallen-transfira").textContent = `★ ${data.stargazers_count}`;
+    })
+    .catch(error => {
+        console.error("Failed to fetch stars for tuallen/transfira", error);
+        document.getElementById("stars-tuallen-transfira").textContent = "";
+    });
+
 fetch("https://api.github.com/repos/j-alex-hanson/speedy-splat")
     .then(response => response.json())
     .then(data => {
