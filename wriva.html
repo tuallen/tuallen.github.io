@@ -10,7 +10,6 @@
         content="Allen Tu is a PhD student in Computer Science at the University of Maryland, College Park, advised by Professor Tom Goldstein. His research advances 3D/4D scene reconstruction, multimodal biometric recognition, and generative priors and uncertainty quantification for robust vision systems, with publications in top computer vision and machine learning venues.">
     <meta name="keywords"
         content="Allen Tu, allentu, tuallen, atu1, University of Maryland, UMD, College Park, Computer Science, PhD student, Tom Goldstein, Matthias Zwicker, Vishal Patel, Abhinav Shrivastava, Rama Chellappa, Joshua Gleason, Jennifer Xu, Systems and Technology Research, STR, UMIACS, 3D Gaussian Splatting, 4D Gaussian Splatting, DeformableGS, dynamic 3DGS, Gaussian Splatting acceleration, temporal sensitivity pruning, motion grouping, GroupFlow, temporal pruning, SE(3) motion distillation, SpeeDe3DGS, Speedy-Splat, PUP 3D-GS, SplatSuRe, TransFIRA, diffusion priors, multi-view super-resolution, geometry-aware super-resolution, sparse-view reconstruction, NeRF, Neural Radiance Fields, uncertainty quantification, uncertainty pruning, principled pruning, explainable AI, interpretable AI, robust vision systems, computer vision, deep learning, differentiable rendering, diffusion models, vision transformers, Swin Transformer, multimodal encoders, biometric recognition, multimodal biometrics, face recognition, body recognition, gait recognition, recognizability assessment, Face Image Quality Assessment, FIQA, template recognizability, learned feature aggregation, transfer learning, BRIAR dataset, IARPA BRIAR, IARPA WRIVA, DARPA TIAMAT, NSF TRAILS Institute, VR rendering, real-time rendering, efficient rendering, GPU programming, CUDA, PyTorch, Python, mixture of experts, MoE, large vision encoders, large language models, LLMs, structure-from-motion, SfM, super-resolution, computer graphics, computational geometry, physically based modeling, advanced computer graphics, XR, simulation, animation, machine learning education, FIRE Capital One Machine Learning, research mentorship, peer research mentor, open-set recognition, multimodal fusion, uncertainty-aware rendering, academic research, CVPR 2025, computer vision publications, Allen Tu CVPR, Allen Tu research, Allen Tu Google Scholar, Allen Tu GitHub, Allen Tu LinkedIn">
-    <!-- Title -->
     <title>Allen Tu | CS PhD @ UMD</title>
 
     <!-- Favicon -->
@@ -19,6 +18,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/extra_min_styles.css">
+    <link rel="stylesheet" href="stylesheets/zoom_containers.css">
     <link rel="stylesheet" href="stylesheets/css/academicons.min.css">
     <link rel="stylesheet" href="stylesheets/css/font-awesome.css">
 
@@ -46,9 +46,7 @@
                     </picture>
                 </a>
                 <center>
-                    <p>
-                        <a href="mailto:atu1@umd.edu"> atu1@umd.edu </a>
-                    </p>
+                    <p><a href="mailto:atu1@umd.edu"> atu1@umd.edu </a></p>
                 </center>
 
                 <div class="icon-grid">
@@ -68,34 +66,221 @@
             <ul class="navbar">
                 <li class="navbar_li"><a href="https://tuallen.github.io/index.html">Home</a></li>
                 <li class="navbar_li"><a href="https://www.semanticscholar.org/author/Allen-Tu/2306782092">Semantic
-                        Scholar</a>
+                        Scholar</a></li>
                 <li class="navbar_li"><a
-                        href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">Rednote (小红书)</a>
-                <li class="navbar_li"><a href="https://www.cs.umd.edu/people/atu1">Department Profile</a>
+                        href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">Rednote (小红书)</a></li>
+                <li class="navbar_li"><a href="https://www.cs.umd.edu/people/atu1">Department Profile</a></li>
             </ul>
         </header>
 
+        <section style="margin-bottom:-60px;">
+            <h1><a href="https://www.iarpa.gov/research-programs/wriva">IARPA Walk-through Rendering from
+                    Images of Varying Altitude (WRIVA)</a></h1>
+            Unconstrained 3D reconstruction and novel view synthesis in challenging real-world
+            environments.
+            <ul>
+                <li><a href="https://speedysplat.github.io/">Efficient rendering, compression, and
+                        training for
+                        3D Gaussian Splatting (3DGS)</a>
+                    [<a href="https://pup3dgs.github.io/">1</a>,
+                    <a href="https://speedysplat.github.io/">2</a>,
+                    <a href="https://speede3dgs.github.io/">3</a>]
+                </li>
+                <li><a href="https://splatsure.github.io/">Multi-view consistent super-resolution for
+                        training
+                        3DGS with low-resolution imagery</a></li>
+                <li><a href="./wriva.html">Image, video, and multiview
+                        diffusion model priors for sparse-view 3D reconstruction</a></li>
+                <li><a href="https://pup3dgs.github.io/">Uncertainty quantification algorithms for 3DGS
+                        and Neural Radiance Fields (NeRF)</a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- WRIVA VIDEO SECTION -->
         <section>
+            <h1>Diffusion Model Priors for 3D Reconstruction</h1>
+            <p>
+                <b>Diffusion in the Loop</b> produces sharper reconstructions with fewer artifacts than the baseline 3D
+                model in sparse-view reconstruction settings.
+                Applying <b>posthoc diffusion cleanup</b> further enhances visual quality and fine detail.
+            </p>
             <div class="video-compare-container" data-left-label="Diffusion in the Loop" data-right-label="Baseline">
                 <video id="v1" class="video" loop playsinline autoplay muted
-                    src="https://www.cs.umd.edu/~atu1/fs/ditl.mp4"
-                    onplay="resizeAndPlay(this)"></video>
+                    src="https://www.cs.umd.edu/~atu1/fs/ditl.mp4" onplay="resizeAndPlay(this)"></video>
                 <canvas class="videoMerge" id="v1Merge"></canvas>
             </div>
-            <div class="video-compare-container" data-left-label="Diffusion in the Loop + Posthoc Cleanup" data-right-label="Baseline + Posthoc Cleanup">
+            <div class="video-compare-container" data-left-label="Diffusion in the Loop + Posthoc Cleanup"
+                data-right-label="Baseline + Posthoc Cleanup">
                 <video id="v2" class="video" loop playsinline autoplay muted
-                    src="https://www.cs.umd.edu/~atu1/fs/ditl_posthoc.mp4"
-                    onplay="resizeAndPlay(this)"></video>
+                    src="https://www.cs.umd.edu/~atu1/fs/ditl_posthoc.mp4" onplay="resizeAndPlay(this)"></video>
                 <canvas class="videoMerge" id="v2Merge"></canvas>
             </div>
         </section>
 
+        <!-- PUBLICATIONS SECTION -->
+        <section>
+            <h1>Publications</h1>
+            <table style="margin-top:-12px;">
+                <tbody>
+                    <!-- SpeeDe3DGS -->
+                    <tr style="border-bottom:1px solid #e5e5e5;">
+                        <td style="text-align: center;">
+                            <div class="video-container">
+                                <a href="https://speede3dgs.github.io/">
+                                    <video class="video-thumbnail" src="./static/media/chicken_speede3dgs.mp4" muted
+                                        loop></video>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="indexWorkText">
+                                <b><a href="https://speede3dgs.github.io/">SpeeDe3DGS: Speedy Deformable 3D Gaussian
+                                        Splatting with Temporal Pruning and Motion Grouping</a></b><br>
+                                <i>Under Review</i>, 2025.<br>
+                            </div>
+                            <div class="indexWorkText">
+                                <a href="https://arxiv.org/abs/2506.07917" class="button" target="_blank">PAPER</a>
+                                <a href="https://github.com/tuallen/speede3dgs" class="button" target="_blank">CODE</a>
+                                <a href="https://speede3dgs.github.io/" class="button" target="_blank">WEBSITE</a>
+                            </div><br>
+                            <div id="indexWorkText">
+                                Boost DeformableGS rendering speed from 20 to 276 FPS using temporal sensitivity pruning
+                                and groupwise SE(3) motion distillation while preserving per-Gaussian neural motion
+                                fidelity.
+                            </div><br>
+                            <div id="indexWorkText">
+                                <strong>Allen Tu*</strong>, <a href="https://oceanying.github.io/">Haiyang Ying*</a>, <a
+                                    href="https://www.cs.umd.edu/~hanson/">Alex Hanson</a>, <a
+                                    href="https://sites.google.com/view/yonghan-lee/home">Yonghan Lee</a>, <a
+                                    href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>, <a
+                                    href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>
+                            </div><br>
+                        </td>
+                    </tr>
+
+                    <!-- SplatSuRe -->
+                    <tr style="border-bottom:1px solid #e5e5e5;">
+                        <td style="text-align: center;">
+                            <div class="video-container">
+                                <a href="https://splatsure.github.io/">
+                                    <video class="video-thumbnail" src="./static/media/church_splatsure.mp4" muted
+                                        loop></video>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="indexWorkText">
+                                <b><a href="https://splatsure.github.io/">SplatSuRe: Selective Super-Resolution for
+                                        Multi-view Consistent 3D Gaussian Splatting</a></b><br>
+                                <i>Under Review</i>, 2025.<br>
+                            </div>
+                            <div class="indexWorkText">
+                                <a href="https://arxiv.org/abs/2512.02172" class="button" target="_blank">PAPER</a>
+                                <a href="https://github.com/pranav-asthana/splatsure" class="button"
+                                    target="_blank">CODE</a>
+                                <a href="https://splatsure.github.io/" class="button" target="_blank">WEBSITE</a>
+                            </div><br>
+                            <div id="indexWorkText">
+                                Enhance 3D Gaussian Splatting by selectively applying super-resolution only in
+                                undersampled regions, improving sharpness and perceptual quality without multi-view
+                                inconsistencies.
+                            </div><br>
+                            <div id="indexWorkText">
+                                <a href="https://pranav-asthana.github.io/">Pranav Asthana</a>, <a
+                                    href="https://www.cs.umd.edu/~hanson/">Alex Hanson</a>, <strong>Allen Tu</strong>,
+                                <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>, <a
+                                    href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>, <a
+                                    href="https://www.cs.umd.edu/~varshney/">Amitabh Varshney</a>
+                            </div><br>
+                        </td>
+                    </tr>
+
+                    <!-- Speedy-Splat -->
+                    <tr style="border-bottom:1px solid #e5e5e5;">
+                        <td style="text-align: center;">
+                            <div class="video-container">
+                                <a href="https://speedysplat.github.io/">
+                                    <video class="video-thumbnail" src="./static/media/kitchen_ss.mp4" muted
+                                        loop></video>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="indexWorkText">
+                                <b><a href="https://speedysplat.github.io/">Speedy-Splat: Fast 3D Gaussian Splatting
+                                        with Sparse Pixels and Sparse Primitives</a></b><br>
+                                <i>CVPR</i>, 2025.<br>
+                            </div>
+                            <div class="indexWorkText">
+                                <a href="https://arxiv.org/abs/2412.00578" class="button" target="_blank">PAPER</a>
+                                <a href="https://github.com/j-alex-hanson/speedy-splat" class="button"
+                                    target="_blank">CODE</a>
+                                <a href="https://speedysplat.github.io/" class="button" target="_blank">WEBSITE</a>
+                            </div><br>
+                            <div id="indexWorkText">
+                                Accelerate 3D Gaussian Splatting rendering by over 6× and reduce model size by 90%
+                                through accurate primitive localization and pruning during training.
+                            </div><br>
+                            <div id="indexWorkText">
+                                <a href="https://www.cs.umd.edu/~hanson/">Alex Hanson</a>, <strong>Allen Tu</strong>, <a
+                                    href="https://scholar.google.com/citations?user=2Vh_sboAAAAJ">Geng Lin</a>, <a
+                                    href="https://vasusingla.github.io/">Vasu Singla</a>, <a
+                                    href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>, <a
+                                    href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>
+                            </div><br>
+                        </td>
+                    </tr>
+
+                    <!-- PUP 3D-GS -->
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="video-container">
+                                <a href="https://pup3dgs.github.io/">
+                                    <video class="video-thumbnail" src="./static/media/playroom_pup.mp4" muted
+                                        loop></video>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="indexWorkText">
+                                <b><a href="https://pup3dgs.github.io/">PUP 3D-GS: Principled Uncertainty Pruning for 3D
+                                        Gaussian Splatting</a></b><br>
+                                <i>CVPR</i>, 2025.<br>
+                            </div>
+                            <div class="indexWorkText">
+                                <a href="https://arxiv.org/abs/2406.10219" class="button" target="_blank">PAPER</a>
+                                <a href="https://github.com/j-alex-hanson/gaussian-splatting-pup" class="button"
+                                    target="_blank">CODE</a>
+                                <a href="https://pup3dgs.github.io/" class="button" target="_blank">WEBSITE</a>
+                            </div><br>
+                            <div id="indexWorkText">
+                                Prune 90% of primitives from pretrained 3DGS models using principled uncertainty scores,
+                                tripling rendering speed while preserving salient foreground detail.
+                            </div><br>
+                            <div id="indexWorkText">
+                                <a href="https://www.cs.umd.edu/~hanson/">Alex Hanson*</a>, <strong>Allen Tu*</strong>,
+                                <a href="https://vasusingla.github.io/">Vasu Singla</a>, <a
+                                    href="https://scholar.google.com/citations?user=0zysOU8AAAAJ">Mayuka
+                                    Jayawardhana</a>, <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>,
+                                <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>
+                            </div><br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: -3em; margin-bottom: 3em;">
+                <small>* denotes equal contribution.</small>
+            </p>
+        </section>
+
+        <!-- FOOTER -->
         <footer>
             <p style="line-height: 1.2;" align="center"><small>
                     Thank you to <a href="https://github.com/orderedlist/minimal">minimal</a> and <a
-                        href="https://somepago.github.io/">Gowthami Somepalli</a><br>for generously <a
-                        href="https://github.com/tuallen/tuallen.github.io">open-sourcing</a> their code!
-                    <br>
+                        href="https://somepago.github.io/">Gowthami Somepalli</a><br>
+                    for generously <a href="https://github.com/tuallen/tuallen.github.io">open-sourcing</a> their
+                    code!<br>
                     &copy; Allen Tu 2025
                 </small></p>
         </footer>
