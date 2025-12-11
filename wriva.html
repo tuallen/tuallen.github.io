@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description"
+        content="Allen Tu is a PhD student in Computer Science at the University of Maryland, College Park, advised by Professor Tom Goldstein. His research advances 3D/4D scene reconstruction, multimodal biometric recognition, and generative priors and uncertainty quantification for robust vision systems, with publications in top computer vision and machine learning venues.">
+    <meta name="keywords"
+        content="Allen Tu, allentu, tuallen, atu1, University of Maryland, UMD, College Park, Computer Science, PhD student, Tom Goldstein, Matthias Zwicker, Vishal Patel, Abhinav Shrivastava, Rama Chellappa, Joshua Gleason, Jennifer Xu, Systems and Technology Research, STR, UMIACS, 3D Gaussian Splatting, 4D Gaussian Splatting, DeformableGS, dynamic 3DGS, Gaussian Splatting acceleration, temporal sensitivity pruning, motion grouping, GroupFlow, temporal pruning, SE(3) motion distillation, SpeeDe3DGS, Speedy-Splat, PUP 3D-GS, SplatSuRe, TransFIRA, diffusion priors, multi-view super-resolution, geometry-aware super-resolution, sparse-view reconstruction, NeRF, Neural Radiance Fields, uncertainty quantification, uncertainty pruning, principled pruning, explainable AI, interpretable AI, robust vision systems, computer vision, deep learning, differentiable rendering, diffusion models, vision transformers, Swin Transformer, multimodal encoders, biometric recognition, multimodal biometrics, face recognition, body recognition, gait recognition, recognizability assessment, Face Image Quality Assessment, FIQA, template recognizability, learned feature aggregation, transfer learning, BRIAR dataset, IARPA BRIAR, IARPA WRIVA, DARPA TIAMAT, NSF TRAILS Institute, VR rendering, real-time rendering, efficient rendering, GPU programming, CUDA, PyTorch, Python, mixture of experts, MoE, large vision encoders, large language models, LLMs, structure-from-motion, SfM, super-resolution, computer graphics, computational geometry, physically based modeling, advanced computer graphics, XR, simulation, animation, machine learning education, FIRE Capital One Machine Learning, research mentorship, peer research mentor, open-set recognition, multimodal fusion, uncertainty-aware rendering, academic research, CVPR 2025, computer vision publications, Allen Tu CVPR, Allen Tu research, Allen Tu Google Scholar, Allen Tu GitHub, Allen Tu LinkedIn">
+    <!-- Title -->
+    <title>Allen Tu | CS PhD @ UMD</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./static/icons/tu_light_red.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/extra_min_styles.css">
+    <link rel="stylesheet" href="stylesheets/css/academicons.min.css">
+    <link rel="stylesheet" href="stylesheets/css/font-awesome.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5MJTNBEPMB');
+    </script>
+    <script src="./static/js/video_comparison.js"></script>
+</head>
+
+<body data-new-gr-c-s-check-loaded="8.876.0" data-gr-ext-installed="">
+    <div class="wrapper">
+        <!-- HEADER -->
+        <header>
+            <h1 align="center">Allen Tu</h1>
+            <div style="margin-bottom: 10px" align="center">
+                <a href="./static/images/Headshot.png">
+                    <picture>
+                        <source srcset="./static/images/Headshot_Square_Background.webp" type="image/webp">
+                        <img src="./static/images/Headshot_Square_Background.jpg" alt="Portrait" class="portrait">
+                    </picture>
+                </a>
+                <center>
+                    <p>
+                        <a href="mailto:atu1@umd.edu"> atu1@umd.edu </a>
+                    </p>
+                </center>
+
+                <div class="icon-grid">
+                    <a href="./files/AllenTu_CV.pdf"><i class="ai ai-cv"></i></a>
+                    <a href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
+                            class="ai ai-google-scholar"></i></a>
+                    <a href="https://www.linkedin.com/in/allentu/"><i class="fa fa-linkedin-square"></i></a>
+                    <a href="https://github.com/tuallen"><i class="fa fa-github"></i></a>
+                    <a href="https://www.youtube.com/@tuallen"><i class="fa fa-youtube"></i></a>
+                    <a href="https://twitter.com/tuallen_"><i class="fa fa-twitter"></i></a>
+                    <a href="static/images/WeChat.png"><i class="fa fa-wechat"></i></a>
+                    <a href="static/images/QRcode_website.png"><i class="fa fa-qrcode"></i></a>
+                </div>
+                <br>
+            </div>
+
+            <ul class="navbar">
+                <li class="navbar_li"><a href="https://tuallen.github.io/index.html">Home</a></li>
+                <li class="navbar_li"><a href="https://www.semanticscholar.org/author/Allen-Tu/2306782092">Semantic
+                        Scholar</a>
+                <li class="navbar_li"><a
+                        href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">Rednote (小红书)</a>
+                <li class="navbar_li"><a href="https://www.cs.umd.edu/people/atu1">Department Profile</a>
+            </ul>
+        </header>
+
+        <section>
+            <div class="video-compare-container" data-left-label="Diffusion in the Loop" data-right-label="Baseline">
+                <video id="v1" class="video" loop playsinline autoplay muted
+                    src="https://www.cs.umd.edu/~atu1/fs/ditl.mp4"
+                    onplay="resizeAndPlay(this)"></video>
+                <canvas class="videoMerge" id="v1Merge"></canvas>
+            </div>
+            <div class="video-compare-container" data-left-label="Diffusion in the Loop + Posthoc Cleanup" data-right-label="Baseline + Posthoc Cleanup">
+                <video id="v2" class="video" loop playsinline autoplay muted
+                    src="https://www.cs.umd.edu/~atu1/fs/ditl_posthoc.mp4"
+                    onplay="resizeAndPlay(this)"></video>
+                <canvas class="videoMerge" id="v2Merge"></canvas>
+            </div>
+        </section>
+
+        <footer>
+            <p style="line-height: 1.2;" align="center"><small>
+                    Thank you to <a href="https://github.com/orderedlist/minimal">minimal</a> and <a
+                        href="https://somepago.github.io/">Gowthami Somepalli</a><br>for generously <a
+                        href="https://github.com/tuallen/tuallen.github.io">open-sourcing</a> their code!
+                    <br>
+                    &copy; Allen Tu 2025
+                </small></p>
+        </footer>
+    </div>
+</body>
+
+</html>
