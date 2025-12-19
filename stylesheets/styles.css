@@ -260,3 +260,23 @@ footer {
 .icon-grid a:hover i {
   transform: scale(1.15);
 }
+
+.link-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: -10px;
+}
+
+.link-list li {
+    margin-bottom: 8px; /* controls spacing */
+}
+
+.link-list a {
+    color: #b03b3b;          /* your red */
+    text-decoration: none;
+    font-size: 1rem;         /* normal text size */
+}
+
+.link-list a:hover {
+    text-decoration: underline;
+}
