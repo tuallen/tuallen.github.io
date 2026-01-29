@@ -2,7 +2,7 @@
 fetch("https://api.github.com/repos/tuallen/speede3dgs")
     .then(response => response.json())
     .then(data => {
-        document.getElementById("stars-tuallen-speede3dgs").textContent = `★ ${data.stargazers_count}`;
+        document.getElementById("stars-tuallen-speede3dgs").textContent = ` ${data.stargazers_count}`;
     })
     .catch(error => {
         console.error("Failed to fetch stars for tuallen/speede3dgs", error);
@@ -12,7 +12,7 @@ fetch("https://api.github.com/repos/tuallen/speede3dgs")
 fetch("https://api.github.com/repos/pranav-asthana/splatsure")
     .then(response => response.json())
     .then(data => {
-        document.getElementById("stars-pranav-asthana-splatsure").textContent = `★ ${data.stargazers_count}`;
+        document.getElementById("stars-pranav-asthana-splatsure").textContent = ` ${data.stargazers_count}`;
     })
     .catch(error => {
         console.error("Failed to fetch stars for pranav-asthana/splatsure", error);
@@ -22,7 +22,7 @@ fetch("https://api.github.com/repos/pranav-asthana/splatsure")
 fetch("https://api.github.com/repos/tuallen/transfira")
     .then(response => response.json())
     .then(data => {
-        document.getElementById("stars-tuallen-transfira").textContent = `★ ${data.stargazers_count}`;
+        document.getElementById("stars-tuallen-transfira").textContent = ` ${data.stargazers_count}`;
     })
     .catch(error => {
         console.error("Failed to fetch stars for tuallen/transfira", error);
@@ -32,7 +32,7 @@ fetch("https://api.github.com/repos/tuallen/transfira")
 fetch("https://api.github.com/repos/j-alex-hanson/speedy-splat")
     .then(response => response.json())
     .then(data => {
-        document.getElementById("stars-j-alex-hanson-speedy-splat").textContent = `★ ${data.stargazers_count}`;
+        document.getElementById("stars-j-alex-hanson-speedy-splat").textContent = ` ${data.stargazers_count}`;
     })
     .catch(error => {
         console.error("Failed to fetch stars for j-alex-hanson/speedy-splat", error);
@@ -42,7 +42,7 @@ fetch("https://api.github.com/repos/j-alex-hanson/speedy-splat")
 fetch("https://api.github.com/repos/j-alex-hanson/gaussian-splatting-pup")
     .then(response => response.json())
     .then(data => {
-        document.getElementById("stars-j-alex-hanson-gaussian-splatting-pup").textContent = `★ ${data.stargazers_count}`;
+        document.getElementById("stars-j-alex-hanson-gaussian-splatting-pup").textContent = ` ${data.stargazers_count}`;
     })
     .catch(error => {
         console.error("Failed to fetch stars for j-alex-hanson/gaussian-splatting-pup", error);

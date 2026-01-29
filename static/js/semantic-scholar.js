@@ -27,14 +27,14 @@ async function fetchCites(id) {
         if (!span) continue;
 
         if (cache[id] && now - cache[id].ts < ttl) {
-            if (cache[id].c > 0) span.textContent = ` ❞ ${cache[id].c}`;
+            if (cache[id].c > 0) span.textContent = ` ${cache[id].c}`;
             continue;
         }
 
         try {
             const c = await fetchCites(id);
             if (c > 0) {
-                span.textContent = ` ❞ ${c}`;
+                span.textContent = ` ${c}`;
                 cache[id] = { c, ts: now };
             }
         } catch (err) {
