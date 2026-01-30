@@ -16,10 +16,10 @@
     <link rel="icon" type="image/x-icon" href="./static/icons/tu_light_red.ico">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/extra_min_styles.css">
-    <link rel="stylesheet" href="stylesheets/zoom_containers.css">
-    <link rel="stylesheet" href="stylesheets/css/academicons.min.css">
+    <link rel="stylesheet" href="static/stylesheets/styles.css">
+    <link rel="stylesheet" href="static/stylesheets/extra_min_styles.css">
+    <link rel="stylesheet" href="static/stylesheets/zoom_containers.css">
+    <link rel="stylesheet" href="static/stylesheets/css/academicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Google Analytics -->
@@ -131,21 +131,21 @@
                 Applying <b>posthoc diffusion cleanup</b> further enhances visual quality and fine detail.
             </p>
             <div class="video-compare-container" data-left-label="Diffusion in the Loop" data-right-label="Baseline">
-                <video id="v1" class="video" loop playsinline autoplay muted src="static/media/ditl.mp4"
+                <video id="v1" class="video" loop playsinline autoplay muted src="media/ditl.mp4"
                     onplay="resizeAndPlay(this)"></video>
                 <canvas class="videoMerge" id="v1Merge"></canvas>
             </div>
             <div class="video-compare-container" data-left-label="Diffusion in the Loop + Posthoc Cleanup"
                 data-right-label="Baseline + Posthoc Cleanup">
-                <video id="v2" class="video" loop playsinline autoplay muted src="static/media/ditl_posthoc.mp4"
+                <video id="v2" class="video" loop playsinline autoplay muted src="media/ditl_posthoc.mp4"
                     onplay="resizeAndPlay(this)"></video>
                 <canvas class="videoMerge" id="v2Merge"></canvas>
             </div>
 
             <div class="video-compare-container" data-left-label="Diffusion in the Loop + Posthoc Cleanup"
                 data-right-label="Baseline">
-                <video id="v3" class="video" loop playsinline autoplay muted
-                    src="static/media/ditl_posthoc_baseline.mp4" onplay="resizeAndPlay(this)"></video>
+                <video id="v3" class="video" loop playsinline autoplay muted src="media/ditl_posthoc_baseline.mp4"
+                    onplay="resizeAndPlay(this)"></video>
                 <canvas class="videoMerge" id="v3Merge"></canvas>
             </div>
         </section>
@@ -160,7 +160,7 @@
                         <td style="text-align: center;">
                             <div class="video-container">
                                 <a href="https://speede3dgs.github.io/">
-                                    <video class="video-thumbnail" src="./static/media/chicken_speede3dgs.mp4" muted
+                                    <video class="video-thumbnail" src="./media/chicken_speede3dgs.mp4" muted
                                         loop></video>
                                 </a>
                             </div>
@@ -213,7 +213,7 @@
                         <td style="text-align: center;">
                             <div class="video-container">
                                 <a href="https://splatsure.github.io/">
-                                    <video class="video-thumbnail" src="./static/media/church_splatsure.mp4" muted
+                                    <video class="video-thumbnail" src="./media/church_splatsure.mp4" muted
                                         loop></video>
                                 </a>
                             </div>
@@ -266,8 +266,7 @@
                         <td style="text-align: center;">
                             <div class="video-container">
                                 <a href="https://speedysplat.github.io/">
-                                    <video class="video-thumbnail" src="./static/media/kitchen_ss.mp4" muted
-                                        loop></video>
+                                    <video class="video-thumbnail" src="./media/kitchen_ss.mp4" muted loop></video>
                                 </a>
                             </div>
                         </td>
@@ -323,8 +322,7 @@
                         <td style="text-align: center;">
                             <div class="video-container">
                                 <a href="https://pup3dgs.github.io/">
-                                    <video class="video-thumbnail" src="./static/media/playroom_pup.mp4" muted
-                                        loop></video>
+                                    <video class="video-thumbnail" src="./media/playroom_pup.mp4" muted loop></video>
                                 </a>
                             </div>
                         </td>
@@ -387,8 +385,8 @@
                         <div class="image-container">
                             <a href="https://spar3d.org/">
                                 <picture>
-                                    <source srcset="./static/media/spar3d_flyer.webp" type="image/webp">
-                                    <img class="image-thumbnail" src="./static/media/spar3d_flyer.png" alt="Teaser"
+                                    <source srcset="./media/spar3d_flyer.webp" type="image/webp">
+                                    <img class="image-thumbnail" src="./media/spar3d_flyer.png" alt="Teaser"
                                         loading="lazy" style="width:100%;height:auto;">
                                 </picture>
                             </a>
