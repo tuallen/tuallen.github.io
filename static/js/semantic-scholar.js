@@ -2,9 +2,9 @@
 const S2_PAPERS = {
     "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9",
     "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
-    "transfira": "333a9c5cb722e495e475d93ccc7dc04cbec3aae4",
-    "splatsure": "4cb5fc84a62133f6f3b0cc85bd3420336d5576a8",
-    "speede3dgs": "e3e599bd7dbf757e85483a21bbadaed3d4de1fcb",
+    // "transfira": "333a9c5cb722e495e475d93ccc7dc04cbec3aae4",
+    // "splatsure": "4cb5fc84a62133f6f3b0cc85bd3420336d5576a8",
+    // "speede3dgs": "e3e599bd7dbf757e85483a21bbadaed3d4de1fcb",
     // "addressing_bias": "1bfd832d88253ee37ae06ee07195711b892b885d"
 };
 
