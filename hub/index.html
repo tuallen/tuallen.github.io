@@ -56,6 +56,7 @@
     <link rel="stylesheet" href="/static/stylesheets/extra_min_styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css">
+    <link rel="stylesheet" href="/static/stylesheets/icons.css">
 
     <script defer src="/static/js/new-tabs.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
@@ -81,28 +82,32 @@
                     </picture>
                 </a>
                 <center>
-                    <p><a href="mailto:atu1@umd.edu"> atu1@umd.edu </a></p>
+                    <p>
+                        <a href="mailto:atu1@umd.edu"> atu1@umd.edu </a>
+                    </p>
                 </center>
 
                 <div class="icon-grid">
                     <a href="/files/AllenTu_CV.pdf"><i class="ai ai-cv"></i></a>
-                    <a href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
+                    <a rel="me" href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
                             class="ai ai-google-scholar"></i></a>
-                    <a href="https://www.linkedin.com/in/allentu/"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://github.com/tuallen"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.youtube.com/@tuallen"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://twitter.com/tuallen_"><i class="fa-brands fa-twitter"></i></a>
+                    <a rel="me" href="https://www.linkedin.com/in/allentu/"><i class="fa-brands fa-linkedin"></i></a>
+                    <a rel="me" href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">
+                        <i class="fa-xhs"></i>
+                    </a>
+                    <a rel="me" href="https://github.com/tuallen"><i class="fa-brands fa-github"></i></a>
+                    <a rel="me" href="https://www.semanticscholar.org/author/Allen-Tu/2306782092"><i
+                            class="ai ai-semantic-scholar"></i></a>
+                    <a rel="me" href="https://twitter.com/tuallen_"><i class="fa-brands fa-twitter"></i></a>
                     <a href="/static/images/WeChat.png"><i class="fa-brands fa-weixin"></i></a>
-                    <a href="/static/images/QRcode_website.png"><i class="fa-solid fa-qrcode"></i></a>
                 </div>
                 <br>
             </div>
 
             <ul class="navbar">
                 <li class="navbar_li"><a href="/">Home</a></li>
+                <li class="navbar_li"><a href="/hub/" id="selected">Link Hub</a></li>
                 <li class="navbar_li"><a href="/3d/">3D/4D Research Portfolio</a></li>
-                <li class="navbar_li"><a
-                        href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">Rednote (小红书)</a></li>
             </ul>
         </header>
 
@@ -125,8 +130,8 @@
                 <li><a href="https://www.linkedin.com/in/allentu/"><i class="fa-brands fa-linkedin"></i>
                         LinkedIn:
                         in/allentu</a></li>
-                <li><a href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207"><i
-                            class="fa fa-book"></i> Rednote (小红书): allentu</a></li>
+                <li><a href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207"><i class="fa-xhs"></i>
+                        Rednote (小红书): allentu</a></li>
                 <li><a href="https://twitter.com/tuallen_"><i class="fa-brands fa-twitter"></i> Twitter: @tuallen_</a>
                 </li>
                 <li><a href="https://www.instagram.com/tuallen_/"><i class="fa-brands fa-instagram"></i> Instagram:
@@ -158,7 +163,8 @@
             <ul class="link-list">
                 <li><a href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
                             class="ai ai-google-scholar"></i> Google Scholar</a></li>
-                <li><a href="https://www.semanticscholar.org/author/Allen-Tu/2306782092">❞ Semantic Scholar</a></li>
+                <li><a href="https://www.semanticscholar.org/author/Allen-Tu/2306782092"><i
+                            class="ai ai-semantic-scholar"></i> Semantic Scholar</a></li>
                 <li><a href="https://www.researchgate.net/profile/Allen-Tu-3/research"><i
                             class="ai ai-researchgate"></i> ResearchGate</a></li>
                 <li><a href="https://www.cs.umd.edu/people/atu1"><i class="fa fa-university"></i> UMD CS Department
@@ -167,7 +173,7 @@
                 </li>
                 <li><a href="https://dblp.org/pid/315/4448.html"><i class="ai ai-dblp"></i> DBLP</a></li>
                 <li><a href="https://www.webofscience.com/wos/author/record/NJR-6484-2025"><i
-                            class="fa fa-database"></i> Web of Science</a></li>
+                            class="ai ai-web-of-science"></i> Web of Science</a></li>
             </ul>
 
             <h2>Contact</h2>
@@ -187,7 +193,7 @@
                     Thank you to <a href="https://somepago.github.io/">Gowthami Somepalli</a><br>
                     for generously <a href="https://github.com/tuallen/tuallen.github.io">open-sourcing</a> their code!
                     <br>
-                    &copy; Allen Tu 2026
+                    &copy; <a href="/static/images/QRcode_website.png">Allen Tu</a> 2026
                 </small>
             </p>
         </footer>
