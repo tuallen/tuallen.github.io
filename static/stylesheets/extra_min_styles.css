@@ -52,9 +52,9 @@ body {
   color: #f88c99;
 }
 
-.navbar_li a#selected {
-  text-decoration: underline !important;
-  font-weight: 700 !important;
+#selected {
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .workPicture {
