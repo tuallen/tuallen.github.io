@@ -11,7 +11,11 @@
         content="Allen Tu, 3D/4D Research Portfolio, 3D Reconstruction, 4D Reconstruction, Sparse-view Reconstruction, Diffusion Priors, Diffusion in the Loop, Gaussian Splatting, 3D Gaussian Splatting, Dynamic Gaussian Splatting, DeformableGS, NeRF, Efficient Rendering, Model Compression, Temporal Pruning, IARPA WRIVA, University of Maryland">
     <title>Allen Tu | 3D/4D Research Portfolio</title>
 
-    <link rel="icon" type="image/x-icon" href="/static/icons/tu_light_red.ico">
+    <link rel="icon" href="/static/icons/tu_light_red.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/static/icons/tu_white.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/static/icons/tu_light_red.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="/static/icons/tu.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/static/icons/tu_light_red.png">
     <link rel="canonical" href="https://tuallen.github.io/3d/">
     <meta name="robots" content="index,follow">
 
@@ -80,9 +84,14 @@
     <div class="wrapper">
         <!-- HEADER -->
         <header>
-            <h1 align="center">Allen Tu</h1>
+            <h1 align="center" class="site-title">
+                <a href="/static/images/QRcode_website.png" class="brandmark" aria-label="Open QR code">
+                    <i class="ai ai-tu" aria-hidden="true"></i>
+                </a>
+                <span class="name">Allen Tu</span>
+            </h1>
             <div style="margin-bottom: 10px" align="center">
-                <a href="/static/images/QRcode_website.png">
+                <a href="/static/images/Headshot.png">
                     <picture>
                         <source srcset="/static/images/Headshot_Square_Background.webp" type="image/webp">
                         <img src="/static/images/Headshot_Square_Background.jpg" alt="Portrait of Allen Tu"
@@ -447,6 +456,10 @@
                         </div>
                         <div class="indexWorkText">
                             <a href="https://www.spar3d.org/" class="button">WEBSITE <i class="fa fa-laptop"></i></a>
+                            <a href="https://openreview.net/group?id=thecvf.com%2FCVPR%2F2026%2FWorkshop%2FSPAR-3D"
+                                class="button">OPENREVIEW</a>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfl-T4x8-HWAbc1xr0aeoomXr7qiWI4px34B7xtYvayCMLbxg/viewform"
+                                class="button">REVIEWERS</a>
                         </div>
                         <br>
 
@@ -481,25 +494,26 @@
             <p style="margin-top: -3em; margin-bottom: 3em;">
                 <small>* denotes equal contribution.</small>
             </p>
+
+            <h1>Acknowledgements</h1>
+            <p>
+                This research is based upon work supported by the Office of the Director of National Intelligence
+                (ODNI), Intelligence Advanced Research Projects Activity (IARPA), via IARPA R&D Contract No.
+                140D0423C0076. The views and conclusions contained herein are those of the authors and should
+                not be interpreted as necessarily representing the official policies or endorsements, either
+                expressed or implied, of the ODNI, IARPA, or the U.S. Government. The U.S. Government is
+                authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any
+                copyright annotation thereon.
+            </p>
         </section>
 
         <!-- FOOTER -->
         <footer>
-            <p style="line-height: 1.2;"><small>
-                    This research is based upon work supported by the Office of the Director of National Intelligence
-                    (ODNI), Intelligence Advanced Research Projects Activity (IARPA), via IARPA R&D Contract No.
-                    140D0423C0076. The views and conclusions contained herein are those of the authors and should
-                    not be interpreted as necessarily representing the official policies or endorsements, either
-                    expressed or implied, of the ODNI, IARPA, or the U.S. Government. The U.S. Government is
-                    authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any
-                    copyright annotation thereon.
-                </small>
-            </p>
             <p style="line-height: 1.2;" align="center"><small>
                     Thank you to <a href="https://somepago.github.io/">Gowthami Somepalli</a><br>
                     for generously <a href="https://github.com/tuallen/tuallen.github.io">open-sourcing</a> their code!
                     <br>
-                    &copy; Allen Tu 2026
+                    &copy; 2026 Allen Tu
                 </small>
             </p>
         </footer>

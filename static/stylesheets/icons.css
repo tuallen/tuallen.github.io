@@ -42,3 +42,22 @@
     mask-position: center;
     mask-size: contain;
 }
+
+.ai-tu {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: currentColor;
+
+    -webkit-mask-image: url("/static/icons/tu.svg");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+
+    mask-image: url("/static/icons/tu.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+
+    vertical-align: -0.15em;
+}
