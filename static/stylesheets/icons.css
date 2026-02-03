@@ -144,3 +144,22 @@
 
     vertical-align: -0.125em;
 }
+
+.ai-allentu {
+    display: inline-block;
+    width: auto;
+    height: 2.5em;
+    aspect-ratio: 1835 / 819;
+    background: currentColor;
+
+    -webkit-mask-image: url("/static/icons/allentu.svg");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+
+    mask-image: url("/static/icons/allentu.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+
+}

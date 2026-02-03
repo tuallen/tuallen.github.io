@@ -56,6 +56,7 @@ On top of the original template, I’ve introduced a number of custom features a
 
 A fully custom icon system extending Academicons and Font Awesome with inline SVG masks for consistent styling and scalability:
 
+- `ai-allentu` — Personal logo
 - `ai-tu` — Personal brandmark
 - `ai-umd` — University of Maryland
 - `ai-umd-cs` — UMD Computer Science
@@ -74,7 +75,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
 - **Comprehensive meta tags** — Open Graph, Twitter Cards, and canonical URLs
 - **Multi-page structure** — Home, Link Hub, and 3D/4D Research Portfolio
-- **Favicon system** — SVG favicons with dark mode support and PNG fallbacks
+- **Favicon system** — Adaptive SVG favicons (red for light mode, white for dark mode) with PNG fallbacks and ICO support
 
 ### Performance & SEO
 
@@ -169,6 +170,6 @@ Feel free to explore, borrow ideas, or adapt pieces for your own academic websit
 
 ---
 
-**Last Updated:** February 2026  
+**Last Updated:** February 3, 2026  
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**

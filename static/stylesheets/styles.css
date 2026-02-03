@@ -321,3 +321,26 @@ screen and (max-width: 480px) {
 .gap-xl {
   margin-bottom: 90px;
 }
+
+.site-title {
+  margin: 0 0 0 0;
+  line-height: 1;
+}
+
+.brandmark {
+  display: inline-block;
+  line-height: 0;
+}
+
+header>div {
+  margin-top: 0px;
+}
+
+.portrait {
+  display: block;
+  margin: 0 auto 6px auto;
+}
+
+header p {
+  margin: 6px 0 10px 0;
+}
