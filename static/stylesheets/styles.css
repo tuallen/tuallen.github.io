@@ -61,7 +61,7 @@ a {
 
 
 a:hover {
-  color: #050505;
+  color: #f88c99;
 }
 
 a small {
@@ -269,6 +269,7 @@ screen and (max-width: 480px) {
   gap: 10px 0px;
   max-width: 70%;
   margin: 0 auto;
+  margin-bottom: 0.5em;
 }
 
 .icon-grid a {
@@ -284,6 +285,7 @@ screen and (max-width: 480px) {
 }
 
 .icon-grid a:hover i {
+  color: #f88c99;
   transform: scale(1.15);
 }
 

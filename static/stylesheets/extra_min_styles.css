@@ -25,35 +25,45 @@ body {
   font-weight: 400;
 }
 
-/* Change some things if user is on a phone */
+/* NAVBAR (default = desktop + everything) */
+.navbar {
+  list-style: none;
+  padding: 0;
+  margin: -16px auto 0;
 
-.navbar.navbar {
-  width: 260px;
-  margin-top: -16px;
-  font-size: 18px;
-  text-align: center;
-  list-style-type: none;
-  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  width: 100%;
+  font-size: 1.1rem;
 }
 
-.navbar_li.navbar_li {
-  /*display: inline;*/
-  margin-bottom: 7px;
-  /* Adds space between each nav item */
-  /*font-weight: lighter;*/
-  margin-right: 36px;
+.navbar_li {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.navbar_li a {
+  color: #b03b3b;
+  text-decoration: none;
+
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .navbar_li a:hover,
 .navbar_li a:focus {
-  border-bottom-style: solid;
-  border-top-style: solid;
-  border-width: 1px;
-  color: #f88c99;
+  border-bottom-color: #f88c99;
 }
 
 #selected {
-  text-decoration: underline;
+  border-bottom-color: #f88c99;
   font-weight: bold;
 }
 
@@ -240,26 +250,4 @@ mathcode {
   min-width: 200px;
   border-style: solid;
   border-width: 1px;
-}
-
-
-/* -------------- */
-/* --- MOBILE --- */
-/* -------------- */
-
-@media only screen and (max-device-width: 600px) {
-  .navbar_li.navbar_li {
-    margin-left: 48px !important;
-    /*margin-right:20px !important;*/
-    text-align: left;
-  }
-
-  .workPicture {
-    width: 0px !important;
-    margin-right: 0px;
-  }
-}
-
-.fa-xhs {
-  outline: 1px solid lime;
 }
