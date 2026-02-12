@@ -143,7 +143,7 @@ function resizeAndPlay(element) {
 
     // Use the section width (the same width the text uses)
     var container = element.closest("section");
-    var containerWidth = container.offsetWidth;
+    var containerWidth = parseFloat(window.getComputedStyle(container).width);
 
     // Video frame: left half only
     var halfWidth = element.videoWidth / 2;
