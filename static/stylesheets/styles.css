@@ -195,7 +195,7 @@ footer {
   color: #b03b3b;
   padding: 0 10px;
   border-radius: 2px;
-  height: 20;
+  height: 20px;
   line-height: 20px;
   border: 1px solid #b03b3b;
   font-size: 11px;
@@ -214,6 +214,10 @@ screen and (max-width: 960px) {
   div.wrapper {
     width: auto;
     margin: 0;
+  }
+
+  body {
+    padding: 20px;
   }
 
   header,
@@ -246,7 +250,7 @@ screen and (max-width: 960px) {
 
   header ul {
     position: absolute;
-    right: 50px;
+    right: 20px;
     top: 52px;
   }
 
@@ -300,7 +304,7 @@ screen and (max-width: 720px) {
 @media print,
 screen and (max-width: 480px) {
   body {
-    padding: 15px;
+    padding: 20px;
   }
 
   header ul {
