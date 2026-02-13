@@ -1,3 +1,9 @@
+/* ==================== BASE STYLES ==================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #fff;
   padding: 50px;
@@ -6,6 +12,13 @@ body {
   font-weight: 400;
 }
 
+.wrapper {
+  width: 1020px;
+  margin: auto;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+
 h1,
 h2,
 h3,
@@ -13,15 +26,6 @@ h4,
 h5,
 h6 {
   color: #222;
-  margin: 0 0 20px;
-}
-
-p,
-ul,
-ol,
-table,
-pre,
-dl {
   margin: 0 0 20px;
 }
 
@@ -54,11 +58,33 @@ h6 {
   font-weight: 500;
 }
 
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 13px;
+}
+
+p,
+ul,
+ol,
+table,
+pre,
+dl {
+  margin: 0 0 20px;
+}
+
+small {
+  font-size: 11px;
+}
+
+/* ==================== LINKS ==================== */
+
 a {
   color: #b03b3b;
   text-decoration: none;
 }
-
 
 a:hover {
   color: #f88c99;
@@ -75,17 +101,93 @@ a:hover small {
   color: #777;
 }
 
-.wrapper {
-  width: 1020px;
-  margin: auto;
+/* ==================== LAYOUT ==================== */
+
+header {
+  width: 300px;
+  float: left;
+  position: fixed;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
-blockquote {
-  border-left: 1px solid #e5e5e5;
-  margin: 0;
-  padding: 0 0 0 20px;
-  font-style: italic;
+header>div {
+  margin-top: 0px;
 }
+
+header p {
+  margin: 6px 0 10px 0;
+}
+
+section {
+  width: 700px;
+  float: right;
+  padding-bottom: 50px;
+  padding-left: 150px;
+  padding-top: 50px;
+}
+
+footer {
+  width: 300px;
+  float: left;
+  position: fixed;
+  margin-top: 500px;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+hr {
+  border: 0;
+  background: #e5e5e5;
+  height: 1px;
+  margin: 0 0 20px;
+}
+
+/* ==================== IMAGES & MEDIA ==================== */
+
+img {
+  max-width: 100%;
+}
+
+.portrait {
+  display: block;
+  margin: 0 auto 6px auto;
+  width: 160px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+}
+
+.workPicture {
+  width: 240px;
+  margin-right: 24px;
+}
+
+.colPortrait {
+  margin-bottom: 8px;
+  border-radius: 10px;
+}
+
+/* ==================== TABLES ==================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 15px 10px;
+}
+
+th {
+  color: #444;
+}
+
+dt {
+  color: #444;
+  font-weight: 500;
+}
+
+/* ==================== CODE BLOCKS ==================== */
 
 code,
 pre {
@@ -101,93 +203,97 @@ pre {
   overflow-x: auto;
 }
 
-table {
+code {
+  font-family: monospace;
+  background: #F8F8FF;
+  border: black dashed 1px;
+  padding: 6px;
+  margin-right: auto;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: block;
+  max-width: 75%;
+}
+
+skinnycode {
+  font-family: monospace;
+  background: #F8F8FF;
+  border: black dashed 1px;
+  padding: 6px;
+  margin-right: auto;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  max-width: 75%;
+}
+
+mathcode {
+  font-family: monospace;
+  background: #F8F8FF;
+  border: black dashed 1px;
+  padding: 6px;
+  margin-left: 80px;
+  display: inline-block;
+  max-width: 60%;
+}
+
+blockquote {
+  border-left: 1px solid #e5e5e5;
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-style: italic;
+}
+
+/* ==================== NAVIGATION ==================== */
+
+.site-title {
+  margin: 0 0 0 0;
+  line-height: 1;
+}
+
+.brandmark {
+  display: inline-block;
+  line-height: 0;
+}
+
+.navbar {
+  list-style: none;
+  padding: 0;
+  margin: -16px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   width: 100%;
-  border-collapse: collapse;
+  font-size: 1.1rem;
 }
 
-th,
-td {
-  text-align: left;
-  padding: 15px 10px;
-  /*border:1px solid #e5e5e5;*/
+.navbar_li {
+  margin: 0;
+  width: 100%;
+  text-align: center;
 }
 
-/* Spacing between content blocks inside table cells (replaces <br> tags) */
-#indexWorkText,
-.indexWorkText {
-  margin-top: 10px;
-  margin-bottom: 15px;
+.navbar_li a {
+  color: #b03b3b;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+  display: inline-block;
+  white-space: nowrap;
 }
 
-#indexExperienceText,
-.indexExperienceText {
-  margin-top: 10px;
-  margin-bottom: 15px;
+.navbar_li a:hover,
+.navbar_li a:focus {
+  border-bottom-color: #f88c99;
 }
 
-/* Spacer for 1.5x line break height */
-.spacer {
-  height: 1em;
+#selected {
+  border-bottom-color: #f88c99;
+  font-weight: bold;
 }
 
-/* Reduce ul margins within work/experience sections */
-#indexWorkText ul,
-.indexWorkText ul,
-#indexExperienceText ul,
-.indexExperienceText ul {
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
-}
-
-dt {
-  color: #444;
-  font-weight: 500;
-}
-
-th {
-  color: #444;
-}
-
-img {
-  max-width: 100%;
-}
-
-header {
-  /*margin-top:100px;*/
-  /*background-color: #996633;*/
-  width: 300px;
-  float: left;
-  position: fixed;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-section {
-  width: 700px;
-  float: right;
-  padding-bottom: 50px;
-  padding-left: 150px;
-  padding-top: 50px;
-}
-
-small {
-  font-size: 11px;
-}
-
-hr {
-  border: 0;
-  background: #e5e5e5;
-  height: 1px;
-  margin: 0 0 20px;
-}
-
-footer {
-  width: 300px;
-  float: left;
-  position: fixed;
-  margin-top: 500px;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
+/* ==================== COMPONENTS ==================== */
 
 .button {
   display: inline-block;
@@ -207,7 +313,55 @@ footer {
   color: #050505;
 }
 
-/* Video Comparison Styles */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 10px 0px;
+  max-width: 70%;
+  margin: 0 auto;
+  margin-bottom: 0.5em;
+}
+
+.icon-grid a {
+  color: #b03b3b;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.icon-grid i {
+  font-size: 32px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.icon-grid a:hover i {
+  color: #f88c99;
+  transform: scale(1.15);
+}
+
+.link-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: -10px;
+}
+
+.link-list li {
+  margin-bottom: 8px;
+}
+
+.link-list a {
+  color: #b03b3b;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.link-list a:hover {
+  text-decoration: underline;
+}
+
+/* ==================== VIDEO COMPARISON ==================== */
+
 .video-compare-container {
   width: 100%;
   max-width: 100%;
@@ -229,10 +383,160 @@ footer {
   display: block;
 }
 
+/* ==================== UTILITY CLASSES ==================== */
+
+.spacer {
+  height: 1em;
+}
+
+.gap-md {
+  margin-bottom: 40px;
+}
+
+.gap-lg {
+  margin-bottom: 60px;
+}
+
+.gap-xl {
+  margin-bottom: 90px;
+}
+
+#indexWorkText,
+.indexWorkText {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+#indexExperienceText,
+.indexExperienceText {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+#indexWorkText ul,
+.indexWorkText ul,
+#indexExperienceText ul,
+.indexExperienceText ul {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+/* ==================== PAPER/BLOG SPECIFIC ==================== */
+
+.paper_line {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-right: 20px;
+  text-align: left;
+}
+
+.paper_title {
+  margin-left: 60px;
+  margin-right: 20px;
+  padding-right: 20px;
+  text-align: left;
+  font-weight: 800;
+}
+
+#bibtexFont {
+  font-size: 10px;
+  color: #9AC39D !important;
+}
+
+#appendixFont {
+  color: #E8AB6B !important;
+}
+
+#collaboratorWrapper {
+  text-align: center;
+  margin-left: -30%;
+}
+
+#blognav {
+  float: right;
+  padding: 14px;
+  border-radius: 10px;
+  border-color: #cdcccc;
+  border: dotted;
+  border-width: 1px;
+  margin-left: 38px;
+  margin-top: 10px;
+  margin-right: 36px;
+  margin-bottom: 40px;
+  width: 195px;
+}
+
+#allPostList {
+  line-height: 24px;
+}
+
+#blognavHeader {
+  margin-top: -2px;
+  font-style: italic;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.blognav_element {
+  margin-left: 16px;
+  font-size: 16px;
+}
+
+.blognav_element a:hover,
+.blognav_element a:focus {
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-width: 1px;
+  color: #f88c99;
+}
+
+#blog_selected {
+  text-decoration: underline;
+}
+
+#tutorialP {
+  max-width: 80%;
+}
+
+#definition {
+  margin-left: 40px;
+  margin-bottom: 10px;
+  margin-right: 160px;
+  text-align: left;
+  font-family: serif;
+  padding: 15px;
+  max-width: 95%;
+  min-width: 200px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#definition_no_b {
+  margin-left: 40px;
+  margin-right: 160px;
+  text-align: left;
+  font-family: serif;
+  max-width: 95%;
+  min-width: 200px;
+}
+
+#narrow_definition {
+  margin-left: 40px;
+  margin-bottom: 20px;
+  margin-right: 280px;
+  text-align: left;
+  font-family: serif;
+  padding: 15px;
+  max-width: 95%;
+  min-width: 200px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
 
 @media print,
 screen and (max-width: 960px) {
-
   div.wrapper {
     width: auto;
     margin: 0;
@@ -276,7 +580,6 @@ screen and (max-width: 960px) {
     top: 52px;
   }
 
-  /* Stack research highlights table on mobile */
   table tr,
   table td {
     display: block;
@@ -288,20 +591,17 @@ screen and (max-width: 960px) {
     padding: 4px 0;
   }
 
-  /* Center video containers on mobile */
   .video-container,
   .image-container {
     margin: 0 auto;
   }
 
-  /* Reduce top margin on mobile for tighter spacing */
   #indexWorkText,
   .indexWorkText {
     margin-top: -10px;
     margin-bottom: 40px;
   }
 
-  /* Lessen the left margin on bullets for mobile */
   ul {
     padding-left: 20px;
   }
@@ -350,89 +650,4 @@ screen and (max-width: 480px) {
     font-size: 12pt;
     color: #444;
   }
-}
-
-.icon-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  gap: 10px 0px;
-  max-width: 70%;
-  margin: 0 auto;
-  margin-bottom: 0.5em;
-}
-
-.icon-grid a {
-  color: #b03b3b;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.icon-grid i {
-  font-size: 32px;
-  line-height: 1;
-  vertical-align: middle;
-}
-
-.icon-grid a:hover i {
-  color: #f88c99;
-  transform: scale(1.15);
-}
-
-.link-list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: -10px;
-}
-
-.link-list li {
-  margin-bottom: 8px;
-  /* controls spacing */
-}
-
-.link-list a {
-  color: #b03b3b;
-  /* your red */
-  text-decoration: none;
-  font-size: 1rem;
-  /* normal text size */
-}
-
-.link-list a:hover {
-  text-decoration: underline;
-}
-
-.gap-md {
-  margin-bottom: 40px;
-}
-
-.gap-lg {
-  margin-bottom: 60px;
-}
-
-.gap-xl {
-  margin-bottom: 90px;
-}
-
-.site-title {
-  margin: 0 0 0 0;
-  line-height: 1;
-}
-
-.brandmark {
-  display: inline-block;
-  line-height: 0;
-}
-
-header>div {
-  margin-top: 0px;
-}
-
-.portrait {
-  display: block;
-  margin: 0 auto 6px auto;
-}
-
-header p {
-  margin: 6px 0 10px 0;
 }

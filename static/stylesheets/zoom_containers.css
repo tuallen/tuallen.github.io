@@ -3,7 +3,6 @@
     width: 300px;
     height: 200px;
     overflow: visible;
-    /* Allow video to expand beyond the container */
     display: inline-block;
 }
 
@@ -11,20 +10,15 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Ensure the entire video is visible */
     transition: transform 0.4s ease;
-    /* Smooth zoom transition */
     position: absolute;
     top: 0;
     left: 0;
 }
 
-/* Zoom the video larger while keeping it visible */
 .video-container:hover .video-thumbnail {
     transform: scale(3);
-    /* Adjust this to make the video larger on hover */
     z-index: 1000;
-    /* Ensure it appears above other content */
 }
 
 .image-container {
@@ -32,7 +26,6 @@
     width: 300px;
     height: 130px;
     overflow: visible;
-    /* Allow image to expand beyond the container */
     display: inline-block;
 }
 
@@ -41,21 +34,16 @@
     height: 100%;
     object-fit: contain;
     transition: transform 0.4s ease;
-    /* Smooth zoom transition */
     position: absolute;
     top: 0;
     left: 0;
 }
 
-/* Zoom the image larger while keeping it visible */
 .image-container:hover .image-thumbnail {
     transform: scale(4);
-    /* Adjust this to make the image larger on hover */
     z-index: 1000;
-    /* Ensure it appears above other content */
 }
 
-/* Mobile: show videos at same dimensions as desktop but without zoom */
 @media screen and (max-width: 960px) {
 
     .video-container {
@@ -72,14 +60,12 @@
         overflow: hidden;
     }
 
-    /* Disable zoom effect on mobile */
     .video-thumbnail,
     .image-thumbnail {
         position: relative;
         transform: none !important;
     }
 
-    /* Disable hover zoom on mobile */
     .video-container:hover .video-thumbnail,
     .image-container:hover .image-thumbnail {
         transform: none !important;
