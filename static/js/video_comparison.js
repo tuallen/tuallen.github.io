@@ -85,7 +85,8 @@ function playVids(videoId) {
             const labelRight = container.dataset.rightLabel || null;
 
             if (labelLeft || labelRight) {
-                const fontSize = Math.round(ch * 0.06);   // scales with video height
+                const isMobile = window.innerWidth <= 960;
+                const fontSize = Math.round(ch * (isMobile ? 0.06 : 0.04));   // scales with video height
                 const paddingX = fontSize * 0.6;
                 const paddingY = fontSize * 0.35;
                 const radius = fontSize * 0.6;
