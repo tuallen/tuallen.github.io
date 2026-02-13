@@ -271,8 +271,8 @@ screen and (max-width: 960px) {
   /* Reduce top margin on mobile for tighter spacing */
   #indexWorkText,
   .indexWorkText {
-    margin-top: -7px;
-    margin-bottom: 25px;
+    margin-top: -10px;
+    margin-bottom: 40px;
   }
 }
 

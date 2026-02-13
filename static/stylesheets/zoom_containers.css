@@ -59,16 +59,16 @@
 @media screen and (max-width: 960px) {
 
     .video-container {
-        width: 300px;
-        height: 200px;
-        margin-top: 20px;
+        width: 100%;
+        height: auto;
+        margin-top: 50px;
         overflow: hidden;
     }
 
     .image-container {
-        width: 300px;
-        height: 130px;
-        margin-top: 20px;
+        width: 100%;
+        height: auto;
+        margin-top: 40px;
         overflow: hidden;
     }
 
