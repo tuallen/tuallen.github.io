@@ -123,6 +123,11 @@ td {
   margin-bottom: 0;
 }
 
+/* Spacer for 1.5x line break height */
+.spacer {
+  height: 1em;
+}
+
 dt {
   color: #444;
   font-weight: 500;
@@ -182,6 +187,8 @@ footer {
   line-height: 20px;
   border: 1px solid #b03b3b;
   font-size: 11px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .button:hover {
