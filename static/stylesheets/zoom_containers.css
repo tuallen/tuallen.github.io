@@ -55,18 +55,33 @@
     /* Ensure it appears above other content */
 }
 
-/* Mobile: let containers size to content instead of fixed height */
+/* Mobile: show videos at same dimensions as desktop but without zoom */
 @media screen and (max-width: 960px) {
 
-    .video-container,
-    .image-container {
-        width: 100%;
-        height: auto;
+    .video-container {
+        width: 300px;
+        height: 200px;
         margin-top: 20px;
+        overflow: hidden;
     }
 
+    .image-container {
+        width: 300px;
+        height: 130px;
+        margin-top: 20px;
+        overflow: hidden;
+    }
+
+    /* Disable zoom effect on mobile */
     .video-thumbnail,
     .image-thumbnail {
         position: relative;
+        transform: none !important;
+    }
+
+    /* Disable hover zoom on mobile */
+    .video-container:hover .video-thumbnail,
+    .image-container:hover .image-thumbnail {
+        transform: none !important;
     }
 }
