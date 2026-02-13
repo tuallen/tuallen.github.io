@@ -116,16 +116,28 @@ td {
 /* Spacing between content blocks inside table cells (replaces <br> tags) */
 #indexWorkText,
 .indexWorkText {
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
-#indexWorkText:last-child {
-  margin-bottom: 0;
+#indexExperienceText,
+.indexExperienceText {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 /* Spacer for 1.5x line break height */
 .spacer {
   height: 1em;
+}
+
+/* Reduce ul margins within work/experience sections */
+#indexWorkText ul,
+.indexWorkText ul,
+#indexExperienceText ul,
+.indexExperienceText ul {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
 
 dt {
@@ -188,7 +200,7 @@ footer {
   border: 1px solid #b03b3b;
   font-size: 11px;
   margin-top: 3px;
-  margin-bottom: 3px;
+  margin-bottom: 1.5px;
 }
 
 .button:hover {
@@ -214,6 +226,7 @@ screen and (max-width: 960px) {
 
   header {
     padding-right: 320px;
+    margin-bottom: 25px;
   }
 
   section {
@@ -253,6 +266,13 @@ screen and (max-width: 960px) {
   .video-container,
   .image-container {
     margin: 0 auto;
+  }
+
+  /* Reduce top margin on mobile for tighter spacing */
+  #indexWorkText,
+  .indexWorkText {
+    margin-top: -7px;
+    margin-bottom: 25px;
   }
 }
 
