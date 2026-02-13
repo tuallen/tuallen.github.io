@@ -1,17 +1,33 @@
 // Check if device is mobile
 const isMobile = window.matchMedia('(max-width: 960px)').matches;
 
-document.querySelectorAll('.video-container').forEach(container => {
-    const video = container.querySelector('.video-thumbnail');
-
-    if (isMobile) {
-        // On mobile: autoplay and loop
-        video.autoplay = true;
-        video.play().catch(() => {
-            // Autoplay might be blocked, that's okay
+if (isMobile) {
+    // On mobile: use Intersection Observer for lazy autoplay
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target.querySelector('.video-thumbnail');
+            if (entry.isIntersecting) {
+                // Video is visible, play it
+                video.play().catch(() => {
+                    // Autoplay might be blocked, that's okay
+                });
+            } else {
+                // Video is not visible, pause it
+                video.pause();
+            }
         });
-    } else {
-        // On desktop: play on hover
+    }, {
+        threshold: 0.5 // Play when 50% of video is visible
+    });
+
+    // Observe all video containers
+    document.querySelectorAll('.video-container').forEach(container => {
+        videoObserver.observe(container);
+    });
+} else {
+    // On desktop: play on hover
+    document.querySelectorAll('.video-container').forEach(container => {
+        const video = container.querySelector('.video-thumbnail');
         container.addEventListener('mouseover', () => {
             video.play();
         });
@@ -19,8 +35,8 @@ document.querySelectorAll('.video-container').forEach(container => {
             video.pause();
             video.currentTime = 0;  // Reset to the beginning when hover ends
         });
-    }
-});
+    });
+}
 
 document.querySelectorAll('.image-container').forEach(container => {
     const image = container.querySelector('.image-thumbnail');
