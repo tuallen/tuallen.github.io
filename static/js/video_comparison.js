@@ -85,7 +85,7 @@ function playVids(videoId) {
             const labelRight = container.dataset.rightLabel || null;
 
             if (labelLeft || labelRight) {
-                const fontSize = Math.round(ch * 0.04);   // scales with video height
+                const fontSize = Math.round(ch * 0.06);   // scales with video height
                 const paddingX = fontSize * 0.6;
                 const paddingY = fontSize * 0.35;
                 const radius = fontSize * 0.6;
@@ -119,12 +119,12 @@ function playVids(videoId) {
 
                 // Left bubble
                 if (labelLeft) {
-                    drawBubble(labelLeft, 15, ch - fontSize * 1.2);
+                    drawBubble(labelLeft, 5, ch - fontSize * 1.2);
                 }
 
                 // Right bubble
                 if (labelRight) {
-                    drawBubble(labelRight, cw - 15, ch - fontSize * 1.2, true);
+                    drawBubble(labelRight, cw - 5, ch - fontSize * 1.2, true);
                 }
             }
             requestAnimationFrame(drawLoop);
