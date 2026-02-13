@@ -207,6 +207,28 @@ footer {
   color: #050505;
 }
 
+/* Video Comparison Styles */
+.video-compare-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.video-compare-container video.video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.video-compare-container canvas.videoMerge {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 @media print,
 screen and (max-width: 960px) {
