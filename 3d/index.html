@@ -59,17 +59,18 @@
     <link rel="preconnect" href="https://api.github.com" crossorigin>
     <link rel="preconnect" href="https://api.semanticscholar.org" crossorigin>
 
-    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-02-13">
-    <link rel="stylesheet" href="/static/stylesheets/zoom_containers.css?v=2026-02-13">
-    <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css?v=2026-02-13">
-    <link rel="stylesheet" href="/static/stylesheets/icons.css?v=2026-02-13">
+    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-02-15">
+    <link rel="stylesheet" href="/static/stylesheets/zoom_containers.css?v=2026-02-15">
+    <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css?v=2026-02-15">
+    <link rel="stylesheet" href="/static/stylesheets/icons.css?v=2026-02-15">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <script defer src="/static/js/video_comparison.js?v=2026-02-13"></script>
-    <script defer src="/static/js/zoom-containers.js?v=2026-02-13"></script>
-    <script defer src="/static/js/github-stars.js?v=2026-02-13"></script>
-    <script defer src="/static/js/semantic-scholar.js?v=2026-02-13"></script>
-    <script defer src="/static/js/new-tabs.js?v=2026-02-13"></script>
+    <script defer src="/static/js/components.js?v=2026-02-15"></script>
+    <script defer src="/static/js/video_comparison.js?v=2026-02-15"></script>
+    <script defer src="/static/js/zoom-containers.js?v=2026-02-15"></script>
+    <script defer src="/static/js/github-stars.js?v=2026-02-15"></script>
+    <script defer src="/static/js/semantic-scholar.js?v=2026-02-15"></script>
+    <script defer src="/static/js/new-tabs.js?v=2026-02-15"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -82,47 +83,7 @@
 <body>
     <div class="wrapper">
         <!-- HEADER -->
-        <header style="text-align: center;">
-            <h1 class="site-title">
-                <a href="/" class="brandmark" aria-label="Allen Tu (Home)">
-                    <i class="ai ai-allentu" aria-hidden="true"></i>
-                    <span class="sr-only">Allen Tu</span>
-                </a>
-            </h1>
-            <div>
-                <a href="/static/images/Headshot.png">
-                    <picture>
-                        <source srcset="/static/images/Headshot_Square_Background.webp" type="image/webp">
-                        <img src="/static/images/Headshot.jpg" alt="Portrait of Allen Tu" class="portrait">
-                    </picture>
-                </a>
-                <p>
-                    <a href="mailto:atu1@umd.edu"> atu1@umd.edu</a>
-                </p>
-
-                <div class="icon-grid">
-                    <a href="/files/AllenTu_CV.pdf"><i class="ai ai-cv"></i></a>
-                    <a rel="me" href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
-                            class="ai ai-google-scholar"></i></a>
-                    <a rel="me" href="https://www.linkedin.com/in/allentu/"><i class="fa-brands fa-linkedin"></i></a>
-                    <a rel="me" href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">
-                        <i class="fa-xhs"></i>
-                    </a>
-                    <a rel="me" href="https://github.com/tuallen"><i class="fa-brands fa-github"></i></a>
-                    <a rel="me" href="https://www.semanticscholar.org/author/Allen-Tu/2306782092"><i
-                            class="ai ai-semantic-scholar"></i></a>
-                    <a rel="me" href="https://twitter.com/tuallen_"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="/static/images/WeChat.png"><i class="fa-brands fa-weixin"></i></a>
-                </div>
-                <br>
-            </div>
-
-            <ul class="navbar">
-                <li class="navbar_li"><a href="/">Home</a></li>
-                <li class="navbar_li"><a href="/hub/">Link Hub</a></li>
-                <li class="navbar_li"><a href="/3d/" id="selected">3D/4D Research</a></li>
-            </ul>
-        </header>
+        <div data-component="header" data-selected="3d"></div>
 
         <section>
             <!-- INTRODUCTION -->
@@ -467,18 +428,7 @@
         </section>
 
         <!-- FOOTER -->
-        <footer style="text-align: center;">
-            <p style="line-height: 1.2;"><small>
-                    Thank you to <a href="https://somepago.github.io/">Gowthami Somepalli</a> for<br>
-                    generously <a href="https://github.com/tuallen/tuallen.github.io">open-sourcing</a> their code! <br>
-                    &copy; 2026 Allen Tu &middot;
-                    <a href="/static/images/QRcode_website.png" target="_blank" rel="noopener" style="opacity: 0.7;"
-                        aria-label="Open mobile QR code">
-                        <i class="fa fa-qrcode"></i>
-                    </a>
-                </small>
-            </p>
-        </footer>
+        <div data-component="footer"></div>
     </div>
 </body>
 
