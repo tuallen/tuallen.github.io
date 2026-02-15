@@ -46,6 +46,11 @@
         if (copyrightYear) {
             copyrightYear.textContent = new Date().getFullYear();
         }
+
+        // Set up theme toggle button after footer has loaded
+        if (typeof window.setupThemeToggle === 'function') {
+            window.setupThemeToggle();
+        }
     }
 
     function highlightNavigation(headerElement, selectedNav) {
