@@ -45,6 +45,8 @@ On top of the original template, I’ve introduced a number of custom features a
 
 ### Dynamic Content
 
+- **Component-based architecture** (`components.js`)  
+  Reusable header and footer components with dynamic navigation highlighting and automatic copyright year
 - **Automatic GitHub star counts** (`github-stars.js`)  
   Real-time repository star counts via the GitHub API
 - **Semantic Scholar citation retrieval** (`semantic-scholar.js`)  
@@ -91,12 +93,16 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 ├── index.html              # Main homepage
 ├── hub/                    # Link hub page
 ├── 3d/                     # 3D/4D research portfolio
+├── components/             # Reusable HTML components
+│   ├── header.html         # Shared header with navigation
+│   └── footer.html         # Shared footer with dynamic copyright
 ├── static/
 │   ├── stylesheets/
 │   │   ├── styles.css      # Main consolidated styles
 │   │   ├── icons.css       # Custom icon definitions
 │   │   └── zoom_containers.css
 │   ├── js/
+│   │   ├── components.js   # Component loader system
 │   │   ├── github-stars.js
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js
@@ -105,7 +111,9 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 │   ├── icons/              # SVG logos and favicons
 │   └── images/             # Photos and media
 ├── media/                  # Research teasers and videos
-└── files/                  # CV, resume, BibTeX, etc.
+├── files/                  # CV, resume, BibTeX, etc.
+├── sitemap.xml             # SEO sitemap
+└── robots.txt              # Crawler directives
 ```
 
 ---
@@ -171,6 +179,6 @@ Feel free to explore, borrow ideas, or adapt pieces for your own academic websit
 
 ---
 
-**Last Updated:** February 13, 2026  
+**Last Updated:** February 15, 2026  
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**

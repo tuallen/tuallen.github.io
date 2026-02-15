@@ -40,6 +40,12 @@
         });
 
         await Promise.all(loadPromises);
+
+        // Set current year in footer copyright
+        const copyrightYear = document.getElementById('copyright-year');
+        if (copyrightYear) {
+            copyrightYear.textContent = new Date().getFullYear();
+        }
     }
 
     function highlightNavigation(headerElement, selectedNav) {
