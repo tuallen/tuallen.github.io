@@ -23,6 +23,21 @@
     function applyTheme(theme) {
         document.documentElement.setAttribute(THEME_ATTR, theme);
         updateThemeIcon(theme);
+        updateFavicon(theme);
+    }
+
+    /**
+     * Update favicon based on theme
+     */
+    function updateFavicon(theme) {
+        const favicon = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+        if (favicon) {
+            if (theme === 'dark') {
+                favicon.href = '/static/icons/tu_dark_red.svg';
+            } else {
+                favicon.href = '/static/icons/tu_red.svg';
+            }
+        }
     }
 
     /**

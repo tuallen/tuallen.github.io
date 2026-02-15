@@ -43,8 +43,10 @@ On top of the original template, I’ve introduced a number of custom features a
 - **Lazy loading**  
   Images and videos load on demand for improved performance
 
-### Dynamic Content
+### Dynamic Content & Theming
 
+- **Dark mode toggle** (`theme-switcher.js`)  
+  Manual theme switcher with localStorage persistence, smooth transitions, and zero FOUC (flash of unstyled content)
 - **Component-based architecture** (`components.js`)  
   Reusable header and footer components with dynamic navigation highlighting and automatic copyright year
 - **Automatic GitHub star counts** (`github-stars.js`)  
@@ -72,6 +74,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 
 ### Design & UX
 
+- **Dark mode** — Toggle between light and dark themes with moon/sun icon in footer; preference persists across sessions
 - **Responsive layout** — Mobile-optimized design with proper viewport handling, video container alignment, and centered navigation
 - **Icon grid navigation** — Compact header linking to CV, profiles, and social platforms
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
@@ -98,11 +101,12 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 │   └── footer.html         # Shared footer with dynamic copyright
 ├── static/
 │   ├── stylesheets/
-│   │   ├── styles.css      # Main consolidated styles
+│   │   ├── styles.css      # Main consolidated styles with CSS variables for theming
 │   │   ├── icons.css       # Custom icon definitions
 │   │   └── zoom_containers.css
 │   ├── js/
 │   │   ├── components.js   # Component loader system
+│   │   ├── theme-switcher.js # Dark mode toggle with localStorage
 │   │   ├── github-stars.js
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js
