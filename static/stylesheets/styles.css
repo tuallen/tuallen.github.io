@@ -699,10 +699,89 @@ screen and (max-width: 480px) {
   }
 }
 
+/* ==================== BIBTEX PAGE ==================== */
+
+.bibtex-container {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.copy-code-btn {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copy-code-btn:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.copy-code-btn.copied {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.bibtex-code {
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+/* BibTeX syntax highlighting */
+.bibtex-code .entry-type {
+  color: #0066cc;
+  font-weight: bold;
+}
+
+.bibtex-code .field-name {
+  color: #cc0066;
+}
+
+.bibtex-code .field-value {
+  color: #006633;
+}
+
 @media print {
   body {
     padding: 0.4in;
     font-size: 12pt;
     color: #444;
+  }
+}
+
+@media print,
+screen and (max-width: 768px) {
+  .bibtex-code {
+    font-size: 0.8rem;
+    padding-top: 2rem;
+  }
+
+  .copy-code-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .copy-code-btn span {
+    display: none;
   }
 }
