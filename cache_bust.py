@@ -28,13 +28,13 @@ class CacheBuster:
         
         # Asset patterns to cache bust
         self.asset_patterns = [
-            r'href="([^"]+\.css)(\?v=[^"]*)?',      # CSS files
-            r'src="([^"]+\.js)(\?v=[^"]*)?',        # JS files
-            r'href="([^"]+\.pdf)(\?v=[^"]*)?',      # PDF files
-            r'href="([^"]+\.bib)(\?v=[^"]*)?',      # BibTeX files
-            r'href="([^"]+\.ico)(\?v=[^"]*)?',      # ICO files
-            r'href="([^"]+\.png)(\?v=[^"]*)?',      # PNG files (if linked)
-            r'href="([^"]+\.svg)(\?v=[^"]*)?',      # SVG files (if linked)
+            r'(href|src)="([^"]+\.css)(?:\?v=[^"]*)?(")',      # CSS files
+            r'(href|src)="([^"]+\.js)(?:\?v=[^"]*)?(")',       # JS files
+            r'(href|src)="([^"]+\.pdf)(?:\?v=[^"]*)?(")',      # PDF files
+            r'(href|src)="([^"]+\.bib)(?:\?v=[^"]*)?(")',      # BibTeX files
+            r'(href|src)="([^"]+\.ico)(?:\?v=[^"]*)?(")',      # ICO files
+            r'(href|src)="([^"]+\.png)(?:\?v=[^"]*)?(")',      # PNG files
+            r'(href|src)="([^"]+\.svg)(?:\?v=[^"]*)?(")',      # SVG files
         ]
         
         self.changes: Dict[str, List[Tuple[str, str]]] = {}
@@ -97,8 +97,9 @@ class CacheBuster:
         
         for pattern in self.asset_patterns:
             def replacer(match):
-                asset_path = match.group(1)
-                old_version = match.group(2) if len(match.groups()) > 1 else None
+                attr = match.group(1)  # 'href' or 'src'
+                asset_path = match.group(2)  # The file path
+                closing_quote = match.group(3)  # The closing "
                 
                 # Skip external URLs (http://, https://, //)
                 if asset_path.startswith(('http://', 'https://', '//')):
@@ -108,11 +109,8 @@ class CacheBuster:
                 if asset_path.startswith('data:'):
                     return match.group(0)
                 
-                # Determine the attribute (href or src)
-                attr = 'href' if 'href=' in match.group(0) else 'src'
-                
                 # Build new tag
-                new_tag = f'{attr}="{asset_path}?v={new_version}"'
+                new_tag = f'{attr}="{asset_path}?v={new_version}{closing_quote}'
                 old_tag = match.group(0)
                 
                 if old_tag != new_tag:

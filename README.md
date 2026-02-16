@@ -183,6 +183,27 @@ Feel free to explore, borrow ideas, or adapt pieces for your own academic websit
 
 ---
 
-**Last Updated:** February 15, 2026  
+
+## Cache Busting
+
+When you update CSS, JavaScript, or other static files, run the cache busting script to force browsers to reload the new versions:
+
+```bash
+# Preview changes
+python3 cache_bust.py
+
+# Apply changes
+python3 cache_bust.py --apply
+```
+
+The script automatically:
+- Detects the current version (e.g., `?v=2026-02-15`)
+- Increments if run multiple times per day (`?v=2026-02-15-1`, `-2`, etc.)
+- Updates all CSS, JS, PDF, images, and other static assets in HTML files
+
+---
+
+**Last Updated:** February 15, 2026
+  
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
