@@ -681,6 +681,12 @@ screen and (max-width: 720px) {
   code {
     word-wrap: normal;
   }
+
+  h1[style*="display: flex"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
 }
 
 @media print,
