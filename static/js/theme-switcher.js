@@ -80,17 +80,26 @@
     }
 
     /**
-     * Set up the theme toggle button
+     * Set up the theme toggle button using event delegation
+     * This ensures the toggle works even if the button is dynamically replaced
      */
+    let toggleListenerAttached = false;
     function setupToggleButton() {
+        // Use event delegation - attach listener to document once
+        if (!toggleListenerAttached) {
+            document.addEventListener('click', (e) => {
+                const themeToggle = e.target.closest('#theme-toggle');
+                if (themeToggle) {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            });
+            toggleListenerAttached = true;
+        }
+
+        // Update icon to match current theme (if button exists)
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
-            themeToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                toggleTheme();
-            });
-
-            // Update icon to match current theme
             const currentTheme = document.documentElement.getAttribute(THEME_ATTR) || 'light';
             updateThemeIcon(currentTheme);
         }
