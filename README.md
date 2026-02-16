@@ -55,6 +55,8 @@ On top of the original template, I’ve introduced a number of custom features a
   Automatic citation counts for publications
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
+- **BibTeX copy & download** (`bibtex.js`)  
+  GitHub-style copy-to-clipboard and download functionality for BibTeX references with fallback support
 
 ### Custom Icon System
 
@@ -79,7 +81,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 - **Icon grid navigation** — Compact header linking to CV, profiles, and social platforms
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
 - **Comprehensive meta tags** — Open Graph, Twitter Cards, and canonical URLs
-- **Multi-page structure** — Home, Link Hub, and 3D/4D Research Portfolio
+- **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, and BibTeX References
 - **Favicon system** — Adaptive SVG favicons (red for light mode, white for dark mode) with PNG fallbacks and ICO support
 
 ### Performance & SEO
@@ -88,6 +90,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 - **Deferred JavaScript** — Non-blocking script loading
 - **Semantic HTML5** — Proper heading hierarchy and ARIA labels
 - **Optimized media** — Appropriately sized images and compressed video assets
+- **Cache busting** — Automated versioning system for static assets to ensure browsers load latest versions
 
 ---
 
@@ -96,6 +99,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 ├── index.html              # Main homepage
 ├── hub/                    # Link hub page
 ├── 3d/                     # 3D/4D research portfolio
+├── bibtex/                 # BibTeX references page
 ├── components/             # Reusable HTML components
 │   ├── header.html         # Shared header with navigation
 │   └── footer.html         # Shared footer with dynamic copyright
@@ -111,11 +115,13 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js
 │   │   ├── video_comparison.js
-│   │   └── zoom-containers.js
+│   │   ├── zoom-containers.js
+│   │   └── bibtex.js       # Copy/download functionality for BibTeX
 │   ├── icons/              # SVG logos and favicons
 │   └── images/             # Photos and media
 ├── media/                  # Research teasers and videos
-├── files/                  # CV, resume, BibTeX, etc.
+├── files/                  # CV, resume, etc.
+├── cache_bust.py           # Automated cache busting script
 ├── sitemap.xml             # SEO sitemap
 └── robots.txt              # Crawler directives
 ```
@@ -143,6 +149,7 @@ Want to see these features live? Check out:
 - **[3D/4D Research Portfolio](https://tuallen.github.io/3d/)** — Zoom containers and video demonstrations
 - **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts and Semantic Scholar citations
 - **[Link Hub](https://tuallen.github.io/hub/)** — Custom icon system showcase
+- **[BibTeX References](https://tuallen.github.io/bibtex/)** — GitHub-style copy/download buttons with fallback support
 - **Header navigation** — Custom brandmark and icon grid on any page
 
 ---
