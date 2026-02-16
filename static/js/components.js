@@ -13,6 +13,10 @@
         loadComponents();
     }
 
+    // Get version from the current script source to use for cache busting fetched components
+    const scriptElement = document.currentScript || document.querySelector('script[src*="components.js"]');
+    const version = scriptElement ? new URL(scriptElement.src, window.location.href).searchParams.get('v') : null;
+
     async function loadComponents() {
         const componentElements = document.querySelectorAll('[data-component]');
 
@@ -22,7 +26,8 @@
             const selectedNav = element.getAttribute('data-selected');
 
             try {
-                const response = await fetch(`/components/${componentName}.html`);
+                const componentUrl = `/components/${componentName}.html${version ? '?v=' + version : ''}`;
+                const response = await fetch(componentUrl);
                 if (!response.ok) {
                     throw new Error(`Failed to load component: ${componentName}`);
                 }
