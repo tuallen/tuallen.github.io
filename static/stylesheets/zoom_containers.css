@@ -3,7 +3,10 @@
     width: 300px;
     height: 200px;
     overflow: visible;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
 }
 
 .video-thumbnail {
@@ -11,9 +14,7 @@
     height: 100%;
     object-fit: contain;
     transition: transform 0.4s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
 }
 
 .video-container:hover .video-thumbnail {
@@ -26,7 +27,10 @@
     width: 300px;
     height: 130px;
     overflow: visible;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
 }
 
 .image-thumbnail {
@@ -34,9 +38,7 @@
     height: 100%;
     object-fit: contain;
     transition: transform 0.4s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
 }
 
 .image-container:hover .image-thumbnail {
@@ -63,33 +65,12 @@
     .video-thumbnail,
     .image-thumbnail {
         position: relative;
+        height: auto;
         transform: none !important;
     }
 
     .video-container:hover .video-thumbnail,
     .image-container:hover .image-thumbnail {
         transform: none !important;
-    }
-}
-
-/* Center the tall Learned Frame Feature Aggregation image vertically on desktop */
-@media screen and (min-width: 961px) {
-    #learned-aggregation-container {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-    }
-
-    #learned-aggregation-container .image-thumbnail {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-    }
-
-    #learned-aggregation-container:hover .image-thumbnail {
-        transform: scale(4);
-        z-index: 1000;
     }
 }
