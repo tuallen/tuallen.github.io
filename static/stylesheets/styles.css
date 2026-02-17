@@ -14,11 +14,13 @@
   --code-bg: #f8f8f8;
   --code-text: #333333;
   --table-heading: #444444;
+  --highlight-row-border: #e5e5e5;
+  --highlight-separator-border: #958a8a;
 }
 
 /* Dark theme - manual override */
 [data-theme="dark"] {
-  --bg-primary: #0f1419;
+  --bg-primary: #000000;
   --bg-secondary: #161b22;
   --text-primary: #e6edf3;
   --text-secondary: #8b949e;
@@ -30,6 +32,8 @@
   --code-bg: #161b22;
   --code-text: #e6edf3;
   --table-heading: #c9d1d9;
+  --highlight-row-border: #333333;
+  --highlight-separator-border: #ffffff;
 }
 
 /* Light theme - manual override */
@@ -238,6 +242,19 @@ th {
 dt {
   color: var(--table-heading);
   font-weight: 500;
+}
+
+/* Highlight Borders */
+.highlight-row {
+  border-bottom: 1px solid var(--highlight-row-border);
+}
+
+.highlight-separator {
+  border-bottom: 3px solid var(--highlight-separator-border) !important;
+}
+
+.highlight-separator td {
+  padding: 0 !important;
 }
 
 /* ==================== CODE BLOCKS ==================== */
