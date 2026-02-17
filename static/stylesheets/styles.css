@@ -429,7 +429,8 @@ blockquote {
 }
 
 .link-list a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: var(--accent-hover);
 }
 
 /* ==================== VIDEO COMPARISON ==================== */
