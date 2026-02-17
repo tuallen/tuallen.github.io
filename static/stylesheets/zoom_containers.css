@@ -71,3 +71,25 @@
         transform: none !important;
     }
 }
+
+/* Center the tall Learned Frame Feature Aggregation image vertically on desktop */
+@media screen and (min-width: 961px) {
+    #learned-aggregation-container {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+    }
+
+    #learned-aggregation-container .image-thumbnail {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+    }
+
+    #learned-aggregation-container:hover .image-thumbnail {
+        transform: scale(4);
+        z-index: 1000;
+    }
+}
