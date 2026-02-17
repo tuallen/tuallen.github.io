@@ -389,7 +389,7 @@ blockquote {
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   gap: 10px 0px;
-  max-width: 70%;
+  max-width: 215px;
   margin: 0 auto;
   margin-bottom: 0.5em;
 }
@@ -628,7 +628,7 @@ screen and (max-width: 960px) {
   }
 
   header {
-    padding-right: 320px;
+    padding-right: 0px;
     margin-bottom: 25px;
   }
 
@@ -648,9 +648,8 @@ screen and (max-width: 960px) {
   }
 
   header ul {
-    position: absolute;
-    right: 20px;
-    top: 52px;
+    position: static;
+    margin-top: 20px;
   }
 
   table tr,
