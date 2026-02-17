@@ -32,10 +32,18 @@
     function updateFavicon(theme) {
         const favicon = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
         if (favicon) {
-            if (theme === 'dark') {
-                favicon.href = '/static/icons/tu_dark_red.svg';
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (systemDark) {
+                // Browser/System is dark -> use white logo for contrast
+                favicon.href = '/static/icons/tu_white.svg';
             } else {
-                favicon.href = '/static/icons/tu_red.svg';
+                // Browser/System is light -> match the page theme red
+                if (theme === 'dark') {
+                    favicon.href = '/static/icons/tu_dark_red.svg';
+                } else {
+                    favicon.href = '/static/icons/tu_red.svg';
+                }
             }
         }
     }
@@ -130,4 +138,9 @@
 
     // Expose setupToggleButton globally so components.js can call it
     window.setupThemeToggle = setupToggleButton;
+    // Listen for system theme changes to update favicon immediately
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const currentTheme = document.documentElement.getAttribute(THEME_ATTR) || 'light';
+        updateFavicon(currentTheme);
+    });
 })();
