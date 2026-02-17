@@ -57,6 +57,8 @@ On top of the original template, I’ve introduced a number of custom features a
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`)  
   GitHub-style copy-to-clipboard and download functionality for BibTeX references with fallback support
+- **Automated Highlight Borders**  
+  CSS variables and utility classes ensure consistent, theme-aware styling for research highlight tables across all pages
 
 ### Custom Icon System
 
@@ -82,7 +84,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
 - **Comprehensive meta tags** — Open Graph, Twitter Cards, and canonical URLs
 - **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, and BibTeX References
-- **Favicon system** — Adaptive SVG favicons (red for light mode, white for dark mode) with PNG fallbacks and ICO support
+- **System-Aware Favicon** — Intelligent favicon adaptation that prioritizes system dark mode (white icon for contrast) while respecting page theme in light mode (red/dark red).
 
 ### Performance & SEO
 
@@ -210,7 +212,7 @@ The script automatically:
 
 ---
 
-**Last Updated:** February 15, 2026
+**Last Updated:** February 17, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
