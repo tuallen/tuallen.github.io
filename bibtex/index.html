@@ -19,10 +19,10 @@
     <title>BibTeX References - Allen Tu</title>
 
     <!-- Favicon - dynamically updated by theme-switcher.js -->
-    <link rel="icon" href="/static/icons/tu_red.svg?v=2026-02-17-21" type="image/svg+xml">
-    <link rel="icon" href="/static/icons/tu_light_red.png?v=2026-02-17-21" type="image/png" sizes="32x32">
-    <link rel="icon" href="/static/icons/tu_light_red.ico?v=2026-02-17-21" sizes="any">
-    <link rel="apple-touch-icon" href="/static/icons/tu_light_red.png?v=2026-02-17-21">
+    <link rel="icon" href="/static/icons/tu_red.svg?v=2026-02-18" type="image/svg+xml">
+    <link rel="icon" href="/static/icons/tu_light_red.png?v=2026-02-18" type="image/png" sizes="32x32">
+    <link rel="icon" href="/static/icons/tu_light_red.ico?v=2026-02-18" sizes="any">
+    <link rel="apple-touch-icon" href="/static/icons/tu_light_red.png?v=2026-02-18">
     <link rel="canonical" href="https://tuallen.github.io/bibtex/">
     <meta name="robots" content="index,follow">
 
@@ -113,14 +113,14 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 
-    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-02-17-21">
+    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-02-18">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css?v=2026-02-17-21">
-    <link rel="stylesheet" href="/static/stylesheets/icons.css?v=2026-02-17-21">
+    <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css?v=2026-02-18">
+    <link rel="stylesheet" href="/static/stylesheets/icons.css?v=2026-02-18">
 
-    <script defer src="/static/js/theme-switcher.js?v=2026-02-17-21"></script>
-    <script defer src="/static/js/new-tabs.js?v=2026-02-17-21"></script>
-    <script defer src="/static/js/bibtex.js?v=2026-02-17-21"></script>
+    <script defer src="/static/js/theme-switcher.js?v=2026-02-18"></script>
+    <script defer src="/static/js/new-tabs.js?v=2026-02-18"></script>
+    <script defer src="/static/js/bibtex.js?v=2026-02-18"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -143,21 +143,35 @@
                 <div style="position: absolute; top: 0.5rem; right: 0.5rem; display: flex; gap: 0.5rem; z-index: 10;">
                     <button class="copy-code-btn" id="copy-btn">
                         <i class="fa fa-copy"></i>
-                        <span class="copy-text">Copy</span>
+                        <span class="btn-text">Copy</span>
                     </button>
                     <button class="copy-code-btn" id="download-btn">
                         <i class="fa fa-download"></i>
-                        <span>Download</span>
+                        <span class="btn-text">Download</span>
                     </button>
                 </div>
-                <pre class="bibtex-code" id="bibtex-content">@InProceedings{HansonTuPUP3DGS,
-    author    = {Hanson, Alex and Tu, Allen and Singla, Vasu and Jayawardhana, Mayuka and Zwicker, Matthias and Goldstein, Tom},
-    title     = {PUP 3D-GS: Principled Uncertainty Pruning for 3D Gaussian Splatting},
-    booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
-    month     = {June},
+                <pre class="bibtex-code" id="bibtex-content">@article{Tu2025TransFIRA,
+    author  = {Tu, Allen and Narayan, Kartik and Gleason, Joshua and Xu, Jennifer and Meyn, Matthew and Goldstein, Tom and Patel, Vishal M.},
+    title   = {TransFIRA: Transfer Learning for Face Image Recognizability Assessment},
+    journal = {arXiv preprint arXiv:2510.06353},
+    year    = {2025},
+    url     = {https://transfira.github.io/}
+}
+
+@article{TuYing2025SpeeDe3DGS,
+    author    = {Tu, Allen and Ying, Haiyang and Hanson, Alex and Lee, Yonghan and Goldstein, Tom and Zwicker, Matthias},
+    title     = {SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping},
+    journal   = {arXiv preprint arXiv:2506.07917},
     year      = {2025},
-    pages     = {5949-5958},
-    url       = {https://pup3dgs.github.io/}
+    url       = {https://speede3dgs.github.io/}
+}
+
+@article{Asthana2025SplatSuRe,
+    author    = {Asthana, Pranav and Hanson, Alex and Tu, Allen and Goldstein, Tom and Zwicker, Matthias and Varshney, Amitabh},
+    title     = {SplatSuRe: Selective Super-Resolution for Multi-view Consistent 3D Gaussian Splatting},
+    journal   = {Preprint},
+    year      = {2025},
+    url       = {https://splatsure.github.io/}
 }
 
 @InProceedings{HansonSpeedy,
@@ -170,28 +184,14 @@
     url       = {https://speedysplat.github.io/}
 }
 
-@article{TuYing2025SpeeDe3DGS,
-    author    = {Tu, Allen and Ying, Haiyang and Hanson, Alex and Lee, Yonghan and Goldstein, Tom and Zwicker, Matthias},
-    title     = {SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping},
-    journal   = {arXiv preprint arXiv:2506.07917},
+@InProceedings{HansonTuPUP3DGS,
+    author    = {Hanson, Alex and Tu, Allen and Singla, Vasu and Jayawardhana, Mayuka and Zwicker, Matthias and Goldstein, Tom},
+    title     = {PUP 3D-GS: Principled Uncertainty Pruning for 3D Gaussian Splatting},
+    booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
+    month     = {June},
     year      = {2025},
-    url       = {https://speede3dgs.github.io/}
-}
-
-@article{Tu2025TransFIRA,
-    author  = {Tu, Allen and Narayan, Kartik and Gleason, Joshua and Xu, Jennifer and Meyn, Matthew and Goldstein, Tom and Patel, Vishal M.},
-    title   = {TransFIRA: Transfer Learning for Face Image Recognizability Assessment},
-    journal = {arXiv preprint arXiv:2510.06353},
-    year    = {2025},
-    url     = {https://transfira.github.io/}
-}
-
-@article{Asthana2025SplatSuRe,
-    author    = {Asthana, Pranav and Hanson, Alex and Tu, Allen and Goldstein, Tom and Zwicker, Matthias and Varshney, Amitabh},
-    title     = {SplatSuRe: Selective Super-Resolution for Multi-view Consistent 3D Gaussian Splatting},
-    journal   = {Preprint},
-    year      = {2025},
-    url       = {https://splatsure.github.io/}
+    pages     = {5949-5958},
+    url       = {https://pup3dgs.github.io/}
 }</pre>
             </div>
 
@@ -202,7 +202,7 @@
     </div>
 
     <!-- Load components immediately for faster rendering -->
-    <script src="/static/js/components.js?v=2026-02-17-21"></script>
+    <script src="/static/js/components.js?v=2026-02-18"></script>
 </body>
 
 </html>

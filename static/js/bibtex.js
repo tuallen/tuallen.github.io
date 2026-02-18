@@ -54,19 +54,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Show success notification
     function showNotification() {
         const copyBtn = document.getElementById('copy-btn');
-        const copyText = copyBtn.querySelector('.copy-text');
         const icon = copyBtn.querySelector('i');
+        const textSpan = copyBtn.querySelector('.btn-text');
+
+        // Store original state
+        const originalIconClass = icon.className;
+        let originalText = '';
+        if (textSpan) {
+            originalText = textSpan.textContent;
+        }
 
         // Change button appearance
         copyBtn.classList.add('copied');
-        copyText.textContent = 'Copied!';
         icon.className = 'fa fa-check';
+
+        // Only change text if it's visible (desktop)
+        if (textSpan && getComputedStyle(textSpan).display !== 'none') {
+            textSpan.textContent = 'Copied!';
+        }
 
         // Reset after 2 seconds
         setTimeout(function () {
             copyBtn.classList.remove('copied');
-            copyText.textContent = 'Copy';
-            icon.className = 'fa fa-copy';
+            icon.className = originalIconClass;
+            if (textSpan) {
+                textSpan.textContent = originalText;
+            }
         }, 2000);
     }
 

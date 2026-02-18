@@ -55,8 +55,8 @@ On top of the original template, I’ve introduced a number of custom features a
   Automatic citation counts for publications
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
-- **BibTeX copy & download** (`bibtex.js`)  
-  GitHub-style copy-to-clipboard and download functionality for BibTeX references with fallback support
+- **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
+  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages.
 - **Automated Highlight Borders**  
   CSS variables and utility classes ensure consistent, theme-aware styling for research highlight tables across all pages
 
@@ -212,7 +212,7 @@ The script automatically:
 
 ---
 
-**Last Updated:** February 17, 2026
+**Last Updated:** February 18, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
