@@ -212,6 +212,24 @@ The script automatically:
 
 ---
 
+## Related Project Websites
+
+In addition to this personal site, I have also built or helped assemble several research project websites based on this codebase:
+
+- [pup3dgs.github.io](https://pup3dgs.github.io/) ([Source Code](https://github.com/pup3dgs/pup3dgs.github.io))
+- [speedysplat.github.io](https://speedysplat.github.io/) ([Source Code](https://github.com/speedysplat/speedysplat.github.io))
+- [speede3dgs.github.io](https://speede3dgs.github.io/) ([Source Code](https://github.com/speede3dgs/speede3dgs.github.io))
+- [transfira.github.io](https://transfira.github.io/) ([Source Code](https://github.com/transfira/transfira.github.io))
+- [splatsure.github.io](https://splatsure.github.io/) ([Source Code](https://github.com/splatsure/splatsure.github.io))
+- [jianyuwang0511.github.io/tameldl](https://jianyuwang0511.github.io/tameldl) ([Source Code](https://github.com/jianyuwang0511/tameldl))
+
+This template has also been used for other academic websites that I helped their authors set up, including:
+
+- [zhouyuanyuan6.github.io](https://zhouyuanyuan6.github.io/) ([Source Code](https://github.com/zhouyuanyuan6/zhouyuanyuan6.github.io))
+- [jianyuwang0511.github.io](https://jianyuwang0511.github.io/) ([Source Code](https://github.com/jianyuwang0511/jianyuwang0511.github.io))
+
+---
+
 **Last Updated:** February 18, 2026
   
 **Built with care** ☕  
