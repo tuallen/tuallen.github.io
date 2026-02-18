@@ -56,7 +56,7 @@ On top of the original template, I’ve introduced a number of custom features a
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
-  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages.
+  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages (e.g., Home, 3D Portfolio, Biometrics).
 - **Automated Highlight Borders**  
   CSS variables and utility classes ensure consistent, theme-aware styling for research highlight tables across all pages
 
@@ -83,7 +83,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 - **Icon grid navigation** — Compact header linking to CV, profiles, and social platforms
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
 - **Comprehensive meta tags** — Open Graph, Twitter Cards, and canonical URLs
-- **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, and BibTeX References
+- **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, Biometric Recognition Research, and BibTeX References
 - **System-Aware Favicon** — Intelligent favicon adaptation that prioritizes system dark mode (white icon for contrast) while respecting page theme in light mode (red/dark red).
 
 ### Performance & SEO
@@ -101,6 +101,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 ├── index.html              # Main homepage
 ├── hub/                    # Link hub page
 ├── 3d/                     # 3D/4D research portfolio
+├── biometrics/             # Biometric recognition research
 ├── bibtex/                 # BibTeX references page
 ├── components/             # Reusable HTML components
 │   ├── header.html         # Shared header with navigation
@@ -148,10 +149,11 @@ The server script uses Python's built-in HTTP server for quick local testing.
 
 Want to see these features live? Check out:
 
-- **[3D/4D Research Portfolio](https://tuallen.github.io/3d/)** — Zoom containers and video demonstrations
-- **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts and Semantic Scholar citations
+- **[3D/4D Research Portfolio](https://tuallen.github.io/3d/)** — Zoom containers, video demonstrations, and BibTeX modal
+- **[Biometric Recognition Research](https://tuallen.github.io/biometrics/)** — Custom icon system and BibTeX modal
+- **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts, Semantic Scholar citations, and BibTeX modal
 - **[Link Hub](https://tuallen.github.io/hub/)** — Custom icon system showcase
-- **[BibTeX References](https://tuallen.github.io/bibtex/)** — GitHub-style copy/download buttons with fallback support
+- **[BibTeX References](https://tuallen.github.io/bibtex/)** — Standalone page with GitHub-style copy/download buttons
 - **Header navigation** — Custom brandmark and icon grid on any page
 
 ---
