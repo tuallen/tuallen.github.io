@@ -67,16 +67,76 @@ function playVids(videoId) {
                 splitX, 0, dstWidth, ch
             );
 
-            // --- SPLIT LINE ---
+            // --- SPLIT LINE AND HANDLE ---
+            mergeContext.save();
+
+            // Shared shadow settings
+            mergeContext.shadowColor = "rgba(12, 12, 12, 0.8)"; // Matches box-shadow: 0 0 10px rgb(12, 12, 12)
+            mergeContext.shadowBlur = 10;
+            mergeContext.shadowOffsetX = 0;
+            mergeContext.shadowOffsetY = 0;
+
+            // 1. Vertical Line (Top segment)
+            const handleRadius = 20;
+            const centerY = ch / 2;
+
             mergeContext.beginPath();
             mergeContext.moveTo(splitX, 0);
-            mergeContext.lineTo(splitX, ch);
-            mergeContext.strokeStyle = "#AAAAAA";
-            mergeContext.lineWidth = 3;
+            mergeContext.lineTo(splitX, centerY - handleRadius);
+            mergeContext.strokeStyle = "#FFFFFF";
+            mergeContext.lineWidth = 2;
             mergeContext.stroke();
 
-            // --- CIRCLE / ARROW (optional — keep yours or remove) ---
-            // (omit here for brevity; your original arrow code still works)
+            // 1. Vertical Line (Bottom segment)
+            mergeContext.beginPath();
+            mergeContext.moveTo(splitX, centerY + handleRadius);
+            mergeContext.lineTo(splitX, ch);
+            mergeContext.stroke();
+
+            // 2. Handle Circle
+
+            mergeContext.beginPath();
+            mergeContext.arc(splitX, centerY, handleRadius, 0, 2 * Math.PI);
+            mergeContext.strokeStyle = "#FFFFFF";
+            mergeContext.lineWidth = 2;
+            mergeContext.stroke();
+            // Optional: fill background so arrows pop? pup3dgs handle seems transparent but has shadows.
+            // Let's keep it transparent for now as per reference CSS which lacks background-color.
+
+            // 3. Arrows (remove shadow for crispness or keep consistent?)
+            // pup3dgs arrows are just CSS borders. Let's draw filled triangles.
+            mergeContext.fillStyle = "#FFFFFF";
+
+            // Left Arrow (points left)
+            // Centered vertically at centerY
+            // CSS: left: 50%, margin-left: -17px. Handle width 41. Center is 20.5.
+            // So arrow is roughly 3-4px to the left of center?
+            // Let's assume arrows are offset by ~8px from center.
+            const arrowSize = 6;
+            const arrowOffset = 5;
+
+            mergeContext.beginPath();
+            // Tip
+            mergeContext.moveTo(splitX - arrowOffset - arrowSize, centerY);
+            // Top Right
+            mergeContext.lineTo(splitX - arrowOffset, centerY - arrowSize);
+            // Bottom Right
+            mergeContext.lineTo(splitX - arrowOffset, centerY + arrowSize);
+            mergeContext.closePath();
+            mergeContext.fill();
+
+            // Right Arrow (points right)
+            mergeContext.beginPath();
+            // Tip
+            mergeContext.moveTo(splitX + arrowOffset + arrowSize, centerY);
+            // Top Left
+            mergeContext.lineTo(splitX + arrowOffset, centerY - arrowSize);
+            // Bottom Left
+            mergeContext.lineTo(splitX + arrowOffset, centerY + arrowSize);
+            mergeContext.closePath();
+            mergeContext.fill();
+
+            mergeContext.restore();
 
             // --- LABEL OVERLAYS (Bulma-style) ---
             const container = videoMerge.parentElement;
