@@ -21,7 +21,7 @@ async function fetchCites(id) {
 
 function updateCitationDisplay(slug, count) {
     const span = document.getElementById(`cites-${slug}`);
-    if (span && count > 0) {
+    if (span && count != null && count > 0) {
         span.textContent = ` ${count}`;
     }
 }
@@ -56,7 +56,7 @@ function updateCitationDisplay(slug, count) {
                 .then(count => ({ slug, id, count, success: true }))
                 .catch(err => {
                     console.warn(`S2 fetch failed for ${slug}:`, err.message);
-                    return { slug, id, count: cached?.c ?? 0, success: false };
+                    return { slug, id, count: cached?.c ?? null, success: false };
                 })
         );
     }

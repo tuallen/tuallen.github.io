@@ -19,7 +19,7 @@ async function fetchStars(repo) {
 
 function updateStarsDisplay(slug, count) {
     const span = document.getElementById(`stars-${slug}`);
-    if (span && count > 0) {
+    if (span && count != null && count > 0) {
         span.textContent = ` ${count}`;
     }
 }
@@ -51,7 +51,7 @@ function updateStarsDisplay(slug, count) {
                 .then(stars => ({ slug, repo, stars, success: true }))
                 .catch(err => {
                     console.warn(`GitHub fetch failed for ${repo}:`, err.message);
-                    return { slug, repo, stars: cached?.stars ?? 0, success: false };
+                    return { slug, repo, stars: cached?.stars ?? null, success: false };
                 })
         );
     }
