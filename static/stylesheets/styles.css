@@ -951,6 +951,39 @@ screen and (max-width: 768px) {
   border-bottom: 1px solid var(--border-color);
   color: var(--text-heading);
   flex-shrink: 0;
+  position: relative;
+}
+
+.pdf-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 1;
+  min-width: 0;
+  z-index: 1;
+}
+
+.pdf-logo-close {
+  color: var(--accent-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.pdf-logo-close:hover {
+  opacity: 0.8;
+}
+
+.pdf-logo-close .logo-desktop {
+  display: inline-block;
+  font-size: 15px;
+  /* scale to match title */
+}
+
+.pdf-logo-close .logo-mobile {
+  display: none;
 }
 
 .pdf-title {
@@ -960,7 +993,6 @@ screen and (max-width: 768px) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 16px;
   color: var(--text-heading);
 }
 
@@ -1030,6 +1062,7 @@ screen and (max-width: 768px) {
 
   .pdf-title {
     font-size: 13px;
+    flex-grow: 1;
   }
 
   .pdf-toolbar-btn span.btn-label {
@@ -1038,5 +1071,14 @@ screen and (max-width: 768px) {
 
   .pdf-toolbar-btn {
     padding: 7px 10px;
+  }
+
+  .pdf-logo-close .logo-desktop {
+    display: none;
+  }
+
+  .pdf-logo-close .logo-mobile {
+    display: inline-block;
+    font-size: 20px;
   }
 }
