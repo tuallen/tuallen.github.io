@@ -118,8 +118,8 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 │   ├── js/
 │   │   ├── components.js   # Component loader system
 │   │   ├── theme-switcher.js # Dark mode toggle with localStorage
-│   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (auto-zooms posters)
-│   │   ├── image-modal.js  # Image viewer modal (intercepts all image links)
+│   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (auto-zooms posters; native passthrough on mobile)
+│   │   ├── image-modal.js  # Image viewer modal (intercepts all image links; auto-loads .webp if available, downloads original)
 │   │   ├── github-stars.js
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js
