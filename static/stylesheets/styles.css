@@ -733,21 +733,23 @@ screen and (max-width: 480px) {
 }
 
 .copy-code-btn {
-  padding: 0.5rem 0.75rem;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 6px;
+  padding: 7px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
 }
 
 .copy-code-btn:hover {
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -805,12 +807,13 @@ screen and (max-width: 768px) {
   }
 
   .copy-code-btn {
-    font-size: 0.75rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 11px;
+    padding: 5px 10px;
   }
 
-  /* Hide button text on mobile */
-  .btn-text {
+  /* Hide button label text on mobile for BibTeX and PDF toolbar buttons */
+  .btn-text,
+  .btn-label {
     display: none;
   }
 }
@@ -856,26 +859,24 @@ screen and (max-width: 768px) {
 }
 
 .close-modal-btn {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  /* Match icon size of other buttons */
-  transition: all 0.2s;
-  padding: 5px 10px;
-  /* Match padding of other buttons */
-  line-height: normal;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 4px 8px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  transition: all 0.15s;
 }
 
 .close-modal-btn:hover {
-  background-color: var(--bg-secondary);
+  background: none;
+  border-color: transparent;
   color: var(--accent-primary);
-  border-color: var(--accent-primary);
 }
 
 .modal-header {
@@ -914,5 +915,128 @@ screen and (max-width: 768px) {
   .modal-content {
     width: 95%;
     margin: 10% auto;
+  }
+}
+
+/* ════════════════════════════════════════
+   PDF VIEWER MODAL
+   ════════════════════════════════════════ */
+.pdf-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.pdf-overlay.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-overlay.show {
+  opacity: 1;
+}
+
+.pdf-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-heading);
+  flex-shrink: 0;
+}
+
+.pdf-title {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 16px;
+  color: var(--text-heading);
+}
+
+.pdf-toolbar-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pdf-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.pdf-toolbar-btn:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.pdf-toolbar-btn.close-btn {
+  border: none;
+  background: none;
+  font-size: 22px;
+  padding: 4px 8px;
+  line-height: 1;
+  color: var(--text-secondary);
+}
+
+.pdf-toolbar-btn.close-btn:hover {
+  background: none;
+  border-color: transparent;
+  color: var(--accent-primary);
+}
+
+.pdf-viewer-container {
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg-secondary);
+}
+
+.pdf-viewer-frame {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 640px) {
+  .pdf-toolbar {
+    padding: 10px 14px;
+  }
+
+  .pdf-title {
+    font-size: 13px;
+  }
+
+  .pdf-toolbar-btn span.btn-label {
+    display: none;
+  }
+
+  .pdf-toolbar-btn {
+    padding: 7px 10px;
   }
 }

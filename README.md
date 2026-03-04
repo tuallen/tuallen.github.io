@@ -40,6 +40,8 @@ On top of the original template, I’ve introduced a number of custom features a
   Click-to-expand images and videos without leaving the page
 - **Video comparison sliders** (`video_comparison.js`)  
   Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations
+- **PDF viewer modal** (`pdf-modal.js`)  
+  Full-screen in-page PDF viewer for any `.pdf` link site-wide — no new tab required. Features a themed toolbar with Download and Open in Tab actions, Escape / backdrop-click dismissal, zoom-to-fit on every open (`#view=FitH`), and mobile-touch-scrollable iframe. Intercepts all PDF links automatically via event delegation (no per-link markup needed).
 - **Lazy loading**  
   Images and videos load on demand for improved performance
 
@@ -56,7 +58,7 @@ On top of the original template, I’ve introduced a number of custom features a
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
-  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages (e.g., Home, 3D Portfolio, Biometrics).
+  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages (e.g., Home, 3D Portfolio, Biometrics). Modal action buttons share the same unified button style as the PDF toolbar.
 - **Automated Highlight Borders**  
   CSS variables and utility classes ensure consistent, theme-aware styling for research highlight tables across all pages
 
@@ -114,6 +116,7 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 │   ├── js/
 │   │   ├── components.js   # Component loader system
 │   │   ├── theme-switcher.js # Dark mode toggle with localStorage
+│   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (intercepts all .pdf links)
 │   │   ├── github-stars.js
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js
@@ -149,12 +152,12 @@ The server script uses Python's built-in HTTP server for quick local testing.
 
 Want to see these features live? Check out:
 
-- **[3D/4D Research Portfolio](https://tuallen.github.io/3d/)** — Zoom containers, video demonstrations, and BibTeX modal
-- **[Biometric Recognition Research](https://tuallen.github.io/biometrics/)** — Custom icon system and BibTeX modal
-- **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts, Semantic Scholar citations, and BibTeX modal
-- **[Link Hub](https://tuallen.github.io/hub/)** — Custom icon system showcase
+- **[3D/4D Research Portfolio](https://tuallen.github.io/3d/)** — Zoom containers, video demonstrations, BibTeX modal, and PDF viewer
+- **[Biometric Recognition Research](https://tuallen.github.io/biometrics/)** — Custom icon system, BibTeX modal, and PDF viewer
+- **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts, Semantic Scholar citations, BibTeX modal, and PDF viewer
+- **[Link Hub](https://tuallen.github.io/hub/)** — Custom icon system showcase and PDF viewer
 - **[BibTeX References](https://tuallen.github.io/bibtex/)** — Standalone page with GitHub-style copy/download buttons
-- **Header navigation** — Custom brandmark and icon grid on any page
+- **Header navigation** — Custom brandmark and icon grid on any page; CV link opens in the PDF viewer
 
 ---
 
@@ -179,6 +182,7 @@ Graceful degradation is implemented for older browsers:
 - Some custom icons may not render correctly in very old browsers (pre-2020)
 - Citation counts and GitHub stars require API availability
 - Zoom containers work best on desktop; mobile uses native image viewing
+- The in-page PDF viewer relies on the browser's native PDF renderer; on iOS Safari the PDF is displayed but zoom controls are limited to pinch-to-zoom
 
 ---
 
@@ -232,7 +236,7 @@ This template has also been used for other academic websites that I helped their
 
 ---
 
-**Last Updated:** February 18, 2026
+**Last Updated:** March 3, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
