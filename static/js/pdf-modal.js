@@ -6,8 +6,13 @@
  * - Probes first page dimensions via pdf.js to auto-apply #view=Fit for
  *   landscape/poster documents; falls back to browser default for portrait
  * - Title read from link's title attribute, then innerText
+ * - On mobile (touch) devices, skips the modal and lets the browser/OS
+ *   handle PDFs natively (iframe PDF rendering is unsupported on Android/iOS)
  * - Closes on Escape, toolbar ×, or backdrop click
  */
+
+/** True on any touch-primary device (Android, iOS, iPadOS). */
+const _isMobile = () => navigator.maxTouchPoints > 0 && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
 // ── Helpers ──────────────────────────────────────────────
 
@@ -133,6 +138,9 @@ document.body.addEventListener('click', function (e) {
 
   // Skip links inside the overlay itself (Download, Open in New Tab)
   if (link.closest('#pdfOverlay')) return;
+
+  // On mobile, iframe PDF rendering is not supported — let the browser handle it natively
+  if (_isMobile()) return;
 
   e.preventDefault();
   // Prefer explicit title attribute, fall back to visible link text
