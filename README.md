@@ -41,7 +41,9 @@ On top of the original template, I’ve introduced a number of custom features a
 - **Video comparison sliders** (`video_comparison.js`)  
   Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations
 - **PDF viewer modal** (`pdf-modal.js`)  
-  Full-screen in-page PDF viewer for any `.pdf` link site-wide — no new tab required. Features a themed toolbar with Download and Open in Tab actions, Escape / backdrop-click dismissal, zoom-to-fit on every open (`#view=FitH`), and mobile-touch-scrollable iframe. Intercepts all PDF links automatically via event delegation (no per-link markup needed).
+  Full-screen in-page PDF viewer for any `.pdf` link site-wide — no new tab required. Features a themed toolbar with Download and Open in New Tab actions, Escape / backdrop-click dismissal, and intelligent auto-zoom: probes the first page's dimensions via `pdf.js` and applies `#view=Fit` for landscape/poster documents — portrait documents use the browser's default zoom. Intercepts all PDF links automatically via event delegation; title is read from the link's `title` attribute (no extra markup needed for standard links).
+- **Image viewer modal** (`image-modal.js`)  
+  Lightweight modal for standalone image links (`.jpg`, `.png`, `.webp`, etc.). The modal shrink-wraps around the image up to 95% of the viewport while maintaining aspect ratio. Matches the theme of the PDF and BibTeX modals. Intercepts image links automatically site-wide; title is read from the `title` attribute, the wrapped `<img>`'s `alt`, or the filename as a fallback.
 - **Lazy loading**  
   Images and videos load on demand for improved performance
 
@@ -116,7 +118,8 @@ All icons are implemented using `mask-image` so they inherit text color, scale c
 │   ├── js/
 │   │   ├── components.js   # Component loader system
 │   │   ├── theme-switcher.js # Dark mode toggle with localStorage
-│   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (intercepts all .pdf links)
+│   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (auto-zooms posters)
+│   │   ├── image-modal.js  # Image viewer modal (intercepts all image links)
 │   │   ├── github-stars.js
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js

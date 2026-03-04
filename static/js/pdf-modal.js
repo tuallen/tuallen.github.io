@@ -2,21 +2,24 @@
  * pdf-modal.js
  * Full-screen PDF viewer modal with toolbar.
  * - Injected lazily on first open (no DOM cost on load)
- * - Intercepts all a[href*=".pdf"] clicks site-wide
- * - Appends #view=FitH to force zoom-to-fit on every open
+ * - Intercepts all a[href*=".pdf"] clicks site-wide via event delegation
+ * - Probes first page dimensions via pdf.js to auto-apply #view=Fit for
+ *   landscape/poster documents; falls back to browser default for portrait
+ * - Title read from link's title attribute, then innerText
  * - Closes on Escape, toolbar ×, or backdrop click
  */
 
 // ── Helpers ──────────────────────────────────────────────
 
-/** Dynamically load pdf.js if not already loaded */
+/** Dynamically load pdf.js if not already loaded. */
 async function _loadPdfJs() {
   if (window.pdfjsLib) return;
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
     script.onload = () => {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
       resolve();
     };
     script.onerror = reject;
@@ -24,27 +27,23 @@ async function _loadPdfJs() {
   });
 }
 
-/** Determine optimal viewer URL by probing PDF dimensions */
+/** Return the URL with an optimal zoom fragment appended.
+ *  Landscape/poster PDFs get #view=Fit; portrait docs use browser default. */
 async function _getOptimalViewerUrl(url) {
-  // If user already specified a view/zoom parameter, respect it
+  // Respect any existing view/zoom parameter
   if (url.includes('zoom=') || url.includes('view=')) return url;
 
   try {
     await _loadPdfJs();
-    const loadingTask = pdfjsLib.getDocument(url);
-    const pdf = await loadingTask.promise;
-    const page = await pdf.getPage(1);
-    const viewport = page.getViewport({ scale: 1.0 });
-
-    // If width > height, it's likely a poster or presentation slide
+    const pdf = await pdfjsLib.getDocument(url).promise;
+    const viewport = (await pdf.getPage(1)).getViewport({ scale: 1.0 });
     if (viewport.width > viewport.height) {
       return url + (url.includes('#') ? '&' : '#') + 'view=Fit';
     }
   } catch (e) {
-    console.warn('Failed to parse PDF dimensions, falling back to default zoom:', e);
+    console.warn('pdf-modal: failed to probe PDF dimensions, using default zoom.', e);
   }
 
-  // Fallback to raw URL (default browser behavior) for standard portrait documents
   return url;
 }
 
@@ -81,7 +80,7 @@ function _getOrCreateOverlay() {
   `;
   document.body.appendChild(overlay);
 
-  // Close on backdrop click (not toolbar click)
+  // Close on backdrop click (not toolbar)
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay) closePDF();
   });
@@ -100,15 +99,13 @@ async function openPDF(event, url, title) {
   document.getElementById('pdfDownload').href = url;
   document.getElementById('pdfNewTab').href = url;
 
-  // Show modal immediately with loading state
+  // Show modal immediately while zoom is being determined
   overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
   void overlay.offsetWidth; // trigger CSS transition
   overlay.classList.add('show');
 
-  // Determine optimal zoom and load iframe
-  const optimalUrl = await _getOptimalViewerUrl(url);
-  document.getElementById('pdfFrame').src = optimalUrl;
+  document.getElementById('pdfFrame').src = await _getOptimalViewerUrl(url);
 }
 
 function closePDF(event) {
@@ -125,7 +122,6 @@ function closePDF(event) {
 
 // ── Global event listeners ────────────────────────────────
 
-// Close on Escape key
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') closePDF();
 });
@@ -135,14 +131,11 @@ document.body.addEventListener('click', function (e) {
   const link = e.target.closest('a[href*=".pdf"]');
   if (!link) return;
 
-  // Skip links inside the pdf viewer overlay itself (Download, Open in New Tab)
+  // Skip links inside the overlay itself (Download, Open in New Tab)
   if (link.closest('#pdfOverlay')) return;
 
-  // Skip links that already call openPDF explicitly via onclick
-  const onclick = link.getAttribute('onclick') || '';
-  if (onclick.includes('openPDF')) return;
-
   e.preventDefault();
-  const title = link.innerText.trim() || link.getAttribute('title') || 'PDF Document';
+  // Prefer explicit title attribute, fall back to visible link text
+  const title = link.getAttribute('title') || link.innerText.trim() || 'PDF Document';
   openPDF(e, link.href, title);
 });

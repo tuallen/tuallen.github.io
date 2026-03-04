@@ -918,6 +918,70 @@ screen and (max-width: 768px) {
   }
 }
 
+/* ==================== IMAGE MODAL ==================== */
+
+.image-modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.image-modal-overlay.active {
+  display: flex;
+}
+
+.image-modal-overlay.show {
+  opacity: 1;
+}
+
+.image-modal-content {
+  background-color: var(--bg-primary);
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  max-width: 95vw;
+  max-height: 95vh;
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.image-modal-overlay.show .image-modal-content {
+  transform: scale(1);
+}
+
+.modal-image-container {
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.modal-image-container img {
+  max-width: 100%;
+  /* Account for modal header + padding */
+  max-height: calc(95vh - 100px);
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 /* ════════════════════════════════════════
    PDF VIEWER MODAL
    ════════════════════════════════════════ */
