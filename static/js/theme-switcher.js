@@ -30,24 +30,27 @@
      * Update favicon based on theme
      */
     function updateFavicon(theme) {
-        const favicon = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
-        if (!favicon) return;
+        const svgLink = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+        const icoLink = document.querySelector('link[rel="icon"][sizes="any"]');
 
-        // Use a timestamp cache-buster so the browser always re-fetches the SVG on theme switch.
-        // Browsers aggressively cache favicons and won't visually update if the URL is the same.
+        // Use a timestamp cache-buster so the browser always re-fetches on theme switch.
+        // Browsers (especially Edge) aggressively cache favicons and won't update if the URL is the same.
         const bust = '?v=' + Date.now();
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+        let name;
         if (systemDark) {
             // OS/browser is dark → white favicon stands out against dark chrome
-            favicon.href = '/static/icons/tu_white.svg' + bust;
+            name = 'tu_white';
         } else {
             // OS/browser is light → match the site theme accent color exactly
             // Light theme: #b03b3b (tu_light), Dark theme: #e05252 (tu_dark)
-            favicon.href = (theme === 'dark'
-                ? '/static/icons/tu_dark.svg'
-                : '/static/icons/tu_light.svg') + bust;
+            name = theme === 'dark' ? 'tu_dark' : 'tu_light';
         }
+
+        if (svgLink) svgLink.href = `/static/icons/${name}.svg` + bust;
+        // Also update ICO — Edge ignores SVG favicons and uses the ICO link for the tab icon
+        if (icoLink) icoLink.href = `/static/icons/${name}.ico` + bust;
     }
 
     /**
