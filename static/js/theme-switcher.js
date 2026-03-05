@@ -31,20 +31,22 @@
      */
     function updateFavicon(theme) {
         const favicon = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
-        if (favicon) {
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (!favicon) return;
 
-            if (systemDark) {
-                // Browser/System is dark -> use white logo for contrast
-                favicon.href = '/static/icons/tu_white.svg';
-            } else {
-                // Browser/System is light -> match the page theme red
-                if (theme === 'dark') {
-                    favicon.href = '/static/icons/tu_dark_red.svg';
-                } else {
-                    favicon.href = '/static/icons/tu_red.svg';
-                }
-            }
+        // Use a timestamp cache-buster so the browser always re-fetches the SVG on theme switch.
+        // Browsers aggressively cache favicons and won't visually update if the URL is the same.
+        const bust = '?v=' + Date.now();
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (systemDark) {
+            // OS/browser is dark → white favicon stands out against dark chrome
+            favicon.href = '/static/icons/tu_white.svg' + bust;
+        } else {
+            // OS/browser is light → match the site theme accent color exactly
+            // Light theme: #b03b3b (tu_light), Dark theme: #e05252 (tu_dark)
+            favicon.href = (theme === 'dark'
+                ? '/static/icons/tu_dark.svg'
+                : '/static/icons/tu_light.svg') + bust;
         }
     }
 
