@@ -2,7 +2,7 @@
  * pdf-modal.js
  * Full-screen PDF viewer modal with toolbar.
  * - Injected lazily on first open (no DOM cost on load)
- * - Intercepts all a[href*=".pdf"] clicks site-wide via event delegation
+ * - Intercepts a[href*=".pdf"] and a[href*="/pdf/"] clicks site-wide via event delegation
  * - Probes first page dimensions via pdf.js to auto-apply #view=Fit for
  *   landscape/poster documents; falls back to browser default for portrait
  * - Title read from link's title attribute, then innerText
@@ -101,7 +101,7 @@ async function openPDF(event, url, title) {
   const overlay = _getOrCreateOverlay();
 
   document.getElementById('pdfTitle').textContent = title || 'PDF';
-  document.getElementById('pdfNewTab').href = url;
+  document.getElementById('pdfNewTab').href = url;  // always the full-size original
 
   const downloadBtn = document.getElementById('pdfDownload');
   downloadBtn.target = '';
@@ -110,12 +110,14 @@ async function openPDF(event, url, title) {
     e.preventDefault();
     const originalHtml = downloadBtn.innerHTML;
 
+    // Show loading state
     downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span class="btn-label">Downloading...</span>';
     downloadBtn.style.pointerEvents = 'none';
 
     try {
       // For arXiv, use the bare URL (no .pdf) — that endpoint returns CORS headers.
       // Appending .pdf triggers a 301 redirect that drops Access-Control-Allow-Origin.
+      // For local/same-origin PDFs, use the URL as-is.
       const fetchUrl = url.includes('arxiv.org') && url.endsWith('.pdf')
         ? url.slice(0, -4) : url;
       const res = await fetch(fetchUrl);
@@ -125,6 +127,8 @@ async function openPDF(event, url, title) {
       const a = document.createElement('a');
       a.href = blobUrl;
 
+      // Use filename from Content-Disposition header if exposed,
+      // then arxiv ID fallback, then basename from URL.
       const disposition = res.headers.get('content-disposition') || '';
       const nameMatch = disposition.match(/filename="?([^"]+)"?/);
       const arxivIdMatch = url.match(/arxiv\.org\/(?:pdf|abs)\/([\d.]+)/);
@@ -152,7 +156,18 @@ async function openPDF(event, url, title) {
   void overlay.offsetWidth; // trigger CSS transition
   overlay.classList.add('show');
 
-  document.getElementById('pdfFrame').src = await _getOptimalViewerUrl(url);
+  // For poster PDFs, load a scaled-down _viewer version in the iframe so it fits screen sizes.
+  // The download and "Open in New Tab" buttons always link to the original full-size URL.
+  // Strip query/hash before testing so ?v= cache-bust params don't break the match.
+  const isPoster = /poster[^/]*\.pdf$/i.test(url.split('?')[0].split('#')[0]);
+  let frameUrl = url;
+  if (isPoster) {
+    frameUrl = url.replace(/\.pdf(\?|#|$)/i, '_viewer.pdf$1');
+    frameUrl += (frameUrl.includes('#') ? '&' : '#') + 'view=Fit';
+  } else {
+    frameUrl = await _getOptimalViewerUrl(url);
+  }
+  document.getElementById('pdfFrame').src = frameUrl;
 }
 
 function closePDF(event) {
@@ -173,9 +188,9 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') closePDF();
 });
 
-// Intercept all PDF link clicks site-wide
+// Intercept all PDF link clicks site-wide (matches .pdf extensions and /pdf/ path-style URLs)
 document.body.addEventListener('click', function (e) {
-  const link = e.target.closest('a[href*=".pdf"]');
+  const link = e.target.closest('a[href*=".pdf"], a[href*="/pdf/"]');
   if (!link) return;
 
   // Skip links inside the overlay itself (Download, Open in New Tab)
