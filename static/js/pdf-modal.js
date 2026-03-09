@@ -101,8 +101,50 @@ async function openPDF(event, url, title) {
   const overlay = _getOrCreateOverlay();
 
   document.getElementById('pdfTitle').textContent = title || 'PDF';
-  document.getElementById('pdfDownload').href = url;
   document.getElementById('pdfNewTab').href = url;
+
+  const downloadBtn = document.getElementById('pdfDownload');
+  downloadBtn.target = '';
+  downloadBtn.href = '#';
+  downloadBtn.onclick = async (e) => {
+    e.preventDefault();
+    const originalHtml = downloadBtn.innerHTML;
+
+    downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span class="btn-label">Downloading...</span>';
+    downloadBtn.style.pointerEvents = 'none';
+
+    try {
+      // For arXiv, use the bare URL (no .pdf) — that endpoint returns CORS headers.
+      // Appending .pdf triggers a 301 redirect that drops Access-Control-Allow-Origin.
+      const fetchUrl = url.includes('arxiv.org') && url.endsWith('.pdf')
+        ? url.slice(0, -4) : url;
+      const res = await fetch(fetchUrl);
+      const blob = await res.blob();
+
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+
+      const disposition = res.headers.get('content-disposition') || '';
+      const nameMatch = disposition.match(/filename="?([^"]+)"?/);
+      const arxivIdMatch = url.match(/arxiv\.org\/(?:pdf|abs)\/([\d.]+)/);
+      const baseName = url.split('/').pop().split('?')[0];
+      a.download = nameMatch ? nameMatch[1]
+        : arxivIdMatch ? `${arxivIdMatch[1]}.pdf`
+          : baseName || 'document.pdf';
+
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error('pdf-modal: download failed, opening in new tab.', err);
+      window.open(url, '_blank');
+    } finally {
+      downloadBtn.innerHTML = originalHtml;
+      downloadBtn.style.pointerEvents = '';
+    }
+  };
 
   // Show modal immediately while zoom is being determined
   overlay.classList.add('active');
