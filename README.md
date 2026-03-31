@@ -40,8 +40,8 @@ On top of the original template, I’ve introduced a number of custom features a
   Click-to-expand images and videos without leaving the page
 - **Video comparison sliders** (`video_comparison.js`)  
   Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations
-- **PDF viewer modal** (`pdf-modal.js`)  
-  Full-screen in-page PDF viewer for any `.pdf` link site-wide — no new tab required. Features a themed toolbar with Download and Open in New Tab actions, Escape / backdrop-click dismissal, and intelligent auto-zoom: probes the first page's dimensions via `pdf.js` and applies `#view=Fit` for landscape/poster documents — portrait documents use the browser's default zoom. Intercepts all PDF links automatically via event delegation; title is read from the link's `title` attribute (no extra markup needed for standard links).
+- **Custom PDF Viewer** (`pdf-modal.js`, `pdfviewer.html`)  
+  Full-screen in-page PDF viewer for any `.pdf` link site-wide. Powered by a self-hosted PDF.js instance, it avoids native browser limitations. It features a sleek Edge-style dark theme with page shadows, custom floating controls (zoom, page navigation, fit width/page), and keyboard shortcut support. It intelligently intercepts external links inside the PDF to open in new tabs, auto-zooms landscape posters, and includes 'Download' and 'Open in New Tab' toolbar actions.
 - **Image viewer modal** (`image-modal.js`)  
   Lightweight modal for standalone image links (`.jpg`, `.png`, `.webp`, etc.). The modal shrink-wraps around the image up to 95% of the viewport while maintaining aspect ratio. Matches the theme of the PDF and BibTeX modals. Intercepts image links automatically site-wide; title is read from the `title` attribute, the wrapped `<img>`'s `alt`, or the filename as a fallback.
 - **Lazy loading**  
@@ -185,7 +185,7 @@ Graceful degradation is implemented for older browsers:
 - Some custom icons may not render correctly in very old browsers (pre-2020)
 - Citation counts and GitHub stars require API availability
 - Zoom containers work best on desktop; mobile uses native image viewing
-- The in-page PDF viewer relies on the browser's native PDF renderer; on iOS Safari the PDF is displayed but zoom controls are limited to pinch-to-zoom
+- On mobile (iOS/Android), the custom PDF viewer is bypassed to let the OS handle PDFs natively
 
 ---
 
@@ -239,7 +239,7 @@ This template has also been used for other academic websites that I helped their
 
 ---
 
-**Last Updated:** March 3, 2026
+**Last Updated:** March 31, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**

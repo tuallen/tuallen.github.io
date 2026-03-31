@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>PDF Viewer</title>
+    <link rel="stylesheet" href="/static/stylesheets/pdf-viewer.css?v=2026-03-31">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
+</head>
+
+<body>
+
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="errorMessage">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v4" />
+            <path d="M12 16h.01" stroke-width="2" />
+        </svg>
+        <span id="errorText">Failed to load PDF.</span>
+        <span id="errorDetail"></span>
+    </div>
+
+    <div id="viewerContainer">
+        <div id="viewer" class="pdfViewer"></div>
+    </div>
+
+    <!-- Edge-style floating controls -->
+    <div id="pdfControls">
+        <!-- Page navigation -->
+        <button class="ctrl-btn" id="pagePrev" title="Previous page" disabled>
+            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.5 3L5 7.5l4.5 4.5" />
+            </svg>
+        </button>
+        <input type="text" id="pageInput" value="1" aria-label="Current page">
+        <span class="ctrl-label">/ <span id="pageCount">—</span></span>
+        <button class="ctrl-btn" id="pageNext" title="Next page" disabled>
+            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5.5 3L10 7.5 5.5 12" />
+            </svg>
+        </button>
+
+        <div class="ctrl-divider"></div>
+
+        <!-- Zoom -->
+        <button class="ctrl-btn" id="zoomOut" title="Zoom out (−)">
+            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round">
+                <path d="M2.5 7.5h10" />
+            </svg>
+        </button>
+        <span id="zoomDisplay">100%</span>
+        <button class="ctrl-btn" id="zoomIn" title="Zoom in (+)">
+            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round">
+                <path d="M7.5 2.5v10M2.5 7.5h10" />
+            </svg>
+        </button>
+
+        <div class="ctrl-divider"></div>
+
+        <!-- Fit width -->
+        <button class="ctrl-btn" id="fitWidth" title="Fit to width">
+            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 7.5h13" />
+                <path d="M11.5 5l2.5 2.5-2.5 2.5" />
+                <path d="M3.5 5L1 7.5 3.5 10" />
+                <rect x="4" y="2" width="7" height="11" rx="0.5" stroke-dasharray="2 1.5" />
+            </svg>
+        </button>
+
+        <!-- Fit page -->
+        <button class="ctrl-btn" id="fitPage" title="Fit whole page">
+            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="1" width="10" height="13" rx="1" />
+                <path d="M7.5 4.5v6" />
+                <path d="M5 6.5l2.5-2.5 2.5 2.5" />
+                <path d="M5 8.5l2.5 2.5 2.5-2.5" />
+            </svg>
+        </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const file = urlParams.get('file');
+
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorMessage = document.getElementById('errorMessage');
+        const pdfControls = document.getElementById('pdfControls');
+
+        function hideLoading() {
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => { loadingOverlay.style.display = 'none'; }, 275);
+        }
+
+        function showError(msg, detail) {
+            hideLoading();
+            document.getElementById('errorText').textContent = msg || 'Failed to load PDF.';
+            document.getElementById('errorDetail').textContent = detail || '';
+            errorMessage.classList.add('visible');
+        }
+
+        if (!file) {
+            window.location.replace('/');  // redirect to homepage when visited directly
+        } else {
+            const container = document.getElementById('viewerContainer');
+            const eventBus = new pdfjsViewer.EventBus();
+
+            const linkService = new pdfjsViewer.PDFLinkService({
+                eventBus,
+                externalLinkTarget: 2  // LinkTarget.BLANK
+            });
+
+            const pdfViewer = new pdfjsViewer.PDFViewer({
+                container,
+                eventBus,
+                linkService,
+                removePageBorders: true
+            });
+            linkService.setViewer(pdfViewer);
+
+            // ── UI element refs ──────────────────────────────────────
+            const zoomDisplay = document.getElementById('zoomDisplay');
+            const pageInput = document.getElementById('pageInput');
+            const pageCount = document.getElementById('pageCount');
+            const prevBtn = document.getElementById('pagePrev');
+            const nextBtn = document.getElementById('pageNext');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const fitWidthBtn = document.getElementById('fitWidth');
+            const fitPageBtn = document.getElementById('fitPage');
+
+            const ZOOM_STEP = 0.25;
+            const ZOOM_MIN = 0.25;
+            const ZOOM_MAX = 4.0;
+
+            function updateZoomDisplay() {
+                zoomDisplay.textContent = Math.round(pdfViewer.currentScale * 100) + '%';
+            }
+
+            function updatePageDisplay() {
+                const cur = pdfViewer.currentPageNumber;
+                const total = pdfViewer.pagesCount;
+                pageInput.value = cur;
+                prevBtn.disabled = cur <= 1;
+                nextBtn.disabled = cur >= total;
+            }
+
+            // ── PDF viewer events ────────────────────────────────────
+            eventBus.on('pagesinit', function () {
+                pdfViewer.currentScaleValue =
+                    file.toLowerCase().includes('view=fit') ? 'page-fit' : 'auto';
+                pageCount.textContent = pdfViewer.pagesCount;
+                updateZoomDisplay();
+                updatePageDisplay();
+                container.scrollTop = 0; // ensure padding-top is visible on open
+                hideLoading();
+                pdfControls.classList.add('visible');
+            });
+
+            eventBus.on('scalechanging', updateZoomDisplay);
+            eventBus.on('pagechanging', updatePageDisplay);
+
+            // ── Toolbar button handlers ──────────────────────────────
+            prevBtn.addEventListener('click', () => {
+                pdfViewer.currentPageNumber =
+                    Math.max(1, pdfViewer.currentPageNumber - 1);
+            });
+            nextBtn.addEventListener('click', () => {
+                pdfViewer.currentPageNumber =
+                    Math.min(pdfViewer.pagesCount, pdfViewer.currentPageNumber + 1);
+            });
+            pageInput.addEventListener('change', () => {
+                const n = parseInt(pageInput.value, 10);
+                if (n >= 1 && n <= pdfViewer.pagesCount) {
+                    pdfViewer.currentPageNumber = n;
+                } else {
+                    updatePageDisplay(); // revert invalid input
+                }
+            });
+            zoomInBtn.addEventListener('click', () => {
+                pdfViewer.currentScaleValue =
+                    Math.min(ZOOM_MAX, pdfViewer.currentScale + ZOOM_STEP);
+            });
+            zoomOutBtn.addEventListener('click', () => {
+                pdfViewer.currentScaleValue =
+                    Math.max(ZOOM_MIN, pdfViewer.currentScale - ZOOM_STEP);
+            });
+            fitWidthBtn.addEventListener('click', () => {
+                pdfViewer.currentScaleValue = 'page-width';
+            });
+            fitPageBtn.addEventListener('click', () => {
+                pdfViewer.currentScaleValue = 'page-fit';
+            });
+
+            // ── Keyboard shortcuts ───────────────────────────────────
+            document.addEventListener('keydown', e => {
+                if (document.activeElement === pageInput) return;
+                if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomInBtn.click(); }
+                if (e.key === '-') { e.preventDefault(); zoomOutBtn.click(); }
+                if (e.key === 'PageUp') prevBtn.click();
+                if (e.key === 'PageDown') nextBtn.click();
+            });
+
+            // ── External link handling ───────────────────────────────
+            // Mirrors new-tabs.js: only open different-origin links in a new tab
+            eventBus.on('annotationlayerrendered', function () {
+                document.querySelectorAll('.annotationLayer a').forEach(l => {
+                    if (!l.href) return;
+                    try {
+                        const u = new URL(l.href);
+                        if (u.origin !== window.location.origin) {
+                            l.target = '_blank';
+                            l.rel = 'noopener noreferrer';
+                        }
+                    } catch (e) { /* malformed href — leave alone */ }
+                });
+            });
+
+            // ── Load PDF ─────────────────────────────────────────────
+            const fetchUrl = file.split('#')[0]; // strip hash before fetching
+            pdfjsLib.getDocument(fetchUrl).promise.then(pdfDocument => {
+                pdfViewer.setDocument(pdfDocument);
+                linkService.setDocument(pdfDocument, null);
+            }).catch(error => {
+                console.error('pdf-viewer: load failed', error);
+                showError(
+                    'Failed to load PDF.',
+                    'The file may be unavailable or blocked by CORS.'
+                );
+            });
+        }
+    </script>
+</body>
+
+</html>
