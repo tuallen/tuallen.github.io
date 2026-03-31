@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>PDF Viewer</title>
-    <link rel="stylesheet" href="/static/stylesheets/pdf-viewer.css?v=2026-03-31">
+    <link rel="stylesheet" href="/static/stylesheets/pdf-viewer.css?v=2026-03-31b">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
 </head>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div id="errorMessage">
-        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--error-icon)" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9" />
             <path d="M12 8v4" />
@@ -30,64 +30,106 @@
         <div id="viewer" class="pdfViewer"></div>
     </div>
 
-    <!-- Edge-style floating controls -->
+    <!-- Edge-style top toolbar -->
     <div id="pdfControls">
-        <!-- Page navigation -->
-        <button class="ctrl-btn" id="pagePrev" title="Previous page" disabled>
-            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9.5 3L5 7.5l4.5 4.5" />
-            </svg>
-        </button>
-        <input type="text" id="pageInput" value="1" aria-label="Current page">
-        <span class="ctrl-label">/ <span id="pageCount">—</span></span>
-        <button class="ctrl-btn" id="pageNext" title="Next page" disabled>
-            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5.5 3L10 7.5 5.5 12" />
-            </svg>
-        </button>
 
-        <div class="ctrl-divider"></div>
+        <!-- Left: Page navigation -->
+        <div class="ctrl-group">
+            <button class="ctrl-btn" id="pagePrev" title="Previous page (PageUp)" disabled>
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9.5 3L5 7.5l4.5 4.5" />
+                </svg>
+            </button>
+            <input type="text" id="pageInput" value="1" aria-label="Current page">
+            <span class="ctrl-label">of <span id="pageCount">—</span></span>
+            <button class="ctrl-btn" id="pageNext" title="Next page (PageDown)" disabled>
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5.5 3L10 7.5 5.5 12" />
+                </svg>
+            </button>
+        </div>
 
-        <!-- Zoom -->
-        <button class="ctrl-btn" id="zoomOut" title="Zoom out (−)">
-            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
-                stroke-linecap="round">
-                <path d="M2.5 7.5h10" />
-            </svg>
-        </button>
-        <span id="zoomDisplay">100%</span>
-        <button class="ctrl-btn" id="zoomIn" title="Zoom in (+)">
-            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
-                stroke-linecap="round">
-                <path d="M7.5 2.5v10M2.5 7.5h10" />
-            </svg>
-        </button>
+        <div class="ctrl-spacer"></div>
 
-        <div class="ctrl-divider"></div>
+        <!-- Center: Zoom + Fit -->
+        <div class="ctrl-group">
+            <button class="ctrl-btn" id="zoomOut" title="Zoom out (−)">
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round">
+                    <path d="M2.5 7.5h10" />
+                </svg>
+            </button>
+            <span id="zoomDisplay">100%</span>
+            <button class="ctrl-btn" id="zoomIn" title="Zoom in (+)">
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round">
+                    <path d="M7.5 2.5v10M2.5 7.5h10" />
+                </svg>
+            </button>
 
-        <!-- Fit width -->
-        <button class="ctrl-btn" id="fitWidth" title="Fit to width">
-            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 7.5h13" />
-                <path d="M11.5 5l2.5 2.5-2.5 2.5" />
-                <path d="M3.5 5L1 7.5 3.5 10" />
-                <rect x="4" y="2" width="7" height="11" rx="0.5" stroke-dasharray="2 1.5" />
-            </svg>
-        </button>
+            <div class="ctrl-divider"></div>
 
-        <!-- Fit page -->
-        <button class="ctrl-btn" id="fitPage" title="Fit whole page">
-            <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2.5" y="1" width="10" height="13" rx="1" />
-                <path d="M7.5 4.5v6" />
-                <path d="M5 6.5l2.5-2.5 2.5 2.5" />
-                <path d="M5 8.5l2.5 2.5 2.5-2.5" />
-            </svg>
-        </button>
+            <!-- Fit width -->
+            <button class="ctrl-btn" id="fitWidth" title="Fit to width">
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 7.5h13" />
+                    <path d="M11.5 5l2.5 2.5-2.5 2.5" />
+                    <path d="M3.5 5L1 7.5 3.5 10" />
+                    <rect x="4" y="2" width="7" height="11" rx="0.5" stroke-dasharray="2 1.5" />
+                </svg>
+            </button>
+
+            <!-- Fit page -->
+            <button class="ctrl-btn" id="fitPage" title="Fit whole page">
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2.5" y="1" width="10" height="13" rx="1" />
+                    <path d="M7.5 4.5v6" />
+                    <path d="M5 6.5l2.5-2.5 2.5 2.5" />
+                    <path d="M5 8.5l2.5 2.5 2.5-2.5" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="ctrl-spacer"></div>
+
+        <!-- Right: Rotate + Print + Download -->
+        <div class="ctrl-group">
+            <!-- Rotate clockwise -->
+            <button class="ctrl-btn" id="rotateCw" title="Rotate clockwise (R)" disabled>
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11.5 4.5A5 5 0 1 0 12.9 8" />
+                    <path d="M10.5 2l2 2.5-2.5 1.5" />
+                </svg>
+            </button>
+
+            <div class="ctrl-divider"></div>
+
+            <!-- Print -->
+            <button class="ctrl-btn" id="printBtn" title="Print (Ctrl+P)" disabled>
+                <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+            </button>
+
+            <!-- Download -->
+            <button class="ctrl-btn" id="downloadBtn" title="Download (Ctrl+S)" disabled>
+                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7.5 2v8" />
+                    <path d="M4.5 7.5l3 3 3-3" />
+                    <path d="M2 11.5v1a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-1" />
+                </svg>
+            </button>
+        </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -134,31 +176,37 @@
             });
             linkService.setViewer(pdfViewer);
 
+            // Keep reference to loaded document for print/download
+            let pdfDocument = null;
+
             // ── UI element refs ──────────────────────────────────────
-            const zoomDisplay = document.getElementById('zoomDisplay');
-            const pageInput = document.getElementById('pageInput');
-            const pageCount = document.getElementById('pageCount');
-            const prevBtn = document.getElementById('pagePrev');
-            const nextBtn = document.getElementById('pageNext');
-            const zoomInBtn = document.getElementById('zoomIn');
-            const zoomOutBtn = document.getElementById('zoomOut');
-            const fitWidthBtn = document.getElementById('fitWidth');
-            const fitPageBtn = document.getElementById('fitPage');
+            const zoomDisplay   = document.getElementById('zoomDisplay');
+            const pageInput     = document.getElementById('pageInput');
+            const pageCount     = document.getElementById('pageCount');
+            const prevBtn       = document.getElementById('pagePrev');
+            const nextBtn       = document.getElementById('pageNext');
+            const zoomInBtn     = document.getElementById('zoomIn');
+            const zoomOutBtn    = document.getElementById('zoomOut');
+            const fitWidthBtn   = document.getElementById('fitWidth');
+            const fitPageBtn    = document.getElementById('fitPage');
+            const rotateCwBtn   = document.getElementById('rotateCw');
+            const printBtn      = document.getElementById('printBtn');
+            const downloadBtn   = document.getElementById('downloadBtn');
 
             const ZOOM_STEP = 0.25;
-            const ZOOM_MIN = 0.25;
-            const ZOOM_MAX = 4.0;
+            const ZOOM_MIN  = 0.25;
+            const ZOOM_MAX  = 4.0;
 
             function updateZoomDisplay() {
                 zoomDisplay.textContent = Math.round(pdfViewer.currentScale * 100) + '%';
             }
 
             function updatePageDisplay() {
-                const cur = pdfViewer.currentPageNumber;
+                const cur   = pdfViewer.currentPageNumber;
                 const total = pdfViewer.pagesCount;
-                pageInput.value = cur;
-                prevBtn.disabled = cur <= 1;
-                nextBtn.disabled = cur >= total;
+                pageInput.value    = cur;
+                prevBtn.disabled   = cur <= 1;
+                nextBtn.disabled   = cur >= total;
             }
 
             // ── PDF viewer events ────────────────────────────────────
@@ -168,22 +216,24 @@
                 pageCount.textContent = pdfViewer.pagesCount;
                 updateZoomDisplay();
                 updatePageDisplay();
-                container.scrollTop = 0; // ensure padding-top is visible on open
+                container.scrollTop = 0;
                 hideLoading();
                 pdfControls.classList.add('visible');
+                // Enable post-load buttons
+                rotateCwBtn.disabled  = false;
+                printBtn.disabled     = false;
+                downloadBtn.disabled  = false;
             });
 
             eventBus.on('scalechanging', updateZoomDisplay);
-            eventBus.on('pagechanging', updatePageDisplay);
+            eventBus.on('pagechanging',  updatePageDisplay);
 
             // ── Toolbar button handlers ──────────────────────────────
             prevBtn.addEventListener('click', () => {
-                pdfViewer.currentPageNumber =
-                    Math.max(1, pdfViewer.currentPageNumber - 1);
+                pdfViewer.currentPageNumber = Math.max(1, pdfViewer.currentPageNumber - 1);
             });
             nextBtn.addEventListener('click', () => {
-                pdfViewer.currentPageNumber =
-                    Math.min(pdfViewer.pagesCount, pdfViewer.currentPageNumber + 1);
+                pdfViewer.currentPageNumber = Math.min(pdfViewer.pagesCount, pdfViewer.currentPageNumber + 1);
             });
             pageInput.addEventListener('change', () => {
                 const n = parseInt(pageInput.value, 10);
@@ -194,12 +244,10 @@
                 }
             });
             zoomInBtn.addEventListener('click', () => {
-                pdfViewer.currentScaleValue =
-                    Math.min(ZOOM_MAX, pdfViewer.currentScale + ZOOM_STEP);
+                pdfViewer.currentScaleValue = Math.min(ZOOM_MAX, pdfViewer.currentScale + ZOOM_STEP);
             });
             zoomOutBtn.addEventListener('click', () => {
-                pdfViewer.currentScaleValue =
-                    Math.max(ZOOM_MIN, pdfViewer.currentScale - ZOOM_STEP);
+                pdfViewer.currentScaleValue = Math.max(ZOOM_MIN, pdfViewer.currentScale - ZOOM_STEP);
             });
             fitWidthBtn.addEventListener('click', () => {
                 pdfViewer.currentScaleValue = 'page-width';
@@ -207,14 +255,33 @@
             fitPageBtn.addEventListener('click', () => {
                 pdfViewer.currentScaleValue = 'page-fit';
             });
+            rotateCwBtn.addEventListener('click', () => {
+                pdfViewer.pagesRotation = (pdfViewer.pagesRotation + 90) % 360;
+            });
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+            downloadBtn.addEventListener('click', () => {
+                const fetchUrl = file.split('#')[0];
+                const a = document.createElement('a');
+                a.href = fetchUrl;
+                // Extract filename from URL path
+                a.download = fetchUrl.split('/').pop() || 'document.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
 
             // ── Keyboard shortcuts ───────────────────────────────────
             document.addEventListener('keydown', e => {
                 if (document.activeElement === pageInput) return;
                 if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomInBtn.click(); }
-                if (e.key === '-') { e.preventDefault(); zoomOutBtn.click(); }
-                if (e.key === 'PageUp') prevBtn.click();
-                if (e.key === 'PageDown') nextBtn.click();
+                if (e.key === '-')                  { e.preventDefault(); zoomOutBtn.click(); }
+                if (e.key === 'PageUp')             prevBtn.click();
+                if (e.key === 'PageDown')           nextBtn.click();
+                if (e.key === 'r' || e.key === 'R') rotateCwBtn.click();
+                if ((e.ctrlKey || e.metaKey) && e.key === 'p') { e.preventDefault(); printBtn.click(); }
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); downloadBtn.click(); }
             });
 
             // ── External link handling ───────────────────────────────
@@ -234,9 +301,10 @@
 
             // ── Load PDF ─────────────────────────────────────────────
             const fetchUrl = file.split('#')[0]; // strip hash before fetching
-            pdfjsLib.getDocument(fetchUrl).promise.then(pdfDocument => {
-                pdfViewer.setDocument(pdfDocument);
-                linkService.setDocument(pdfDocument, null);
+            pdfjsLib.getDocument(fetchUrl).promise.then(doc => {
+                pdfDocument = doc;
+                pdfViewer.setDocument(doc);
+                linkService.setDocument(doc, null);
             }).catch(error => {
                 console.error('pdf-viewer: load failed', error);
                 showError(
