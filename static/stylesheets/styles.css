@@ -1000,8 +1000,7 @@ screen and (max-width: 960px) {
   }
 
   section {
-    border: 1px solid var(--border-color);
-    border-width: 1px 0 0 0;
+    border: none;
     padding: 20px 0;
     margin: 0 0 20px;
   }
