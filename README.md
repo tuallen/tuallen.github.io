@@ -72,6 +72,8 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
   Real-time repository star counts via the GitHub API
 - **Semantic Scholar citation retrieval** (`semantic-scholar.js`)  
   Automatic citation counts for publications
+- **News timeline toggle** (`news-toggle.js`)  
+  Collapsible news timeline with animated expand/collapse. The vertical rail grows to meet each item as it appears, with staggered entry reveals. The third item shows a down-arrow indicator when collapsed; the last item shows an up-arrow when expanded. Clicking dates, dots, or the sidebar column toggles the state.
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
@@ -143,6 +145,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   │   ├── github-stars.js
 │   │   ├── semantic-scholar.js
 │   │   ├── new-tabs.js
+│   │   ├── news-toggle.js  # Collapsible news timeline with animated rail
 │   │   ├── video_comparison.js
 │   │   ├── zoom-containers.js
 │   │   └── bibtex.js       # Copy/download functionality for BibTeX

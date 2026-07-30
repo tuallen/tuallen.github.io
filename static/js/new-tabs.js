@@ -1,6 +1,10 @@
 /* ---- Open external links in new tabs ---- */
-document.addEventListener("DOMContentLoaded", () => {
-    const links = document.querySelectorAll('a[href]');
+
+// Apply target="_blank" to external links within a given root element.
+// Exposed globally so dynamically injected markup (e.g. components loaded by
+// components.js) can be processed after it is added to the DOM.
+function applyExternalLinkTargets(root = document) {
+    const links = root.querySelectorAll('a[href]');
 
     links.forEach(a => {
         const href = a.getAttribute('href');
@@ -30,4 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+}
+
+window.applyExternalLinkTargets = applyExternalLinkTargets;
+
+document.addEventListener("DOMContentLoaded", () => {
+    applyExternalLinkTargets(document);
 });

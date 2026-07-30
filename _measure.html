@@ -892,6 +892,36 @@
 
     <!-- Load components immediately for faster rendering -->
     <script src="/static/js/components.js?v=2026-07-29"></script>
+
+<script>
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    function box(el){ if(!el) return null; var r=el.getBoundingClientRect(); return {l:+r.left.toFixed(2),t:+r.top.toFixed(2),w:+r.width.toFixed(2),h:+r.height.toFixed(2),cx:+(r.left+r.width/2).toFixed(2),cy:+(r.top+r.height/2).toFixed(2)}; }
+    var icon = document.querySelector('.news-heading i');
+    var tl = document.querySelector('.news-timeline');
+    var lis = tl ? tl.querySelectorAll(':scope > li') : [];
+    var out = {};
+    out.icon = box(icon);
+    out.timeline = box(tl);
+    out.lis = [];
+    lis.forEach(function(li){ out.lis.push(box(li)); });
+    // dot center: read ::before geometry
+    if(lis.length){
+      var cs = getComputedStyle(lis[0], '::before');
+      out.dotStyle = {left:cs.left, width:cs.width, top:cs.top, height:cs.height};
+    }
+    var railcs = getComputedStyle(tl, '::before');
+    out.railStyle = {left:railcs.left, width:railcs.width};
+    if(out.icon && out.timeline){
+      out.iconCenterXFromTimelineLeft = +(out.icon.cx - out.timeline.l).toFixed(2);
+    }
+    var pre = document.createElement('pre');
+    pre.id = 'MEASURE';
+    pre.textContent = 'MEASURE_JSON=' + JSON.stringify(out);
+    document.body.appendChild(pre);
+  }, 500);
+});
+</script>
 </body>
 
 </html>

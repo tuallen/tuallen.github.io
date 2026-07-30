@@ -46,6 +46,12 @@
 
         await Promise.all(loadPromises);
 
+        // Apply external-link new-tab handling to markup injected by components,
+        // since new-tabs.js runs on DOMContentLoaded before components load.
+        if (typeof window.applyExternalLinkTargets === 'function') {
+            window.applyExternalLinkTargets(document);
+        }
+
         // Set current year in footer copyright
         const copyrightYear = document.getElementById('copyright-year');
         if (copyrightYear) {
