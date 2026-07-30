@@ -38,21 +38,25 @@ function initSlideshow(container) {
     prevBtn.addEventListener("click", () => { goTo(current - 1); resetAuto(); });
     nextBtn.addEventListener("click", () => { goTo(current + 1); resetAuto(); });
 
-    // Auto-advance every 3 seconds
+    // Auto-advance every 5 seconds
+    let paused = false;
+
     function startAuto() {
-        autoTimer = setInterval(() => goTo(current + 1), 3000);
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+            if (!paused) goTo(current + 1);
+        }, 5000);
     }
 
     function resetAuto() {
-        clearInterval(autoTimer);
         startAuto();
     }
 
     startAuto();
 
     // Pause on hover
-    container.addEventListener("mouseenter", () => clearInterval(autoTimer));
-    container.addEventListener("mouseleave", startAuto);
+    container.addEventListener("mouseenter", () => { paused = true; });
+    container.addEventListener("mouseleave", () => { paused = false; resetAuto(); });
 
     // Touch/swipe support
     let startX = 0;
