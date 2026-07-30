@@ -127,10 +127,19 @@ section > h1::after {
 }
 
 /*
- * Flex headings (title + BibTeX button) must stay full-width for the
+ * Flex headings (title + BibTeX/CV button) must stay full-width for the
  * space-between layout, so anchor the bar to the inner <span> (title text
  * only) instead of the whole heading — this keeps it off the button.
+ *
+ * The accent-bar padding lives on the <span> here, so the h1's own
+ * padding-bottom (from `section > h1`) is dead space that would push the
+ * following table 10px lower than under a plain heading. Zero it so a heading
+ * with a button has the exact same content gap as one without.
  */
+section > h1[style*="display: flex"] {
+  padding-bottom: 0;
+}
+
 section > h1[style*="display: flex"]::after {
   content: none;
 }
