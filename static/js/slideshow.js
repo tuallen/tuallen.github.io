@@ -125,9 +125,18 @@ function initSlideshow(container) {
 
     // Click-to-navigate (only if not dragging)
     const link = container.dataset.link;
+    const wrapper = container.querySelector(".slideshow-track-wrapper");
     if (link) {
         track.addEventListener("click", (e) => {
             if (!mouseDragging && Math.abs(e.clientX - mouseStartX) < 5) {
+                // Force un-zoom immediately so it doesn't appear over modals
+                wrapper.style.transform = "scale(1)";
+                wrapper.style.pointerEvents = "none";
+                setTimeout(() => {
+                    wrapper.style.transform = "";
+                    wrapper.style.pointerEvents = "";
+                }, 500);
+
                 // Create a temporary anchor so event delegation (e.g. PDF modal) can intercept
                 const a = document.createElement("a");
                 a.href = link;
