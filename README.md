@@ -47,6 +47,21 @@ On top of the original template, I’ve introduced a number of custom features a
 - **Lazy loading**  
   Images and videos load on demand for improved performance
 
+### Motion & Interaction Polish
+
+A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-aware, and all respecting `prefers-reduced-motion`:
+
+- **Animated sliding underlines**  
+  Inline text links, sidebar navigation links, and the sidebar email grow an underline left-to-right on hover. The underline uses `currentColor`, so it fades in sync with the text color.
+- **Slow color fades**  
+  Navigation links and social icons ease into the accent-hover color over ~0.45s for a softer, more deliberate feel (icons keep their subtle scale pop).
+- **Pill-style buttons with accent fill**  
+  All buttons (`.button`, plus the BibTeX modal and PDF toolbar action buttons) are fully rounded pills that fill with the accent color and lift with a soft themed shadow on hover. Close (`×`) buttons are circular and spin 90° on hover.
+- **Heading accent bars**  
+  Each section `<h1>` carries a short accent-colored bar underneath. Flex headings (title + inline BibTeX button) anchor the bar to the title text only, so it never runs under the button.
+- **Softer media surfaces**  
+  Video/image thumbnails and the video-comparison sliders have rounded corners and a subtle, theme-aware drop shadow at rest (the shadow releases during the zoom-container hover so it doesn't magnify).
+
 ### Dynamic Content & Theming
 
 - **Dark mode toggle** (`theme-switcher.js`)  
@@ -60,9 +75,9 @@ On top of the original template, I’ve introduced a number of custom features a
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
-  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages (e.g., Home, 3D Portfolio, Biometrics). Modal action buttons share the same unified button style as the PDF toolbar.
-- **Automated Highlight Borders**  
-  CSS variables and utility classes ensure consistent, theme-aware styling for research highlight tables across all pages
+  GitHub-style copy-to-clipboard and download functionality for BibTeX references, available both on a standalone page and as a responsive modal popup on research pages (e.g., Home, 3D Portfolio, Biometrics). Modal action buttons share the same unified pill-button style as the PDF toolbar.
+- **Theme-aware styling tokens**  
+  CSS variables drive consistent, theme-aware styling across all pages — including highlight-table borders and dedicated shadow tokens (`--accent-shadow`, `--media-shadow`) that keep hover shadows tuned for both light and dark themes.
 
 ### Custom Icon System
 
@@ -75,14 +90,19 @@ A fully custom icon system extending Academicons and Font Awesome with inline SV
 - `ai-str` — Systems & Technology Research (STR)
 - `ai-ncino` — nCino
 - `ai-iarpa` — IARPA
+- `ai-amazon` — Amazon
 - `ai-xhs` — Xiaohongshu (RedNote)
 - Custom Semantic Scholar and Web of Science icons
 
-All icons are implemented using `mask-image` so they inherit text color, scale cleanly, and support dark mode automatically.
+Several logos also ship a full-color variant (e.g. `ai-amazon-color`, `ai-str-color`, `ai-umd-cs-color`, `ai-iarpa-color`, `ai-ncino-color`) that layers brand colors using multiple mask elements, while the base icons inherit text color for theming.
+
+Monochrome icons are implemented using `mask-image` so they inherit text color, scale cleanly, and support dark mode automatically.
 
 ### Design & UX
 
+- **Modern typography** — [Inter](https://rsms.me/inter/) as the primary typeface (with a system-font fallback stack), font antialiasing, and refined heading weight/letter-spacing for a cleaner, more contemporary feel
 - **Dark mode** — Toggle between light and dark themes with moon/sun icon in footer; preference persists across sessions
+- **Large-screen auto-zoom** — The layout keeps its fixed width, but on wide monitors the content (`.wrapper`) progressively scales up via CSS `zoom` (1.1× at 1500px through 1.6× at 2800px) to fill a modern amount of the screen. Fonts, sidebar, media, and spacing all scale together, so the layout and line breaks stay identical — things just get bigger. `zoom` is applied to the content wrapper (not `body`) so full-screen modals stay sized to the real viewport and never require scrolling.
 - **Responsive layout** — Mobile-optimized design with proper viewport handling, video container alignment, and centered navigation
 - **Icon grid navigation** — Compact header linking to CV, profiles, and social platforms
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
@@ -176,6 +196,8 @@ Graceful degradation is implemented for older browsers:
 - WebP images fall back to PNG/JPG
 - CSS mask-image icons degrade to standard text
 - JavaScript features are progressively enhanced
+- The large-screen `zoom` scaling is a pure enhancement — unsupported browsers simply render the page at its normal fixed width
+- Motion effects respect `prefers-reduced-motion` and fall back to instant state changes
 
 ---
 
@@ -239,7 +261,7 @@ This template has also been used for other academic websites that I helped their
 
 ---
 
-**Last Updated:** March 31, 2026
+**Last Updated:** July 29, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
