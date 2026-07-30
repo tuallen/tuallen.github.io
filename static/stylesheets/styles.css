@@ -113,6 +113,8 @@ section > h1 {
   position: relative;
   padding-bottom: 10px;
   display: inline-block;
+  /* Tighten the space between a section heading and its content */
+  margin-bottom: 10px;
 }
 
 section > h1::after {
@@ -163,6 +165,11 @@ section > h1[style*="display: flex"] > span::after {
 h2 {
   color: var(--text-heading-alt);
   font-weight: 500;
+}
+
+/* Tighten the space between subsection headings (e.g. News) and their content */
+section > h2 {
+  margin-bottom: 10px;
 }
 
 h2 title {
@@ -491,6 +498,16 @@ blockquote {
   box-shadow: 0 2px 8px var(--accent-shadow);
 }
 
+/*
+ * Section-heading buttons (BibTeX References, Curriculum Vitae) lead with an
+ * icon followed by the label. Add a little breathing room after the icon so it
+ * isn't cramped against the text — e.g. "CV  Curriculum Vitae". Scoped to
+ * heading buttons so the PAPER/CODE buttons (trailing icons) are unaffected.
+ */
+section > h1 .button i {
+  margin-right: 4px;
+}
+
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -735,31 +752,31 @@ blockquote {
  */
 @media screen and (min-width: 1500px) {
   .wrapper {
-    zoom: 1.1;
+    zoom: 1.05;
   }
 }
 
 @media screen and (min-width: 1700px) {
   .wrapper {
-    zoom: 1.2;
+    zoom: 1.1;
   }
 }
 
 @media screen and (min-width: 1900px) {
   .wrapper {
-    zoom: 1.3;
+    zoom: 1.18;
   }
 }
 
 @media screen and (min-width: 2300px) {
   .wrapper {
-    zoom: 1.45;
+    zoom: 1.32;
   }
 }
 
 @media screen and (min-width: 2800px) {
   .wrapper {
-    zoom: 1.6;
+    zoom: 1.5;
   }
 }
 
@@ -787,6 +804,34 @@ screen and (max-width: 960px) {
   header {
     padding-right: 0px;
     margin-bottom: 25px;
+  }
+
+  /*
+   * Fluidly scale the stacked mobile header with the viewport so it feels
+   * modern on larger phones and tablets (rather than staying phone-sized),
+   * capped so it never gets oversized. Mirrors the desktop zoom idea: the
+   * logo, portrait, social icons, and nav all grow together up to a limit.
+   */
+  .site-title {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .portrait {
+    width: clamp(160px, 30vw, 260px);
+  }
+
+  .icon-grid {
+    max-width: clamp(215px, 46vw, 320px);
+    gap: clamp(10px, 2.5vw, 18px) 0;
+  }
+
+  .icon-grid i {
+    font-size: clamp(32px, 6vw, 46px);
+  }
+
+  .navbar {
+    font-size: clamp(1.1rem, 4.3vw, 1.55rem);
+    gap: clamp(6px, 1.6vw, 12px);
   }
 
   section {
@@ -820,14 +865,20 @@ screen and (max-width: 960px) {
     padding: 4px 0;
   }
 
+  /* Breathing room above the very first (media) cell of the highlights table */
+  .highlight-row:first-of-type td:first-child {
+    padding-top: 12px;
+  }
+
   .video-container,
   .image-container {
     margin: 0 auto;
   }
 
+  /* Add a little space between the stacked media and the title */
   #indexWorkText,
   .indexWorkText {
-    margin-top: -10px;
+    margin-top: 0px;
     margin-bottom: 40px;
   }
 

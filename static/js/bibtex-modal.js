@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (openBtn) {
         openBtn.addEventListener('click', function (e) {
+            // On mobile, let the button navigate straight to the BibTeX page
+            // instead of opening the modal (the href already points to /bibtex/).
+            if (window.matchMedia('(max-width: 960px)').matches) {
+                return;
+            }
             e.preventDefault();
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden'; // Prevent scrolling background
