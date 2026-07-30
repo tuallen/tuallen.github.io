@@ -767,14 +767,17 @@ section > h1 .button i {
 .slideshow {
   position: relative;
   width: 380px;
+  outline: none;
+}
+
+.slideshow-track-wrapper {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
-  outline: none;
   transition: box-shadow 0.4s ease;
 }
 
-.slideshow:has(img:hover) {
+.slideshow:has(img:hover) .slideshow-track-wrapper {
   overflow: visible;
   box-shadow: none;
 }
