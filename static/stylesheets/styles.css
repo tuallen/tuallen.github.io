@@ -794,6 +794,12 @@ section > h1 .button i {
   justify-content: center;
 }
 
+.slideshow-slide picture {
+  width: 100%;
+  height: var(--slideshow-height, auto);
+  display: block;
+}
+
 .slideshow-slide img {
   width: 100%;
   height: var(--slideshow-height, auto);
