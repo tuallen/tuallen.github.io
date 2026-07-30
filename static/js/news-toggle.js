@@ -30,8 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebarClick.setAttribute("aria-label", `Show ${hiddenCount} more news items`);
     list.prepend(sidebarClick);
 
-    // Start collapsed
+    // Start collapsed, then mark as JS-ready so CSS switches from display:none to animated collapse
     list.classList.add("is-collapsed");
+    list.classList.add("js-ready");
     let expanded = false;
 
     const getRailHeight = (target) => {
