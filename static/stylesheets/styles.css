@@ -792,6 +792,7 @@ section > h1 .button i {
 .slideshow-slide img {
   width: 100%;
   height: auto;
+  max-height: 250px;
   object-fit: contain;
   display: block;
   border-radius: 10px;
