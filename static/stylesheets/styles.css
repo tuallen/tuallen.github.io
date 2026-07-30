@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* ==================== CSS VARIABLES ==================== */
 
 :root {
@@ -16,6 +18,8 @@
   --table-heading: #444444;
   --highlight-row-border: #e5e5e5;
   --highlight-separator-border: #958a8a;
+  --accent-shadow: rgba(176, 59, 59, 0.25);
+  --media-shadow: rgba(0, 0, 0, 0.12);
 }
 
 /* Dark theme - manual override */
@@ -34,6 +38,8 @@
   --table-heading: #c9d1d9;
   --highlight-row-border: #333333;
   --highlight-separator-border: #ffffff;
+  --accent-shadow: rgba(224, 82, 82, 0.35);
+  --media-shadow: rgba(0, 0, 0, 0.5);
 }
 
 /* Light theme - manual override */
@@ -50,6 +56,8 @@
   --code-bg: #f8f8f8;
   --code-text: #333333;
   --table-heading: #444444;
+  --accent-shadow: rgba(176, 59, 59, 0.25);
+  --media-shadow: rgba(0, 0, 0, 0.12);
 }
 
 /* ==================== BASE STYLES ==================== */
@@ -62,14 +70,17 @@ html {
 body {
   background-color: var(--bg-primary);
   padding: 50px;
-  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font: 14px/1.6 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text-primary);
   font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .wrapper {
-  width: 1020px;
+  width: 1120px;
   margin: auto;
 }
 
@@ -88,12 +99,56 @@ h6 {
 h1,
 h2,
 h3 {
-  line-height: 1.1;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 h1 {
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+/* Accent bar beneath section titles */
+section > h1 {
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+section > h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--accent-primary);
+}
+
+/*
+ * Flex headings (title + BibTeX button) must stay full-width for the
+ * space-between layout, so anchor the bar to the inner <span> (title text
+ * only) instead of the whole heading — this keeps it off the button.
+ */
+section > h1[style*="display: flex"]::after {
+  content: none;
+}
+
+section > h1[style*="display: flex"] > span {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+section > h1[style*="display: flex"] > span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--accent-primary);
 }
 
 h2 {
@@ -147,6 +202,35 @@ a:hover {
   color: var(--accent-hover);
 }
 
+/* Animated sliding underline for inline text links (main content + sidebar email) */
+section :is(p, li, h2) a:not(.button),
+#indexWorkText a:not(.button),
+#indexExperienceText a:not(.button),
+header p a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+section :is(p, li, h2) a:not(.button):hover,
+#indexWorkText a:not(.button):hover,
+#indexExperienceText a:not(.button):hover,
+header p a:hover {
+  background-size: 100% 1.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  section :is(p, li, h2) a:not(.button),
+  #indexWorkText a:not(.button),
+  #indexExperienceText a:not(.button),
+  header p a {
+    transition: color 0.2s ease;
+  }
+}
+
 a small {
   font-size: 11px;
   color: var(--text-secondary);
@@ -176,11 +260,11 @@ header p {
 }
 
 section {
-  width: 700px;
+  width: 780px;
   float: right;
   padding-bottom: 50px;
   padding-left: 150px;
-  padding-top: 0;
+  padding-top: 10px;
 }
 
 footer {
@@ -247,6 +331,7 @@ dt {
 /* Highlight Borders */
 .highlight-row {
   border-bottom: 1px solid var(--highlight-row-border);
+  transition: background-color 0.2s ease;
 }
 
 .highlight-separator {
@@ -347,41 +432,54 @@ blockquote {
 .navbar_li a {
   color: var(--accent-primary);
   text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease;
   display: inline-block;
   white-space: nowrap;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.3s ease, color 0.45s ease;
 }
 
 .navbar_li a:hover,
 .navbar_li a:focus {
-  border-bottom-color: var(--accent-hover);
+  color: var(--accent-hover);
+  background-size: 100% 2px;
 }
 
 #selected {
-  border-bottom-color: var(--accent-hover);
+  background-size: 100% 2px;
   font-weight: bold;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navbar_li a {
+    transition: color 0.2s ease;
+  }
 }
 
 /* ==================== COMPONENTS ==================== */
 
 .button {
   display: inline-block;
-  font-weight: 300;
+  font-weight: 500;
   color: var(--accent-primary);
-  padding: 0 10px;
-  border-radius: 2px;
+  padding: 0 12px;
+  border-radius: 999px;
   height: 20px;
   line-height: 20px;
   border: 1px solid var(--accent-primary);
   font-size: 11px;
   margin-top: 3px;
   margin-bottom: 1.5px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .button:hover {
-  color: var(--text-heading);
+  color: var(--bg-primary);
+  background-color: var(--accent-primary);
+  box-shadow: 0 2px 8px var(--accent-shadow);
 }
 
 .icon-grid {
@@ -404,6 +502,7 @@ blockquote {
   font-size: 32px;
   line-height: 1;
   vertical-align: middle;
+  transition: color 0.45s ease;
 }
 
 .icon-grid a:hover i {
@@ -441,6 +540,8 @@ blockquote {
   overflow: hidden;
   position: relative;
   margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
 }
 
 .video-compare-container video.video {
@@ -454,6 +555,7 @@ blockquote {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 10px;
 }
 
 /* ==================== UTILITY CLASSES ==================== */
@@ -606,6 +708,52 @@ blockquote {
   border-width: 1px;
 }
 
+/* ==================== LARGE-SCREEN SCALING ==================== */
+
+/*
+ * The layout is a fixed 1120px width, so on large monitors it leaves a lot of
+ * empty margin. Progressively `zoom` the page content on wide viewports to
+ * fill a modern amount of the screen. `zoom` scales fonts, the fixed sidebar,
+ * media, and spacing together — layout and line breaks stay identical, things
+ * just get bigger. (Unlike `transform: scale`, `zoom` participates in layout
+ * and keeps `position: fixed` aligned, so there are no overflow artifacts.)
+ *
+ * The zoom is applied to `.wrapper` (all page content) rather than `body` on
+ * purpose: the full-screen modals (BibTeX, PDF, image) are `body` children
+ * outside `.wrapper`, so they stay sized to the real viewport and never grow
+ * taller than the screen — otherwise a zoomed modal would require page
+ * scrolling to see the whole container.
+ */
+@media screen and (min-width: 1500px) {
+  .wrapper {
+    zoom: 1.1;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .wrapper {
+    zoom: 1.2;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .wrapper {
+    zoom: 1.3;
+  }
+}
+
+@media screen and (min-width: 2300px) {
+  .wrapper {
+    zoom: 1.45;
+  }
+}
+
+@media screen and (min-width: 2800px) {
+  .wrapper {
+    zoom: 1.6;
+  }
+}
+
 /* ==================== RESPONSIVE DESIGN ==================== */
 
 @media print,
@@ -739,24 +887,26 @@ screen and (max-width: 480px) {
   padding: 7px 16px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 999px;
   color: var(--text-secondary);
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .copy-code-btn:hover {
-  background: var(--bg-primary);
+  background: var(--accent-primary);
   border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 2px 8px var(--accent-shadow);
 }
 
 .copy-code-btn.copied {
-  color: var(--accent-primary);
+  background: var(--accent-primary);
   border-color: var(--accent-primary);
+  color: var(--bg-primary);
 }
 
 .bibtex-code {
@@ -862,21 +1012,23 @@ screen and (max-width: 768px) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   background: none;
   border: none;
-  border-radius: 6px;
+  border-radius: 50%;
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 22px;
   line-height: 1;
-  transition: all 0.15s;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
 .close-modal-btn:hover {
-  background: none;
-  border-color: transparent;
+  background: var(--bg-secondary);
   color: var(--accent-primary);
+  transform: rotate(90deg);
 }
 
 .modal-header {
@@ -1071,7 +1223,7 @@ screen and (max-width: 768px) {
   align-items: center;
   gap: 6px;
   padding: 7px 16px;
-  border-radius: 6px;
+  border-radius: 999px;
   border: 1px solid var(--border-color);
   background: var(--bg-secondary);
   color: var(--text-secondary);
@@ -1079,29 +1231,37 @@ screen and (max-width: 768px) {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   text-decoration: none;
 }
 
 .pdf-toolbar-btn:hover {
-  background: var(--bg-primary);
+  background: var(--accent-primary);
   border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 2px 8px var(--accent-shadow);
 }
 
 .pdf-toolbar-btn.close-btn {
   border: none;
   background: none;
   font-size: 22px;
-  padding: 4px 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
   line-height: 1;
   color: var(--text-secondary);
+  justify-content: center;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
 .pdf-toolbar-btn.close-btn:hover {
-  background: none;
+  background: var(--bg-secondary);
   border-color: transparent;
   color: var(--accent-primary);
+  box-shadow: none;
+  transform: rotate(90deg);
 }
 
 .pdf-viewer-container {
