@@ -128,7 +128,15 @@ function initSlideshow(container) {
     if (link) {
         track.addEventListener("click", (e) => {
             if (!mouseDragging && Math.abs(e.clientX - mouseStartX) < 5) {
-                window.open(link, "_blank", "noopener,noreferrer");
+                // Create a temporary anchor so event delegation (e.g. PDF modal) can intercept
+                const a = document.createElement("a");
+                a.href = link;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.style.display = "none";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
             }
         });
     }
