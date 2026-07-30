@@ -449,7 +449,7 @@ dt {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   font-size: 6px;
-  color: var(--bg-primary);
+  color: #ffffff;
   text-align: center;
   line-height: 12px;
   pointer-events: none;
@@ -986,7 +986,7 @@ screen and (max-width: 960px) {
 
   section {
     border: 1px solid var(--border-color);
-    border-width: 1px 0;
+    border-width: 1px 0 0 0;
     padding: 20px 0;
     margin: 0 0 20px;
   }
