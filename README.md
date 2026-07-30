@@ -75,6 +75,10 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
   Each section `<h1>` carries a short accent-colored bar underneath. Flex headings (title + inline BibTeX button) anchor the bar to the title text only, so it never runs under the button.
 - **Softer media surfaces**  
   Video/image thumbnails and the video-comparison sliders have rounded corners and a subtle, theme-aware drop shadow at rest (the shadow releases during the zoom-container hover so it doesn't magnify).
+- **Touch-aware hover**  
+  All hover effects are disabled on touch devices via `@media (hover: none)` to prevent sticky `:hover` states after tap.
+- **Mobile bio toggle**  
+  On mobile, the second paragraph of the About Me bio collapses behind a chevron button for a cleaner first impression.
 
 ### Dynamic Content & Theming
 

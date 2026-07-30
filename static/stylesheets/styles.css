@@ -1939,3 +1939,83 @@ screen and (max-width: 768px) {
     font-size: 20px;
   }
 }
+
+/* ==================== TOUCH DEVICE: DISABLE STICKY HOVER ==================== */
+
+@media (hover: none) {
+  .button:hover {
+    color: var(--accent-primary);
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .portrait:hover {
+    transform: none;
+    box-shadow: 0 4px 20px var(--media-shadow);
+  }
+
+  .brandmark:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .icon-grid a:hover i {
+    color: var(--accent-primary);
+    transform: none;
+    filter: none;
+  }
+
+  footer a:not(#theme-toggle):hover i {
+    color: var(--accent-primary);
+    transform: none;
+    filter: none;
+  }
+
+  .slideshow-track-wrapper:hover {
+    transform: none;
+  }
+
+  .navbar_li a:hover,
+  .navbar_li a:focus {
+    color: var(--accent-primary);
+    background-size: 0% 2px;
+  }
+
+  #selected {
+    background-size: 100% 2px;
+  }
+
+  .bio-toggle:hover {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: none;
+  }
+
+  .news-timeline li:hover::before {
+    transform: none;
+  }
+
+  #theme-toggle:hover .theme-icon-sun {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  #theme-toggle:hover .theme-icon-moon {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  [data-theme="dark"] #theme-toggle:hover .theme-icon-sun {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  [data-theme="dark"] #theme-toggle:hover .theme-icon-moon {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  #theme-toggle:hover {
+    color: var(--accent-primary);
+  }
+}
