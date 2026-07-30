@@ -813,8 +813,13 @@ section > h1 .button i {
   height: var(--slideshow-height, auto);
   object-fit: cover;
   display: block;
+  transition: object-fit 0s;
   -webkit-user-drag: none;
   user-select: none;
+}
+
+.slideshow-track-wrapper:hover .slideshow-slide img {
+  object-fit: contain;
 }
 
 .slideshow-controls {
