@@ -769,12 +769,20 @@ section > h1 .button i {
   width: 380px;
   overflow: hidden;
   border-radius: 10px;
+  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
   outline: none;
+  transition: box-shadow 0.4s ease;
+}
+
+.slideshow:has(img:hover) {
+  overflow: visible;
+  box-shadow: none;
 }
 
 .slideshow-track {
   display: flex;
   transition: transform 0.4s ease;
+  border-radius: 10px;
 }
 
 .slideshow-slide {
@@ -790,20 +798,14 @@ section > h1 .button i {
   object-fit: cover;
   display: block;
   border-radius: 10px;
-  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease;
   position: relative;
   -webkit-user-drag: none;
   user-select: none;
 }
 
-.slideshow:has(img:hover) {
-  overflow: visible;
-}
-
-.slideshow .slideshow-slide img:hover {
+.slideshow-slide img:hover {
   transform: scale(4);
-  box-shadow: none;
   z-index: 1000;
 }
 
