@@ -781,6 +781,7 @@ section > h1 .button i {
 .slideshow-track-wrapper:hover {
   transform: scale(2.5);
   box-shadow: none;
+  border-radius: 0;
   z-index: 1000;
 }
 
@@ -813,13 +814,14 @@ section > h1 .button i {
   height: var(--slideshow-height, auto);
   object-fit: cover;
   display: block;
-  transition: object-fit 0s;
+  border-radius: 10px;
   -webkit-user-drag: none;
   user-select: none;
 }
 
 .slideshow-track-wrapper:hover .slideshow-slide img {
   object-fit: contain;
+  border-radius: 10px;
 }
 
 .slideshow-controls {
