@@ -775,11 +775,6 @@ section > h1 .button i {
 .slideshow-track {
   display: flex;
   transition: transform 0.4s ease;
-  cursor: grab;
-}
-
-.slideshow-track:active {
-  cursor: grabbing;
 }
 
 .slideshow-slide {

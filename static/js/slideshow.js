@@ -15,25 +15,27 @@ function initSlideshow(container) {
     let current = 0;
     let autoTimer = null;
 
-    // Set container height to match the widest (most landscape) image
+    // Set container height based on a reference image.
+    // data-aspect-ref="1" (0-indexed) picks which slide's aspect ratio to use.
+    // Defaults to 0 (first image).
+    const aspectRef = parseInt(container.dataset.aspectRef || "0", 10);
     const imgs = Array.from(track.querySelectorAll("img"));
-    let ready = 0;
+
     function calcHeight() {
-        ready++;
-        if (ready < imgs.length) return;
+        const refImg = imgs[aspectRef] || imgs[0];
+        if (!refImg || !refImg.naturalWidth) return;
         const containerWidth = container.offsetWidth;
-        let minRatio = Infinity;
-        imgs.forEach(img => {
-            const ratio = img.naturalHeight / img.naturalWidth;
-            if (ratio < minRatio) minRatio = ratio;
-        });
-        const height = Math.round(containerWidth * minRatio);
+        const ratio = refImg.naturalHeight / refImg.naturalWidth;
+        const height = Math.round(containerWidth * ratio);
         container.style.setProperty("--slideshow-height", `${height}px`);
     }
-    imgs.forEach(img => {
-        if (img.complete) calcHeight();
-        else img.addEventListener("load", calcHeight);
-    });
+
+    // Wait for the reference image to load
+    const refImg = imgs[aspectRef] || imgs[0];
+    if (refImg) {
+        if (refImg.complete) calcHeight();
+        else refImg.addEventListener("load", calcHeight);
+    }
 
     // Create dots between the arrows
     slides.forEach((_, i) => {
@@ -47,7 +49,6 @@ function initSlideshow(container) {
     const dots = Array.from(controls.querySelectorAll(".slideshow-dot"));
 
     function goTo(index) {
-        // Wrap around
         if (index >= slides.length) index = 0;
         if (index < 0) index = slides.length - 1;
         current = index;
@@ -58,14 +59,14 @@ function initSlideshow(container) {
     prevBtn.addEventListener("click", () => { goTo(current - 1); resetAuto(); });
     nextBtn.addEventListener("click", () => { goTo(current + 1); resetAuto(); });
 
-    // Auto-advance every 5 seconds
+    // Auto-advance every 3 seconds
     let paused = false;
 
     function startAuto() {
         clearInterval(autoTimer);
         autoTimer = setInterval(() => {
             if (!paused) goTo(current + 1);
-        }, 5000);
+        }, 3000);
     }
 
     function resetAuto() {
@@ -74,7 +75,7 @@ function initSlideshow(container) {
 
     startAuto();
 
-    // Pause on hover
+    // Pause on hover (also covers zoom-container magnification)
     container.addEventListener("mouseenter", () => { paused = true; });
     container.addEventListener("mouseleave", () => { paused = false; resetAuto(); });
 
@@ -87,7 +88,7 @@ function initSlideshow(container) {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isDragging = true;
-        clearInterval(autoTimer);
+        paused = true;
     }, { passive: true });
 
     track.addEventListener("touchend", (e) => {
@@ -99,28 +100,10 @@ function initSlideshow(container) {
             if (dx < 0) goTo(current + 1);
             else goTo(current - 1);
         }
+        paused = false;
         resetAuto();
     }, { passive: true });
 
-    // Mouse drag support for desktop
-    let mouseStartX = 0;
-
-    track.addEventListener("mousedown", (e) => {
-        mouseStartX = e.clientX;
-        isDragging = true;
-        e.preventDefault();
-    });
-
-    document.addEventListener("mouseup", (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        const dx = e.clientX - mouseStartX;
-        if (Math.abs(dx) > 40) {
-            if (dx < 0) goTo(current + 1);
-            else goTo(current - 1);
-            resetAuto();
-        }
-    });
 
     // Keyboard support when focused
     container.addEventListener("keydown", (e) => {
