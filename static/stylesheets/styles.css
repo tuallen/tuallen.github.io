@@ -331,6 +331,13 @@ img {
   width: 160px;
   margin-bottom: 8px;
   border-radius: 50%;
+  box-shadow: 0 4px 20px var(--media-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portrait:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 28px var(--accent-shadow);
 }
 
 .workPicture {
@@ -629,6 +636,7 @@ blockquote {
   text-decoration: none;
   display: inline-block;
   white-space: nowrap;
+  letter-spacing: 0.01em;
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
   background-repeat: no-repeat;
@@ -643,6 +651,7 @@ blockquote {
 }
 
 #selected {
+  background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-hover));
   background-size: 100% 2px;
   font-weight: bold;
 }
@@ -718,7 +727,7 @@ section :is(h1, h2) .button.heading-btn {
 
 .icon-grid a:hover i {
   color: var(--accent-hover);
-  transform: scale(1.15);
+  transform: scale(1.15) translateY(-2px);
 }
 
 .link-list {
