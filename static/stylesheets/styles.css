@@ -1377,7 +1377,7 @@ screen and (max-width: 480px) {
 screen and (max-width: 768px) {
   .bibtex-code {
     font-size: 0.8rem;
-    padding-top: 0;
+    padding-top: 2px;
   }
 
   /* Reset padding for modal BibTeX code */
