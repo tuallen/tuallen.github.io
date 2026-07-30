@@ -75,9 +75,32 @@ function initSlideshow(container) {
 
     startAuto();
 
-    // Pause on hover (also covers zoom-container magnification)
-    container.addEventListener("mouseenter", () => { paused = true; });
-    container.addEventListener("mouseleave", () => { paused = false; resetAuto(); });
+    // Pause on hover and resize wrapper to fit current image's aspect ratio
+    const wrapper = container.querySelector(".slideshow-track-wrapper");
+
+    container.addEventListener("mouseenter", () => {
+        paused = true;
+        const currentImg = imgs[current];
+        if (currentImg && currentImg.naturalWidth && currentImg.naturalHeight) {
+            const imgRatio = currentImg.naturalHeight / currentImg.naturalWidth;
+            const containerWidth = container.offsetWidth;
+            const containerHeight = parseInt(getComputedStyle(currentImg).height);
+            const imgNaturalFitHeight = containerWidth * imgRatio;
+            if (imgNaturalFitHeight > containerHeight) {
+                // Portrait: shrink width to fit within current height
+                const fitWidth = Math.round(containerHeight / imgRatio);
+                wrapper.style.width = `${fitWidth}px`;
+                wrapper.style.margin = "0 auto";
+            }
+        }
+    });
+
+    container.addEventListener("mouseleave", () => {
+        paused = false;
+        resetAuto();
+        wrapper.style.width = "";
+        wrapper.style.margin = "";
+    });
 
     // Touch/swipe support
     let startX = 0;

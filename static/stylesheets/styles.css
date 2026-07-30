@@ -774,14 +774,13 @@ section > h1 .button i {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, width 0.4s ease, margin 0.4s ease;
   position: relative;
 }
 
 .slideshow-track-wrapper:hover {
   transform: scale(2.5);
   box-shadow: none;
-  border-radius: 0;
   z-index: 1000;
 }
 
@@ -819,10 +818,6 @@ section > h1 .button i {
   user-select: none;
 }
 
-.slideshow-track-wrapper:hover .slideshow-slide img {
-  object-fit: contain;
-  border-radius: 10px;
-}
 
 .slideshow-controls {
   display: flex;
