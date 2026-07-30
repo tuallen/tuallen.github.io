@@ -287,6 +287,36 @@ header {
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
+/* Staggered entrance animation (first visit only) */
+.header-entrance .site-title,
+.header-entrance > div,
+.header-entrance .navbar {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: headerReveal 0.5s ease forwards;
+}
+
+.header-entrance .site-title { animation-delay: 0s; }
+.header-entrance > div { animation-delay: 0.1s; }
+.header-entrance .navbar { animation-delay: 0.2s; }
+
+@keyframes headerReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-entrance .site-title,
+  .header-entrance > div,
+  .header-entrance .navbar {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 header>div {
   margin-top: 0px;
 }
@@ -301,6 +331,18 @@ section {
   padding-bottom: 50px;
   padding-left: 150px;
   padding-top: 10px;
+  animation: sectionReveal 0.35s ease;
+}
+
+@keyframes sectionReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section {
+    animation: none;
+  }
 }
 
 footer {

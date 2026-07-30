@@ -39,6 +39,15 @@
                 if (componentName === 'header' && selectedNav) {
                     highlightNavigation(element, selectedNav);
                 }
+
+                // Staggered entrance on first visit only
+                if (componentName === 'header' && !sessionStorage.getItem('visited')) {
+                    const header = element.querySelector('header');
+                    if (header && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                        header.classList.add('header-entrance');
+                        sessionStorage.setItem('visited', '1');
+                    }
+                }
             } catch (error) {
                 console.error(`Error loading component ${componentName}:`, error);
             }
