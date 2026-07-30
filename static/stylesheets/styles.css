@@ -1051,13 +1051,18 @@ screen and (max-width: 960px) {
     padding-left: 20px;
   }
 
-  /* Stack role and dates on mobile, no colon */
+  /* Stack role and dates on mobile, no colon, no extra space before team */
   .exp-role::after {
     content: none;
   }
 
   .exp-dates {
     display: block;
+    line-height: 1.4;
+  }
+
+  .exp-dates + br {
+    display: none;
   }
 }
 
