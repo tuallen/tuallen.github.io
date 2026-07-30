@@ -142,7 +142,7 @@
 
         <section>
             <h1>About Me</h1>
-            <p>
+            <p class="bio-primary">
                 I am a second-year Computer Science Ph.D. student at the <a href="https://www.cs.umd.edu/">University
                     of Maryland, College Park</a>, advised by Professors <a href="https://www.cs.umd.edu/~tomg/">Tom
                     Goldstein</a> and <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>. My research focuses on efficient and reliable <a href="/3d">3D/4D
@@ -154,7 +154,7 @@
                 digital twins from real-world sensor data.
             </p>
 
-            <p>
+            <p class="bio-extended">
                 My research is supported through the IARPA <a href="/3d">WRIVA</a> and <a
                     href="/biometrics">BRIAR</a> programs and shaped by collaborations across academia and industry,
                 including prior internships at <a href="https://str.us/">Systems &amp; Technology Research (STR)</a>
@@ -164,6 +164,7 @@
                     href="https://umd-fire-coml.github.io/">FIRE: Capital One Machine Learning</a> program. I received
                 my B.S./M.S. in Computer Science from UMD in 2024.
             </p>
+            <button class="bio-toggle" aria-label="Show more" aria-expanded="false" onclick="const p=document.querySelector('.bio-extended');const v=p.classList.toggle('is-visible');this.querySelector('i').classList.toggle('fa-chevron-down',!v);this.querySelector('i').classList.toggle('fa-chevron-up',v);this.setAttribute('aria-expanded',v);this.setAttribute('aria-label',v?'Show less':'Show more')"><i class="fa fa-chevron-down"></i></button>
 
             <h2 class="news-heading" style="display: flex; justify-content: space-between; align-items: center;"><span><i class="fa fa-newspaper"></i>News</span>
                 <a href="/gallery/#cvpr2026" class="button heading-btn"><i class="fa fa-images"></i> Gallery</a>
