@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Prevent flash of wrong theme -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme-preference') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <meta name="description"
+        content="Gallery — conference photos and research moments by Allen Tu.">
+    <meta name="keywords"
+        content="Allen Tu, Gallery, CVPR 2026, FG 2026, conferences, research photos">
+    <title>Allen Tu | Gallery</title>
+
+    <!-- Favicon - dynamically updated by theme-switcher.js -->
+    <link rel="icon" href="/static/icons/tu_light.svg?v=2026-07-30" type="image/svg+xml">
+    <link rel="icon" href="/static/icons/tu_light.png?v=2026-07-30" type="image/png" sizes="32x32">
+    <link rel="icon" href="/static/icons/tu_light.ico?v=2026-07-30" sizes="any">
+    <link rel="apple-touch-icon" href="/static/icons/tu_light.png?v=2026-07-30">
+    <link rel="canonical" href="https://tuallen.github.io/gallery/">
+    <meta name="robots" content="index,follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Allen Tu | Gallery">
+    <meta property="og:description"
+        content="Gallery — conference photos and research moments by Allen Tu.">
+    <meta property="og:url" content="https://tuallen.github.io/gallery/">
+    <meta property="og:image" content="https://tuallen.github.io/static/images/Headshot_Square_Background.jpg">
+    <meta property="og:site_name" content="Allen Tu">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:url" content="https://tuallen.github.io/gallery/">
+    <meta name="twitter:site" content="@tuallen_">
+    <meta name="twitter:domain" content="tuallen.github.io">
+    <meta name="twitter:creator" content="@tuallen_">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Allen Tu | Gallery">
+    <meta name="twitter:description"
+        content="Gallery — conference photos and research moments by Allen Tu.">
+    <meta name="twitter:image" content="https://tuallen.github.io/static/images/Headshot_Square_Background.jpg">
+    <meta name="twitter:image:alt" content="Portrait of Allen Tu">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://tuallen.github.io/gallery/",
+        "url": "https://tuallen.github.io/gallery/",
+        "name": "Allen Tu | Gallery",
+        "description": "Gallery — conference photos and research moments by Allen Tu.",
+        "image": "https://tuallen.github.io/static/images/Headshot_Square_Background.jpg",
+        "about": { "@id": "https://tuallen.github.io/#person" },
+        "isPartOf": { "@id": "https://tuallen.github.io/" }
+    }
+    </script>
+
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preload" href="/components/header.html?v=2026-07-29" as="fetch" crossorigin>
+    <link rel="preload" href="/components/footer.html?v=2026-07-29" as="fetch" crossorigin>
+    <link rel="preload" href="/static/icons/allentu.svg?v=2026-07-30" as="image">
+    <link rel="preload" href="/static/icons/tu.svg?v=2026-07-30" as="image">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="/static/js/components.js?v=2026-07-30"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-07-30">
+    <link rel="stylesheet" href="/static/stylesheets/zoom_containers.css?v=2026-07-30">
+    <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css?v=2026-07-30">
+    <link rel="stylesheet" href="/static/stylesheets/icons.css?v=2026-07-30">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script defer src="/static/js/theme-switcher.js?v=2026-07-30"></script>
+    <script defer src="/static/js/image-modal.js?v=2026-07-30"></script>
+    <script defer src="/static/js/new-tabs.js?v=2026-07-30"></script>
+    <script defer src="/static/js/scroll-reveal.js?v=2026-07-30"></script>
+    <script defer src="/static/js/slideshow.js?v=2026-07-30"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5MJTNBEPMB');
+    </script>
+
+    <style>
+        .gallery-slideshow {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .gallery-slideshow .slideshow-track-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
+        }
+
+        .gallery-slideshow .slideshow-track-wrapper:hover {
+            transform: none;
+            box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
+        }
+
+        .gallery-slideshow .slideshow-slide picture,
+        .gallery-slideshow .slideshow-slide img {
+            width: 100%;
+            height: var(--slideshow-height, auto);
+            object-fit: contain;
+        }
+
+        @media (min-width: 769px) {
+            section {
+                min-height: 60vh;
+            }
+        }
+
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+
+        .gallery-section h2 {
+            margin-bottom: 8px;
+        }
+
+        .gallery-section p {
+            margin-top: 0;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+        }
+
+        .gallery-section p + p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- HEADER -->
+        <div data-component="header" data-selected="gallery"></div>
+
+        <section>
+            <h1>Conference Gallery</h1>
+            <div class="spacer"></div>
+
+            <!-- CVPR 2026 -->
+            <div class="gallery-section" id="cvpr2026">
+                <h2><a href="https://cvpr.thecvf.com/Conferences/2026">CVPR 2026</a></h2>
+                <p>Denver, Colorado &mdash; June 2026</p>
+                <p>
+                    <a href="https://www.linkedin.com/posts/allentu_cvpr2026-cvpr-ai-ugcPost-7470138772072845312-sk0o/" class="button">LINKEDIN <i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.rednote.com/explore/6a283962000000000e031400" class="button">REDNOTE <i class="fa-xhs"></i></a>
+                </p>
+
+                <div class="slideshow gallery-slideshow" tabindex="0" data-aspect-ref="0">
+                    <div class="slideshow-track-wrapper">
+                        <div class="slideshow-track">
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2026/0_speede3dgs.jpg" alt="SpeedE3DGS poster presentation at CVPR 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2026/1_splatsure.jpg" alt="SplatSure poster presentation at CVPR 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2026/2_spar3d.jpg" alt="SPAR-3D Workshop at CVPR 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2026/3_posters.jpg" alt="Poster session at CVPR 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2026/4_awards.jpg" alt="Awards ceremony at CVPR 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2026/5_umd.jpg" alt="UMD group at CVPR 2026" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slideshow-controls">
+                        <button class="slideshow-prev" aria-label="Previous slide"><i class="fa fa-chevron-left"></i></button>
+                        <button class="slideshow-next" aria-label="Next slide"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FG 2026 -->
+            <div class="gallery-section" id="fg2026">
+                <h2><a href="https://fg2026.ieee-biometrics.org/">FG 2026</a></h2>
+                <p>Kyoto, Japan &mdash; May 2026</p>
+                <p>
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7466167596799832064/" class="button">LINKEDIN <i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.rednote.com/explore/6a19c8c70000000010001c00?xsec_token=ABx8RngQRNeRvavVHycFLU4BKCiOcq9KRZIS9bFLoldBU=&xsec_source=pc_user" class="button">REDNOTE <i class="fa-xhs"></i></a>
+                </p>
+
+                <div class="slideshow gallery-slideshow" tabindex="0" data-aspect-ref="0">
+                    <div class="slideshow-track-wrapper">
+                        <div class="slideshow-track">
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/0_transfira.jpg" alt="TransFIRA presentation at FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/1_dc.jpg" alt="Doctoral Consortium presentation at FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/2_dcposter.jpg" alt="Doctoral Consortium poster session at FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/3_banquet.jpg" alt="FG 2026 banquet" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/4_meshgait.jpg" alt="MeshGait presentation at FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/5_proxy.jpg" alt="Proxy presentation at FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/6_idea.jpg" alt="IDEA session at FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/7_shrine.jpg" alt="Shrine visit during FG 2026" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/fg2026/8_garden.jpg" alt="Garden visit during FG 2026" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slideshow-controls">
+                        <button class="slideshow-prev" aria-label="Previous slide"><i class="fa fa-chevron-left"></i></button>
+                        <button class="slideshow-next" aria-label="Next slide"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CVPR 2025 -->
+            <div class="gallery-section" id="cvpr2025">
+                <h2><a href="https://cvpr.thecvf.com/Conferences/2025">CVPR 2025</a></h2>
+                <p>Nashville, Tennessee &mdash; June 2025</p>
+                <p>
+                    <a href="https://www.linkedin.com/posts/allentu_cvpr2025-activity-7340164794253037568-YTBx" class="button">LINKEDIN <i class="fa-brands fa-linkedin"></i></a>
+                </p>
+
+                <div class="slideshow gallery-slideshow" tabindex="0" data-aspect-ref="0">
+                    <div class="slideshow-track-wrapper">
+                        <div class="slideshow-track">
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2025/0_pup3dgs.jpg" alt="PUP 3D-GS poster presentation at CVPR 2025" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2025/1_speedysplat.jpg" alt="Speedy-Splat poster presentation at CVPR 2025" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2025/2_ming.jpg" alt="Ming at CVPR 2025" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2025/3_zoey.jpg" alt="Zoey at CVPR 2025" loading="lazy">
+                            </div>
+                            <div class="slideshow-slide">
+                                <img src="/gallery/cvpr2025/4_nvidia.jpg" alt="NVIDIA at CVPR 2025" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slideshow-controls">
+                        <button class="slideshow-prev" aria-label="Previous slide"><i class="fa fa-chevron-left"></i></button>
+                        <button class="slideshow-next" aria-label="Next slide"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <div data-component="footer"></div>
+    </div>
+
+</body>
+
+</html>

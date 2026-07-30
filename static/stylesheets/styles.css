@@ -308,6 +308,7 @@ footer {
   float: left;
   position: fixed;
   margin-top: 540px;
+  padding-top: 30px;
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -388,7 +389,7 @@ dt {
 
 .news-heading i {
   color: var(--accent-primary);
-  margin-right: 8px;
+  margin-right: 12px;
   display: inline-block;
   width: 16px;
   text-align: center;
