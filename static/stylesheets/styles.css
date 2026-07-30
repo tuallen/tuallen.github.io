@@ -778,7 +778,6 @@ section > h1 .button i {
 }
 
 .slideshow:has(img:hover) .slideshow-track-wrapper {
-  overflow: visible;
   box-shadow: none;
 }
 
@@ -808,7 +807,7 @@ section > h1 .button i {
 }
 
 .slideshow-slide img:hover {
-  transform: scale(4);
+  transform: scale(2);
   z-index: 1000;
 }
 
