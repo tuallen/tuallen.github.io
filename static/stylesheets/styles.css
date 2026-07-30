@@ -791,8 +791,20 @@ section > h1 .button i {
   display: block;
   border-radius: 10px;
   box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
   -webkit-user-drag: none;
   user-select: none;
+}
+
+.slideshow:has(img:hover) {
+  overflow: visible;
+}
+
+.slideshow .slideshow-slide img:hover {
+  transform: scale(4);
+  box-shadow: none;
+  z-index: 1000;
 }
 
 .slideshow-controls {
