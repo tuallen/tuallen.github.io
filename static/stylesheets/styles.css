@@ -315,14 +315,66 @@ header {
   }
 }
 
-/* Theme toggle spin */
-#theme-toggle i {
-  display: inline-block;
-  transition: transform 0.4s ease;
+/* Theme toggle rise/set animation */
+.theme-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.125em;
 }
 
-#theme-toggle.spinning i {
-  transform: rotate(360deg);
+.theme-icon {
+  position: absolute;
+  left: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Light mode: sun visible, hover → sun sets (down), moon rises (up) */
+.theme-icon-sun {
+  top: 0;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.theme-icon-moon {
+  top: 0;
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+#theme-toggle:hover .theme-icon-sun {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+#theme-toggle:hover .theme-icon-moon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Dark mode: moon visible, hover → moon sets (down), sun rises (up) */
+[data-theme="dark"] .theme-icon-sun {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon-moon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+[data-theme="dark"] #theme-toggle:hover .theme-icon-sun {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+[data-theme="dark"] #theme-toggle:hover .theme-icon-moon {
+  transform: translateY(100%);
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -335,7 +387,7 @@ header {
     animation: none;
   }
 
-  #theme-toggle i {
+  .theme-icon {
     transition: none;
   }
 }
@@ -375,6 +427,16 @@ footer {
   margin-top: 540px;
   padding-top: 30px;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+
+footer a:not(#theme-toggle) i {
+  transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+footer a:not(#theme-toggle):hover i {
+  color: var(--accent-hover);
+  transform: scale(1.15);
+  filter: drop-shadow(0 2px 6px var(--accent-shadow));
 }
 
 hr {
@@ -681,6 +743,12 @@ blockquote {
 .brandmark {
   display: inline-block;
   line-height: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.brandmark:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 4px 12px var(--accent-shadow));
 }
 
 .navbar {
@@ -798,6 +866,7 @@ section :is(h1, h2) .button.heading-btn {
 .icon-grid a:hover i {
   color: var(--accent-hover);
   transform: scale(1.15) translateY(-2px);
+  filter: drop-shadow(0 2px 6px var(--accent-shadow));
 }
 
 .link-list {

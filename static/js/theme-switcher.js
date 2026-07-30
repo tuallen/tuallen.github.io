@@ -54,28 +54,14 @@
     }
 
     /**
-     * Update the theme toggle icon
-     * Moon icon in light mode (click to go dark)
-     * Sun icon in dark mode (click to go light)
+     * Update the theme toggle aria-label
      */
     function updateThemeIcon(theme) {
         const themeToggle = document.getElementById('theme-toggle');
         if (!themeToggle) return;
 
-        const icon = themeToggle.querySelector('i');
-        if (!icon) return;
-
-        if (theme === 'dark') {
-            // In dark mode, show sun (click to go light)
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-            themeToggle.setAttribute('aria-label', 'Switch to light mode');
-        } else {
-            // In light mode, show moon (click to go dark)
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-            themeToggle.setAttribute('aria-label', 'Switch to dark mode');
-        }
+        themeToggle.setAttribute('aria-label',
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     }
 
     /**
@@ -84,13 +70,6 @@
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute(THEME_ATTR) || 'light';
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        // Spin the icon
-        const toggle = document.getElementById('theme-toggle');
-        if (toggle) {
-            toggle.classList.add('spinning');
-            setTimeout(() => toggle.classList.remove('spinning'), 400);
-        }
 
         // Save preference
         localStorage.setItem(STORAGE_KEY, newTheme);

@@ -57,16 +57,16 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
   On first visit or page refresh, the sidebar logo, portrait/icons, nav links, and footer fade and slide in with a 1s stagger. Internal link navigation skips the animation (detected via `PerformanceNavigationTiming`).
 - **Section content fade-in**  
   The main content area fades in on every page navigation for a smooth transition feel.
-- **Theme toggle spin**  
-  The dark/light mode icon rotates 360° on click for a playful micro-interaction.
+- **Theme toggle rise/set**  
+  The sun/moon theme icons animate with a rise/set transition on hover — the current icon drops down while the next one rises from above, previewing the theme switch before committing on click.
 - **Animated sliding underlines**  
   Inline text links, sidebar navigation links, and the sidebar email grow an underline left-to-right on hover. The underline uses `currentColor`, so it fades in sync with the text color.
 - **Slow color fades**  
   Navigation links and social icons ease into the accent-hover color over ~0.45s for a softer, more deliberate feel (icons keep their subtle scale pop).
-- **Icon hover lift**  
-  Social icons in the header lift upward with a subtle translateY on hover in addition to scaling.
-- **Portrait hover**  
-  The portrait photo has a soft shadow at rest and subtly lifts with an accent glow on hover.
+- **Icon hover lift & glow**  
+  Social icons in the header and footer lift upward with a subtle translateY on hover, plus an accent-colored drop-shadow glow.
+- **Portrait & brandmark hover**  
+  The portrait photo and logo brandmark have a soft shadow at rest and subtly lift with an accent glow on hover.
 - **Gradient active nav**  
   The selected/active navigation link uses a gradient underline (primary → hover color) instead of a solid line.
 - **Pill-style buttons with accent fill**  
@@ -154,7 +154,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   │   └── zoom_containers.css
 │   ├── js/
 │   │   ├── components.js   # Component loader with entrance animations
-│   │   ├── theme-switcher.js # Dark mode toggle with spin animation
+│   │   ├── theme-switcher.js # Dark mode toggle with rise/set animation
 │   │   ├── slideshow.js    # Swipable image carousels
 │   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (auto-zooms posters; native passthrough on mobile)
 │   │   ├── image-modal.js  # Image viewer modal (intercepts all image links; auto-loads .webp if available, downloads original)
