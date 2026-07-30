@@ -774,14 +774,14 @@ section > h1 .button i {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
-  transition: transform 0.4s ease, box-shadow 0.4s ease, width 0.4s ease, margin 0.4s ease;
-  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .slideshow-track-wrapper:hover {
   transform: scale(2.5);
   box-shadow: none;
-  z-index: 1000;
+  z-index: 9999;
+  position: relative;
 }
 
 .slideshow-track {
@@ -813,11 +813,9 @@ section > h1 .button i {
   height: var(--slideshow-height, auto);
   object-fit: cover;
   display: block;
-  border-radius: 10px;
   -webkit-user-drag: none;
   user-select: none;
 }
-
 
 .slideshow-controls {
   display: flex;
