@@ -767,6 +767,7 @@ section > h1 .button i {
 .slideshow {
   position: relative;
   width: 380px;
+  margin: 0 auto;
   outline: none;
 }
 
@@ -822,7 +823,7 @@ section > h1 .button i {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 0 4px;
+  padding: 4px 0 0;
 }
 
 .slideshow-dot {
