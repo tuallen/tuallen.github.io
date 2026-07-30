@@ -777,6 +777,15 @@ section > h1 .button i {
   margin-bottom: 0.1em;
 }
 
+/* Experience role + dates: colon on desktop, stacked on mobile */
+.exp-role::after {
+  content: ": ";
+}
+
+.exp-dates {
+  font-weight: 400;
+}
+
 /* ==================== PAPER/BLOG SPECIFIC ==================== */
 
 .paper_line {
@@ -1039,6 +1048,15 @@ screen and (max-width: 960px) {
 
   ul {
     padding-left: 20px;
+  }
+
+  /* Stack role and dates on mobile, no colon */
+  .exp-role::after {
+    content: none;
+  }
+
+  .exp-dates {
+    display: block;
   }
 }
 
