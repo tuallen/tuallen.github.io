@@ -11,27 +11,23 @@ function initSlideshow(container) {
     const controls = container.querySelector(".slideshow-controls");
     const prevBtn = container.querySelector(".slideshow-prev");
     const nextBtn = container.querySelector(".slideshow-next");
+    const imgs = Array.from(track.querySelectorAll("img"));
 
     let current = 0;
     let autoTimer = null;
+    let paused = false;
 
-    // Set container height based on a reference image.
-    // data-aspect-ref="1" (0-indexed) picks which slide's aspect ratio to use.
-    // Defaults to 0 (first image).
+    // Set container height based on a reference image (data-aspect-ref, 0-indexed)
     const aspectRef = parseInt(container.dataset.aspectRef || "0", 10);
-    const imgs = Array.from(track.querySelectorAll("img"));
+    const refImg = imgs[aspectRef] || imgs[0];
 
     function calcHeight() {
-        const refImg = imgs[aspectRef] || imgs[0];
         if (!refImg || !refImg.naturalWidth) return;
-        const containerWidth = container.offsetWidth;
         const ratio = refImg.naturalHeight / refImg.naturalWidth;
-        const height = Math.round(containerWidth * ratio);
+        const height = Math.round(container.offsetWidth * ratio);
         container.style.setProperty("--slideshow-height", `${height}px`);
     }
 
-    // Wait for the reference image to load
-    const refImg = imgs[aspectRef] || imgs[0];
     if (refImg) {
         if (refImg.complete) calcHeight();
         else refImg.addEventListener("load", calcHeight);
@@ -56,12 +52,7 @@ function initSlideshow(container) {
         dots.forEach((d, i) => d.classList.toggle("active", i === current));
     }
 
-    prevBtn.addEventListener("click", () => { goTo(current - 1); resetAuto(); });
-    nextBtn.addEventListener("click", () => { goTo(current + 1); resetAuto(); });
-
     // Auto-advance every 3 seconds
-    let paused = false;
-
     function startAuto() {
         clearInterval(autoTimer);
         autoTimer = setInterval(() => {
@@ -69,43 +60,20 @@ function initSlideshow(container) {
         }, 3000);
     }
 
-    function resetAuto() {
-        startAuto();
-    }
+    function resetAuto() { startAuto(); }
 
     startAuto();
 
-    // Pause on hover and resize wrapper to fit current image's aspect ratio
-    const wrapper = container.querySelector(".slideshow-track-wrapper");
+    // Navigation
+    prevBtn.addEventListener("click", () => { goTo(current - 1); resetAuto(); });
+    nextBtn.addEventListener("click", () => { goTo(current + 1); resetAuto(); });
 
-    container.addEventListener("mouseenter", () => {
-        paused = true;
-        const currentImg = imgs[current];
-        if (currentImg && currentImg.naturalWidth && currentImg.naturalHeight) {
-            const imgRatio = currentImg.naturalHeight / currentImg.naturalWidth;
-            const containerWidth = container.offsetWidth;
-            const containerHeight = parseInt(getComputedStyle(currentImg).height);
-            const imgNaturalFitHeight = containerWidth * imgRatio;
-            if (imgNaturalFitHeight > containerHeight) {
-                // Portrait: shrink width to fit within current height
-                const fitWidth = Math.round(containerHeight / imgRatio);
-                wrapper.style.width = `${fitWidth}px`;
-                wrapper.style.margin = "0 auto";
-            }
-        }
-    });
+    // Pause on hover
+    container.addEventListener("mouseenter", () => { paused = true; });
+    container.addEventListener("mouseleave", () => { paused = false; resetAuto(); });
 
-    container.addEventListener("mouseleave", () => {
-        paused = false;
-        resetAuto();
-        wrapper.style.width = "";
-        wrapper.style.margin = "";
-    });
-
-    // Touch/swipe support
-    let startX = 0;
-    let startY = 0;
-    let isDragging = false;
+    // Touch swipe
+    let startX = 0, startY = 0, isDragging = false;
 
     track.addEventListener("touchstart", (e) => {
         startX = e.touches[0].clientX;
@@ -127,10 +95,8 @@ function initSlideshow(container) {
         resetAuto();
     }, { passive: true });
 
-
-    // Mouse drag support for desktop swipe
-    let mouseStartX = 0;
-    let mouseDragging = false;
+    // Mouse drag (desktop swipe)
+    let mouseStartX = 0, mouseDragging = false;
 
     track.addEventListener("mousedown", (e) => {
         mouseStartX = e.clientX;
@@ -151,7 +117,7 @@ function initSlideshow(container) {
         resetAuto();
     });
 
-    // Keyboard support when focused
+    // Keyboard navigation
     container.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") { goTo(current - 1); resetAuto(); }
         if (e.key === "ArrowRight") { goTo(current + 1); resetAuto(); }
