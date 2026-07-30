@@ -124,6 +124,13 @@ section > h1::after {
   height: 3px;
   border-radius: 3px;
   background: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+section > h1.in-view::after {
+  transform: scaleX(1);
 }
 
 /*
@@ -158,6 +165,21 @@ section > h1[style*="display: flex"] > span::after {
   height: 3px;
   border-radius: 3px;
   background: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+section > h1[style*="display: flex"].in-view > span::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section > h1::after,
+  section > h1[style*="display: flex"] > span::after {
+    transform: scaleX(1);
+    transition: none;
+  }
 }
 
 h2 {
