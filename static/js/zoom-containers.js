@@ -1,42 +1,34 @@
 // Check if device is mobile
 const isMobile = window.matchMedia('(max-width: 960px)').matches;
 
-if (isMobile) {
-    // On mobile: use Intersection Observer for lazy autoplay
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target.querySelector('.video-thumbnail');
-            if (entry.isIntersecting) {
-                // Video is visible, play it
-                video.play().catch(() => {
-                    // Autoplay might be blocked, that's okay
-                });
-            } else {
-                // Video is not visible, pause it
-                video.pause();
-            }
-        });
-    }, {
-        threshold: 0.5 // Play when 50% of video is visible
-    });
-
-    // Observe all video containers
-    document.querySelectorAll('.video-container').forEach(container => {
-        videoObserver.observe(container);
-    });
-} else {
-    // On desktop: play on hover
-    document.querySelectorAll('.video-container').forEach(container => {
-        const video = container.querySelector('.video-thumbnail');
-        container.addEventListener('mouseover', () => {
-            video.play();
-        });
-        container.addEventListener('mouseleave', () => {
+// Autoplay thumbnail videos when they scroll into view, on every screen size.
+//
+// This is intentionally decoupled from the hover-to-zoom effect (which is pure
+// CSS in zoom_containers.css). Earlier the desktop path played on mouseover and
+// paused + reset currentTime on mouseleave, so hovering to zoom in would
+// restart the clip every time. Using an IntersectionObserver instead means the
+// video just keeps looping while it's on screen — zooming in/out never pauses,
+// restarts, or resets it.
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const video = entry.target.querySelector('.video-thumbnail');
+        if (!video) return;
+        if (entry.isIntersecting) {
+            // Autoplay may be blocked before user interaction; that's fine.
+            video.play().catch(() => { });
+        } else {
+            // Pause off-screen videos to save resources; keep currentTime so it
+            // resumes where it left off rather than resetting.
             video.pause();
-            video.currentTime = 0;  // Reset to the beginning when hover ends
-        });
+        }
     });
-}
+}, {
+    threshold: 0.25 // Play once a quarter of the video is visible
+});
+
+document.querySelectorAll('.video-container').forEach(container => {
+    videoObserver.observe(container);
+});
 
 document.querySelectorAll('.image-container').forEach(container => {
     const image = container.querySelector('.image-thumbnail');
