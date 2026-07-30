@@ -800,14 +800,14 @@ section > h1 .button i {
   object-fit: cover;
   display: block;
   border-radius: 10px;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, object-fit 0s;
   position: relative;
   -webkit-user-drag: none;
   user-select: none;
 }
 
 .slideshow-slide img:hover {
-  transform: scale(2);
+  object-fit: contain;
   z-index: 1000;
 }
 
