@@ -64,8 +64,8 @@
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="preload" href="/components/header.html?v=2026-07-29" as="fetch" crossorigin>
-    <link rel="preload" href="/components/footer.html?v=2026-07-29" as="fetch" crossorigin>
+    <link rel="preload" href="/components/header.html?v=2026-07-30" as="fetch" crossorigin>
+    <link rel="preload" href="/components/footer.html?v=2026-07-30" as="fetch" crossorigin>
     <link rel="preload" href="/static/icons/allentu.svg?v=2026-07-30" as="image">
     <link rel="preload" href="/static/icons/tu.svg?v=2026-07-30" as="image">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -94,54 +94,6 @@
         gtag('config', 'G-5MJTNBEPMB');
     </script>
 
-    <style>
-        .gallery-slideshow {
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .gallery-slideshow .slideshow-track-wrapper {
-            border-radius: 10px;
-            box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
-        }
-
-        .gallery-slideshow .slideshow-track-wrapper:hover {
-            transform: none;
-            box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
-        }
-
-        .gallery-slideshow .slideshow-slide picture,
-        .gallery-slideshow .slideshow-slide img {
-            width: 100%;
-            height: var(--slideshow-height, auto);
-            object-fit: contain;
-        }
-
-        @media (min-width: 769px) {
-            section {
-                min-height: 60vh;
-            }
-        }
-
-        .gallery-section {
-            margin-bottom: 60px;
-        }
-
-        .gallery-section h2 {
-            margin-bottom: 8px;
-        }
-
-        .gallery-section p {
-            margin-top: 0;
-            margin-bottom: 4px;
-            color: var(--text-secondary);
-        }
-
-        .gallery-section p + p {
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -151,7 +103,6 @@
 
         <section>
             <h1>Conference Gallery</h1>
-            <div class="spacer"></div>
 
             <!-- CVPR 2026 -->
             <div class="gallery-section" id="cvpr2026">
@@ -166,7 +117,7 @@
                     <div class="slideshow-track-wrapper">
                         <div class="slideshow-track">
                             <div class="slideshow-slide">
-                                <img src="/gallery/cvpr2026/0_speede3dgs.jpg" alt="SpeedE3DGS poster presentation at CVPR 2026" loading="lazy">
+                                <img src="/gallery/cvpr2026/0_speede3dgs.jpg" alt="SpeedE3DGS poster presentation at CVPR 2026" loading="eager">
                             </div>
                             <div class="slideshow-slide">
                                 <img src="/gallery/cvpr2026/1_splatsure.jpg" alt="SplatSure poster presentation at CVPR 2026" loading="lazy">

@@ -683,8 +683,14 @@ blockquote {
  * isn't cramped against the text — e.g. "CV  Curriculum Vitae". Scoped to
  * heading buttons so the PAPER/CODE buttons (trailing icons) are unaffected.
  */
-section > h1 .button i {
+section > h1 .button i,
+section > h2 .button i {
   margin-right: 4px;
+}
+
+section :is(h1, h2) .button.heading-btn {
+  font-size: 11px;
+  margin: 0;
 }
 
 .icon-grid {
@@ -870,6 +876,56 @@ section > h1 .button i {
 .slideshow-next:hover {
   background: var(--bg-secondary);
   color: var(--accent-hover);
+}
+
+/* ==================== GALLERY PAGE ==================== */
+
+.gallery-slideshow {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.gallery-slideshow .slideshow-track-wrapper {
+  border-radius: 10px;
+  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
+}
+
+.gallery-slideshow .slideshow-track-wrapper:hover {
+  transform: none;
+  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
+  z-index: 1;
+}
+
+.gallery-slideshow .slideshow-slide picture,
+.gallery-slideshow .slideshow-slide img {
+  width: 100%;
+  height: var(--slideshow-height, auto);
+  object-fit: contain;
+}
+
+.gallery-section {
+  margin-bottom: 60px;
+}
+
+.gallery-section h2 {
+  margin-bottom: 8px;
+}
+
+.gallery-section p {
+  margin-top: 0;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
+.gallery-section p + p {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 769px) {
+  section:has(.gallery-section) {
+    min-height: 60vh;
+  }
 }
 
 /* ==================== UTILITY CLASSES ==================== */
@@ -1139,6 +1195,7 @@ screen and (max-width: 960px) {
 
   footer {
     margin-top: 0;
+    padding-top: 0;
   }
 
   header a small {
