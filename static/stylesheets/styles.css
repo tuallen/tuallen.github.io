@@ -293,7 +293,7 @@ header {
 .header-entrance .navbar {
   opacity: 0;
   transform: translateY(12px);
-  animation: headerReveal 0.5s ease forwards;
+  animation: headerReveal 1s ease forwards;
 }
 
 .header-entrance .site-title { animation-delay: 0s; }
@@ -304,7 +304,7 @@ header {
 .footer-entrance {
   opacity: 0;
   transform: translateY(12px);
-  animation: headerReveal 0.5s ease forwards;
+  animation: headerReveal 1s ease forwards;
   animation-delay: 0.3s;
 }
 

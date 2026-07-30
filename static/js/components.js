@@ -12,7 +12,9 @@
     const scriptElement = document.currentScript || document.querySelector('script[src*="components.js"]');
     const version = scriptElement ? new URL(scriptElement.src, window.location.href).searchParams.get('v') : null;
     const cacheKey = (name) => `component:${name}:${version}`;
-    const isFirstVisit = !sessionStorage.getItem('visited');
+    const navEntry = performance.getEntriesByType('navigation')[0];
+    const isReload = navEntry && navEntry.type === 'reload';
+    const isFirstVisit = !sessionStorage.getItem('visited') || isReload;
 
     // Inject cached components immediately (before DOMContentLoaded) to prevent flash
     document.querySelectorAll('[data-component]').forEach((element) => {
