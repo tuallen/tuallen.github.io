@@ -779,7 +779,7 @@ section > h1 .button i {
 }
 
 .slideshow-track-wrapper:hover {
-  transform: scale(4);
+  transform: scale(2);
   box-shadow: none;
   z-index: 1000;
 }
