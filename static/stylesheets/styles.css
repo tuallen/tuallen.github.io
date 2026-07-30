@@ -762,6 +762,95 @@ section > h1 .button i {
   border-radius: 10px;
 }
 
+/* ==================== SLIDESHOW ==================== */
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
+  outline: none;
+}
+
+.slideshow-track {
+  display: flex;
+  transition: transform 0.4s ease;
+  cursor: grab;
+}
+
+.slideshow-track:active {
+  cursor: grabbing;
+}
+
+.slideshow-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+}
+
+.slideshow-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.slideshow-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
+.slideshow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border-color);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.slideshow-dot.active {
+  background: var(--accent-primary);
+  transform: scale(1.25);
+}
+
+.slideshow-dot:hover {
+  background: var(--accent-hover);
+}
+
+.slideshow-prev,
+.slideshow-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--accent-primary);
+  cursor: pointer;
+  font-size: 10px;
+  padding: 0;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.slideshow-prev:hover,
+.slideshow-next:hover {
+  background: var(--bg-secondary);
+  color: var(--accent-hover);
+}
+
 /* ==================== UTILITY CLASSES ==================== */
 
 .spacer {
