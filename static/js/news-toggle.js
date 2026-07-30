@@ -43,22 +43,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Set initial collapsed rail height after layout settles
+    const isMobile = () => window.innerWidth <= 960;
     requestAnimationFrame(() => {
-        list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + 16}px`);
+        const extra = isMobile() ? 24 : 16;
+        list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
     });
 
     const toggle = () => {
         expanded = !expanded;
 
         if (expanded) {
-            // Rail stops at second-to-last item (no rail past last dot)
-            const secondToLast = items[items.length - 2];
+            // On mobile, rail goes to last dot; on desktop, second-to-last
+            const isMobile = window.innerWidth <= 960;
+            const expandTarget = isMobile ? lastItem : items[items.length - 2];
 
             // Pre-measure expanded height before animating
             list.style.transition = "none";
             list.classList.remove("is-collapsed");
             items.forEach(li => li.style.transition = "none");
-            const expandedHeight = getRailHeight(secondToLast);
+            const expandedHeight = getRailHeight(expandTarget);
             list.classList.add("is-collapsed");
             // Force reflow so the browser registers the collapsed state
             void list.offsetHeight;
@@ -72,11 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
             sidebarClick.setAttribute("aria-label", "Show fewer news items");
             list.style.setProperty("--rail-height", `${expandedHeight}px`);
         } else {
-            const collapsedHeight = getRailHeight(thirdItem) + 16;
             lastItem.classList.remove("news-arrow-up");
             thirdItem.classList.add("news-arrow-down");
             list.classList.add("is-collapsed");
-            list.style.setProperty("--rail-height", `${collapsedHeight}px`);
+            requestAnimationFrame(() => {
+                const extra = isMobile() ? 24 : 16;
+                list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
+            });
             sidebarClick.setAttribute("aria-label", `Show ${hiddenCount} more news items`);
         }
 
