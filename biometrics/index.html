@@ -91,6 +91,7 @@
     <script defer src="/static/js/semantic-scholar.js?v=2026-07-30"></script>
     <script defer src="/static/js/new-tabs.js?v=2026-07-30"></script>
     <script defer src="/static/js/scroll-reveal.js?v=2026-07-30"></script>
+    <script defer src="/static/js/slideshow.js?v=2026-07-30"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -332,31 +333,37 @@
             <table style="margin-top:-12px;">
                 <tbody>
                     <tr>
-                        <!-- Teaser -->
+                        <!-- Slideshow -->
                         <td style="text-align: center;">
-                            <div class="image-container">
-                                <a href="/media/fg2026_proxy.jpg?v=2026-07-30">
-                                    <picture>
-                                        <source srcset="/media/fg2026_proxy.webp?v=2026-07-30" type="image/webp">
-                                        <img class="image-thumbnail" src="/media/fg2026_proxy.jpg?v=2026-07-30"
-                                            alt="FG 2026 Proxy Presentations" loading="lazy" style="width:100%;height:auto;">
-                                    </picture>
-                                </a>
+                            <div class="slideshow" tabindex="0" aria-label="FG 2026 proxy presentation photos">
+                                <div class="slideshow-track">
+                                    <div class="slideshow-slide">
+                                        <img src="/gallery/fg2026/4_meshgait.jpg?v=2026-07-30" alt="Mesh-Gait presentation at FG 2026" loading="lazy">
+                                    </div>
+                                    <div class="slideshow-slide">
+                                        <img src="/gallery/fg2026/5_proxy.jpg?v=2026-07-30" alt="Proxy presentations at FG 2026" loading="lazy">
+                                    </div>
+                                    <div class="slideshow-slide">
+                                        <img src="/gallery/fg2026/6_cape.jpg?v=2026-07-30" alt="CAPE presentation at FG 2026" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="slideshow-controls">
+                                    <button class="slideshow-prev" aria-label="Previous slide"><i class="fa fa-chevron-left"></i></button>
+                                    <button class="slideshow-next" aria-label="Next slide"><i class="fa fa-chevron-right"></i></button>
+                                </div>
                             </div>
                         </td>
 
                         <!-- TITLE AND INFO -->
                         <td>
                             <div id="indexWorkText">
-                                In addition to presenting my <a href="https://transfira.github.io/">own work</a> at <a
-                                    href="https://fg2026.ieee-biometrics.org/">FG 2026</a>, I proxy presented several papers on behalf
-                                of authors who were unable to attend due to international travel constraints. Thank you to the original
-                                authors of the following works for entrusting me with sharing their research with the biometrics
-                                community:
+                                In addition to my <a href="https://transfira.github.io/">own work</a>, I proxy presented several papers on behalf
+                                of authors who were unable to attend <a href="https://fg2026.ieee-biometrics.org/">FG 2026</a> due to international 
+                                travel constraints. 
                                 <ul style="margin-top:6px">
                                     <li>
                                         <a href="https://arxiv.org/abs/2510.10406">Mesh-Gait: A Unified Framework for Gait Recognition
-                                            Through Multi-Modal Representation Learning from 2D Silhouettes</a> (Oral)
+                                            Through Multi-Modal Representation Learning from 2D Silhouettes</a>
                                     </li>
                                     <li>
                                         <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4768863">Bi-Level Keypoint Relation
@@ -375,6 +382,7 @@
                                             Individual Differences of Facial Expression for Authentic Expression Generation</a>
                                     </li>
                                 </ul>
+                                Thank you to the original authors for entrusting me with sharing their research!
                             </div>
                         </td>
                     </tr>
