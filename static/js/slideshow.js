@@ -105,6 +105,29 @@ function initSlideshow(container) {
     }, { passive: true });
 
 
+    // Mouse drag support for desktop swipe
+    let mouseStartX = 0;
+    let mouseDragging = false;
+
+    track.addEventListener("mousedown", (e) => {
+        mouseStartX = e.clientX;
+        mouseDragging = true;
+        paused = true;
+        e.preventDefault();
+    });
+
+    document.addEventListener("mouseup", (e) => {
+        if (!mouseDragging) return;
+        mouseDragging = false;
+        const dx = e.clientX - mouseStartX;
+        if (Math.abs(dx) > 40) {
+            if (dx < 0) goTo(current + 1);
+            else goTo(current - 1);
+        }
+        paused = false;
+        resetAuto();
+    });
+
     // Keyboard support when focused
     container.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") { goTo(current - 1); resetAuto(); }
