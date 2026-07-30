@@ -42,11 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.max(0, dotCenter - 9);
     };
 
-    // Set initial collapsed rail height after layout settles
+    // Set initial collapsed rail height after layout fully settles
     const isMobile = () => window.innerWidth <= 960;
     requestAnimationFrame(() => {
-        const extra = isMobile() ? 40 : 16;
-        list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
+        requestAnimationFrame(() => {
+            const extra = isMobile() ? 40 : 16;
+            list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
+        });
     });
 
     const toggle = () => {
