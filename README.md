@@ -53,12 +53,10 @@ On top of the original template, I’ve introduced a number of custom features a
 
 A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-aware, and all respecting `prefers-reduced-motion`:
 
-- **Staggered header entrance**  
-  On first visit (per session), the sidebar logo, portrait/icons, and nav links fade and slide in with a stagger. Internal navigation within the session skips the animation.
+- **Staggered header & footer entrance**  
+  On first visit or page refresh, the sidebar logo, portrait/icons, nav links, and footer fade and slide in with a 1s stagger. Internal link navigation skips the animation (detected via `PerformanceNavigationTiming`).
 - **Section content fade-in**  
   The main content area fades in on every page navigation for a smooth transition feel.
-- **Footer entrance**  
-  The footer reveals in sync with the header stagger on first visit.
 - **Theme toggle spin**  
   The dark/light mode icon rotates 360° on click for a playful micro-interaction.
 - **Animated sliding underlines**  
@@ -83,13 +81,13 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
 - **Dark mode toggle** (`theme-switcher.js`)  
   Manual theme switcher with localStorage persistence, smooth transitions, and zero FOUC (flash of unstyled content)
 - **Component-based architecture** (`components.js`)  
-  Reusable header and footer components with dynamic navigation highlighting and automatic copyright year
+  Reusable header and footer components with dynamic navigation highlighting, automatic copyright year, sessionStorage caching for flash-free navigation, and entrance animations on first visit/refresh
 - **Automatic GitHub star counts** (`github-stars.js`)  
   Real-time repository star counts via the GitHub API
 - **Semantic Scholar citation retrieval** (`semantic-scholar.js`)  
   Automatic citation counts for publications
 - **News timeline toggle** (`news-toggle.js`)  
-  Collapsible news timeline with animated expand/collapse. The vertical rail grows to meet each item as it appears, with staggered entry reveals. The third item shows a down-arrow indicator when collapsed; the last item shows an up-arrow when expanded. Clicking dates, dots, or the sidebar column toggles the state.
+  Collapsible news timeline with animated expand/collapse. The vertical rail grows to meet each item as it appears, with staggered entry reveals and a gradient taper when collapsed. The third item shows a down-arrow indicator when collapsed; the last item shows an up-arrow when expanded. Clicking dates, dots, or the sidebar column toggles the state.
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
