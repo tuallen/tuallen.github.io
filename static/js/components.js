@@ -1,6 +1,7 @@
 /**
  * Lightweight component loader for GitHub Pages
- * Loads HTML components and handles navigation highlighting
+ * Loads HTML components, handles navigation highlighting,
+ * and triggers entrance animations on first visit.
  */
 
 (function () {
