@@ -122,4 +122,14 @@ function initSlideshow(container) {
         if (e.key === "ArrowLeft") { goTo(current - 1); resetAuto(); }
         if (e.key === "ArrowRight") { goTo(current + 1); resetAuto(); }
     });
+
+    // Click-to-navigate (only if not dragging)
+    const link = container.dataset.link;
+    if (link) {
+        track.addEventListener("click", (e) => {
+            if (!mouseDragging && Math.abs(e.clientX - mouseStartX) < 5) {
+                window.open(link, "_blank", "noopener,noreferrer");
+            }
+        });
+    }
 }
