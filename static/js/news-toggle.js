@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set initial collapsed rail height after layout settles
     const isMobile = () => window.innerWidth <= 960;
     requestAnimationFrame(() => {
-        const extra = isMobile() ? 24 : 16;
+        const extra = isMobile() ? 40 : 16;
         list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
     });
 
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             thirdItem.classList.add("news-arrow-down");
             list.classList.add("is-collapsed");
             requestAnimationFrame(() => {
-                const extra = isMobile() ? 24 : 16;
+                const extra = isMobile() ? 40 : 16;
                 list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
             });
             sidebarClick.setAttribute("aria-label", `Show ${hiddenCount} more news items`);
