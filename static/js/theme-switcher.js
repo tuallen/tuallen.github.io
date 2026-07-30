@@ -85,6 +85,13 @@
         const currentTheme = document.documentElement.getAttribute(THEME_ATTR) || 'light';
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
+        // Spin the icon
+        const toggle = document.getElementById('theme-toggle');
+        if (toggle) {
+            toggle.classList.add('spinning');
+            setTimeout(() => toggle.classList.remove('spinning'), 400);
+        }
+
         // Save preference
         localStorage.setItem(STORAGE_KEY, newTheme);
 

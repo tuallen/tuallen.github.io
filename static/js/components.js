@@ -45,7 +45,13 @@
                     const header = element.querySelector('header');
                     if (header && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
                         header.classList.add('header-entrance');
-                        sessionStorage.setItem('visited', '1');
+                    }
+                }
+
+                if (componentName === 'footer' && !sessionStorage.getItem('visited')) {
+                    const footer = element.querySelector('footer');
+                    if (footer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                        footer.classList.add('footer-entrance');
                     }
                 }
             } catch (error) {
@@ -54,6 +60,11 @@
         });
 
         await Promise.all(loadPromises);
+
+        // Mark session as visited (after all entrance animations are applied)
+        if (!sessionStorage.getItem('visited')) {
+            sessionStorage.setItem('visited', '1');
+        }
 
         // Apply external-link new-tab handling to markup injected by components,
         // since new-tabs.js runs on DOMContentLoaded before components load.

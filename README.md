@@ -36,6 +36,8 @@ On top of the original template, I’ve introduced a number of custom features a
 
 ### Interactive Media
 
+- **Image slideshows** (`slideshow.js`)  
+  Swipable image carousels with auto-advance, keyboard navigation, touch/mouse drag, and dot indicators. Used for research highlight teasers (with hover zoom) and the Conference Gallery page (full-width, no crop).
 - **Zoom containers** (`zoom-containers.js`)  
   Click-to-expand images and videos without leaving the page
 - **Video comparison sliders** (`video_comparison.js`)  
@@ -51,10 +53,24 @@ On top of the original template, I’ve introduced a number of custom features a
 
 A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-aware, and all respecting `prefers-reduced-motion`:
 
+- **Staggered header entrance**  
+  On first visit (per session), the sidebar logo, portrait/icons, and nav links fade and slide in with a stagger. Internal navigation within the session skips the animation.
+- **Section content fade-in**  
+  The main content area fades in on every page navigation for a smooth transition feel.
+- **Footer entrance**  
+  The footer reveals in sync with the header stagger on first visit.
+- **Theme toggle spin**  
+  The dark/light mode icon rotates 360° on click for a playful micro-interaction.
 - **Animated sliding underlines**  
   Inline text links, sidebar navigation links, and the sidebar email grow an underline left-to-right on hover. The underline uses `currentColor`, so it fades in sync with the text color.
 - **Slow color fades**  
   Navigation links and social icons ease into the accent-hover color over ~0.45s for a softer, more deliberate feel (icons keep their subtle scale pop).
+- **Icon hover lift**  
+  Social icons in the header lift upward with a subtle translateY on hover in addition to scaling.
+- **Portrait hover**  
+  The portrait photo has a soft shadow at rest and subtly lifts with an accent glow on hover.
+- **Gradient active nav**  
+  The selected/active navigation link uses a gradient underline (primary → hover color) instead of a solid line.
 - **Pill-style buttons with accent fill**  
   All buttons (`.button`, plus the BibTeX modal and PDF toolbar action buttons) are fully rounded pills that fill with the accent color and lift with a soft themed shadow on hover. Close (`×`) buttons are circular and spin 90° on hover.
 - **Heading accent bars**  
@@ -109,7 +125,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 - **Icon grid navigation** — Compact header linking to CV, profiles, and social platforms
 - **Structured data** — JSON-LD schema markup for better SEO and rich snippets
 - **Comprehensive meta tags** — Open Graph, Twitter Cards, and canonical URLs
-- **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, Biometric Recognition Research, and BibTeX References
+- **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, Biometric Recognition Research, Conference Gallery, and BibTeX References
 - **System-Aware Favicon** — Intelligent favicon adaptation that prioritizes system dark mode (white icon for contrast) while respecting page theme in light mode (red/dark red).
 
 ### Performance & SEO
@@ -128,6 +144,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 ├── hub/                    # Link hub page
 ├── 3d/                     # 3D/4D research portfolio
 ├── biometrics/             # Biometric recognition research
+├── gallery/                # Conference gallery (CVPR, FG slideshows)
 ├── bibtex/                 # BibTeX references page
 ├── components/             # Reusable HTML components
 │   ├── header.html         # Shared header with navigation
@@ -138,8 +155,9 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   │   ├── icons.css       # Custom icon definitions
 │   │   └── zoom_containers.css
 │   ├── js/
-│   │   ├── components.js   # Component loader system
-│   │   ├── theme-switcher.js # Dark mode toggle with localStorage
+│   │   ├── components.js   # Component loader with entrance animations
+│   │   ├── theme-switcher.js # Dark mode toggle with spin animation
+│   │   ├── slideshow.js    # Swipable image carousels
 │   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (auto-zooms posters; native passthrough on mobile)
 │   │   ├── image-modal.js  # Image viewer modal (intercepts all image links; auto-loads .webp if available, downloads original)
 │   │   ├── github-stars.js
@@ -180,10 +198,11 @@ Want to see these features live? Check out:
 
 - **[3D/4D Research Portfolio](https://tuallen.github.io/3d/)** — Zoom containers, video demonstrations, BibTeX modal, and PDF viewer
 - **[Biometric Recognition Research](https://tuallen.github.io/biometrics/)** — Custom icon system, BibTeX modal, and PDF viewer
-- **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts, Semantic Scholar citations, BibTeX modal, and PDF viewer
+- **[Main Homepage](https://tuallen.github.io/)** — GitHub star counts, Semantic Scholar citations, slideshows, BibTeX modal, and PDF viewer
+- **[Conference Gallery](https://tuallen.github.io/gallery/)** — Full-width image slideshows for CVPR 2026, FG 2026, and CVPR 2025 with LinkedIn/RedNote post links
 - **[Link Hub](https://tuallen.github.io/hub/)** — Custom icon system showcase and PDF viewer
-- **[BibTeX References](https://tuallen.github.io/bibtex/)** — Standalone page with GitHub-style copy/download buttons
-- **Header navigation** — Custom brandmark and icon grid on any page; CV link opens in the PDF viewer
+- **[BibTeX References](https://tuallen.github.io/bibtex/)** — Standalone page with GitHub-style copy/download buttons and Google Scholar/Semantic Scholar links
+- **Header navigation** — Custom brandmark and icon grid on any page; CV link opens in the PDF viewer; staggered entrance animation on first visit
 
 ---
 
@@ -264,7 +283,7 @@ This template has also been used for other academic websites that I helped their
 
 ---
 
-**Last Updated:** July 29, 2026
+**Last Updated:** July 30, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
