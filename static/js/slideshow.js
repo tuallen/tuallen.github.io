@@ -15,6 +15,26 @@ function initSlideshow(container) {
     let current = 0;
     let autoTimer = null;
 
+    // Set container height to match the widest (most landscape) image
+    const imgs = Array.from(track.querySelectorAll("img"));
+    let ready = 0;
+    function calcHeight() {
+        ready++;
+        if (ready < imgs.length) return;
+        const containerWidth = container.offsetWidth;
+        let minRatio = Infinity;
+        imgs.forEach(img => {
+            const ratio = img.naturalHeight / img.naturalWidth;
+            if (ratio < minRatio) minRatio = ratio;
+        });
+        const height = Math.round(containerWidth * minRatio);
+        container.style.setProperty("--slideshow-height", `${height}px`);
+    }
+    imgs.forEach(img => {
+        if (img.complete) calcHeight();
+        else img.addEventListener("load", calcHeight);
+    });
+
     // Create dots between the arrows
     slides.forEach((_, i) => {
         const dot = document.createElement("button");
