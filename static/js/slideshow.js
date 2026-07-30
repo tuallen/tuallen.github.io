@@ -8,31 +8,51 @@ function initSlideshow(container) {
     const slides = Array.from(track.querySelectorAll(".slideshow-slide"));
     if (slides.length === 0) return;
 
-    const dotsContainer = container.querySelector(".slideshow-dots");
+    const controls = container.querySelector(".slideshow-controls");
     const prevBtn = container.querySelector(".slideshow-prev");
     const nextBtn = container.querySelector(".slideshow-next");
 
     let current = 0;
+    let autoTimer = null;
 
-    // Create dots
+    // Create dots between the arrows
     slides.forEach((_, i) => {
         const dot = document.createElement("button");
         dot.className = "slideshow-dot" + (i === 0 ? " active" : "");
         dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
-        dot.addEventListener("click", () => goTo(i));
-        dotsContainer.insertBefore(dot, nextBtn);
+        dot.addEventListener("click", () => { goTo(i); resetAuto(); });
+        controls.insertBefore(dot, nextBtn);
     });
 
-    const dots = Array.from(dotsContainer.querySelectorAll(".slideshow-dot"));
+    const dots = Array.from(controls.querySelectorAll(".slideshow-dot"));
 
     function goTo(index) {
-        current = Math.max(0, Math.min(index, slides.length - 1));
+        // Wrap around
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+        current = index;
         track.style.transform = `translateX(-${current * 100}%)`;
         dots.forEach((d, i) => d.classList.toggle("active", i === current));
     }
 
-    prevBtn.addEventListener("click", () => goTo(current - 1));
-    nextBtn.addEventListener("click", () => goTo(current + 1));
+    prevBtn.addEventListener("click", () => { goTo(current - 1); resetAuto(); });
+    nextBtn.addEventListener("click", () => { goTo(current + 1); resetAuto(); });
+
+    // Auto-advance every 3 seconds
+    function startAuto() {
+        autoTimer = setInterval(() => goTo(current + 1), 3000);
+    }
+
+    function resetAuto() {
+        clearInterval(autoTimer);
+        startAuto();
+    }
+
+    startAuto();
+
+    // Pause on hover
+    container.addEventListener("mouseenter", () => clearInterval(autoTimer));
+    container.addEventListener("mouseleave", startAuto);
 
     // Touch/swipe support
     let startX = 0;
@@ -43,6 +63,7 @@ function initSlideshow(container) {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isDragging = true;
+        clearInterval(autoTimer);
     }, { passive: true });
 
     track.addEventListener("touchend", (e) => {
@@ -50,11 +71,11 @@ function initSlideshow(container) {
         isDragging = false;
         const dx = e.changedTouches[0].clientX - startX;
         const dy = e.changedTouches[0].clientY - startY;
-        // Only trigger if horizontal swipe is dominant
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
             if (dx < 0) goTo(current + 1);
             else goTo(current - 1);
         }
+        resetAuto();
     }, { passive: true });
 
     // Mouse drag support for desktop
@@ -73,12 +94,13 @@ function initSlideshow(container) {
         if (Math.abs(dx) > 40) {
             if (dx < 0) goTo(current + 1);
             else goTo(current - 1);
+            resetAuto();
         }
     });
 
     // Keyboard support when focused
     container.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") goTo(current - 1);
-        if (e.key === "ArrowRight") goTo(current + 1);
+        if (e.key === "ArrowLeft") { goTo(current - 1); resetAuto(); }
+        if (e.key === "ArrowRight") { goTo(current + 1); resetAuto(); }
     });
 }
