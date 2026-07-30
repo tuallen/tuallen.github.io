@@ -99,6 +99,9 @@
     <link rel="preconnect" href="https://api.github.com" crossorigin>
     <link rel="preconnect" href="https://api.semanticscholar.org" crossorigin>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-07-29">
     <link rel="stylesheet" href="/static/stylesheets/zoom_containers.css?v=2026-07-29">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -113,6 +116,7 @@
     <script defer src="/static/js/semantic-scholar.js?v=2026-07-29"></script>
     <script defer src="/static/js/github-stars.js?v=2026-07-29"></script>
     <script defer src="/static/js/new-tabs.js?v=2026-07-29"></script>
+    <script defer src="/static/js/news-toggle.js?v=2026-07-29"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -156,32 +160,41 @@
                 University of Maryland in 2024.
             </p>
 
-            <h2>News</h2>
-            <ul>
-                <li><b>June 2026:</b> Joined <a href="https://www.amazon.science/">Amazon</a> as an Applied
-                    Science Intern to research 3D digital twin training environments for embodied AI in the 
-                    <a href="https://www.amazon.science/tag/last-mile-delivery">Last Mile Delivery and Automation</a> org. 
-                    <i class="ai ai-amazon-color"></i></li>
+            <h2 class="news-heading"><i class="fa fa-newspaper"></i>News</h2>
+            <ul class="news-timeline">
+                <li>
+                    <time class="news-date" datetime="2026-06">June 2026</time>
+                    Interning at <a href="https://www.amazon.science/">Amazon</a> to research 3D digital twins for embodied AI in <a href="https://www.amazon.science/tag/last-mile-delivery">Last Mile Delivery and Automation</a>.
+                    <i class="ai ai-amazon-color"></i>
+                </li>
 
-                <li><b>June 2026:</b> Thank you for coming to <a href="https://speede3dgs.github.io/">SpeeDe3DGS</a>, <a
+                <li>
+                    <time class="news-date" datetime="2026-06">June 2026</time>
+                    Thank you for coming to <a href="https://speede3dgs.github.io/">SpeeDe3DGS</a>, <a
                         href="https://splatsure.github.io/">SplatSuRe</a>, and the <a href="https://spar3d.org/">SPAR-3D
                         Workshop</a> at <a href="https://cvpr.thecvf.com/Conferences/2026">CVPR&nbsp;2026</a> in <a
                         href="https://www.linkedin.com/posts/allentu_cvpr2026-cvpr-ai-ugcPost-7470138772072845312-sk0o/">Denver</a>!
                     🏔️
                 </li>
 
-                <li><b>May 2026:</b> Thank you for coming to my <a href="https://transfira.github.io/">TransFIRA
-                    </a> (Oral), <a href="https://youtu.be/noe-CdzTFrI">Doctoral Consortium</a>, and <a
+                <li>
+                    <time class="news-date" datetime="2026-05">May 2026</time>
+                    Thank you for coming to my <a href="https://transfira.github.io/">TransFIRA</a>, 
+                        <a href="https://youtu.be/noe-CdzTFrI">Doctoral Consortium</a>, and <a
                         href="/biometrics#fg2026">proxy presentations</a> at <a
                         href="https://fg2026.ieee-biometrics.org/">FG 2026</a> in <a
                         href="https://www.linkedin.com/feed/update/urn:li:activity:7466167596799832064/">Kyoto</a>! ⛩️
                 </li>
 
-                <li><b>January 2026:</b> Finished my internship at <a href="https://str.us/">STR</a> on
+                <li>
+                    <time class="news-date" datetime="2026-01">January 2026</time>
+                    Finished my internship at <a href="https://str.us/">STR</a> on
                     <a href="/biometrics"> biometric recognition</a>. <i class="ai ai-str"></i>
                 </li>
 
-                <li><b>June 2025:</b> Thank you for coming to
+                <li>
+                    <time class="news-date" datetime="2025-06">June 2025</time>
+                    Thank you for coming to
                     <a href="https://pup3dgs.github.io/">PUP 3D-GS</a> and
                     <a href="https://speedysplat.github.io/">Speedy-Splat</a> at
                     <a href='https://cvpr.thecvf.com/Conferences/2025'>CVPR 2025</a> in
