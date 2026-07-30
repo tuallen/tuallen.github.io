@@ -464,7 +464,12 @@ dt {
   content: "\f077";
 }
 
-/* Collapsed state — hidden items shrink to zero */
+/* Pre-JS collapse: hide items 4+ instantly to prevent flash of full list */
+.news-timeline:not(.js-ready) li:nth-child(n+4) {
+  display: none;
+}
+
+/* Collapsed state — hidden items shrink to zero (JS-controlled) */
 .news-timeline.is-collapsed li.news-hidden {
   max-height: 0;
   opacity: 0;
