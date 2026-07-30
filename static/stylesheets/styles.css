@@ -107,7 +107,8 @@ h1 {
 }
 
 /* Accent bar beneath section titles */
-section > h1 {
+section > h1,
+.gallery-section > h1 {
   position: relative;
   padding-bottom: 10px;
   display: inline-block;
@@ -115,7 +116,8 @@ section > h1 {
   margin-bottom: 10px;
 }
 
-section > h1::after {
+section > h1::after,
+.gallery-section > h1::after {
   content: "";
   position: absolute;
   left: 0;
@@ -129,7 +131,8 @@ section > h1::after {
   transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-section > h1.in-view::after {
+section > h1.in-view::after,
+.gallery-section > h1.in-view::after {
   transform: scaleX(1);
 }
 
@@ -853,14 +856,14 @@ section :is(h1, h2) .button.heading-btn {
 .icon-grid a {
   color: var(--accent-primary);
   text-decoration: none;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
 }
 
 .icon-grid i {
   font-size: 32px;
   line-height: 1;
   vertical-align: middle;
-  transition: color 0.45s ease;
+  transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
 }
 
 .icon-grid a:hover i {
@@ -1056,7 +1059,7 @@ section :is(h1, h2) .button.heading-btn {
   margin-bottom: 60px;
 }
 
-.gallery-section h2 {
+.gallery-section h1 {
   margin-bottom: 8px;
 }
 
@@ -1066,7 +1069,7 @@ section :is(h1, h2) .button.heading-btn {
   color: var(--text-secondary);
 }
 
-.gallery-section p + p {
+.gallery-section p:last-of-type {
   margin-bottom: 20px;
 }
 
