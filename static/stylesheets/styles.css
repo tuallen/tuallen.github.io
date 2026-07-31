@@ -787,7 +787,7 @@ blockquote {
 }
 
 #selected {
-  background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-hover));
+  background-image: linear-gradient(currentColor, currentColor);
   background-size: 100% 2px;
   font-weight: bold;
 }
