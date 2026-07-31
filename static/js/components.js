@@ -116,18 +116,7 @@
             }
         });
 
-        // On touch devices, play the underline animation before navigating
-        if ('ontouchstart' in window) {
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.id === 'selected') return;
-                    e.preventDefault();
-                    link.style.backgroundSize = '100% 2px';
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 180);
-                });
-            });
-        }
+        // Nav links navigate immediately on touch. Delaying the tap to play the
+        // underline animation first read as lag, which is worse than not seeing it.
     }
 })();

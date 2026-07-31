@@ -49,12 +49,12 @@
     height: 1em;
     background: currentColor;
 
-    -webkit-mask-image: url("/static/icons/tu.svg?v=2026-07-30-6");
+    -webkit-mask-image: url("/static/icons/tu.svg?v=2026-07-30-11");
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
     -webkit-mask-size: contain;
 
-    mask-image: url("/static/icons/tu.svg?v=2026-07-30-6");
+    mask-image: url("/static/icons/tu.svg?v=2026-07-30-11");
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
@@ -193,12 +193,12 @@
     aspect-ratio: 1835 / 819;
     background: currentColor;
 
-    -webkit-mask-image: url("/static/icons/allentu.svg?v=2026-07-30-6");
+    -webkit-mask-image: url("/static/icons/allentu.svg?v=2026-07-30-11");
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
     -webkit-mask-size: contain;
 
-    mask-image: url("/static/icons/allentu.svg?v=2026-07-30-6");
+    mask-image: url("/static/icons/allentu.svg?v=2026-07-30-11");
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;

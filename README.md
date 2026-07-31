@@ -22,7 +22,7 @@ Huge thanks to her for open-sourcing a clean, well-structured starting point.
 ## Tech Stack
 
 - **Pure HTML / CSS / JavaScript** — No frameworks, no build process; just vanilla web technologies
-- **Font Awesome 6.5.1** — General-purpose icon library
+- **Font Awesome 6.5.1** — General-purpose icon library, self-hosted as a subset of only the glyphs in use (see `tools/build-icon-font.sh`)
 - **Academicons** — Academic-specific icons (Google Scholar, ORCID, arXiv, etc.)
 - **Custom SVG icon system** — Inline SVG masks for institutional and organizational logos
 - **Modern image formats** — WebP with PNG/JPG fallbacks
@@ -41,13 +41,13 @@ On top of the original template, I’ve introduced a number of custom features a
 - **Zoom containers** (`zoom-containers.js`)  
   Click-to-expand images and videos without leaving the page
 - **Video comparison sliders** (`video_comparison.js`)  
-  Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations
+  Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations. On the 3D/4D page the sliders share one slot as a carousel (`.video-slideshow`) so they don't stack vertically, and only the visible comparison plays. Navigation is arrows/dots/arrow keys only — drag-to-swipe would conflict with dragging the split itself.
 - **Custom PDF Viewer** (`pdf-modal.js`, `pdfviewer.html`)  
   Full-screen in-page PDF viewer for any `.pdf` link site-wide. Powered by a self-hosted PDF.js instance, it avoids native browser limitations. It features a sleek Edge-style top toolbar with page shadows, custom controls (zoom, page navigation, fit width/page, rotate, print, and download), and comprehensive keyboard shortcut support. The viewer visually mirrors the Microsoft Edge PDF experience, including an automatic system-aware light/dark theme that adapts to OS preferences independently of the main site theme. It intelligently intercepts external links inside the PDF to open in new tabs and auto-zooms landscape posters.
 - **Image viewer modal** (`image-modal.js`)  
   Lightweight modal for standalone image links (`.jpg`, `.png`, `.webp`, etc.). The modal shrink-wraps around the image up to 95% of the viewport while maintaining aspect ratio. Matches the theme of the PDF and BibTeX modals. Intercepts image links automatically site-wide; title is read from the `title` attribute, the wrapped `<img>`'s `alt`, or the filename as a fallback.
 - **Lazy loading**  
-  Images and videos load on demand for improved performance
+  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos instead use `preload="metadata"` with a `poster` frame and only begin loading when scrolled into view — this keeps ~27 MB of off-screen video off the initial page load.
 
 ### Motion & Interaction Polish
 
@@ -68,7 +68,7 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
 - **Portrait & brandmark hover**  
   The portrait photo and logo brandmark have a soft shadow at rest and subtly lift with an accent glow on hover.
 - **Solid active nav**  
-  The selected/active navigation link uses a solid `currentColor` underline. On touch devices, tapping a nav link plays the underline animation before navigating (~180ms delay).
+  The selected/active navigation link uses a solid `currentColor` underline. Taps navigate immediately — delaying to play the underline animation first read as lag.
 - **Pill-style buttons with accent fill**  
   All buttons (`.button`, plus the BibTeX modal and PDF toolbar action buttons) are fully rounded pills that fill with the accent color and lift with a soft themed shadow on hover. Close (`×`) buttons are circular and spin 90° on hover.
 - **Heading accent bars**  
@@ -91,7 +91,7 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
 - **Semantic Scholar citation retrieval** (`semantic-scholar.js`)  
   Automatic citation counts for publications
 - **News timeline toggle** (`news-toggle.js`)  
-  Collapsible news timeline with animated expand/collapse. The vertical rail grows to meet each item as it appears, with staggered entry reveals and a gradient taper when collapsed. The third item shows a down-arrow indicator when collapsed; the last item shows an up-arrow when expanded. Clicking dates, dots, or the sidebar column toggles the state.
+  Collapsible news timeline with animated expand/collapse. The vertical rail is measured from layout every frame while the list animates, so it grows at exactly the rate the dots move rather than easing toward a moving target (which left it lagging behind). Staggered entry reveals, with a gradient taper when collapsed. The third item shows a down-arrow indicator when collapsed; the last item shows an up-arrow when expanded. Clicking dates, dots, or the sidebar column toggles the state.
 - **External link handling** (`new-tabs.js`)  
   External links automatically open in new tabs
 - **BibTeX copy & download** (`bibtex.js`, `bibtex-modal.js`)  
@@ -125,7 +125,9 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 - **Large-screen auto-zoom** — The layout keeps its fixed width, but on wide monitors the content (`.wrapper`) progressively scales up via CSS `zoom` (1.1× at 1500px through 1.6× at 2800px) to fill a modern amount of the screen. Fonts, sidebar, media, and spacing all scale together, so the layout and line breaks stay identical — things just get bigger. `zoom` is applied to the content wrapper (not `body`) so full-screen modals stay sized to the real viewport and never require scrolling.
 - **Responsive layout** — Mobile-optimized design with proper viewport handling, video container alignment, and centered navigation
 - **Icon grid navigation** — Compact header linking to CV, profiles, and social platforms
-- **Structured data** — JSON-LD schema markup for better SEO and rich snippets
+- **Structured data** — JSON-LD schema markup for better SEO and rich snippets: a
+  `Person` and `WebSite` node that every page's `WebPage` references by `@id`, plus
+  `ScholarlyArticle` entries for each publication (authors, venue, year)
 - **Comprehensive meta tags** — Open Graph, Twitter Cards, and canonical URLs
 - **Multi-page structure** — Home, Link Hub, 3D/4D Research Portfolio, Biometric Recognition Research, Conference Gallery, and BibTeX References
 - **System-Aware Favicon** — Intelligent favicon adaptation that prioritizes system dark mode (white icon for contrast) while respecting page theme in light mode (red/dark red).
@@ -155,7 +157,9 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   ├── stylesheets/
 │   │   ├── styles.css      # Main consolidated styles with CSS variables for theming
 │   │   ├── icons.css       # Custom icon definitions
+│   │   ├── fontawesome-subset.css # Generated: self-hosted Font Awesome subset
 │   │   └── zoom_containers.css
+│   ├── webfonts/           # Generated: subset Font Awesome woff2 files
 │   ├── js/
 │   │   ├── components.js   # Component loader with entrance animations
 │   │   ├── theme-switcher.js # Dark mode toggle with rise/set animation
@@ -172,7 +176,10 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   ├── icons/              # SVG logos and favicons
 │   └── images/             # Photos and media
 ├── media/                  # Research teasers and videos
+│   └── posters/            # First-frame stills for thumbnail videos
 ├── files/                  # CV, resume, etc.
+├── tools/
+│   └── build-icon-font.sh  # Regenerates the Font Awesome subset
 ├── cache_bust.py           # Automated cache busting script
 ├── sitemap.xml             # SEO sitemap
 └── robots.txt              # Crawler directives
@@ -263,7 +270,33 @@ python3 cache_bust.py --apply
 The script automatically:
 - Detects the current version (e.g., `?v=2026-02-15`)
 - Increments if run multiple times per day (`?v=2026-02-15-1`, `-2`, etc.)
-- Updates all CSS, JS, PDF, images, and other static assets in HTML files
+- Updates `href`/`src`/`srcset`/`poster`/`data-link` in HTML, `url()` in our own
+  stylesheets, and versioned page URLs built as strings in JS
+
+Covering CSS and JS matters: a `<link rel="preload">` and the `url()` it refers to
+must match byte-for-byte, query string included, or the browser treats them as two
+different resources and the preload is wasted. External URLs are left alone, so
+things like YouTube's `?v=` video IDs are never rewritten.
+
+---
+
+## Icon Font Subset
+
+The site uses ~36 of Font Awesome's ~2000 icons. The CDN build costs 100 KB of
+render-blocking CSS plus 267 KB of webfonts from a third-party origin; the
+self-hosted subset is ~9 KB total from our own origin.
+
+```bash
+pip3 install --user fonttools brotli   # one-time
+tools/build-icon-font.sh
+```
+
+The script scans the markup and JS for the icon classes actually in use — including
+`classList` calls and inline `onclick` handlers — plus raw codepoints referenced from
+our own CSS (`content: "\f077"` for the news toggle arrows, which never appear as a
+class). It then subsets the fonts, verifies every glyph survived with real outlines,
+and checks that `fontawesome-subset.css` agrees with the fonts. Run it after adding
+or removing an icon; if a glyph is missing it fails rather than shipping a blank box.
 
 ---
 
