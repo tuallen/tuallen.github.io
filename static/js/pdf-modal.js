@@ -167,7 +167,7 @@ async function openPDF(event, url, title) {
   } else {
     frameUrl = await _getOptimalViewerUrl(url);
   }
-  document.getElementById('pdfFrame').src = '/pdfviewer.html?v=2026-07-30-6&file=' + encodeURIComponent(frameUrl);
+  document.getElementById('pdfFrame').src = '/pdfviewer.html?v=2026-07-30-11&file=' + encodeURIComponent(frameUrl);
 }
 
 function closePDF(event) {

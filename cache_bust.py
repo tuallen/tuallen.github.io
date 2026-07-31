@@ -26,12 +26,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-# Extensions worth versioning. Webfonts are omitted: they are referenced only
-# from vendored stylesheets, which this script deliberately leaves untouched.
+# Extensions worth versioning. woff2 is included because we self-host the Font
+# Awesome subset: its preload in the HTML and the url() in fontawesome-subset.css
+# must carry the same version or they are two different URLs and the preload is
+# wasted. Vendored stylesheets are still left untouched, so their fonts are
+# unaffected.
 ASSET_EXTS = [
     "css", "js", "pdf", "bib",
     "ico", "png", "svg", "webp", "jpg", "jpeg", "gif",
-    "mp4", "webm",
+    "mp4", "webm", "woff2",
 ]
 _EXT_ALT = "|".join(ASSET_EXTS)
 

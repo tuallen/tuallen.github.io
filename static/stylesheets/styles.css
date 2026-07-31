@@ -538,7 +538,10 @@ dt {
   height: var(--rail-height, 0px);
   width: 2px;
   background: var(--rail-bg, var(--border-color));
-  transition: height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* No height transition. --rail-height is remeasured every frame by the
+     ResizeObserver as the items expand, so the rail already grows at exactly the
+     rate the dots move. Easing toward each new measurement on top of that just
+     added a transition-duration of lag, leaving the rail trailing the dots. */
 }
 
 .news-timeline li {
@@ -997,11 +1000,15 @@ section :is(h1, h2) .button.heading-btn {
   outline: none;
 }
 
+/* The wrapper carries the shadow, not the slider inside it: `overflow: hidden`
+   is needed to hide the neighbouring slide and would clip a child's shadow,
+   but an element's own shadow still paints outside its clip. */
 .video-slideshow .slideshow-track-wrapper,
 .video-slideshow .slideshow-track-wrapper:hover {
   transform: none;
   overflow: hidden;
-  box-shadow: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
   z-index: auto;
 }
 
@@ -1011,11 +1018,16 @@ section :is(h1, h2) .button.heading-btn {
 
 .video-slideshow .slideshow-slide {
   min-width: 100%;
-  /* The slider draws its own rounded corners and shadow; let them show rather
-     than clipping them against the track. */
-  overflow: visible;
   /* Slides must not stretch to the tallest one: only the canvas defines height. */
   align-items: flex-start;
+}
+
+/* The wrapper owns the rounded corners and shadow now, so nothing inside should
+   paint a second set behind it. */
+.video-slideshow .video-compare-container {
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 0;
 }
 
 /* Only the canvas is meant to be visible; resizeAndPlay() sets height:0 on the
@@ -1031,10 +1043,7 @@ section :is(h1, h2) .button.heading-btn {
    the canvas keeps its default 300x150 ratio until its slider initialises. */
 .video-slideshow .video-compare-container canvas.videoMerge {
   aspect-ratio: 4 / 3;
-}
-
-.video-slideshow .video-compare-container {
-  margin-bottom: 0;
+  border-radius: 0;
 }
 
 /* ==================== GALLERY PAGE ==================== */

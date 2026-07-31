@@ -90,7 +90,19 @@ document.addEventListener("DOMContentLoaded", () => {
             sidebarClick.setAttribute("aria-label", `Show ${hiddenCount} more news items`);
         }
 
+        // Track the rail every frame for the length of the item transition. The
+        // ResizeObserver alone would keep up, but it coalesces into the next frame
+        // and stops firing once the <ul> settles; driving it directly keeps the
+        // rail exactly level with the dots as they move.
         updateRail();
+        const start = performance.now();
+        const follow = () => {
+            updateRail();
+            // 0.35s max-height + 0.42s longest stagger, plus a frame of slack.
+            if (performance.now() - start < 800) requestAnimationFrame(follow);
+        };
+        requestAnimationFrame(follow);
+
         sidebarClick.setAttribute("aria-expanded", String(expanded));
     };
 

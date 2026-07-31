@@ -1,0 +1,135 @@
+/*
+ * Font Awesome 6.5.1 subset — self-hosted.
+ *
+ * Replaces the 100 KB render-blocking CDN stylesheet and its 267 KB of
+ * webfonts. Only the 35 glyphs this site actually uses are included, so the
+ * fonts are ~5 KB total and load from our own origin (no extra DNS + TLS
+ * handshake on the critical path).
+ *
+ * Family names and class names are kept identical to upstream so markup and
+ * styles.css (which sets font-family: "Font Awesome 6 Free" directly for the
+ * news toggle arrows) keep working unchanged.
+ *
+ * Regenerate with tools/build-icon-font.sh after adding or removing an icon.
+ */
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("/static/webfonts/fa-solid-900.woff2?v=2026-07-30-11") format("woff2");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/static/webfonts/fa-brands-400.woff2?v=2026-07-30-11") format("woff2");
+}
+
+.fa,
+.fas,
+.fa-solid,
+.fab,
+.fa-brands {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: var(--fa-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.fa,
+.fas,
+.fa-solid {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+.fab,
+.fa-brands {
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+/* Visually-hidden helper. Upstream Font Awesome provided this and the header
+   brandmark relies on it, so it has to live here now. */
+.sr-only,
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* fa-spin — used by the PDF download button while it works. */
+.fa-spin {
+  animation-name: fa-spin;
+  animation-duration: var(--fa-animation-duration, 2s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-spin {
+    animation-delay: -1ms;
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ---- Glyphs ---- */
+
+/* Solid */
+.fa-check::before { content: "\f00c"; }
+.fa-chevron-down::before { content: "\f078"; }
+.fa-chevron-left::before { content: "\f053"; }
+.fa-chevron-right::before { content: "\f054"; }
+.fa-chevron-up::before { content: "\f077"; }
+.fa-code::before { content: "\f121"; }
+.fa-copy::before { content: "\f0c5"; }
+.fa-cube::before { content: "\f1b2"; }
+.fa-download::before { content: "\f019"; }
+.fa-envelope::before { content: "\f0e0"; }
+.fa-external-link-alt::before { content: "\f35d"; }
+.fa-file::before { content: "\f15b"; }
+.fa-fingerprint::before { content: "\f577"; }
+.fa-fire::before { content: "\f06d"; }
+.fa-home::before { content: "\f015"; }
+.fa-image::before { content: "\f03e"; }
+.fa-images::before { content: "\f302"; }
+.fa-laptop::before { content: "\f109"; }
+.fa-moon::before { content: "\f186"; }
+.fa-newspaper::before { content: "\f1ea"; }
+.fa-phone::before { content: "\f095"; }
+.fa-qrcode::before { content: "\f029"; }
+.fa-quote-right::before { content: "\f10e"; }
+.fa-spinner::before { content: "\f110"; }
+.fa-sun::before { content: "\f185"; }
+.fa-times::before { content: "\f00d"; }
+
+/* Brands */
+.fa-bilibili::before { content: "\e3d9"; }
+.fa-discord::before { content: "\f392"; }
+.fa-github::before { content: "\f09b"; }
+.fa-google-drive::before { content: "\f3aa"; }
+.fa-google-scholar::before { content: "\e63b"; }
+.fa-instagram::before { content: "\f16d"; }
+.fa-linkedin::before { content: "\f08c"; }
+.fa-twitter::before { content: "\f099"; }
+.fa-weixin::before { content: "\f1d7"; }
+.fa-youtube::before { content: "\f167"; }
