@@ -123,7 +123,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 
 ### Design & UX
 
-- **Modern typography** — [Inter](https://rsms.me/inter/) as the primary typeface (with a system-font fallback stack), font antialiasing, and refined heading weight/letter-spacing for a cleaner, more contemporary feel
+- **Modern typography** — [Inter](https://rsms.me/inter/) as the primary typeface (with a system-font fallback stack), font antialiasing, and refined heading weight/letter-spacing for a cleaner, more contemporary feel. Body text is 16px/1.65 in a near-black `#2f2f2f` (12.6:1 contrast); prose runs the full column width so every block — paragraphs, lists, tables, media — shares the same right edge, trading a shorter measure for that alignment
 - **Dark mode** — Toggle between light and dark themes with moon/sun icon in footer; preference persists across sessions
 - **Large-screen auto-zoom** — The layout keeps its fixed width, but on wide monitors the content (`.wrapper`) progressively scales up via CSS `zoom` (1.1× at 1500px through 1.6× at 2800px) to fill a modern amount of the screen. Fonts, sidebar, media, and spacing all scale together, so the layout and line breaks stay identical — things just get bigger. `zoom` is applied to the content wrapper (not `body`) so full-screen modals stay sized to the real viewport and never require scrolling.
 - **Responsive layout** — Mobile-optimized design with proper viewport handling, video container alignment, and centered navigation
