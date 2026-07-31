@@ -1044,10 +1044,17 @@ section > h2 .button.heading-btn {
   display: block;
 }
 
+/*
+ * `contain`, not `cover`: the track's height comes from one reference slide
+ * (data-aspect-ref), so any slide with a different aspect ratio would be
+ * zoomed and cropped to fill that box. Letterboxing against the page
+ * background shows each image whole instead — posters and photos of differing
+ * shapes share a slot without losing their edges.
+ */
 .slideshow-slide img {
   width: 100%;
   height: var(--slideshow-height, auto);
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   -webkit-user-drag: none;
   user-select: none;
@@ -1175,13 +1182,6 @@ section > h2 .button.heading-btn {
   transform: none;
   box-shadow: 0 4px 14px var(--media-shadow, rgba(0, 0, 0, 0.12));
   z-index: 1;
-}
-
-.gallery-slideshow .slideshow-slide picture,
-.gallery-slideshow .slideshow-slide img {
-  width: 100%;
-  height: var(--slideshow-height, auto);
-  object-fit: contain;
 }
 
 .gallery-section {
