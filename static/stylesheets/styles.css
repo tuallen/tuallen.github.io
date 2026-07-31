@@ -1092,6 +1092,10 @@ section :is(h1, h2) .button.heading-btn {
 
 /* ==================== BIO TOGGLE (MOBILE ONLY) ==================== */
 
+.bio-primary {
+  margin-bottom: 10px;
+}
+
 .bio-toggle {
   display: none;
 }
@@ -1156,7 +1160,7 @@ section :is(h1, h2) .button.heading-btn {
 }
 
 .gap-lg {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .gap-xl {
