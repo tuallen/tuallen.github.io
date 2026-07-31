@@ -35,54 +35,51 @@ document.addEventListener("DOMContentLoaded", () => {
     list.classList.add("js-ready");
     let expanded = false;
 
-    const getRailHeight = (target) => {
-        const listRect = list.getBoundingClientRect();
-        const targetRect = target.getBoundingClientRect();
-        const dotCenter = targetRect.top + 9 - listRect.top;
-        return Math.max(0, dotCenter - 9);
+    // Dot center = li.offsetTop + 9 (dot: top 3px + radius 6px).
+    // Rail CSS top = 9px (first dot center).
+    // Rail height to a dot = li.offsetTop (the +9's cancel).
+    const updateRail = () => {
+        if (expanded) {
+            // Solid rail from first dot to last dot
+            const height = lastItem.offsetTop;
+            list.style.setProperty("--rail-height", `${height}px`);
+            list.style.setProperty("--rail-bg", "var(--border-color)");
+        } else {
+            // Rail from first dot, solid to third dot, then fades to the last text baseline.
+            // Text baseline ≈ li bottom minus padding-bottom minus half-leading.
+            const pb = parseFloat(getComputedStyle(thirdItem).paddingBottom);
+            const dotEnd = thirdItem.offsetTop;
+            const textEnd = thirdItem.offsetTop + thirdItem.offsetHeight - pb;
+            const solidStop = dotEnd / textEnd * 100;
+            list.style.setProperty("--rail-height", `${textEnd}px`);
+            list.style.setProperty("--rail-bg",
+                `linear-gradient(to bottom, var(--border-color) ${solidStop}%, transparent)`);
+        }
     };
 
-    // Set initial collapsed rail height after collapse transition finishes (~350ms)
-    const isMobile = () => window.innerWidth <= 960;
-    setTimeout(() => {
-        const extra = isMobile() ? 40 : 16;
-        list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
-    }, 400);
+    // Reactively update rail when layout changes (resize, text wrap, orientation)
+    const observer = new ResizeObserver(updateRail);
+    observer.observe(list);
+
+    // Initial rail after collapse transition settles
+    setTimeout(updateRail, 400);
 
     const toggle = () => {
         expanded = !expanded;
 
         if (expanded) {
-            const expandTarget = lastItem;
-
-            // Pre-measure expanded height before animating
-            list.style.transition = "none";
-            list.classList.remove("is-collapsed");
-            items.forEach(li => li.style.transition = "none");
-            const expandedHeight = getRailHeight(expandTarget);
-            list.classList.add("is-collapsed");
-            // Force reflow so the browser registers the collapsed state
-            void list.offsetHeight;
-            items.forEach(li => li.style.transition = "");
-            list.style.transition = "";
-
-            // Now animate open
             list.classList.remove("is-collapsed");
             thirdItem.classList.remove("news-arrow-down");
             lastItem.classList.add("news-arrow-up");
             sidebarClick.setAttribute("aria-label", "Show fewer news items");
-            list.style.setProperty("--rail-height", `${expandedHeight - 3}px`);
         } else {
             lastItem.classList.remove("news-arrow-up");
             thirdItem.classList.add("news-arrow-down");
             list.classList.add("is-collapsed");
-            requestAnimationFrame(() => {
-                const extra = isMobile() ? 40 : 16;
-                list.style.setProperty("--rail-height", `${getRailHeight(thirdItem) + extra}px`);
-            });
             sidebarClick.setAttribute("aria-label", `Show ${hiddenCount} more news items`);
         }
 
+        updateRail();
         sidebarClick.setAttribute("aria-expanded", String(expanded));
     };
 

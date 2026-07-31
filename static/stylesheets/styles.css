@@ -547,12 +547,8 @@ dt {
   top: 9px;
   height: var(--rail-height, 0px);
   width: 2px;
-  background: linear-gradient(to bottom, var(--border-color) calc(100% - 20px), transparent);
-  transition: height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), background 0.3s ease;
-}
-
-.news-timeline:not(.is-collapsed)::before {
-  background: var(--border-color);
+  background: var(--rail-bg, var(--border-color));
+  transition: height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .news-timeline li {
