@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Rebuild the self-hosted icon font subsets (Font Awesome and Academicons).
+# Rebuild the self-hosted webfonts: Font Awesome and Academicons subsets, plus Inter.
 #
 # The site uses ~36 of Font Awesome's ~2000 icons and 6 of Academicons' ~150.
 # Shipping both in full costs 100 KB of render-blocking CSS plus 267 KB of
@@ -12,7 +12,7 @@
 #
 # Requires: fontTools + brotli  (pip3 install --user fonttools brotli)
 #
-# Usage: tools/build-icon-font.sh
+# Usage: tools/build-webfonts.sh
 #
 set -euo pipefail
 
@@ -300,6 +300,53 @@ for cls, cp in wanted.items():
 if failed:
     sys.exit("Academicons subset is inconsistent.")
 print(f"    {len(declared)} glyph rules, consistent with the subset font")
+PY
+
+echo "==> Refreshing self-hosted Inter"
+# Google serves Inter as a variable font, so one file covers every weight the
+# site uses (400-700) in ~47 KB where four static faces would be ~189 KB. Ask
+# with a desktop UA or the API returns older formats.
+UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+curl -sL "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" \
+  -H "User-Agent: $UA" -o "$WORK/inter.css"
+
+python3 - "$ROOT" "$WORK" <<'PY'
+import os, re, sys, urllib.request
+
+root, work = sys.argv[1], sys.argv[2]
+css = open(os.path.join(work, "inter.css"), encoding="utf-8").read()
+
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
+targets = {"latin": "inter-latin", "latin-ext": "inter-latin-ext"}
+ranges = {}
+
+for name, out in targets.items():
+    m = re.search(r"/\*\s*" + re.escape(name) + r"\s*\*/\s*@font-face\s*\{(.*?)\}",
+                  css, re.S)
+    if not m:
+        sys.exit(f"Could not find the {name} @font-face block.")
+    body = m.group(1)
+    ranges[name] = re.search(r"unicode-range:\s*([^;]+);", body).group(1).strip()
+    url = re.search(r"url\((https://[^)]+)\)", body).group(1)
+    data = urllib.request.urlopen(
+        urllib.request.Request(url, headers={"User-Agent": UA})).read()
+    dest = os.path.join(root, "static/webfonts", out + ".woff2")
+    open(dest, "wb").write(data)
+    print(f"    {out}.woff2: {len(data)/1024:.1f} KB")
+
+# Keep the stylesheet's unicode-range in step with whatever upstream now serves.
+sheet = os.path.join(root, "static/stylesheets/inter.css")
+text = open(sheet, encoding="utf-8").read()
+for name, out in targets.items():
+    pattern = re.compile(
+        r'(src: url\("/static/webfonts/' + re.escape(out) +
+        r'\.woff2[^"]*"\) format\("woff2"\);\n\s*unicode-range:\s*)([^;]+)(;)')
+    if not pattern.search(text):
+        sys.exit(f"Could not locate the {out} rule in inter.css.")
+    text = pattern.sub(lambda m: m.group(1) + ranges[name] + m.group(3), text)
+open(sheet, "w", encoding="utf-8").write(text)
+print("    inter.css unicode-ranges in sync with upstream")
 PY
 
 echo
