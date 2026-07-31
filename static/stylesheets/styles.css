@@ -106,18 +106,28 @@ h1 {
   font-weight: 600;
 }
 
-/* Accent bar beneath section titles */
-section > h1,
-.gallery-section > h1 {
+/*
+ * Section headings.
+ *
+ * Keyed off a class rather than `section > h1` so the heading level can follow
+ * document outline rules (one <h1> per page, sections as <h2>) without changing
+ * how anything looks. The class also restates size/weight/colour, because an
+ * <h2> would otherwise pick up the lighter `h2` rule below.
+ */
+.section-heading {
   position: relative;
   padding-bottom: 10px;
   display: inline-block;
   /* Tighten the space between a section heading and its content */
   margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-heading);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
-section > h1::after,
-.gallery-section > h1::after {
+.section-heading::after {
   content: "";
   position: absolute;
   left: 0;
@@ -131,35 +141,45 @@ section > h1::after,
   transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-section > h1.in-view::after,
-.gallery-section > h1.in-view::after {
+.section-heading.in-view::after {
   transform: scaleX(1);
 }
 
 /*
- * Flex headings (title + BibTeX/CV button) must stay full-width for the
- * space-between layout, so anchor the bar to the inner <span> (title text
+ * Headings that pair a title with a button (BibTeX/CV) must stay full-width for
+ * the space-between layout, so anchor the bar to the inner <span> (title text
  * only) instead of the whole heading — this keeps it off the button.
  *
- * The accent-bar padding lives on the <span> here, so the h1's own
- * padding-bottom (from `section > h1`) is dead space that would push the
- * following table 10px lower than under a plain heading. Zero it so a heading
- * with a button has the exact same content gap as one without.
+ * The accent-bar padding lives on the <span> here, so the heading's own
+ * padding-bottom is dead space that would push the following table 10px lower
+ * than under a plain heading. Zero it so a heading with a button has the exact
+ * same content gap as one without.
  */
-section > h1[style*="display: flex"] {
+.section-heading.has-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-bottom: 0;
 }
 
-section > h1[style*="display: flex"]::after {
+.section-heading.has-action::after {
   content: none;
 }
 
-section > h1[style*="display: flex"] > span {
+/* Headings whose action area holds more than one button need to wrap rather
+   than overflow on narrow screens (e.g. BibTeX: Google Scholar + Semantic
+   Scholar). */
+.section-heading.has-action.wraps {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.section-heading.has-action > span {
   position: relative;
   padding-bottom: 10px;
 }
 
-section > h1[style*="display: flex"] > span::after {
+.section-heading.has-action > span::after {
   content: "";
   position: absolute;
   left: 0;
@@ -173,13 +193,13 @@ section > h1[style*="display: flex"] > span::after {
   transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-section > h1[style*="display: flex"].in-view > span::after {
+.section-heading.has-action.in-view > span::after {
   transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  section > h1::after,
-  section > h1[style*="display: flex"] > span::after {
+  .section-heading::after,
+  .section-heading.has-action > span::after {
     transform: scaleX(1);
     transition: none;
   }
@@ -511,6 +531,9 @@ dt {
    Center the icon above the 10px dot center-line of the timeline. */
 .news-heading {
   padding-left: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .news-heading > span > i {
@@ -796,12 +819,13 @@ blockquote {
  * isn't cramped against the text — e.g. "CV  Curriculum Vitae". Scoped to
  * heading buttons so the PAPER/CODE buttons (trailing icons) are unaffected.
  */
-section > h1 .button i,
+.section-heading .button i,
 section > h2 .button i {
   margin-right: 4px;
 }
 
-section :is(h1, h2) .button.heading-btn {
+.section-heading .button.heading-btn,
+section > h2 .button.heading-btn {
   font-size: 11px;
   margin: 0;
 }
@@ -1076,7 +1100,7 @@ section :is(h1, h2) .button.heading-btn {
   margin-bottom: 60px;
 }
 
-.gallery-section h1 {
+.gallery-section .section-heading {
   margin-bottom: 8px;
 }
 
@@ -1391,15 +1415,15 @@ screen and (max-width: 720px) {
     word-wrap: normal;
   }
 
-  h1[style*="display: flex"] {
-    flex-direction: column !important;
-    align-items: flex-start !important;
+  .section-heading.has-action {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
   }
 
-  h1[style*="display: flex"].flex-row-mobile {
-    flex-direction: row !important;
-    align-items: center !important;
+  .section-heading.has-action.flex-row-mobile {
+    flex-direction: row;
+    align-items: center;
     gap: 0;
   }
 }

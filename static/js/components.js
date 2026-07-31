@@ -16,18 +16,60 @@
     const isReload = navEntry && navEntry.type === 'reload';
     const isFirstVisit = !sessionStorage.getItem('visited') || isReload;
 
-    // Inject cached components immediately (before DOMContentLoaded) to prevent flash
-    document.querySelectorAll('[data-component]').forEach((element) => {
+    /**
+     * Fill a placeholder from sessionStorage. Returns true if it was filled.
+     *
+     * Doing this before first paint is what keeps the header and footer from
+     * flashing in on internal navigation.
+     */
+    function injectFromCache(element) {
+        if (element.dataset.componentReady) return true;
         const componentName = element.getAttribute('data-component');
         const cached = sessionStorage.getItem(cacheKey(componentName));
-        if (cached) {
-            element.innerHTML = cached;
-            const selectedNav = element.getAttribute('data-selected');
-            if (componentName === 'header' && selectedNav) {
-                highlightNavigation(element, selectedNav);
-            }
+        if (!cached) return false;
+
+        element.innerHTML = cached;
+        element.dataset.componentReady = 'true';
+        const selectedNav = element.getAttribute('data-selected');
+        if (componentName === 'header' && selectedNav) {
+            highlightNavigation(element, selectedNav);
         }
-    });
+        applyEntrance(element, componentName);
+        return true;
+    }
+
+    /**
+     * Add the first-visit entrance class.
+     *
+     * Applied as soon as the markup lands rather than after the network settles,
+     * so on a reload (which counts as a first visit but has a warm cache) the
+     * animation starts with the paint instead of a beat later.
+     */
+    function applyEntrance(element, componentName) {
+        if (!isFirstVisit) return;
+        if (element.dataset.entranceApplied) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const target = element.querySelector(componentName === 'header' ? 'header' : 'footer');
+        if (!target) return;
+        target.classList.add(componentName === 'header' ? 'header-entrance' : 'footer-entrance');
+        element.dataset.entranceApplied = 'true';
+    }
+
+    // This script runs in <head>, so the placeholders in <body> do not exist yet
+    // and cannot be queried. Watch the document as it parses instead and fill each
+    // placeholder the moment it appears — that lands the cached markup in the first
+    // paint. (Previously this ran as a one-shot querySelectorAll here, which always
+    // matched zero elements, so every navigation waited for DOMContentLoaded and
+    // the header visibly popped in.)
+    if (document.readyState === 'loading' && 'MutationObserver' in window) {
+        const parseObserver = new MutationObserver(() => {
+            document.querySelectorAll('[data-component]:not([data-component-ready])')
+                .forEach(injectFromCache);
+        });
+        parseObserver.observe(document.documentElement, { childList: true, subtree: true });
+        document.addEventListener('DOMContentLoaded', () => parseObserver.disconnect(), { once: true });
+    }
 
     // Full load (fetch from network, apply animations, set up interactivity)
     if (document.readyState === 'loading') {
@@ -38,6 +80,10 @@
 
     async function loadComponents() {
         const componentElements = document.querySelectorAll('[data-component]');
+
+        // Anything the parse-time pass missed (no cache yet, or no MutationObserver)
+        // still gets the cached markup before we hit the network.
+        componentElements.forEach(injectFromCache);
 
         const loadPromises = Array.from(componentElements).map(async (element) => {
             const componentName = element.getAttribute('data-component');
@@ -55,13 +101,16 @@
                 // Cache for instant injection on next navigation
                 sessionStorage.setItem(cacheKey(componentName), html);
 
-                // Only re-inject if not already populated from cache
-                if (!element.querySelector('header, footer')) {
+                // Only re-inject if the cache did not already fill this in.
+                // Replacing identical markup would restart the entrance animation
+                // and discard the nav highlight for no visible benefit.
+                const alreadyFilled = element.dataset.componentReady === 'true';
+                if (!alreadyFilled) {
                     element.innerHTML = html;
-                }
-
-                if (componentName === 'header' && selectedNav) {
-                    highlightNavigation(element, selectedNav);
+                    element.dataset.componentReady = 'true';
+                    if (componentName === 'header' && selectedNav) {
+                        highlightNavigation(element, selectedNav);
+                    }
                 }
 
                 // Apply external-link new-tab handling to this component's markup.
@@ -72,19 +121,7 @@
                 }
 
                 // Staggered entrance on first visit only
-                if (componentName === 'header' && isFirstVisit) {
-                    const header = element.querySelector('header');
-                    if (header && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-                        header.classList.add('header-entrance');
-                    }
-                }
-
-                if (componentName === 'footer' && isFirstVisit) {
-                    const footer = element.querySelector('footer');
-                    if (footer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-                        footer.classList.add('footer-entrance');
-                    }
-                }
+                applyEntrance(element, componentName);
             } catch (error) {
                 console.error(`Error loading component ${componentName}:`, error);
             }

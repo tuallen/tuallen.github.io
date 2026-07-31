@@ -1,10 +1,11 @@
 #!/bin/bash
 #
-# Rebuild the self-hosted Font Awesome subset.
+# Rebuild the self-hosted icon font subsets (Font Awesome and Academicons).
 #
-# The site uses ~35 of Font Awesome's ~2000 icons. Loading the CDN build costs
-# 100 KB of render-blocking CSS plus 267 KB of webfonts from a third-party
-# origin; subsetting brings that to roughly 9 KB total from our own origin.
+# The site uses ~36 of Font Awesome's ~2000 icons and 6 of Academicons' ~150.
+# Shipping both in full costs 100 KB of render-blocking CSS plus 267 KB of
+# webfonts from a third-party origin, and another 128 KB .woff locally;
+# subsetting brings the pair to roughly 10 KB.
 #
 # Run this after adding or removing an icon in the markup or in JS. It scans for
 # the classes actually used, so no list needs maintaining by hand.
@@ -216,6 +217,89 @@ if wrong:
 if missing or wrong:
     sys.exit("Stylesheet and fonts disagree; fix fontawesome-subset.css.")
 print(f"    {len(declared)} glyph rules, consistent with the subset fonts")
+PY
+
+echo "==> Subsetting Academicons"
+python3 - "$ROOT" "$WORK" <<'PY'
+import json, os, re, sys
+from fontTools.ttLib import TTFont
+
+root, work = sys.argv[1], sys.argv[2]
+
+# Which ai-* classes are used, and which of them actually need the webfont —
+# most institutional logos are custom SVG masks in icons.css, which loads after
+# this stylesheet and wins.
+used = set()
+for base, dirs, files in os.walk(root):
+    dirs[:] = [d for d in dirs if not d.startswith((".", "_", "node_modules"))]
+    for name in files:
+        if not name.endswith((".html", ".js")) or name.startswith("_"):
+            continue
+        text = open(os.path.join(base, name), encoding="utf-8").read()
+        for pat in (r'class="([^"]*)"',
+                    r'''class(?:Name)?\s*=\s*['"]([^'"]*)['"]'''):
+            for m in re.finditer(pat, text):
+                used.update(m.group(1).split())
+
+upstream = open(os.path.join(root, "static/stylesheets/css/academicons.min.css"),
+                encoding="utf-8").read()
+custom = set(re.findall(r"\.(ai-[a-z0-9-]+)",
+             open(os.path.join(root, "static/stylesheets/icons.css"),
+                  encoding="utf-8").read()))
+
+wanted = {}
+for cls in sorted(c for c in used if re.fullmatch(r"ai-[a-z0-9-]+", c)):
+    if cls in custom:
+        continue  # drawn by an SVG mask, no glyph needed
+    m = re.search(r"\." + re.escape(cls) + r":before\s*\{\s*content:\s*\"\\([0-9a-f]+)\"",
+                  upstream)
+    if m:
+        wanted[cls] = m.group(1)
+
+print(f"    {len(wanted)} glyphs needed: {sorted(wanted)}")
+json.dump(wanted, open(os.path.join(work, "ai.json"), "w"))
+open(os.path.join(work, "ai.unicodes"), "w").write(
+    ",".join("U+" + cp for cp in sorted(wanted.values())))
+PY
+
+pyftsubset "$ROOT/static/stylesheets/fonts/academicons.ttf" \
+  --unicodes-file="$WORK/ai.unicodes" \
+  --flavor=woff2 --layout-features='' --no-hinting --desubroutinize \
+  --output-file="$ROOT/static/webfonts/academicons.woff2" 2>/dev/null
+python3 -c "
+import os,sys
+o=os.path.getsize('$ROOT/static/stylesheets/fonts/academicons.woff')
+n=os.path.getsize('$ROOT/static/webfonts/academicons.woff2')
+print(f'    academicons: {o/1024:.1f} KB woff -> {n/1024:.1f} KB woff2')"
+
+python3 - "$ROOT" "$WORK" <<'PY'
+import json, os, sys
+from fontTools.ttLib import TTFont
+
+root, work = sys.argv[1], sys.argv[2]
+wanted = json.load(open(os.path.join(work, "ai.json")))
+font = TTFont(os.path.join(root, "static/webfonts/academicons.woff2"))
+chars = set()
+for table in font["cmap"].tables:
+    chars |= set(table.cmap.keys())
+
+css = open(os.path.join(root, "static/stylesheets/academicons-subset.css"),
+           encoding="utf-8").read()
+import re
+declared = {m.group(1): m.group(2).lower() for m in
+            re.finditer(r'\.(ai-[a-z0-9-]+)::before\s*\{\s*content:\s*"\\([0-9a-f]+)"', css)}
+
+failed = False
+for cls, cp in wanted.items():
+    if int(cp, 16) not in chars:
+        print(f"    MISSING glyph {cls} U+{cp.upper()}")
+        failed = True
+    if declared.get(cls) != cp.lower():
+        print(f"    stylesheet mismatch for {cls}: {declared.get(cls)} vs {cp}")
+        failed = True
+if failed:
+    sys.exit("Academicons subset is inconsistent.")
+print(f"    {len(declared)} glyph rules, consistent with the subset font")
 PY
 
 echo
