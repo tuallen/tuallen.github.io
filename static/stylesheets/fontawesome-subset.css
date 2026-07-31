@@ -18,7 +18,7 @@
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("/static/webfonts/fa-solid-900.woff2?v=2026-07-31-9") format("woff2");
+  src: url("/static/webfonts/fa-solid-900.woff2?v=2026-07-31-11") format("woff2");
 }
 
 @font-face {
@@ -26,7 +26,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("/static/webfonts/fa-brands-400.woff2?v=2026-07-31-9") format("woff2");
+  src: url("/static/webfonts/fa-brands-400.woff2?v=2026-07-31-11") format("woff2");
 }
 
 .fa,

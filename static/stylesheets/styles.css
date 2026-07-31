@@ -82,6 +82,35 @@ body {
   margin: auto;
 }
 
+/*
+ * Skip link — the header contributes 16 tab stops before the content starts, so
+ * keyboard users get a way past it. Off-screen rather than display:none so it
+ * stays in the tab order, and it reveals itself on focus.
+ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  padding: 10px 16px;
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  border-radius: 0 0 8px 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* The target takes tabindex="-1" so focus actually moves there on activation;
+   it should not draw a ring of its own when it does. */
+#main-content:focus {
+  outline: none;
+}
+
 /* ==================== TYPOGRAPHY ==================== */
 
 h1,
@@ -914,6 +943,18 @@ section > h2 .button.heading-btn {
   width: 380px;
   margin: 0 auto;
   outline: none;
+}
+
+/*
+ * Slideshows are tabindex="0" and navigable with the arrow keys, so a keyboard
+ * user needs to see which one they are on — `outline: none` above alone left no
+ * indication at all. :focus-visible shows the ring only for keyboard focus, so
+ * clicking a slide still doesn't draw one.
+ */
+.slideshow:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 4px;
+  border-radius: 12px;
 }
 
 .slideshow-track-wrapper {
