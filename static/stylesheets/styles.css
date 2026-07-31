@@ -1255,8 +1255,15 @@ section > h2 .button.heading-btn {
     padding: 0;
   }
 
+  /*
+   * The toggle sets max-height from the paragraph's own scrollHeight, since the
+   * height depends on the viewport width and the length of the copy — the fixed
+   * value that used to live here clipped the last ~100px once the body text went
+   * to 16px. The value below is only a fallback for when the inline handler has
+   * not run, and is generous enough not to clip on a narrow phone.
+   */
   .bio-extended.is-visible {
-    max-height: 300px;
+    max-height: 600px;
     opacity: 1;
     padding-top: 16px;
   }
