@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             thirdItem.classList.remove("news-arrow-down");
             lastItem.classList.add("news-arrow-up");
             sidebarClick.setAttribute("aria-label", "Show fewer news items");
-            list.style.setProperty("--rail-height", `${expandedHeight}px`);
+            list.style.setProperty("--rail-height", `${expandedHeight - 3}px`);
         } else {
             lastItem.classList.remove("news-arrow-up");
             thirdItem.classList.add("news-arrow-down");
