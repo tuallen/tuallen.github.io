@@ -1,0 +1,41 @@
+/*
+ * Academicons subset — self-hosted.
+ *
+ * Upstream ships ~150 icons as a 128 KB .woff (no .woff2). This site uses six
+ * of them; the rest of the ai-* icons are custom SVG masks in icons.css. The
+ * subset is ~1 KB.
+ *
+ * Family and class names match upstream so markup is unchanged. Only the .ai
+ * base class is used on this site, so the size/stack/pull modifiers are omitted.
+ *
+ * Regenerate with tools/build-icon-font.sh.
+ */
+
+@font-face {
+  font-family: 'Academicons';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/static/webfonts/academicons.woff2?v=2026-07-31-1") format("woff2");
+}
+
+.ai {
+  font-family: 'Academicons';
+  font-weight: 400;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+/* ---- Glyphs ---- */
+
+.ai-arxiv::before { content: "\e974"; }
+.ai-cv::before { content: "\e9a5"; }
+.ai-dblp::before { content: "\e94f"; }
+.ai-orcid::before { content: "\e9d9"; }
+.ai-overleaf::before { content: "\e914"; }
+.ai-researchgate::before { content: "\e95e"; }

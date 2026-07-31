@@ -23,7 +23,7 @@ Huge thanks to her for open-sourcing a clean, well-structured starting point.
 
 - **Pure HTML / CSS / JavaScript** — No frameworks, no build process; just vanilla web technologies
 - **Font Awesome 6.5.1** — General-purpose icon library, self-hosted as a subset of only the glyphs in use (see `tools/build-icon-font.sh`)
-- **Academicons** — Academic-specific icons (Google Scholar, ORCID, arXiv, etc.)
+- **Academicons** — Academic-specific icons (ORCID, arXiv, DBLP, etc.), also self-hosted as a subset
 - **Custom SVG icon system** — Inline SVG masks for institutional and organizational logos
 - **Modern image formats** — WebP with PNG/JPG fallbacks
 - **Google Analytics** — Lightweight traffic monitoring
@@ -72,7 +72,7 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
 - **Pill-style buttons with accent fill**  
   All buttons (`.button`, plus the BibTeX modal and PDF toolbar action buttons) are fully rounded pills that fill with the accent color and lift with a soft themed shadow on hover. Close (`×`) buttons are circular and spin 90° on hover.
 - **Heading accent bars**  
-  Each section `<h1>` carries a short accent-colored bar underneath. Flex headings (title + inline BibTeX button) anchor the bar to the title text only, so it never runs under the button.
+  Each `.section-heading` carries a short accent-colored bar underneath. Headings that pair a title with a button (`.has-action`) anchor the bar to the title text only, so it never runs under the button. The class is what carries the styling, so heading levels follow the document outline (one `<h1>` per page, sections as `<h2>`) without changing how anything looks.
 - **Softer media surfaces**  
   Video/image thumbnails and the video-comparison sliders have rounded corners and a subtle, theme-aware drop shadow at rest (the shadow releases during the zoom-container hover so it doesn't magnify).
 - **Touch-aware hover**  
@@ -85,7 +85,9 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
 - **Dark mode toggle** (`theme-switcher.js`)  
   Manual theme switcher with localStorage persistence, smooth transitions, and zero FOUC (flash of unstyled content)
 - **Component-based architecture** (`components.js`)  
-  Reusable header and footer components with dynamic navigation highlighting, automatic copyright year, sessionStorage caching for flash-free navigation, and entrance animations on first visit/refresh
+  Reusable header and footer components with dynamic navigation highlighting, automatic copyright year, sessionStorage caching for flash-free navigation, and entrance animations on first visit/refresh.
+
+  The cached markup is injected while the document is still parsing, via a `MutationObserver` that fills each placeholder the moment it appears. The script runs in `<head>`, so it cannot simply query for placeholders that `<body>` has not produced yet — doing that matched nothing, and the header only appeared at `DOMContentLoaded`, which is the flash this avoids.
 - **Automatic GitHub star counts** (`github-stars.js`)  
   Real-time repository star counts via the GitHub API
 - **Semantic Scholar citation retrieval** (`semantic-scholar.js`)  
@@ -158,8 +160,9 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   │   ├── styles.css      # Main consolidated styles with CSS variables for theming
 │   │   ├── icons.css       # Custom icon definitions
 │   │   ├── fontawesome-subset.css # Generated: self-hosted Font Awesome subset
+│   │   ├── academicons-subset.css  # Generated: self-hosted Academicons subset
 │   │   └── zoom_containers.css
-│   ├── webfonts/           # Generated: subset Font Awesome woff2 files
+│   ├── webfonts/           # Generated: subset icon-font woff2 files
 │   ├── js/
 │   │   ├── components.js   # Component loader with entrance animations
 │   │   ├── theme-switcher.js # Dark mode toggle with rise/set animation
@@ -280,11 +283,12 @@ things like YouTube's `?v=` video IDs are never rewritten.
 
 ---
 
-## Icon Font Subset
+## Icon Font Subsets
 
-The site uses ~36 of Font Awesome's ~2000 icons. The CDN build costs 100 KB of
-render-blocking CSS plus 267 KB of webfonts from a third-party origin; the
-self-hosted subset is ~9 KB total from our own origin.
+The site uses ~36 of Font Awesome's ~2000 icons and 6 of Academicons' ~150.
+Font Awesome's CDN build costs 100 KB of render-blocking CSS plus 267 KB of
+webfonts from a third-party origin, and Academicons ships a 128 KB `.woff` with
+no `.woff2`. The self-hosted subsets total ~10 KB from our own origin.
 
 ```bash
 pip3 install --user fonttools brotli   # one-time
@@ -294,9 +298,15 @@ tools/build-icon-font.sh
 The script scans the markup and JS for the icon classes actually in use — including
 `classList` calls and inline `onclick` handlers — plus raw codepoints referenced from
 our own CSS (`content: "\f077"` for the news toggle arrows, which never appear as a
-class). It then subsets the fonts, verifies every glyph survived with real outlines,
-and checks that `fontawesome-subset.css` agrees with the fonts. Run it after adding
-or removing an icon; if a glyph is missing it fails rather than shipping a blank box.
+class). For Academicons it also skips any `ai-*` class that `icons.css` draws as an
+SVG mask, since those need no glyph. It then subsets both fonts, verifies every glyph
+survived with real outlines, and checks each generated stylesheet agrees with its
+font. Run it after adding or removing an icon; if a glyph is missing it fails rather
+than shipping a blank box.
+
+The upstream `static/stylesheets/css/academicons.min.css` and
+`static/stylesheets/fonts/academicons.*` are kept as the subset's source — they are
+no longer served to visitors.
 
 ---
 

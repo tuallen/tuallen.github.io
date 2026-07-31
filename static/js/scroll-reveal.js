@@ -1,6 +1,6 @@
 /* ---- Reveal section heading accent bars on scroll ---- */
 document.addEventListener("DOMContentLoaded", () => {
-    const headings = document.querySelectorAll("section > h1, .gallery-section > h1");
+    const headings = document.querySelectorAll(".section-heading");
     if (!headings.length) return;
 
     // Skip animation entirely for reduced-motion users
