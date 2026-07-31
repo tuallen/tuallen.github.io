@@ -8,6 +8,6 @@ Sitemap: https://tuallen.github.io/sitemap.xml
 # Crawl delay (be nice to servers)
 Crawl-delay: 1
 
-# Disallow crawling of specific paths (if needed in future)
-# User-agent: *
-# Disallow: /private/
+# The PDF viewer is a shell with no content of its own — the PDFs it displays
+# are linked (and crawlable) directly.
+Disallow: /pdfviewer.html

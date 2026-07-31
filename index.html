@@ -33,6 +33,9 @@
         content="Allen Tu is a PhD student in Computer Science at the University of Maryland, College Park, advised by Professor Tom Goldstein. His research focuses on efficient, reliable, and scalable vision systems, spanning 3D/4D reconstruction, multimodal biometric recognition, and generative modeling.">
     <meta property="og:url" content="https://tuallen.github.io/">
     <meta property="og:image" content="https://tuallen.github.io/static/images/Headshot_Square_Background.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+    <meta property="og:image:alt" content="Portrait of Allen Tu">
     <meta property="og:site_name" content="Allen Tu">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:url" content="https://tuallen.github.io/">
@@ -92,6 +95,18 @@
     }
     </script>
 
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://tuallen.github.io/#website",
+        "url": "https://tuallen.github.io/",
+        "name": "Allen Tu",
+        "inLanguage": "en-US",
+        "publisher": { "@id": "https://tuallen.github.io/#person" }
+    }
+    </script>
+
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -109,7 +124,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-07-30a">
+    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-07-30">
     <link rel="stylesheet" href="/static/stylesheets/zoom_containers.css?v=2026-07-30">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/static/stylesheets/css/academicons.min.css?v=2026-07-30">
@@ -118,12 +133,11 @@
     <script defer src="/static/js/theme-switcher.js?v=2026-07-30"></script>
     <script defer src="/static/js/pdf-modal.js?v=2026-07-30"></script>
     <script defer src="/static/js/image-modal.js?v=2026-07-30"></script>
-    <script defer src="/static/js/video_comparison.js?v=2026-07-30"></script>
     <script defer src="/static/js/zoom-containers.js?v=2026-07-30"></script>
     <script defer src="/static/js/semantic-scholar.js?v=2026-07-30"></script>
     <script defer src="/static/js/github-stars.js?v=2026-07-30"></script>
     <script defer src="/static/js/new-tabs.js?v=2026-07-30"></script>
-    <script defer src="/static/js/news-toggle.js?v=2026-07-30a"></script>
+    <script defer src="/static/js/news-toggle.js?v=2026-07-30"></script>
     <script defer src="/static/js/scroll-reveal.js?v=2026-07-30"></script>
     <script defer src="/static/js/slideshow.js?v=2026-07-30"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
@@ -278,7 +292,7 @@
                         <!-- Teaser -->
                         <td style="text-align: center;">
                             <div class="video-container">
-                                <a href="https://speede3dgs.github.io/">
+                                <a href="https://speede3dgs.github.io/" aria-label="SpeeDe3DGS project page">
                                     <video class="video-thumbnail" src="/media/chicken_speede3dgs.mp4?v=2026-07-30" muted loop
                                         loading="lazy"></video>
                                 </a>
@@ -324,7 +338,7 @@
                         <!-- Teaser -->
                         <td style="text-align: center;">
                             <div class="video-container">
-                                <a href="https://splatsure.github.io/">
+                                <a href="https://splatsure.github.io/" aria-label="SplatSuRe project page">
                                     <video class="video-thumbnail" src="/media/church_splatsure.mp4?v=2026-07-30" muted loop
                                         loading="lazy"></video>
                                 </a>
@@ -436,7 +450,7 @@
                         <!-- Teaser -->
                         <td style="text-align: center;">
                             <div class="video-container">
-                                <a href="https://pup3dgs.github.io/">
+                                <a href="https://pup3dgs.github.io/" aria-label="PUP 3D-GS project page">
                                     <video class="video-thumbnail" src="/media/playroom_pup.mp4?v=2026-07-30" muted loop
                                         loading="lazy"></video>
                                 </a>
@@ -486,7 +500,7 @@
                         <!-- Teaser -->
                         <td style="text-align: center;">
                             <div class="video-container">
-                                <a href="https://speedysplat.github.io/">
+                                <a href="https://speedysplat.github.io/" aria-label="Speedy-Splat project page">
                                     <video class="video-thumbnail" src="/media/kitchen_ss.mp4?v=2026-07-30" muted loop
                                         loading="lazy"></video>
                                 </a>
@@ -540,7 +554,7 @@
                     <!-- Teaser -->
                     <td style="text-align: center;">
                         <div class="video-container">
-                            <a href="/3d/#diffusion-priors">
+                            <a href="/3d/#diffusion-priors" aria-label="Diffusion priors research">
                                 <video class="video-thumbnail" src="/media/ditl_single.mp4?v=2026-07-30" muted loop
                                     loading="lazy"></video>
                             </a>
@@ -834,7 +848,7 @@
                                         <div class="slideshow-slide">
                                             <picture>
                                                 <source srcset="/media/spar3d_flyer.webp?v=2026-07-30" type="image/webp">
-                                                <img src="/media/spar3d_flyer.png?v=2026-07-30" alt="SPAR-3D Workshop flyer" loading="lazy">
+                                                <img src="/media/spar3d_flyer.jpeg?v=2026-07-30" alt="SPAR-3D Workshop flyer" loading="lazy">
                                             </picture>
                                         </div>
                                         <div class="slideshow-slide">
@@ -846,13 +860,13 @@
                                         <div class="slideshow-slide">
                                             <picture>
                                                 <source srcset="/gallery/cvpr2026/6_spar3d_a.webp?v=2026-07-30" type="image/webp">
-                                                <img src="/gallery/cvpr2026/6_spar3d_a.jpg?v=2026-07-30" alt="SPAR-3D at CVPR 2026" loading="lazy">
+                                                <img src="/gallery/cvpr2026/6_spar3d_a.jpg?v=2026-07-30" alt="SPAR-3D Workshop organizers at CVPR 2026" loading="lazy">
                                             </picture>
                                         </div>
                                         <div class="slideshow-slide">
                                             <picture>
                                                 <source srcset="/gallery/cvpr2026/5_spar3d_b.webp?v=2026-07-30" type="image/webp">
-                                                <img src="/gallery/cvpr2026/5_spar3d_b.jpg?v=2026-07-30" alt="SPAR-3D at CVPR 2026" loading="lazy">
+                                                <img src="/gallery/cvpr2026/5_spar3d_b.jpg?v=2026-07-30" alt="SPAR-3D Workshop session at CVPR 2026" loading="lazy">
                                             </picture>
                                         </div>
                                     </div>

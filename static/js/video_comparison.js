@@ -40,6 +40,32 @@ function playVids(videoId) {
 
         videoMerge.addEventListener("click", videoMerge.togglePlayPause);
 
+        // Label metrics depend only on viewport width and the canvas font, neither of
+        // which changes between resizes. Reading them per frame (60fps, per canvas)
+        // forced a style recalc each time, so cache and refresh them on resize instead.
+        var isMobile = window.innerWidth <= 960;
+        var computedFont = window.getComputedStyle(videoMerge).fontFamily;
+        window.addEventListener("resize", function () {
+            isMobile = window.innerWidth <= 960;
+            computedFont = window.getComputedStyle(videoMerge).fontFamily;
+        });
+
+        // Only run the draw loop while the canvas is on screen. An off-screen canvas
+        // cannot be seen, so redrawing it is pure waste — this keeps two comparison
+        // sliders from burning CPU for the whole page. The video itself keeps playing,
+        // so scrolling back shows the current frame immediately with no visible change.
+        var onScreen = true;
+        var running = false;
+
+        if ("IntersectionObserver" in window) {
+            new IntersectionObserver(function (entries) {
+                onScreen = entries[entries.length - 1].isIntersecting;
+                if (onScreen && !running) {
+                    running = true;
+                    requestAnimationFrame(drawLoop);
+                }
+            }).observe(videoMerge);
+        }
 
         function drawLoop() {
             var dpr = window.devicePixelRatio || 1;
@@ -147,13 +173,11 @@ function playVids(videoId) {
             const labelRight = container.dataset.rightLabel || null;
 
             if (labelLeft || labelRight) {
-                const isMobile = window.innerWidth <= 960;
                 const fontSize = Math.round(ch * (isMobile ? 0.06 : 0.04));   // scales with video height
                 const paddingX = fontSize * 0.6;
                 const paddingY = fontSize * 0.35;
                 const radius = fontSize * 0.6;
 
-                const computedFont = window.getComputedStyle(videoMerge).fontFamily;
                 mergeContext.font = `${fontSize}px ${computedFont}`;
                 mergeContext.textBaseline = "middle";
 
@@ -190,8 +214,13 @@ function playVids(videoId) {
                     drawBubble(labelRight, cw - 5, ch - fontSize * 1.2, true);
                 }
             }
-            requestAnimationFrame(drawLoop);
+            if (onScreen) {
+                requestAnimationFrame(drawLoop);
+            } else {
+                running = false;   // the IntersectionObserver restarts the loop
+            }
         }
+        running = true;
         requestAnimationFrame(drawLoop);
     }
 }

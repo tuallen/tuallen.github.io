@@ -57,8 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Reactively update rail when layout changes (resize, text wrap, orientation)
-    const observer = new ResizeObserver(updateRail);
+    // Reactively update rail when layout changes (resize, text wrap, orientation).
+    // Coalesce into a frame: updateRail writes custom properties on the very element
+    // being observed, so responding synchronously risks re-entrant notifications
+    // ("ResizeObserver loop completed with undelivered notifications").
+    let railQueued = false;
+    const observer = new ResizeObserver(() => {
+        if (railQueued) return;
+        railQueued = true;
+        requestAnimationFrame(() => {
+            railQueued = false;
+            updateRail();
+        });
+    });
     observer.observe(list);
 
     // Initial rail after collapse transition settles

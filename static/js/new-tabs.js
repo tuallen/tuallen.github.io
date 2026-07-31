@@ -27,7 +27,9 @@ function applyExternalLinkTargets(root = document) {
                 // Open external links in new tab
                 if (url.origin !== window.location.origin) {
                     a.target = '_blank';
-                    a.rel = 'noopener noreferrer';
+                    // Add to relList rather than assigning `rel` — assignment would
+                    // clobber authored values like rel="me" on the profile links.
+                    a.relList.add('noopener', 'noreferrer');
                 }
             } catch (e) {
                 console.warn('Invalid URL:', href);

@@ -20,22 +20,25 @@
     /**
      * Apply the theme to the document
      */
-    function applyTheme(theme) {
+    function applyTheme(theme, bustFavicon) {
         document.documentElement.setAttribute(THEME_ATTR, theme);
         updateThemeIcon(theme);
-        updateFavicon(theme);
+        updateFavicon(theme, bustFavicon);
     }
 
     /**
-     * Update favicon based on theme
+     * Update favicon based on theme.
+     *
+     * `bust` adds a timestamp query so the browser re-fetches even though the
+     * filename may be unchanged — browsers (especially Edge) cache favicons
+     * aggressively and won't repaint the tab otherwise. It is only passed when
+     * the theme actually changes; on initial load we reuse the ?v= already in
+     * the markup so the icons stay cacheable across navigations.
      */
-    function updateFavicon(theme) {
+    function updateFavicon(theme, bust) {
         const svgLink = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
         const icoLink = document.querySelector('link[rel="icon"][sizes="any"]');
 
-        // Use a timestamp cache-buster so the browser always re-fetches on theme switch.
-        // Browsers (especially Edge) aggressively cache favicons and won't update if the URL is the same.
-        const bust = '?v=' + Date.now();
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         let name;
@@ -48,9 +51,18 @@
             name = theme === 'dark' ? 'tu_dark' : 'tu_light';
         }
 
-        if (svgLink) svgLink.href = `/static/icons/${name}.svg` + bust;
+        // Reuse the existing ?v= (the cache-bust version baked into the HTML) so an
+        // unchanged icon keeps its URL — and therefore its cache entry — on page load.
+        const setIcon = (link, ext) => {
+            if (!link) return;
+            const query = bust ? `?v=${Date.now()}` : new URL(link.href, location.href).search;
+            const next = `/static/icons/${name}.${ext}${query}`;
+            if (link.getAttribute('href') !== next) link.href = next;
+        };
+
+        setIcon(svgLink, 'svg');
         // Also update ICO — Edge ignores SVG favicons and uses the ICO link for the tab icon
-        if (icoLink) icoLink.href = `/static/icons/${name}.ico` + bust;
+        setIcon(icoLink, 'ico');
     }
 
     /**
@@ -74,8 +86,8 @@
         // Save preference
         localStorage.setItem(STORAGE_KEY, newTheme);
 
-        // Apply new theme
-        applyTheme(newTheme);
+        // Apply new theme (bust the favicon cache — the icon color changes)
+        applyTheme(newTheme, true);
     }
 
     /**
@@ -132,6 +144,6 @@
     // Listen for system theme changes to update favicon immediately
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         const currentTheme = document.documentElement.getAttribute(THEME_ATTR) || 'light';
-        updateFavicon(currentTheme);
+        updateFavicon(currentTheme, true);
     });
 })();
