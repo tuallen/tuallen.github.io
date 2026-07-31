@@ -67,8 +67,8 @@ A layer of lightweight, tasteful micro-interactions — all pure CSS, all theme-
   Social icons in the header and footer lift upward with a subtle translateY on hover, plus an accent-colored drop-shadow glow.
 - **Portrait & brandmark hover**  
   The portrait photo and logo brandmark have a soft shadow at rest and subtly lift with an accent glow on hover.
-- **Gradient active nav**  
-  The selected/active navigation link uses a gradient underline (primary → hover color) instead of a solid line.
+- **Solid active nav**  
+  The selected/active navigation link uses a solid `currentColor` underline. On touch devices, tapping a nav link plays the underline animation before navigating (~180ms delay).
 - **Pill-style buttons with accent fill**  
   All buttons (`.button`, plus the BibTeX modal and PDF toolbar action buttons) are fully rounded pills that fill with the accent color and lift with a soft themed shadow on hover. Close (`×`) buttons are circular and spin 90° on hover.
 - **Heading accent bars**  
