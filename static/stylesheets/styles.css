@@ -1509,6 +1509,12 @@ screen and (max-width: 720px) {
     align-items: flex-start !important;
     gap: 10px;
   }
+
+  h1[style*="display: flex"].flex-row-mobile {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0;
+  }
 }
 
 @media print,
