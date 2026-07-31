@@ -1396,7 +1396,7 @@ screen and (max-width: 960px) {
   section {
     border: none;
     padding: 20px 0;
-    margin: 0 0 20px;
+    margin: 0;
   }
 
   footer {
@@ -1424,7 +1424,11 @@ screen and (max-width: 960px) {
     padding: 4px 0;
   }
 
-  /* Breathing room above the very first (media) cell of the highlights table */
+  /* Breathing room above media cells in stacked highlight rows */
+  .highlight-row td:first-child {
+    padding-top: 8px;
+  }
+
   .highlight-row:first-of-type td:first-child {
     padding-top: 12px;
   }
@@ -1440,7 +1444,7 @@ screen and (max-width: 960px) {
   #indexWorkText,
   .indexWorkText {
     margin-top: 0px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   ul {
