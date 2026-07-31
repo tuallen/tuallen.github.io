@@ -989,6 +989,54 @@ section :is(h1, h2) .button.heading-btn {
   color: var(--accent-hover);
 }
 
+/* Slideshow of comparison sliders: full width like the sliders it replaces, and
+   no hover zoom — the slider is an interactive control, so scaling it under the
+   cursor would move the split handle away from the pointer. */
+.video-slideshow {
+  width: 100%;
+  outline: none;
+}
+
+.video-slideshow .slideshow-track-wrapper,
+.video-slideshow .slideshow-track-wrapper:hover {
+  transform: none;
+  overflow: hidden;
+  box-shadow: none;
+  z-index: auto;
+}
+
+.video-slideshow .slideshow-track {
+  cursor: default;
+}
+
+.video-slideshow .slideshow-slide {
+  min-width: 100%;
+  /* The slider draws its own rounded corners and shadow; let them show rather
+     than clipping them against the track. */
+  overflow: visible;
+  /* Slides must not stretch to the tallest one: only the canvas defines height. */
+  align-items: flex-start;
+}
+
+/* Only the canvas is meant to be visible; resizeAndPlay() sets height:0 on the
+   <video> once it plays, but a slide that starts paused never gets there and
+   would otherwise contribute its intrinsic height to the flex track — leaving a
+   gap between the canvas and the controls until the first slide change. */
+.video-slideshow .video-compare-container video.video {
+  height: 0;
+}
+
+/* Reserve the right height before JS sizes the canvas. Each source is a
+   side-by-side pair, so the visible half is 960x720 — a 4:3 box. Without this
+   the canvas keeps its default 300x150 ratio until its slider initialises. */
+.video-slideshow .video-compare-container canvas.videoMerge {
+  aspect-ratio: 4 / 3;
+}
+
+.video-slideshow .video-compare-container {
+  margin-bottom: 0;
+}
+
 /* ==================== GALLERY PAGE ==================== */
 
 .gallery-slideshow {
