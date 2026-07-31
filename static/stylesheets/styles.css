@@ -111,6 +111,26 @@ body {
   outline: none;
 }
 
+/*
+ * Content that sits directly under a section heading. The heading's own
+ * margin-bottom plus the element's default top margin leaves too much air, so
+ * pull it back up. Previously an inline style="margin-top:-12px" repeated on ten
+ * elements across three pages.
+ */
+.tight-under-heading {
+  margin-top: -12px;
+}
+
+.tight-under-heading.tight-list {
+  margin-bottom: 8px;
+}
+
+/* Teaser cell in a research-highlight row — always holds a video, image or
+   slideshow container, centred in its column. Was an inline style on 21 cells. */
+.teaser-cell {
+  text-align: center;
+}
+
 /* ==================== TYPOGRAPHY ==================== */
 
 h1,
