@@ -10,7 +10,7 @@
  * styles.css (which sets font-family: "Font Awesome 6 Free" directly for the
  * news toggle arrows) keep working unchanged.
  *
- * Regenerate with tools/build-icon-font.sh after adding or removing an icon.
+ * Regenerate with tools/build-webfonts.sh after adding or removing an icon.
  */
 
 @font-face {
@@ -18,7 +18,7 @@
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("/static/webfonts/fa-solid-900.woff2?v=2026-07-31-1") format("woff2");
+  src: url("/static/webfonts/fa-solid-900.woff2?v=2026-07-31-3") format("woff2");
 }
 
 @font-face {
@@ -26,7 +26,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("/static/webfonts/fa-brands-400.woff2?v=2026-07-31-1") format("woff2");
+  src: url("/static/webfonts/fa-brands-400.woff2?v=2026-07-31-3") format("woff2");
 }
 
 .fa,

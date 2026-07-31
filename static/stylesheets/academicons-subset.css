@@ -8,7 +8,7 @@
  * Family and class names match upstream so markup is unchanged. Only the .ai
  * base class is used on this site, so the size/stack/pull modifiers are omitted.
  *
- * Regenerate with tools/build-icon-font.sh.
+ * Regenerate with tools/build-webfonts.sh.
  */
 
 @font-face {
@@ -16,7 +16,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("/static/webfonts/academicons.woff2?v=2026-07-31-1") format("woff2");
+  src: url("/static/webfonts/academicons.woff2?v=2026-07-31-3") format("woff2");
 }
 
 .ai {

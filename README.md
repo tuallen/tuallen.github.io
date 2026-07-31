@@ -22,8 +22,9 @@ Huge thanks to her for open-sourcing a clean, well-structured starting point.
 ## Tech Stack
 
 - **Pure HTML / CSS / JavaScript** — No frameworks, no build process; just vanilla web technologies
-- **Font Awesome 6.5.1** — General-purpose icon library, self-hosted as a subset of only the glyphs in use (see `tools/build-icon-font.sh`)
+- **Font Awesome 6.5.1** — General-purpose icon library, self-hosted as a subset of only the glyphs in use (see `tools/build-webfonts.sh`)
 - **Academicons** — Academic-specific icons (ORCID, arXiv, DBLP, etc.), also self-hosted as a subset
+- **Inter** — Body typeface, self-hosted as a variable font (no Google Fonts request)
 - **Custom SVG icon system** — Inline SVG masks for institutional and organizational logos
 - **Modern image formats** — WebP with PNG/JPG fallbacks
 - **Google Analytics** — Lightweight traffic monitoring
@@ -161,6 +162,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   │   ├── icons.css       # Custom icon definitions
 │   │   ├── fontawesome-subset.css # Generated: self-hosted Font Awesome subset
 │   │   ├── academicons-subset.css  # Generated: self-hosted Academicons subset
+│   │   ├── inter.css       # Generated: self-hosted Inter variable font
 │   │   └── zoom_containers.css
 │   ├── webfonts/           # Generated: subset icon-font woff2 files
 │   ├── js/
@@ -182,7 +184,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 │   └── posters/            # First-frame stills for thumbnail videos
 ├── files/                  # CV, resume, etc.
 ├── tools/
-│   └── build-icon-font.sh  # Regenerates the Font Awesome subset
+│   └── build-webfonts.sh   # Regenerates the icon-font subsets and Inter
 ├── cache_bust.py           # Automated cache busting script
 ├── sitemap.xml             # SEO sitemap
 └── robots.txt              # Crawler directives
@@ -283,16 +285,23 @@ things like YouTube's `?v=` video IDs are never rewritten.
 
 ---
 
-## Icon Font Subsets
+## Webfonts
+
+Every font is self-hosted, so no third-party origin sits on the critical path.
 
 The site uses ~36 of Font Awesome's ~2000 icons and 6 of Academicons' ~150.
 Font Awesome's CDN build costs 100 KB of render-blocking CSS plus 267 KB of
 webfonts from a third-party origin, and Academicons ships a 128 KB `.woff` with
-no `.woff2`. The self-hosted subsets total ~10 KB from our own origin.
+no `.woff2`. The self-hosted subsets total ~10 KB.
+
+Inter comes from the same script. Google serves it as a variable font, so one
+47 KB file covers every weight the site uses (400/500/600/700) where four static
+faces would be ~189 KB. The `unicode-range` split mirrors upstream, so
+`latin-ext` is only fetched by a page that needs a character outside Latin-1.
 
 ```bash
 pip3 install --user fonttools brotli   # one-time
-tools/build-icon-font.sh
+tools/build-webfonts.sh
 ```
 
 The script scans the markup and JS for the icon classes actually in use — including
