@@ -53,9 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         expanded = !expanded;
 
         if (expanded) {
-            // On mobile, rail goes to last dot; on desktop, second-to-last
-            const isMobile = window.innerWidth <= 960;
-            const expandTarget = isMobile ? lastItem : items[items.length - 2];
+            const expandTarget = lastItem;
 
             // Pre-measure expanded height before animating
             list.style.transition = "none";
