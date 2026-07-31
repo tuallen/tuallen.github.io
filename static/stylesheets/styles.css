@@ -1274,7 +1274,9 @@ section > h2 .button.heading-btn {
     justify-content: center;
     width: 22px;
     height: 22px;
-    margin: 6px auto 8px;
+    /* Tight above so the control reads as attached to the paragraph it expands;
+       the larger bottom margin keeps it off whatever follows. */
+    margin: 1px auto 8px;
     background: none;
     border: 1.5px solid var(--accent-primary);
     border-radius: 50%;
