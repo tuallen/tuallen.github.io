@@ -137,11 +137,19 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 
 ### Performance & SEO
 
-- **Preconnect hints** — DNS prefetching for external resources
-- **Deferred JavaScript** — Non-blocking script loading
-- **Semantic HTML5** — Proper heading hierarchy and ARIA labels
-- **Optimized media** — Appropriately sized images and compressed video assets
+- **No third-party origin on the critical path** — every render-blocking stylesheet and font is served from this origin, so first paint never waits on a DNS lookup and TLS handshake elsewhere. `cdnjs` is still preconnected because PDF.js loads from there on demand.
+- **Preconnect hints** — DNS prefetching for the APIs and CDN that are fetched after load
+- **Deferred JavaScript** — every script is `defer`red except `components.js`, which must run during parse so the cached header lands in the first paint
+- **Semantic HTML5** — one `<h1>` per page with sections as `<h2>` (the accent-bar styling lives on `.section-heading`, so heading level follows the document outline rather than the design), a `main` landmark on each page's content `<section>`, and an accessible name on every link, button and control
+- **Optimized media** — images sized to what the UI actually shows, allowing for the hover zoom (`display width x zoom x 2` for retina); videos kept at native resolution because they are already below that threshold
 - **Cache busting** — Automated versioning system for static assets to ensure browsers load latest versions
+
+One deliberate non-change: `components/header.html` is a fragment that returns 200,
+so a crawler could in principle index it as a thin page. Adding `Disallow: /components/`
+would be worse — `robots.txt` also blocks subresource fetches during rendering, and
+since the nav exists only after that fetch, Googlebot would render every page with no
+navigation at all. The right tool is an `X-Robots-Tag: noindex` response header on that
+path, which GitHub Pages cannot set per-file. Left crawlable on purpose.
 
 ---
 
