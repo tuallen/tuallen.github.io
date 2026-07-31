@@ -195,11 +195,6 @@ section > h2 {
   margin-bottom: 10px;
 }
 
-h2 title {
-  color: var(--accent-primary);
-  font-weight: 500;
-}
-
 h3,
 h4,
 h5,
@@ -243,8 +238,8 @@ a:hover {
 
 /* Animated sliding underline for inline text links (main content + sidebar email) */
 section :is(p, li, h2) a:not(.button),
-#indexWorkText a:not(.button),
-#indexExperienceText a:not(.button),
+.indexWorkText a:not(.button),
+.indexExperienceText a:not(.button),
 header p a {
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
@@ -254,8 +249,8 @@ header p a {
 }
 
 section :is(p, li, h2) a:not(.button):hover,
-#indexWorkText a:not(.button):hover,
-#indexExperienceText a:not(.button):hover,
+.indexWorkText a:not(.button):hover,
+.indexExperienceText a:not(.button):hover,
 header p a:hover {
   background-size: 100% 1.5px;
 }
@@ -263,8 +258,8 @@ header p a:hover {
 @media (prefers-reduced-motion: reduce) {
 
   section :is(p, li, h2) a:not(.button),
-  #indexWorkText a:not(.button),
-  #indexExperienceText a:not(.button),
+  .indexWorkText a:not(.button),
+  .indexExperienceText a:not(.button),
   header p a {
     transition: color 0.2s ease;
   }
@@ -333,10 +328,10 @@ header {
 .theme-icon {
   position: absolute;
   left: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
-/* Light mode: sun visible, hover → sun sets (down), moon rises (up) */
+/* Light mode: sun visible, hover → sun sets (drops down), moon rises (from below) */
 .theme-icon-sun {
   top: 0;
   transform: translateY(0);
@@ -345,7 +340,7 @@ header {
 
 .theme-icon-moon {
   top: 0;
-  transform: translateY(-100%);
+  transform: translateY(100%);
   opacity: 0;
 }
 
@@ -359,9 +354,9 @@ header {
   opacity: 1;
 }
 
-/* Dark mode: moon visible, hover → moon sets (down), sun rises (up) */
+/* Dark mode: moon visible, hover → moon sets (drops down), sun rises (from below) */
 [data-theme="dark"] .theme-icon-sun {
-  transform: translateY(-100%);
+  transform: translateY(100%);
   opacity: 0;
 }
 
@@ -1168,21 +1163,21 @@ section :is(h1, h2) .button.heading-btn {
   margin-bottom: 90px;
 }
 
-#indexWorkText,
+.indexWorkText,
 .indexWorkText {
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-#indexExperienceText,
+.indexExperienceText,
 .indexExperienceText {
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-#indexWorkText ul,
 .indexWorkText ul,
-#indexExperienceText ul,
+.indexWorkText ul,
+.indexExperienceText ul,
 .indexExperienceText ul {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
@@ -1454,13 +1449,13 @@ screen and (max-width: 960px) {
     margin-top: 10px;
   }
 
-  #indexWorkText,
+  .indexWorkText,
   .indexWorkText {
     margin-top: 0px;
     margin-bottom: 10px;
   }
 
-  .highlight-row:last-of-type #indexWorkText,
+  .highlight-row:last-of-type .indexWorkText,
   .highlight-row:last-of-type .indexWorkText {
     margin-bottom: 0;
   }
@@ -2024,12 +2019,12 @@ screen and (max-width: 768px) {
   }
 
   #theme-toggle:hover .theme-icon-moon {
-    transform: translateY(-100%);
+    transform: translateY(100%);
     opacity: 0;
   }
 
   [data-theme="dark"] #theme-toggle:hover .theme-icon-sun {
-    transform: translateY(-100%);
+    transform: translateY(100%);
     opacity: 0;
   }
 
