@@ -35,6 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
     list.classList.add("js-ready");
     let expanded = false;
 
+    // padding-bottom comes from a stylesheet and only changes with the media
+    // query, so read it once instead of on every frame of the animation — this
+    // runs 60x/s while the list expands and getComputedStyle forces a recalc.
+    let itemPaddingBottom = parseFloat(getComputedStyle(thirdItem).paddingBottom);
+
     // Dot center = li.offsetTop + 9 (dot: top 3px + radius 6px).
     // Rail CSS top = 9px (first dot center).
     // Rail height to a dot = li.offsetTop (the +9's cancel).
@@ -47,9 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             // Rail from first dot, solid to third dot, then fades to the last text baseline.
             // Text baseline ≈ li bottom minus padding-bottom minus half-leading.
-            const pb = parseFloat(getComputedStyle(thirdItem).paddingBottom);
             const dotEnd = thirdItem.offsetTop;
-            const textEnd = thirdItem.offsetTop + thirdItem.offsetHeight - pb;
+            const textEnd = thirdItem.offsetTop + thirdItem.offsetHeight - itemPaddingBottom;
             const solidStop = dotEnd / textEnd * 100;
             list.style.setProperty("--rail-height", `${textEnd}px`);
             list.style.setProperty("--rail-bg",
@@ -67,6 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         railQueued = true;
         requestAnimationFrame(() => {
             railQueued = false;
+            // Re-read the cached padding here rather than on window resize: this
+            // fires for any size change, including the media-query switch that
+            // actually alters it, and runs before updateRail uses the value.
+            itemPaddingBottom = parseFloat(getComputedStyle(thirdItem).paddingBottom);
             updateRail();
         });
     });
