@@ -141,6 +141,8 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 - **Preconnect hints** — DNS prefetching for the APIs and CDN that are fetched after load
 - **Deferred JavaScript** — every script is `defer`red except `components.js`, which must run during parse so the cached header lands in the first paint
 - **Semantic HTML5** — one `<h1>` per page with sections as `<h2>` (the accent-bar styling lives on `.section-heading`, so heading level follows the document outline rather than the design), a `main` landmark on each page's content `<section>`, and an accessible name on every link, button and control
+- **Keyboard access** — a skip link as the first tab stop, since the header contributes 16 tab stops before the content begins, and a `:focus-visible` ring on the slideshows, which are `tabindex="0"` and arrow-key navigable but set `outline: none`
+- **Styling in stylesheets** — repeated inline styles live in classes instead (`.section-heading`/`.has-action` for headings, `.teaser-cell` for highlight-row media cells, `.tight-under-heading` for content pulled up under a heading), which is what let the heading levels change without touching a single visual rule
 - **Optimized media** — images sized to what the UI actually shows, allowing for the hover zoom (`display width x zoom x 2` for retina); videos kept at native resolution because they are already below that threshold
 - **Cache busting** — Automated versioning system for static assets to ensure browsers load latest versions
 
