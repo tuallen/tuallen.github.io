@@ -52,7 +52,7 @@ function initSlideshow(container) {
         dots.forEach((d, i) => d.classList.toggle("active", i === current));
     }
 
-    // Auto-advance every 3 seconds
+    // Auto-advance every 3 seconds (only when visible)
     function startAuto() {
         clearInterval(autoTimer);
         autoTimer = setInterval(() => {
@@ -60,9 +60,25 @@ function initSlideshow(container) {
         }, 3000);
     }
 
-    function resetAuto() { startAuto(); }
+    function stopAuto() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+    }
 
-    startAuto();
+    function resetAuto() { if (!paused) startAuto(); }
+
+    // Only auto-advance when the slideshow is on screen
+    const visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startAuto();
+            } else {
+                stopAuto();
+            }
+        });
+    }, { threshold: 0.1 });
+
+    visibilityObserver.observe(container);
 
     // Navigation
     prevBtn.addEventListener("click", () => { goTo(current - 1); resetAuto(); });
