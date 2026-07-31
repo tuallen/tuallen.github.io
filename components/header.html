@@ -9,8 +9,8 @@
         <a href="/static/images/Headshot.png?v=2026-07-30">
             <picture>
                 <source srcset="/static/images/Headshot_Square_Background.webp?v=2026-07-30" type="image/webp">
-                <img src="/static/images/Headshot.jpg?v=2026-07-30" alt="Portrait of Allen Tu" title="Portrait of Allen Tu"
-                    class="portrait" fetchpriority="high" loading="eager">
+                <img src="/static/images/Headshot_Square_Background.jpg?v=2026-07-30" alt="Portrait of Allen Tu"
+                    title="Portrait of Allen Tu" class="portrait" fetchpriority="high" loading="eager">
             </picture>
         </a>
         <p>
@@ -18,27 +18,35 @@
         </p>
 
         <div class="icon-grid">
-            <a href="/files/AllenTu_CV.pdf?v=2026-07-30" title="Curriculum Vitae"><i class="ai ai-cv"></i></a>
-            <a rel="me" href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl"><i
-                    class="fa-brands fa-google-scholar"></i></a>
-            <a rel="me" href="https://www.linkedin.com/in/allentu/"><i class="fa-brands fa-linkedin"></i></a>
-            <a rel="me" href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207">
-                <i class="fa-xhs"></i>
+            <a href="/files/AllenTu_CV.pdf?v=2026-07-30" title="Curriculum Vitae" aria-label="Curriculum Vitae"><i
+                    class="ai ai-cv" aria-hidden="true"></i></a>
+            <a rel="me" href="https://scholar.google.com/citations?user=sqPGyG4AAAAJ&hl" aria-label="Google Scholar"><i
+                    class="fa-brands fa-google-scholar" aria-hidden="true"></i></a>
+            <a rel="me" href="https://www.linkedin.com/in/allentu/" aria-label="LinkedIn"><i
+                    class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+            <a rel="me" href="https://www.xiaohongshu.com/user/profile/6786b4ad0000000008018207"
+                aria-label="RedNote (Xiaohongshu)">
+                <i class="fa-xhs" aria-hidden="true"></i>
             </a>
-            <a rel="me" href="https://github.com/tuallen"><i class="fa-brands fa-github"></i></a>
-            <a rel="me" href="https://twitter.com/tuallen_"><i class="fa-brands fa-twitter"></i></a>
-            <a href="/static/images/WeChat.png?v=2026-07-30" title="WeChat QR Code"><i
-                    class="fa-brands fa-weixin"></i></a>
-            <a rel="me" href="https://space.bilibili.com/3706971811220357"><i class="fa-brands fa-bilibili"></i></a>
+            <a rel="me" href="https://github.com/tuallen" aria-label="GitHub"><i class="fa-brands fa-github"
+                    aria-hidden="true"></i></a>
+            <a rel="me" href="https://twitter.com/tuallen_" aria-label="Twitter"><i class="fa-brands fa-twitter"
+                    aria-hidden="true"></i></a>
+            <a href="/static/images/WeChat.png?v=2026-07-30" title="WeChat QR Code" aria-label="WeChat QR code"><i
+                    class="fa-brands fa-weixin" aria-hidden="true"></i></a>
+            <a rel="me" href="https://space.bilibili.com/3706971811220357" aria-label="Bilibili"><i
+                    class="fa-brands fa-bilibili" aria-hidden="true"></i></a>
         </div>
         <br>
     </div>
 
-    <ul class="navbar">
-        <li class="navbar_li"><a href="/" data-nav="home">Home</a></li>
-        <li class="navbar_li"><a href="/hub/" data-nav="hub">Link Hub</a></li>
-        <li class="navbar_li"><a href="/3d/" data-nav="3d">3D/4D Research</a></li>
-        <li class="navbar_li"><a href="/biometrics/" data-nav="biometrics">Biometrics Research</a></li>
-        <li class="navbar_li"><a href="/gallery/" data-nav="gallery">Conference Gallery</a></li>
-    </ul>
+    <nav aria-label="Main">
+        <ul class="navbar">
+            <li class="navbar_li"><a href="/" data-nav="home">Home</a></li>
+            <li class="navbar_li"><a href="/hub/" data-nav="hub">Link Hub</a></li>
+            <li class="navbar_li"><a href="/3d/" data-nav="3d">3D/4D Research</a></li>
+            <li class="navbar_li"><a href="/biometrics/" data-nav="biometrics">Biometrics Research</a></li>
+            <li class="navbar_li"><a href="/gallery/" data-nav="gallery">Conference Gallery</a></li>
+        </ul>
+    </nav>
 </header>

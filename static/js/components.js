@@ -64,6 +64,13 @@
                     highlightNavigation(element, selectedNav);
                 }
 
+                // Apply external-link new-tab handling to this component's markup.
+                // Scoped to the injected element — new-tabs.js already handled the
+                // rest of the document on DOMContentLoaded.
+                if (typeof window.applyExternalLinkTargets === 'function') {
+                    window.applyExternalLinkTargets(element);
+                }
+
                 // Staggered entrance on first visit only
                 if (componentName === 'header' && isFirstVisit) {
                     const header = element.querySelector('header');
@@ -87,11 +94,6 @@
 
         if (isFirstVisit) {
             sessionStorage.setItem('visited', '1');
-        }
-
-        // Apply external-link new-tab handling to markup injected by components
-        if (typeof window.applyExternalLinkTargets === 'function') {
-            window.applyExternalLinkTargets(document);
         }
 
         // Set current year in footer copyright

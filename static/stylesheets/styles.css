@@ -465,16 +465,6 @@ img {
   box-shadow: 0 6px 28px var(--accent-shadow);
 }
 
-.workPicture {
-  width: 240px;
-  margin-right: 24px;
-}
-
-.colPortrait {
-  margin-bottom: 8px;
-  border-radius: 10px;
-}
-
 /* ==================== TABLES ==================== */
 
 table {
@@ -669,9 +659,6 @@ dt {
   .news-timeline li {
     transition: none;
   }
-  .news-grey-dots {
-    transition: none;
-  }
 }
 
 /* ==================== CODE BLOCKS ==================== */
@@ -700,28 +687,6 @@ code {
   margin-bottom: 10px;
   display: block;
   max-width: 75%;
-}
-
-skinnycode {
-  font-family: monospace;
-  background: var(--code-bg);
-  border: var(--border-color) dashed 1px;
-  padding: 6px;
-  margin-right: auto;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  display: inline-block;
-  max-width: 75%;
-}
-
-mathcode {
-  font-family: monospace;
-  background: var(--code-bg);
-  border: var(--border-color) dashed 1px;
-  padding: 6px;
-  margin-left: 80px;
-  display: inline-block;
-  max-width: 60%;
 }
 
 blockquote {
@@ -1116,11 +1081,6 @@ section :is(h1, h2) .button.heading-btn {
     padding-top: 16px;
   }
 
-  .bio-extended.is-visible {
-    max-height: 300px;
-    opacity: 1;
-  }
-
   .bio-toggle {
     display: flex;
     align-items: center;
@@ -1151,33 +1111,21 @@ section :is(h1, h2) .button.heading-btn {
   height: 1em;
 }
 
-.gap-md {
-  margin-bottom: 40px;
-}
-
 .gap-lg {
   margin-bottom: 30px;
 }
 
-.gap-xl {
-  margin-bottom: 90px;
-}
-
-.indexWorkText,
 .indexWorkText {
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-.indexExperienceText,
 .indexExperienceText {
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
 .indexWorkText ul,
-.indexWorkText ul,
-.indexExperienceText ul,
 .indexExperienceText ul {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
@@ -1190,118 +1138,6 @@ section :is(h1, h2) .button.heading-btn {
 
 .exp-dates {
   font-weight: 400;
-}
-
-/* ==================== PAPER/BLOG SPECIFIC ==================== */
-
-.paper_line {
-  margin-left: 20px;
-  margin-right: 20px;
-  padding-right: 20px;
-  text-align: left;
-}
-
-.paper_title {
-  margin-left: 60px;
-  margin-right: 20px;
-  padding-right: 20px;
-  text-align: left;
-  font-weight: 800;
-}
-
-#bibtexFont {
-  font-size: 10px;
-  color: #9AC39D !important;
-}
-
-#appendixFont {
-  color: #E8AB6B !important;
-}
-
-#collaboratorWrapper {
-  text-align: center;
-  margin-left: -30%;
-}
-
-#blognav {
-  float: right;
-  padding: 14px;
-  border-radius: 10px;
-  border-color: #cdcccc;
-  border: dotted;
-  border-width: 1px;
-  margin-left: 38px;
-  margin-top: 10px;
-  margin-right: 36px;
-  margin-bottom: 40px;
-  width: 195px;
-}
-
-#allPostList {
-  line-height: 24px;
-}
-
-#blognavHeader {
-  margin-top: -2px;
-  font-style: italic;
-  font-weight: lighter;
-  text-align: center;
-}
-
-.blognav_element {
-  margin-left: 16px;
-  font-size: 16px;
-}
-
-.blognav_element a:hover,
-.blognav_element a:focus {
-  border-bottom-style: solid;
-  border-top-style: solid;
-  border-width: 1px;
-  color: #f88c99;
-}
-
-#blog_selected {
-  text-decoration: underline;
-}
-
-#tutorialP {
-  max-width: 80%;
-}
-
-#definition {
-  margin-left: 40px;
-  margin-bottom: 10px;
-  margin-right: 160px;
-  text-align: left;
-  font-family: serif;
-  padding: 15px;
-  max-width: 95%;
-  min-width: 200px;
-  border-style: solid;
-  border-width: 1px;
-}
-
-#definition_no_b {
-  margin-left: 40px;
-  margin-right: 160px;
-  text-align: left;
-  font-family: serif;
-  max-width: 95%;
-  min-width: 200px;
-}
-
-#narrow_definition {
-  margin-left: 40px;
-  margin-bottom: 20px;
-  margin-right: 280px;
-  text-align: left;
-  font-family: serif;
-  padding: 15px;
-  max-width: 95%;
-  min-width: 200px;
-  border-style: solid;
-  border-width: 1px;
 }
 
 /* ==================== LARGE-SCREEN SCALING ==================== */
@@ -1449,13 +1285,11 @@ screen and (max-width: 960px) {
     margin-top: 10px;
   }
 
-  .indexWorkText,
   .indexWorkText {
     margin-top: 0px;
     margin-bottom: 10px;
   }
 
-  .highlight-row:last-of-type .indexWorkText,
   .highlight-row:last-of-type .indexWorkText {
     margin-bottom: 0;
   }
@@ -1579,20 +1413,6 @@ screen and (max-width: 480px) {
   white-space: pre;
   border: none;
   background: transparent;
-}
-
-/* BibTeX syntax highlighting */
-.bibtex-code .entry-type {
-  color: #0066cc;
-  font-weight: bold;
-}
-
-.bibtex-code .field-name {
-  color: #cc0066;
-}
-
-.bibtex-code .field-value {
-  color: #006633;
 }
 
 @media print {
