@@ -8,7 +8,7 @@
     <!-- Viewer shell: it only has content when given a ?file= param, so keep it out of the index -->
     <meta name="robots" content="noindex,follow">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="/static/stylesheets/pdf-viewer.css?v=2026-07-31-4">
+    <link rel="stylesheet" href="/static/stylesheets/pdf-viewer.css?v=2026-07-31-5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
 </head>
 
@@ -19,7 +19,7 @@
     </div>
 
     <div id="errorMessage">
-        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--error-icon)" stroke-width="1.5"
+        <svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--error-icon)" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9" />
             <path d="M12 8v4" />
@@ -38,16 +38,16 @@
 
         <!-- Left: Page navigation -->
         <div class="ctrl-group">
-            <button class="ctrl-btn" id="pagePrev" title="Previous page (PageUp)" disabled>
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+            <button class="ctrl-btn" id="pagePrev" title="Previous page (PageUp)" aria-label="Previous page (PageUp)" disabled>
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9.5 3L5 7.5l4.5 4.5" />
                 </svg>
             </button>
             <input type="text" id="pageInput" value="1" aria-label="Current page">
             <span class="ctrl-label">of <span id="pageCount">—</span></span>
-            <button class="ctrl-btn" id="pageNext" title="Next page (PageDown)" disabled>
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+            <button class="ctrl-btn" id="pageNext" title="Next page (PageDown)" aria-label="Next page (PageDown)" disabled>
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5.5 3L10 7.5 5.5 12" />
                 </svg>
@@ -58,15 +58,15 @@
 
         <!-- Center: Zoom + Fit -->
         <div class="ctrl-group">
-            <button class="ctrl-btn" id="zoomOut" title="Zoom out (−)">
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+            <button class="ctrl-btn" id="zoomOut" title="Zoom out (−)" aria-label="Zoom out (−)">
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
                     stroke-linecap="round">
                     <path d="M2.5 7.5h10" />
                 </svg>
             </button>
             <span id="zoomDisplay">100%</span>
-            <button class="ctrl-btn" id="zoomIn" title="Zoom in (+)">
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
+            <button class="ctrl-btn" id="zoomIn" title="Zoom in (+)" aria-label="Zoom in (+)">
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"
                     stroke-linecap="round">
                     <path d="M7.5 2.5v10M2.5 7.5h10" />
                 </svg>
@@ -75,8 +75,8 @@
             <div class="ctrl-divider"></div>
 
             <!-- Fit width -->
-            <button class="ctrl-btn" id="fitWidth" title="Fit to width">
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+            <button class="ctrl-btn" id="fitWidth" title="Fit to width" aria-label="Fit to width">
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M1 7.5h13" />
                     <path d="M11.5 5l2.5 2.5-2.5 2.5" />
@@ -86,8 +86,8 @@
             </button>
 
             <!-- Fit page -->
-            <button class="ctrl-btn" id="fitPage" title="Fit whole page">
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+            <button class="ctrl-btn" id="fitPage" title="Fit whole page" aria-label="Fit whole page">
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2.5" y="1" width="10" height="13" rx="1" />
                     <path d="M7.5 4.5v6" />
@@ -102,8 +102,8 @@
         <!-- Right: Rotate + Print + Download -->
         <div class="ctrl-group">
             <!-- Rotate clockwise -->
-            <button class="ctrl-btn" id="rotateCw" title="Rotate clockwise (R)" disabled>
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+            <button class="ctrl-btn" id="rotateCw" title="Rotate clockwise (R)" aria-label="Rotate clockwise (R)" disabled>
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M11.5 4.5A5 5 0 1 0 12.9 8" />
                     <path d="M10.5 2l2 2.5-2.5 1.5" />
@@ -113,8 +113,8 @@
             <div class="ctrl-divider"></div>
 
             <!-- Print -->
-            <button class="ctrl-btn" id="printBtn" title="Print (Ctrl+P)" disabled>
-                <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            <button class="ctrl-btn" id="printBtn" title="Print (Ctrl+P)" aria-label="Print (Ctrl+P)" disabled>
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 9 6 2 18 2 18 9"></polyline>
                     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -123,8 +123,8 @@
             </button>
 
             <!-- Download -->
-            <button class="ctrl-btn" id="downloadBtn" title="Download (Ctrl+S)" disabled>
-                <svg class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
+            <button class="ctrl-btn" id="downloadBtn" title="Download (Ctrl+S)" aria-label="Download (Ctrl+S)" disabled>
+                <svg aria-hidden="true" class="ctrl-icon" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M7.5 2v8" />
                     <path d="M4.5 7.5l3 3 3-3" />
