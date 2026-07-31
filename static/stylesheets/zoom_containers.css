@@ -57,27 +57,13 @@
     .video-container {
         width: 100%;
         height: auto;
-        margin-top: 50px;
         overflow: hidden;
     }
 
     .image-container {
         width: 100%;
         height: auto;
-        margin-top: 40px;
         overflow: hidden;
-    }
-
-    /*
-     * The media's top margin (40-50px) separates one stacked card from the card
-     * above it. On the FIRST card there's no card above — just the section
-     * heading and its BibTeX/CV button — so that margin creates an oversized
-     * gap. Use a small value so the button→media spacing matches the tight gap
-     * under the plain (button-less) headings.
-     */
-    .highlight-row:first-of-type .video-container,
-    .highlight-row:first-of-type .image-container {
-        margin-top: 10px;
     }
 
     .video-thumbnail,

@@ -508,6 +508,10 @@ dt {
   transition: background-color 0.2s ease;
 }
 
+.highlight-row:last-of-type {
+  border-bottom: none;
+}
+
 .highlight-separator {
   border-bottom: 3px solid var(--highlight-separator-border) !important;
 }
@@ -1079,6 +1083,18 @@ section :is(h1, h2) .button.heading-btn {
   }
 }
 
+.equal-contribution-note {
+  margin-top: -3em;
+  margin-bottom: 3em;
+}
+
+@media screen and (max-width: 960px) {
+  .equal-contribution-note {
+    margin-top: 0;
+    margin-bottom: 2em;
+  }
+}
+
 /* ==================== BIO TOGGLE (MOBILE ONLY) ==================== */
 
 .bio-toggle {
@@ -1424,28 +1440,31 @@ screen and (max-width: 960px) {
     padding: 4px 0;
   }
 
-  /* Breathing room above media cells in stacked highlight rows */
-  .highlight-row td:first-child {
-    padding-top: 8px;
-  }
-
-  .highlight-row:first-of-type td:first-child {
-    padding-top: 12px;
-  }
 
   .video-container,
   .image-container,
   .slideshow {
     width: 100%;
-    margin: 0 auto;
+    margin: 20px auto 0;
   }
 
-  /* Add a little space between the stacked media and the title */
+  .highlight-row:first-of-type .video-container,
+  .highlight-row:first-of-type .image-container,
+  .highlight-row:first-of-type .slideshow {
+    margin-top: 10px;
+  }
+
   #indexWorkText,
   .indexWorkText {
     margin-top: 0px;
     margin-bottom: 20px;
   }
+
+  .highlight-row:last-of-type #indexWorkText,
+  .highlight-row:last-of-type .indexWorkText {
+    margin-bottom: 0;
+  }
+
 
   ul {
     padding-left: 20px;
