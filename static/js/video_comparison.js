@@ -17,11 +17,19 @@ function playVids(videoId) {
             // Normalize to [0, 1]
             bcr = videoMerge.getBoundingClientRect();
             position = ((e.pageX - bcr.x) / bcr.width);
+            redrawIfIdle();
         }
         function trackLocationTouch(e) {
             // Normalize to [0, 1]
             bcr = videoMerge.getBoundingClientRect();
             position = ((e.touches[0].pageX - bcr.x) / bcr.width);
+            redrawIfIdle();
+        }
+
+        // The user can click to pause and keep dragging the split. The loop is
+        // stopped then, so paint a single frame to follow the pointer.
+        function redrawIfIdle() {
+            if (!running) requestAnimationFrame(drawLoop);
         }
 
         videoMerge.addEventListener("mousemove", trackLocation, false);
@@ -57,15 +65,23 @@ function playVids(videoId) {
         var onScreen = true;
         var running = false;
 
+        function startLoop() {
+            if (running || !onScreen) return;
+            running = true;
+            requestAnimationFrame(drawLoop);
+        }
+
         if ("IntersectionObserver" in window) {
             new IntersectionObserver(function (entries) {
                 onScreen = entries[entries.length - 1].isIntersecting;
-                if (onScreen && !running) {
-                    running = true;
-                    requestAnimationFrame(drawLoop);
-                }
+                startLoop();
             }).observe(videoMerge);
         }
+
+        // A slider inside a slideshow is paused while its slide is hidden, which
+        // ends the loop. The canvas never leaves the viewport in that case, so the
+        // observer above won't fire again — restart from `play` instead.
+        vid.addEventListener("play", startLoop);
 
         function drawLoop() {
             var dpr = window.devicePixelRatio || 1;
@@ -214,10 +230,13 @@ function playVids(videoId) {
                     drawBubble(labelRight, cw - 5, ch - fontSize * 1.2, true);
                 }
             }
-            if (onScreen) {
+            // Keep drawing only while visible and playing. A paused slider holds
+            // its last frame, so stopping costs nothing visually; `play` and the
+            // IntersectionObserver both restart the loop.
+            if (onScreen && !vid.paused) {
                 requestAnimationFrame(drawLoop);
             } else {
-                running = false;   // the IntersectionObserver restarts the loop
+                running = false;
             }
         }
         running = true;
@@ -274,6 +293,29 @@ function resizeAndPlay(element) {
         var ctx = cv.getContext("2d");
         ctx.scale(dpr, dpr);
     };
+
+    // `onplay` fires on every play, including when a slideshow slide is shown
+    // again after being paused. Only set up once: updateSize() calls
+    // ctx.scale(dpr, dpr) on a context that persists across getContext() calls,
+    // so running it twice compounds the transform and draws at 2x on retina.
+    if (element.dataset.comparisonReady) return;
+
+    // onplay can fire before the video is usable: with no dimensions yet the
+    // canvas would be sized from videoHeight 0, and playVids() below bails
+    // unless readyState > 3. Retry on canplaythrough, which guarantees both.
+    if (!element.videoWidth || element.readyState <= 3) {
+        if (!element.dataset.comparisonPending) {
+            element.dataset.comparisonPending = "true";
+            element.addEventListener("canplaythrough", function once() {
+                element.removeEventListener("canplaythrough", once);
+                delete element.dataset.comparisonPending;
+                resizeAndPlay(element);
+            });
+        }
+        return;
+    }
+
+    element.dataset.comparisonReady = "true";
 
     // Initial size update
     updateSize();
