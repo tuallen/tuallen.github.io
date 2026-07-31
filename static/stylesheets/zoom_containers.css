@@ -57,13 +57,13 @@
     .video-container {
         width: 100%;
         height: auto;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .image-container {
         width: 100%;
         height: auto;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .video-thumbnail,
