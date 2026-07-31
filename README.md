@@ -37,7 +37,7 @@ On top of the original template, I’ve introduced a number of custom features a
 ### Interactive Media
 
 - **Image slideshows** (`slideshow.js`)  
-  Swipable image carousels with auto-advance, keyboard navigation, touch/mouse drag, and dot indicators. Used for research highlight teasers (with hover zoom) and the Conference Gallery page (full-width, no crop).
+  Swipable image carousels with auto-advance, keyboard navigation, touch/mouse drag, and dot indicators. Auto-advance pauses when the slideshow is off-screen (via IntersectionObserver) to save resources. Used for research highlight teasers (with hover zoom) and the Conference Gallery page (full-width, no crop).
 - **Zoom containers** (`zoom-containers.js`)  
   Click-to-expand images and videos without leaving the page
 - **Video comparison sliders** (`video_comparison.js`)  
