@@ -1457,7 +1457,7 @@ screen and (max-width: 960px) {
   #indexWorkText,
   .indexWorkText {
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .highlight-row:last-of-type #indexWorkText,
