@@ -4,8 +4,8 @@
   /* Light theme (default) */
   --bg-primary: #ffffff;
   --bg-secondary: #f8f8f8;
-  --text-primary: #595959;
-  --text-secondary: #777777;
+  --text-primary: #2f2f2f;
+  --text-secondary: #6a6a6a;
   --text-heading: #222222;
   --text-heading-alt: #393939;
   --accent-primary: #b03b3b;
@@ -44,8 +44,8 @@
 [data-theme="light"] {
   --bg-primary: #ffffff;
   --bg-secondary: #f8f8f8;
-  --text-primary: #595959;
-  --text-secondary: #777777;
+  --text-primary: #2f2f2f;
+  --text-secondary: #6a6a6a;
   --text-heading: #222222;
   --text-heading-alt: #393939;
   --accent-primary: #b03b3b;
@@ -68,7 +68,7 @@ html {
 body {
   background-color: var(--bg-primary);
   padding: 50px;
-  font: 14px/1.6 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font: 16px/1.65 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text-primary);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -288,6 +288,15 @@ pre,
 dl {
   margin: 0 0 20px;
 }
+
+/*
+ * Prose runs the full column width.
+ *
+ * A narrower measure (~640px, or 75 characters) would be easier to read than
+ * the 780px column's ~104, but it left the text ending 140px short of the
+ * tables, timeline and media below it — and that ragged right edge cost more
+ * than the reading comfort gained. Every block now ends on the same line.
+ */
 
 small {
   font-size: 11px;
@@ -606,7 +615,8 @@ dt {
   content: "";
   position: absolute;
   left: 9px;
-  top: 9px;
+  /* Starts at the first dot's centre, same derivation as the dot itself. */
+  top: calc(13px * 1.65 / 2);
   height: var(--rail-height, 0px);
   width: 2px;
   background: var(--rail-bg, var(--border-color));
@@ -646,11 +656,20 @@ dt {
 .news-timeline.is-collapsed li.news-hidden:nth-child(9) { transition-delay: 0s; }
 
 /* Timeline node — centered under the news heading icon */
+/*
+ * Timeline node, centred on the date that follows it.
+ *
+ * `top` is derived rather than hardcoded: the date is the item's first line, so
+ * its optical centre is half its line box (13px x 1.65 = 21.45px), and the dot
+ * needs to sit half its own height above that. Written as a calc so it stays
+ * centred if the date's size or the body line-height changes — a fixed 3px was
+ * correct for the old 12px date and drifted 1.7px high at 13px.
+ */
 .news-timeline li::before {
   content: "";
   position: absolute;
   left: 4px;
-  top: 3px;
+  top: calc((13px * 1.65 / 2) - 6px);
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -664,11 +683,12 @@ dt {
 }
 
 /* Arrow overlay on the toggle dot */
+/* Arrow overlay — must track the dot exactly, so it repeats the same offset. */
 .news-timeline li::after {
   content: none;
   position: absolute;
   left: 4px;
-  top: 3px;
+  top: calc((13px * 1.65 / 2) - 6px);
   width: 12px;
   height: 12px;
   font-family: "Font Awesome 6 Free";
@@ -702,12 +722,19 @@ dt {
   padding-bottom: 0;
 }
 
+/*
+ * Date label on a news entry. Kept a step below the 16px body so it reads as
+ * metadata attached to the sentence rather than a second headline competing
+ * with it — it is already marked out by the accent colour and weight 600, and
+ * the size difference is what lets the eye scan down the dates without parsing
+ * the prose. (12px was tuned against 14px body and now sits too far below.)
+ */
 .news-date {
   display: block;
   margin-bottom: -2px;
   color: var(--accent-primary);
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.01em;
   cursor: pointer;
 }
@@ -1195,8 +1222,19 @@ section > h2 .button.heading-btn {
 
 /* ==================== BIO TOGGLE (MOBILE ONLY) ==================== */
 
+/*
+ * Gap between the two bio paragraphs on desktop.
+ *
+ * Left at the 20px every other <p> on the site uses, so this reads as an
+ * ordinary paragraph break rather than a special case. (It was 10px, tuned when
+ * the body was 14px, which looked cramped against 16px/1.65 text; a full
+ * line-height at 26.4px was too airy.)
+ *
+ * The mobile rule below overrides this — there the second paragraph is
+ * collapsed behind the toggle, so it manages its own spacing.
+ */
 .bio-primary {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .bio-toggle {

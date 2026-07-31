@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // runs 60x/s while the list expands and getComputedStyle forces a recalc.
     let itemPaddingBottom = parseFloat(getComputedStyle(thirdItem).paddingBottom);
 
-    // Dot center = li.offsetTop + 9 (dot: top 3px + radius 6px).
-    // Rail CSS top = 9px (first dot center).
-    // Rail height to a dot = li.offsetTop (the +9's cancel).
+    // Dot centre = li.offsetTop + half the date's line box (see the CSS, which
+    // derives the same offset). The rail's CSS `top` is that same value, so the
+    // two cancel and the height to any dot is simply li.offsetTop.
     const updateRail = () => {
         if (expanded) {
             // Solid rail from first dot to last dot
