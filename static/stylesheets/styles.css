@@ -318,7 +318,8 @@ a:hover {
 section :is(p, li, h2) a:not(.button),
 .indexWorkText a:not(.button),
 .indexExperienceText a:not(.button),
-header p a {
+header p a,
+a.plain-link {
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
   background-repeat: no-repeat;
@@ -329,8 +330,21 @@ header p a {
 section :is(p, li, h2) a:not(.button):hover,
 .indexWorkText a:not(.button):hover,
 .indexExperienceText a:not(.button):hover,
-header p a:hover {
+header p a:hover,
+a.plain-link:hover,
+a.plain-link:focus-visible {
   background-size: 100% 1.5px;
+}
+
+/* The name in the footer copyright goes home, the same as the brandmark in the header —
+   but it is running text, not a mark, so it keeps the colour of the line it sits in
+   rather than taking the red every other footer link uses. The underline above is drawn
+   in currentColor, so it follows that grey in either theme without a value of its own.
+   `a` and `a:hover` both set the accent colour, hence overriding both states here. */
+footer a.plain-link,
+footer a.plain-link:hover,
+footer a.plain-link:focus {
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
