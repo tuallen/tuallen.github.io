@@ -133,10 +133,17 @@
             sessionStorage.setItem('visited', '1');
         }
 
-        // Set current year in footer copyright
+        // Keep the footer copyright year current. The markup already carries a year,
+        // so this only writes when the two differ — i.e. after New Year, until the
+        // committed value is updated. Writing unconditionally would dirty the text
+        // node on every load and reflow the footer for no reason, which is what the
+        // empty span this replaced used to do.
         const copyrightYear = document.getElementById('copyright-year');
         if (copyrightYear) {
-            copyrightYear.textContent = new Date().getFullYear();
+            const currentYear = String(new Date().getFullYear());
+            if (copyrightYear.textContent.trim() !== currentYear) {
+                copyrightYear.textContent = currentYear;
+            }
         }
 
         // Set up theme toggle button after footer has loaded
