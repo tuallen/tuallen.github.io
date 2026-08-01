@@ -1,6 +1,13 @@
 <footer style="text-align: center;">
     <p style="line-height: 1.2;">
-        &copy; <span id="copyright-year"></span> <a href="/" class="plain-link"
+        <!-- The year is in the markup, not injected. It used to be an empty
+             <span id="copyright-year"> filled by components.js after the fetch
+             settled, which left the footer painting as "© Allen Tu · …" and then
+             reflowing sideways as the year arrived — a visible jump on every
+             navigation, since the cached markup lands before that script runs.
+             components.js still rewrites it if the real year ever differs, so a
+             stale year self-corrects on load rather than needing a yearly edit. -->
+        &copy; <span id="copyright-year">2026</span> <a href="/" class="plain-link"
             aria-label="Allen Tu (Home)">Allen Tu</a>
         &middot;
         <a href="#" id="theme-toggle" aria-label="Switch to dark mode">
@@ -15,7 +22,7 @@
             <i class="fa fa-code"></i>
         </a>
         &middot;
-        <a href="/static/images/QRcode_website.png?v=2026-08-01" title="Website QR Code" target="_blank"
+        <a href="/static/images/QRcode_website.png?v=2026-08-01-1" title="Website QR Code" target="_blank"
             rel="noopener" aria-label="Open mobile QR code"><i class="fa fa-qrcode"></i></a>
     </p>
 </footer>
