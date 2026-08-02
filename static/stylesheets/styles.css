@@ -1345,6 +1345,18 @@ section > h2 .button.heading-btn {
   margin-bottom: 0.1em;
 }
 
+/*
+ * An aside under a project's description — an invitation, award, or similar —
+ * is a separate thought from the description, so it takes half a line of air
+ * above it (1.5x the line advance the plain <br> used to give). Still tighter
+ * than the full 1em .spacer that divides the description from the author list,
+ * so the note stays visibly attached to the description it qualifies.
+ */
+.work-note {
+  display: block;
+  margin-top: 0.25em; 
+}
+
 /* Experience role + dates: colon on desktop, stacked on mobile */
 .exp-role::after {
   content: ": ";
