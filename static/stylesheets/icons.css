@@ -52,7 +52,7 @@
     height: 1em;
     background: currentColor;
 
-    --icon: url("/static/icons/tu.svg?v=2026-08-01-1");
+    --icon: url("/static/icons/tu.svg?v=2026-08-01-2");
 
     -webkit-mask-image: var(--icon);
     -webkit-mask-repeat: no-repeat;
@@ -207,7 +207,7 @@
     aspect-ratio: 1835 / 819;
     background: currentColor;
 
-    --icon: url("/static/icons/allentu.svg?v=2026-08-01-1");
+    --icon: url("/static/icons/allentu.svg?v=2026-08-01-2");
 
     -webkit-mask-image: var(--icon);
     -webkit-mask-repeat: no-repeat;
