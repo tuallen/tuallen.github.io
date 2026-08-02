@@ -720,8 +720,19 @@ dt {
   content: "\f078";
 }
 
+/*
+ * The two chevrons are not mirror images inside their em box: measured against
+ * the dot centre, \f078 lands 0.1px low but \f077 sits 0.9px high, so centring
+ * the box leaves only the up state looking lifted. Nudge that one state back.
+ *
+ * 0.4px, not the full 0.9px it is out by: at 1x the 7px glyph rasterises onto
+ * whole pixels and already lands centred, and anything from 0.5px up crosses
+ * the rounding threshold and drops it a full pixel low there. 0.4px is the
+ * largest correction that leaves 1x untouched while halving the 2x error.
+ */
 .news-timeline li.news-arrow-up::after {
   content: "\f077";
+  transform: translateY(0.4px);
 }
 
 /* Pre-JS collapse: hide items 4+ instantly to prevent flash of full list */
