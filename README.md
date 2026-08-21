@@ -341,14 +341,15 @@ In addition to this personal site, I have also built or helped assemble several 
 - [splatsure.github.io](https://splatsure.github.io/) ([Source Code](https://github.com/splatsure/splatsure.github.io))
 - [jianyuwang0511.github.io/tameldl](https://jianyuwang0511.github.io/tameldl) ([Source Code](https://github.com/jianyuwang0511/tameldl))
 
-This template has also been used for other academic websites that I helped their authors set up, including:
+This template has also been used for other academic websites, some of which I helped their authors set up, including:
 
 - [zhouyuanyuan6.github.io](https://zhouyuanyuan6.github.io/) ([Source Code](https://github.com/zhouyuanyuan6/zhouyuanyuan6.github.io))
 - [jianyuwang0511.github.io](https://jianyuwang0511.github.io/) ([Source Code](https://github.com/jianyuwang0511/jianyuwang0511.github.io))
+- [nicomastro.github.io](https://nicomastro.github.io/) ([Source Code](https://github.com/nicomastro/nicomastro.github.io))
 
 ---
 
-**Last Updated:** July 30, 2026
+**Last Updated:** August 20, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
