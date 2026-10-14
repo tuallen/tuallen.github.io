@@ -83,7 +83,85 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial rail after collapse transition settles
     setTimeout(updateRail, 400);
 
-    const toggle = () => {
+    // When an expanded timeline collapses, the date/dot used as the control can
+    // move upward by several screenfuls. Keep that point anchored in the viewport
+    // while the existing item transitions run, so collapse and navigation feel like
+    // one motion rather than a collapse followed by a separate scroll. The page's
+    // normal smooth anchor scrolling is temporarily disabled because it would queue
+    // these per-frame corrections and replay them after the collapse.
+    let scrollFollowFrame = null;
+    const scrollCancelEvents = ["wheel", "touchstart", "pointerdown", "keydown"];
+    let previousInlineScrollBehavior = null;
+
+    const cancelScrollFollow = () => {
+        if (scrollFollowFrame !== null) {
+            cancelAnimationFrame(scrollFollowFrame);
+            scrollFollowFrame = null;
+        }
+        scrollCancelEvents.forEach(type => {
+            window.removeEventListener(type, cancelScrollFollow, true);
+        });
+        if (previousInlineScrollBehavior !== null) {
+            document.documentElement.style.scrollBehavior = previousInlineScrollBehavior;
+            previousInlineScrollBehavior = null;
+        }
+    };
+
+    const cssTimeToMilliseconds = value => {
+        value = value.trim();
+        if (value.endsWith("ms")) return parseFloat(value) || 0;
+        if (value.endsWith("s")) return (parseFloat(value) || 0) * 1000;
+        return 0;
+    };
+
+    const collapseTransitionMilliseconds = () => items.reduce((longest, item) => {
+        const style = getComputedStyle(item);
+        const durations = style.transitionDuration.split(",").map(cssTimeToMilliseconds);
+        const delays = style.transitionDelay.split(",").map(cssTimeToMilliseconds);
+        const count = Math.max(durations.length, delays.length);
+        for (let i = 0; i < count; i++) {
+            longest = Math.max(
+                longest,
+                durations[i % durations.length] + delays[i % delays.length]
+            );
+        }
+        return longest;
+    }, 0);
+
+    const followAnchorDuringCollapse = (anchor, anchorTop) => {
+        cancelScrollFollow();
+        previousInlineScrollBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = "auto";
+        scrollCancelEvents.forEach(type => {
+            window.addEventListener(type, cancelScrollFollow, { capture: true, passive: true });
+        });
+
+        const endTime = performance.now() + collapseTransitionMilliseconds() + 50;
+        const follow = now => {
+            if (expanded) {
+                cancelScrollFollow();
+                return;
+            }
+
+            const delta = anchor.getBoundingClientRect().top - anchorTop;
+            if (Math.abs(delta) > 0.25) window.scrollBy(0, delta);
+
+            if (now < endTime) scrollFollowFrame = requestAnimationFrame(follow);
+            else cancelScrollFollow();
+        };
+        scrollFollowFrame = requestAnimationFrame(follow);
+    };
+
+    const dates = items.map(item => item.querySelector(".news-date"));
+    const nearestDate = clientY => dates.reduce((nearest, date) => {
+        if (!nearest) return date;
+        return Math.abs(date.getBoundingClientRect().top - clientY)
+            < Math.abs(nearest.getBoundingClientRect().top - clientY) ? date : nearest;
+    }, null);
+
+    const toggle = collapseAnchor => {
+        const anchorTop = collapseAnchor ? collapseAnchor.getBoundingClientRect().top : 0;
+        cancelScrollFollow();
         expanded = !expanded;
 
         if (expanded) {
@@ -96,6 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
             thirdItem.classList.add("news-arrow-down");
             list.classList.add("is-collapsed");
             sidebarClick.setAttribute("aria-label", `Show ${hiddenCount} more news items`);
+        }
+
+        if (!expanded && collapseAnchor) {
+            followAnchorDuringCollapse(collapseAnchor, anchorTop);
         }
 
         // Track the rail every frame for the length of the item transition. The
@@ -116,16 +198,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sidebarClick.setAttribute("aria-expanded", "false");
 
-    sidebarClick.addEventListener("click", toggle);
+    sidebarClick.addEventListener("click", e => {
+        toggle(expanded ? nearestDate(e.clientY) : null);
+    });
     sidebarClick.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            toggle();
+            toggle(expanded ? dates[dates.length - 1] : null);
         }
     });
 
     // Clicking any date also toggles
     list.querySelectorAll(".news-date").forEach(date => {
-        date.addEventListener("click", toggle);
+        date.addEventListener("click", () => toggle(expanded ? date : null));
     });
 });
