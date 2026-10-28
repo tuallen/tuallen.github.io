@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
 
-    <meta name="description" content="Copy-ready BibTeX citations for Allen Tu's publications, including SpeeDe3DGS, SplatSuRe, TransFIRA, PUP 3D-GS, and Speedy-Splat.">
+    <meta name="description" content="Copy-ready BibTeX citations for Allen Tu's publications, including GOFish, RIDE-Splat, SpeeDe3DGS, SplatSuRe, TransFIRA, PUP 3D-GS, and Speedy-Splat.">
     <meta name="keywords"
         content="Allen Tu, BibTeX, Citations, Research Publications, Computer Vision, 3D Gaussian Splatting">
     <title>BibTeX References - Allen Tu</title>
@@ -59,6 +59,17 @@
             "name": "Research Publications",
             "description": "Collection of BibTeX citations for scholarly articles",
             "itemListElement": [
+                {
+                    "@type": "ScholarlyArticle",
+                    "name": "GOFish: Full Field-of-View Gaussian Splatting and Mesh Extraction",
+                    "url": "https://3dgofish.github.io/"
+                },
+                {
+                    "@type": "ScholarlyArticle",
+                    "name": "RIDE-Splat: Reflection Removal for In-the-Wild Driving Environments",
+                    "sameAs": "https://arxiv.org/abs/2610.34632",
+                    "url": "https://ridesplat.github.io/"
+                },
                 {
                     "@type": "ScholarlyArticle",
                     "name": "PUP 3D-GS: Principled Uncertainty Pruning for 3D Gaussian Splatting",
@@ -167,7 +178,24 @@
                         <span class="btn-text">Download</span>
                     </button>
                 </div>
-                <pre class="bibtex-code" id="bibtex-content">@InProceedings{TuYing2025SpeeDe3DGS,
+                <pre class="bibtex-code" id="bibtex-content">@misc{Tu2026GOFish,
+    author = {Tu, Allen and Karumuri, Meher Gitika and Zhu, Shifan and Wang, Hailing and Lin, Yen-Liang and Held, David and Zwicker, Matthias and Goldstein, Tom},
+    title  = {{GOFish}: Full Field-of-View Gaussian Splatting and Mesh Extraction},
+    year   = {2026},
+    url    = {https://3dgofish.github.io/}
+}
+
+@misc{Hayes2026RIDESplat,
+    author        = {Hayes, Kevin David and Hanson, Alex and Tu, Allen and Asthana, Pranav and Zwicker, Matthias and Goldstein, Tom},
+    title         = {{RIDE-Splat}: Reflection Removal for In-the-Wild Driving Environments},
+    year          = {2026},
+    eprint        = {2610.34632},
+    archivePrefix = {arXiv},
+    primaryClass  = {cs.CV},
+    url           = {https://arxiv.org/abs/2610.34632}
+}
+
+@InProceedings{TuYing2025SpeeDe3DGS,
     author    = {Tu, Allen and Ying, Haiyang and Hanson, Alex and Lee, Yonghan and Goldstein, Tom and Zwicker, Matthias},
     title     = {SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping},
     booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},

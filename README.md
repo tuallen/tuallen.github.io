@@ -49,7 +49,7 @@ On top of the original template, I’ve introduced a number of custom features a
 - **Image viewer modal** (`image-modal.js`)  
   Lightweight modal for standalone image links (`.jpg`, `.png`, `.webp`, etc.). The modal shrink-wraps around the image up to 95% of the viewport while maintaining aspect ratio. Matches the theme of the PDF and BibTeX modals. Intercepts image links automatically site-wide; title is read from the `title` attribute, the wrapped `<img>`'s `alt`, or the filename as a fallback.
 - **Lazy loading**  
-  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos instead use `preload="metadata"` with a `poster` frame and only begin loading when scrolled into view — this keeps ~27 MB of off-screen video off the initial page load.
+  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos instead use `preload="metadata"` with a `poster` frame and only begin loading when scrolled into view — this keeps off-screen video out of the initial page load.
 
 ### Motion & Interaction Polish
 

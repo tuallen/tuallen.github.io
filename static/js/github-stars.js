@@ -1,5 +1,7 @@
 /* ---- GitHub Stars widgets ---- */
 const GITHUB_REPOS = {
+    "ridesplat-ride-splat": "ridesplat/ride-splat",
+    "tuallen-gofish": "tuallen/GOFish",
     "tuallen-speede3dgs": "tuallen/speede3dgs",
     "pranav-asthana-splatsure": "pranav-asthana/splatsure",
     "tuallen-transfira": "tuallen/transfira",

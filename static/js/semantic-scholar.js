@@ -2,6 +2,7 @@
 
 // Maps display slug -> paper ID (used for cache keying and fallback)
 const S2_PAPERS = {
+    "ridesplat": "afb95485b81c582de35da64382a6ce30f4c57227",
     "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9",
     "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
     "speede3dgs": "d1cebed3f0845908f4139149daf9bd40b7505e5b",

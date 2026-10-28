@@ -135,6 +135,43 @@
         "@graph": [
             {
                 "@type": "ScholarlyArticle",
+                "headline": "RIDE-Splat: Reflection Removal for In-the-Wild Driving Environments",
+                "author": [
+                    {
+                        "@type": "Person",
+                        "name": "Kevin David Hayes"
+                    },
+                    {
+                        "@type": "Person",
+                        "name": "Alex Hanson"
+                    },
+                    {
+                        "@id": "https://tuallen.github.io/#person"
+                    },
+                    {
+                        "@type": "Person",
+                        "name": "Pranav Asthana"
+                    },
+                    {
+                        "@type": "Person",
+                        "name": "Matthias Zwicker"
+                    },
+                    {
+                        "@type": "Person",
+                        "name": "Tom Goldstein"
+                    }
+                ],
+                "datePublished": "2026",
+                "identifier": {
+                    "@type": "PropertyValue",
+                    "propertyID": "arXiv",
+                    "value": "2610.34632"
+                },
+                "sameAs": "https://arxiv.org/abs/2610.34632",
+                "url": "https://ridesplat.github.io/"
+            },
+            {
+                "@type": "ScholarlyArticle",
                 "headline": "TransFIRA: Transfer Learning for Face Image Recognizability Assessment",
                 "author": [
                     {
@@ -342,8 +379,8 @@
     <script defer src="/static/js/pdf-modal.js?v=2026-08-02-3"></script>
     <script defer src="/static/js/image-modal.js?v=2026-08-02-3"></script>
     <script defer src="/static/js/zoom-containers.js?v=2026-08-02-3"></script>
-    <script defer src="/static/js/semantic-scholar.js?v=2026-08-02-3"></script>
-    <script defer src="/static/js/github-stars.js?v=2026-08-02-3"></script>
+    <script defer src="/static/js/semantic-scholar.js?v=2026-10-27-1"></script>
+    <script defer src="/static/js/github-stars.js?v=2026-10-27-1"></script>
     <script defer src="/static/js/new-tabs.js?v=2026-08-02-3"></script>
     <script defer src="/static/js/news-toggle.js?v=2026-10-13"></script>
     <script defer src="/static/js/scroll-reveal.js?v=2026-08-02-3"></script>
@@ -374,9 +411,8 @@
                     reconstruction and generation</a>, including compression methods for Gaussian Splatting and
                 diffusion-based priors that enable reconstruction from sparse or degraded imagery. I also worked on
                 multimodal <a href="/biometrics">biometric recognition</a> under severe operating conditions. I am
-                currently an Applied Science Intern at <a href="https://www.amazon.science/">Amazon</a>, building
-                photorealistic simulation environments for training embodied AI by reconstructing physics-ready 3D
-                digital twins from real-world sensor data.
+                currently an Applied Science Intern at <a href="https://www.amazon.science/">Amazon</a>, researching 3D digital twins,
+                world models, and agentic pipelines for physical AI simulation.
             </p>
 
             <p class="bio-extended">
@@ -395,6 +431,19 @@
                 <a href="/gallery/#cvpr2026" class="button heading-btn"><i class="fa fa-images"></i> Conference Gallery</a>
             </h2>
             <ul class="news-timeline">
+                <!-- <li>
+                    <time class="news-date" datetime="2026-10">October 2026</time>
+                    Released our <a href="https://3dgofish.github.io/">GOFish</a> <a href="">paper</a> and
+                    <a href="https://github.com/tuallen/GOFish">code</a> for simulation-ready 3D digital twins from fisheye images. 🐟
+                </li> -->
+
+                <li>
+                    <time class="news-date" datetime="2026-10">October 2026</time>
+                    Released our <a href="https://ridesplat.github.io/">RIDE-Splat</a> <a href="https://arxiv.org/abs/2610.34632">paper</a>,
+                    <a href="https://github.com/ridesplat/ride-splat">code</a>, and <a href="https://github.com/ridesplat/ride-splat-dataset">dataset</a>
+                    for reflection-free dashcam 3DGS. 🚗
+                </li>
+
                 <li>
                     <time class="news-date" datetime="2026-08">August 2026</time>
                     Extended my internship at <a href="https://www.amazon.science/">Amazon</a>
@@ -500,6 +549,101 @@
                         </td>
                     </tr> -->
 
+                    <!-- GOFISH RESEARCH HIGHLIGHT (temporarily hidden until release)
+                    <tr class="highlight-row">
+                        Teaser
+                        <td class="teaser-cell">
+                            <div class="video-container">
+                                <a href="https://3dgofish.github.io/" aria-label="GOFish project page">
+                                    <video poster="/media/posters/gofish_social_all_three.jpg?v=2026-10-22-2"
+                                        preload="metadata" class="video-thumbnail"
+                                        src="/media/gofish_social_all_three.mp4?v=2026-10-22-2" muted loop
+                                        loading="lazy"></video>
+                                </a>
+                            </div>
+                        </td>
+
+                        TITLE AND INFO
+                        <td>
+                            <div class="indexWorkText">
+                                Title + Link
+                                <b><a href="https://3dgofish.github.io/">GOFish: Full Field&#8209;of&#8209;View
+                                        Gaussian Splatting and Mesh Extraction</a></b>
+                                <br>
+                                <a href="" class="button">PAPER <i
+                                        class="ai ai-arxiv"></i></a>
+                                <a href="https://github.com/tuallen/GOFish" class="button">CODE <i
+                                        class="fa-brands fa-github"></i>
+                                    <span id="stars-tuallen-gofish"></span></a>
+                                <a href="https://3dgofish.github.io/" class="button">WEBSITE <i
+                                        class="fa fa-laptop"></i></a>
+                                <div class="spacer"></div>
+
+                                Description
+                                Reconstruct simulation-ready 3D digital twins directly from fisheye imagery, combining
+                                photorealistic Gaussian Splatting over the camera's full field of view with an aligned
+                                mesh for collisions.
+                                <div class="spacer"></div>
+
+                                Collaborators
+                                <strong>Allen Tu</strong>,
+                                <a href="https://scholar.google.com/citations?user=R14csHAAAAAJ">Meher Gitika Karumuri</a>,
+                                <a href="https://shifanzhu.github.io/">Shifan Zhu</a>,
+                                <a href="https://scholar.google.com/citations?user=oKoYjqUAAAAJ">Hailing Wang</a>,
+                                <a href="https://sites.google.com/view/yenlianglin">Yen-Liang Lin</a>,
+                                <a href="https://davheld.github.io/">David Held</a>,
+                                <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>,
+                                <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>
+                            </div>
+                        </td>
+                    </tr>
+                    GOFISH RESEARCH HIGHLIGHT -->
+
+                    <tr class="highlight-row">
+                        <!-- Teaser -->
+                        <td class="teaser-cell">
+                            <div class="video-container">
+                                <a href="https://ridesplat.github.io/" aria-label="RIDE-Splat project page">
+                                    <video poster="/media/posters/ridesplat_rs2.jpg?v=2026-10-15-1" preload="metadata" class="video-thumbnail" src="/media/ridesplat_rs2.mp4?v=2026-10-15-1" muted loop
+                                        loading="lazy"></video>
+                                </a>
+                            </div>
+                        </td>
+
+                        <!-- TITLE AND INFO -->
+                        <td>
+                            <div class="indexWorkText">
+                                <!-- Title + Link -->
+                                <b><a href="https://ridesplat.github.io/">RIDE-Splat: Reflection Removal for
+                                        In&#8209;the&#8209;Wild Driving Environments</a></b>
+                                <br>
+                                <a href="https://arxiv.org/abs/2610.34632" class="button">PAPER <i
+                                        class="ai ai-arxiv"></i><span id="cites-ridesplat"></span></a>
+                                <a href="https://github.com/ridesplat/ride-splat" class="button">CODE <i
+                                        class="fa-brands fa-github"></i>
+                                    <span id="stars-ridesplat-ride-splat"></span></a>
+                                <a href="https://github.com/ridesplat/ride-splat-dataset" class="button">DATA <i
+                                        class="fa fa-download"></i></a>
+                                <a href="https://ridesplat.github.io/" class="button">WEBSITE <i
+                                        class="fa fa-laptop"></i></a>
+                                <div class="spacer"></div>
+
+                                <!-- Description -->
+                                Reconstruct reflection-free 3D Gaussian Splatting scenes from dashcam footage by
+                                separating the world-consistent road scene from camera-attached windshield reflections.
+                                <div class="spacer"></div>
+
+                                <!-- Collaborators -->
+                                <a href="https://kevindavidhayes.com/">Kevin David Hayes</a>,
+                                <a href="https://www.cs.umd.edu/~hanson/">Alex Hanson</a>,
+                                <strong>Allen Tu</strong>,
+                                <a href="https://pranav-asthana.github.io/">Pranav Asthana</a>,
+                                <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>,
+                                <a href="https://www.cs.umd.edu/~tomg/">Tom&nbsp;Goldstein</a>
+                            </div>
+                        </td>
+                    </tr>
+
                     <tr class="highlight-row">
                         <!-- Teaser -->
                         <td class="teaser-cell">
@@ -515,8 +659,8 @@
                         <td>
                             <div class="indexWorkText">
                                 <!-- Title + Link -->
-                                <b><a href="https://speede3dgs.github.io/">SpeeDe3DGS: Speedy Deformable 3D Gaussian
-                                        Splatting with Temporal Pruning and Motion Grouping</a></b>
+                                <b><a href="https://speede3dgs.github.io/">SpeeDe3DGS: Speedy Deformable
+                                        3D&nbsp;Gaussian&nbsp;Splatting with Temporal Pruning and Motion Grouping</a></b>
                                 <br>
                                 <a href="/gallery/#cvpr2026">CVPR 2026</a>
                                 <br>
@@ -562,7 +706,7 @@
                             <div class="indexWorkText">
                                 <!-- Title + Link -->
                                 <b><a href="https://splatsure.github.io/">SplatSuRe: Selective Super-Resolution for
-                                        Multi-view Consistent 3D Gaussian Splatting</a></b>
+                                        Multi-view Consistent 3D&nbsp;Gaussian&nbsp;Splatting</a></b>
                                 <br>
                                 <a href="/gallery/#cvpr2026">CVPR 2026</a>
                                 <br>
@@ -678,7 +822,7 @@
                             <div class="indexWorkText">
                                 <!-- Title + Link -->
                                 <b><a href="https://pup3dgs.github.io/"> PUP 3D-GS: Principled Uncertainty Pruning
-                                        for 3D Gaussian Splatting
+                                        for 3D&nbsp;Gaussian&nbsp;Splatting
                                     </a></b>
                                 <br>
                                 <a href="/gallery/#cvpr2025">CVPR 2025</a>
@@ -707,7 +851,7 @@
                                 <a href="https://scholar.google.com/citations?user=0zysOU8AAAAJ">Mayuka
                                     Jayawardhana</a>,
                                 <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>,
-                                <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>
+                                <a href="https://www.cs.umd.edu/~tomg/">Tom&nbsp;Goldstein</a>
                             </div>
                         </td>
                     </tr>
@@ -727,8 +871,8 @@
                         <td>
                             <div class="indexWorkText">
                                 <!-- Title + Link -->
-                                <b><a href="https://speedysplat.github.io/"> Speedy-Splat: Fast 3D Gaussian Splatting
-                                        with Sparse Pixels and Sparse Primitives
+                                <b><a href="https://speedysplat.github.io/"> Speedy-Splat: Fast
+                                        3D&nbsp;Gaussian&nbsp;Splatting with Sparse Pixels and Sparse Primitives
                                     </a></b>
                                 <br>
                                 <a href="/gallery/#cvpr2025">CVPR 2025</a>
@@ -889,9 +1033,9 @@
                                     <li>Advised by Professors <a href='https://www.cs.umd.edu/~tomg/'>Tom Goldstein</a> and
                                         <a href='https://www.cs.umd.edu/~zwicker/'>Matthias Zwicker</a>
                                     </li>
-                                    <li>Collaborating with Professors
+                                    <!-- <li>Collaborating with Professors
                                         <a href='https://engineering.jhu.edu/faculty/vishal-patel/'>Vishal M. Patel</a> and
-                                        <a href='https://engineering.jhu.edu/faculty/rama-chellappa/'>Rama Chellappa</a></li>
+                                        <a href='https://engineering.jhu.edu/faculty/rama-chellappa/'>Rama Chellappa</a></li> -->
                                 </ul>
                             </div>
                         </td>
@@ -1186,7 +1330,24 @@
             </div>
 
             <div class="modal-bibtex-container">
-                <pre class="bibtex-code" id="modal-bibtex-content">@InProceedings{TuYing2025SpeeDe3DGS,
+                <pre class="bibtex-code" id="modal-bibtex-content">@misc{Tu2026GOFish,
+    author = {Tu, Allen and Karumuri, Meher Gitika and Zhu, Shifan and Wang, Hailing and Lin, Yen-Liang and Held, David and Zwicker, Matthias and Goldstein, Tom},
+    title  = {{GOFish}: Full Field-of-View Gaussian Splatting and Mesh Extraction},
+    year   = {2026},
+    url    = {https://3dgofish.github.io/}
+}
+
+@misc{Hayes2026RIDESplat,
+    author        = {Hayes, Kevin David and Hanson, Alex and Tu, Allen and Asthana, Pranav and Zwicker, Matthias and Goldstein, Tom},
+    title         = {{RIDE-Splat}: Reflection Removal for In-the-Wild Driving Environments},
+    year          = {2026},
+    eprint        = {2610.34632},
+    archivePrefix = {arXiv},
+    primaryClass  = {cs.CV},
+    url           = {https://arxiv.org/abs/2610.34632}
+}
+
+@InProceedings{TuYing2025SpeeDe3DGS,
     author    = {Tu, Allen and Ying, Haiyang and Hanson, Alex and Lee, Yonghan and Goldstein, Tom and Zwicker, Matthias},
     title     = {SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping},
     booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
