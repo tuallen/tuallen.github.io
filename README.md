@@ -9,13 +9,6 @@ The guiding principle is simple: keep things lightweight, readable, and publicat
 
 ---
 
-## Featured Research
-
-- **[GOFish: Full Field-of-View Gaussian Splatting and Mesh Extraction](https://3dgofish.github.io/)** — Reconstructs simulation-ready 3D digital twins directly from fisheye imagery, combining photorealistic full-field-of-view Gaussian Splatting with an aligned mesh for collisions. [Paper](https://arxiv.org/abs/2610.37818) · [Code](https://github.com/tuallen/GOFish)
-- **[RIDE-Splat: Reflection Removal for In-the-Wild Driving Environments](https://ridesplat.github.io/)** — Reconstructs reflection-free 3D Gaussian Splatting scenes from dashcam footage by separating the world-consistent road scene from camera-attached windshield reflections. [Paper](https://arxiv.org/abs/2610.34632) · [Code](https://github.com/ridesplat/ride-splat) · [Dataset](https://github.com/ridesplat/ride-splat/releases/tag/dataset-v0.1)
-
----
-
 ## Credits
 
 This site is built on top of the excellent academic website template by  
@@ -342,6 +335,8 @@ no longer served to visitors.
 
 In addition to this personal site, I have also built or helped assemble several research project websites based on this codebase:
 
+- [3dgofish.github.io](https://3dgofish.github.io/) ([Source Code](https://github.com/3dgofish/3dgofish.github.io))
+- [ridesplat.github.io](https://ridesplat.github.io/) ([Source Code](https://github.com/ridesplat/ridesplat.github.io))
 - [pup3dgs.github.io](https://pup3dgs.github.io/) ([Source Code](https://github.com/pup3dgs/pup3dgs.github.io))
 - [speedysplat.github.io](https://speedysplat.github.io/) ([Source Code](https://github.com/speedysplat/speedysplat.github.io))
 - [speede3dgs.github.io](https://speede3dgs.github.io/) ([Source Code](https://github.com/speede3dgs/speede3dgs.github.io))
@@ -357,7 +352,7 @@ This template has also been used for other academic websites, some of which I he
 
 ---
 
-**Last Updated:** August 20, 2026
+**Last Updated:** October 29, 2026
   
 **Built with care** ☕  
 **by Allen Tu, with help from AI tools**
