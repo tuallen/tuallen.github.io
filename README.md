@@ -9,6 +9,13 @@ The guiding principle is simple: keep things lightweight, readable, and publicat
 
 ---
 
+## Featured Research
+
+- **[GOFish: Full Field-of-View Gaussian Splatting and Mesh Extraction](https://3dgofish.github.io/)** — Reconstructs simulation-ready 3D digital twins directly from fisheye imagery, combining photorealistic full-field-of-view Gaussian Splatting with an aligned mesh for collisions. [Paper](https://arxiv.org/abs/2610.37818) · [Code](https://github.com/tuallen/GOFish)
+- **[RIDE-Splat: Reflection Removal for In-the-Wild Driving Environments](https://ridesplat.github.io/)** — Reconstructs reflection-free 3D Gaussian Splatting scenes from dashcam footage by separating the world-consistent road scene from camera-attached windshield reflections. [Paper](https://arxiv.org/abs/2610.34632) · [Code](https://github.com/ridesplat/ride-splat) · [Dataset](https://github.com/ridesplat/ride-splat/releases/tag/dataset-v0.1)
+
+---
+
 ## Credits
 
 This site is built on top of the excellent academic website template by  
@@ -21,12 +28,12 @@ Huge thanks to her for open-sourcing a clean, well-structured starting point.
 
 ## Tech Stack
 
-- **Pure HTML / CSS / JavaScript** — No frameworks, no build process; just vanilla web technologies
+- **Pure HTML / CSS / JavaScript** — No runtime framework or application build step; just vanilla web technologies
 - **Font Awesome 6.5.1** — General-purpose icon library, self-hosted as a subset of only the glyphs in use (see `tools/build-webfonts.sh`)
 - **Academicons** — Academic-specific icons (ORCID, arXiv, DBLP, etc.), also self-hosted as a subset
 - **Inter** — Body typeface, self-hosted as a variable font (no Google Fonts request)
 - **Custom SVG icon system** — Inline SVG masks for institutional and organizational logos
-- **Modern image formats** — WebP with PNG/JPG fallbacks
+- **Modern media formats** — WebP with PNG/JPG fallbacks, plus AV1 video with fast-start H.264 fallbacks
 - **Google Analytics** — Lightweight traffic monitoring
 
 ---
@@ -37,8 +44,8 @@ On top of the original template, I’ve introduced a number of custom features a
 
 ### Interactive Media
 
-- **Image slideshows** (`slideshow.js`)  
-  Swipable image carousels with auto-advance, keyboard navigation, touch/mouse drag, and dot indicators. Auto-advance pauses when the slideshow is off-screen (via IntersectionObserver) to save resources. Used for research highlight teasers (with hover zoom) and the Conference Gallery page (full-width, no crop).  
+- **Image and video slideshows** (`slideshow.js`)
+  Swipable carousels with keyboard navigation, touch/mouse drag, and dot indicators. Image slides auto-advance on a timer only while visible. GOFish video slides advance when the active clip ends, pause off-screen, and loop the focused clip instead of advancing while hover zoom is active. Used for research highlight teasers and the Conference Gallery page.
   The track is a true ring: stepping past the last slide moves the images left like any other forward step instead of rewinding the whole strip, and stepping back off the first moves them right. Dots take whichever way round is shorter, so the last dot is one step from the first — the transition is a fixed 0.4s whatever the distance, so a jump the long way round the 9-image gallery would sweep 8 slides in that time. Rather than clone slides — the video carousel's slides own `<video>` ids a comparison slider has already bound a canvas to — the slides about to be crossed are shifted a strip width to the far end for the length of the animation, which places them beside the current slide in ring order. That shift is a transform, so no flex item's box moves and the strip's layout is untouched; the offsets are swapped back for the equivalent in-bounds ones on `transitionend`, while only the on-screen slide is visible, making the swap unobservable. A move that stays inside the strip skips all of this and writes the one transform it always did, so the extra work — the shift and the single forced reflow that lands it — is paid only on a wrap.
 - **Zoom containers** (`zoom-containers.js`)  
   Click-to-expand images and videos without leaving the page
@@ -49,7 +56,7 @@ On top of the original template, I’ve introduced a number of custom features a
 - **Image viewer modal** (`image-modal.js`)  
   Lightweight modal for standalone image links (`.jpg`, `.png`, `.webp`, etc.). The modal shrink-wraps around the image up to 95% of the viewport while maintaining aspect ratio. Matches the theme of the PDF and BibTeX modals. Intercepts image links automatically site-wide; title is read from the `title` attribute, the wrapped `<img>`'s `alt`, or the filename as a fallback.
 - **Lazy loading**  
-  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos instead use `preload="metadata"` with a `poster` frame and only begin loading when scrolled into view — this keeps off-screen video out of the initial page load.
+  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos use `preload="metadata"` with lightweight poster frames and begin playback/decoding only when scrolled into view. Inactive carousel videos remain paused.
 
 ### Motion & Interaction Polish
 
@@ -144,7 +151,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 - **Semantic HTML5** — one `<h1>` per page with sections as `<h2>` (the accent-bar styling lives on `.section-heading`, so heading level follows the document outline rather than the design), a `main` landmark on each page's content `<section>`, and an accessible name on every link, button and control
 - **Keyboard access** — a skip link as the first tab stop, since the header contributes 16 tab stops before the content begins, and a `:focus-visible` ring on the slideshows, which are `tabindex="0"` and arrow-key navigable but set `outline: none`
 - **Styling in stylesheets** — repeated inline styles live in classes instead (`.section-heading`/`.has-action` for headings, `.teaser-cell` for highlight-row media cells, `.tight-under-heading` for content pulled up under a heading), which is what let the heading levels change without touching a single visual rule
-- **Optimized media** — images sized to what the UI actually shows, allowing for the hover zoom (`display width x zoom x 2` for retina); videos kept at native resolution because they are already below that threshold
+- **Optimized media** — images and videos are sized for their displayed and hover-zoomed dimensions, with AV1 preferred for compact delivery and fast-start H.264 retained for compatibility
 - **Cache busting** — Automated versioning system for static assets to ensure browsers load latest versions
 
 One deliberate non-change: `components/header.html` is a fragment that returns 200,
@@ -179,7 +186,7 @@ path, which GitHub Pages cannot set per-file. Left crawlable on purpose.
 │   ├── js/
 │   │   ├── components.js   # Component loader with entrance animations
 │   │   ├── theme-switcher.js # Dark mode toggle with rise/set animation
-│   │   ├── slideshow.js    # Swipable image carousels
+│   │   ├── slideshow.js    # Swipable image and end-driven video carousels
 │   │   ├── pdf-modal.js    # Full-screen PDF viewer modal (auto-zooms posters; native passthrough on mobile)
 │   │   ├── image-modal.js  # Image viewer modal (intercepts all image links; auto-loads .webp if available, downloads original)
 │   │   ├── github-stars.js
@@ -191,8 +198,8 @@ path, which GitHub Pages cannot set per-file. Left crawlable on purpose.
 │   │   └── bibtex.js       # Copy/download functionality for BibTeX
 │   ├── icons/              # SVG logos and favicons
 │   └── images/             # Photos and media
-├── media/                  # Research teasers and videos
-│   └── posters/            # First-frame stills for thumbnail videos
+├── media/                  # AV1/H.264 research teasers and videos
+│   └── posters/            # Lightweight first-frame stills for thumbnail videos
 ├── files/                  # CV, resume, etc.
 ├── tools/
 │   └── build-webfonts.sh   # Regenerates the icon-font subsets and Inter
@@ -213,7 +220,7 @@ sh run_server.sh
 
 Then navigate to `http://localhost:8000` in your browser.
 
-The server script uses Python's built-in HTTP server for quick local testing.
+The server script uses Python's built-in HTTP server bound to `127.0.0.1` for local-only testing.
 
 ---
 
@@ -241,6 +248,7 @@ This site uses modern web standards and is optimized for:
 
 Graceful degradation is implemented for older browsers:
 - WebP images fall back to PNG/JPG
+- AV1 videos fall back to H.264
 - CSS mask-image icons degrade to standard text
 - JavaScript features are progressively enhanced
 - The large-screen `zoom` scaling is a pure enhancement — unsupported browsers simply render the page at its normal fixed width
