@@ -211,24 +211,37 @@ function initSlideshow(container) {
     const prevBtn = container.querySelector(".slideshow-prev");
     const nextBtn = container.querySelector(".slideshow-next");
     const imgs = Array.from(track.querySelectorAll("img"));
+    const videos = Array.from(track.querySelectorAll("video"));
+    const advanceOnEnd = container.dataset.advance === "ended" && videos.length > 0;
+    const reduceMotion = window.matchMedia
+        ? window.matchMedia("(prefers-reduced-motion: reduce)")
+        : { matches: false };
 
     let autoTimer = null;
     let paused = false;
+    let inView = false;
+    let hoverLocked = false;
 
-    // Set container height based on a reference image (data-aspect-ref, 0-indexed)
+    // Set container height from the selected reference image or video.
     const aspectRef = parseInt(container.dataset.aspectRef || "0", 10);
     const refImg = imgs[aspectRef] || imgs[0];
+    const refVideo = videos[aspectRef] || videos[0];
 
     function calcHeight() {
-        if (!refImg || !refImg.naturalWidth) return;
-        const ratio = refImg.naturalHeight / refImg.naturalWidth;
-        const height = Math.round(container.offsetWidth * ratio);
-        container.style.setProperty("--slideshow-height", `${height}px`);
+        const sourceWidth = refImg?.naturalWidth || refVideo?.videoWidth;
+        const sourceHeight = refImg?.naturalHeight || refVideo?.videoHeight;
+        if (!sourceWidth || !sourceHeight) return;
+        const ratio = sourceHeight / sourceWidth;
+        const displayHeight = Math.round(container.offsetWidth * ratio);
+        container.style.setProperty("--slideshow-height", `${displayHeight}px`);
     }
 
     if (refImg) {
         if (refImg.complete) calcHeight();
         else refImg.addEventListener("load", calcHeight);
+    } else if (refVideo) {
+        if (refVideo.readyState >= HTMLMediaElement.HAVE_METADATA) calcHeight();
+        else refVideo.addEventListener("loadedmetadata", calcHeight, { once: true });
     }
 
     // Create dots between the arrows
@@ -244,10 +257,44 @@ function initSlideshow(container) {
 
     const ring = createRingTrack(track, slides, (index) => {
         dots.forEach((d, i) => d.classList.toggle("active", i === index));
+        if (advanceOnEnd) syncVideos(index, true);
     });
 
-    // Auto-advance every 3 seconds (only when visible)
+    function syncVideos(index, restart) {
+        videos.forEach((video, i) => {
+            if (i !== index) {
+                video.pause();
+                return;
+            }
+            if (restart) {
+                try { video.currentTime = 0; } catch { }
+            }
+            if (inView && !paused && !reduceMotion.matches) {
+                video.play().catch(() => { });
+            }
+        });
+    }
+
+    if (advanceOnEnd) {
+        videos.forEach((video, index) => {
+            video.addEventListener("ended", () => {
+                if (!inView || paused || ring.current !== index) return;
+                if (hoverLocked) {
+                    video.currentTime = 0;
+                    video.play().catch(() => { });
+                } else {
+                    ring.step(1);
+                }
+            });
+        });
+    }
+
+    // Images use a timer; video cards advance when the active clip ends.
     function startAuto() {
+        if (advanceOnEnd) {
+            syncVideos(ring.current, false);
+            return;
+        }
         clearInterval(autoTimer);
         autoTimer = setInterval(() => {
             if (!paused) ring.step(1);
@@ -257,6 +304,7 @@ function initSlideshow(container) {
     function stopAuto() {
         clearInterval(autoTimer);
         autoTimer = null;
+        if (advanceOnEnd) videos.forEach(video => video.pause());
     }
 
     function resetAuto() { if (!paused) startAuto(); }
@@ -264,6 +312,7 @@ function initSlideshow(container) {
     // Only auto-advance when the slideshow is on screen
     const visibilityObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            inView = entry.isIntersecting;
             if (entry.isIntersecting) {
                 startAuto();
             } else {
@@ -278,9 +327,20 @@ function initSlideshow(container) {
     prevBtn.addEventListener("click", () => { ring.step(-1); resetAuto(); });
     nextBtn.addEventListener("click", () => { ring.step(1); resetAuto(); });
 
-    // Pause on hover
-    container.addEventListener("mouseenter", () => { paused = true; });
-    container.addEventListener("mouseleave", () => { paused = false; resetAuto(); });
+    // Hover zoom locks a video carousel to its current slide without pausing
+    // playback; the clip loops until the pointer leaves. Image carousels retain
+    // their existing pause-on-hover behavior.
+    container.addEventListener("mouseenter", () => {
+        if (advanceOnEnd) hoverLocked = true;
+        else paused = true;
+    });
+    container.addEventListener("mouseleave", () => {
+        if (advanceOnEnd) hoverLocked = false;
+        else {
+            paused = false;
+            resetAuto();
+        }
+    });
 
     // Touch swipe
     let startX = 0, startY = 0, isDragging = false;
@@ -290,6 +350,7 @@ function initSlideshow(container) {
         startY = e.touches[0].clientY;
         isDragging = true;
         paused = true;
+        if (advanceOnEnd) stopAuto();
     }, { passive: true });
 
     track.addEventListener("touchend", (e) => {
@@ -311,6 +372,7 @@ function initSlideshow(container) {
         mouseStartX = e.clientX;
         mouseDragging = true;
         paused = true;
+        if (advanceOnEnd) stopAuto();
         e.preventDefault();
     });
 

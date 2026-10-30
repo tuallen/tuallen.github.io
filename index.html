@@ -415,7 +415,7 @@
     <link rel="preload" href="/static/webfonts/fa-solid-900.woff2?v=2026-10-29" as="font" type="font/woff2" crossorigin>
     <script src="/static/js/components.js?v=2026-10-29"></script>
     <link rel="stylesheet" href="/static/stylesheets/inter.css?v=2026-10-29">
-    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-10-29">
+    <link rel="stylesheet" href="/static/stylesheets/styles.css?v=2026-10-29-1">
     <link rel="stylesheet" href="/static/stylesheets/zoom_containers.css?v=2026-10-29">
     <link rel="stylesheet" href="/static/stylesheets/fontawesome-subset.css?v=2026-10-29">
     <link rel="stylesheet" href="/static/stylesheets/academicons-subset.css?v=2026-10-29">
@@ -430,7 +430,7 @@
     <script defer src="/static/js/new-tabs.js?v=2026-10-29"></script>
     <script defer src="/static/js/news-toggle.js?v=2026-10-29"></script>
     <script defer src="/static/js/scroll-reveal.js?v=2026-10-29"></script>
-    <script defer src="/static/js/slideshow.js?v=2026-10-29"></script>
+    <script defer src="/static/js/slideshow.js?v=2026-10-29-1"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJTNBEPMB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -479,9 +479,8 @@
             <ul class="news-timeline">
                 <li>
                     <time class="news-date" datetime="2026-10">October 2026</time>
-                    Released our <a href="https://3dgofish.github.io/">GOFish</a> <a href="https://arxiv.org/abs/2610.37818">paper</a>,
-                    <a href="https://github.com/tuallen/GOFish">code</a>, and
-                    <a href="https://huggingface.co/datasets/AllenTu/GOFish-scenes">models</a> for simulation-ready 3D digital twins from fisheye images. 🐟
+                    Released our <a href="https://3dgofish.github.io/">GOFish</a> <a href="https://arxiv.org/abs/2610.37818">paper</a> and
+                    <a href="https://github.com/tuallen/GOFish">code</a> for simulation-ready 3D digital twins from fisheye images. 🐟
                 </li>
 
                 <li>
@@ -600,16 +599,49 @@
                     <tr class="highlight-row">
                         <!-- Teaser -->
                         <td class="teaser-cell">
-                            <div class="video-container">
-                                <a href="https://3dgofish.github.io/" aria-label="GOFish project page">
-                                    <video poster="/media/posters/gofish_social_all_three.jpg?v=2026-10-29"
-                                        preload="metadata" class="video-thumbnail" muted loop loading="lazy">
-                                        <source src="/media/gofish_social_all_three.av1.mp4?v=2026-10-29"
-                                            type='video/mp4; codecs="av01"'>
-                                        <source src="/media/gofish_social_all_three.mp4?v=2026-10-29"
-                                            type="video/mp4">
-                                    </video>
-                                </a>
+                            <div class="slideshow gofish-video-carousel" tabindex="0"
+                                data-aspect-ref="0" data-link="https://3dgofish.github.io/"
+                                data-advance="ended">
+                                <div class="slideshow-track-wrapper">
+                                    <div class="slideshow-track">
+                                        <div class="slideshow-slide">
+                                            <video poster="/media/posters/gofish_building_social_render.jpg?v=2026-10-29"
+                                                preload="metadata" muted playsinline
+                                                aria-label="GOFish full-field-of-view rendering comparison">
+                                                <source src="/media/gofish_building_social_render.av1.mp4?v=2026-10-29"
+                                                    type='video/mp4; codecs="av01"'>
+                                                <source src="/media/gofish_building_social_render.mp4?v=2026-10-29"
+                                                    type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <div class="slideshow-slide">
+                                            <video poster="/media/posters/gofish_building_social_mesh.jpg?v=2026-10-29"
+                                                preload="metadata" muted playsinline
+                                                aria-label="GOFish aligned mesh extraction">
+                                                <source src="/media/gofish_building_social_mesh.av1.mp4?v=2026-10-29"
+                                                    type='video/mp4; codecs="av01"'>
+                                                <source src="/media/gofish_building_social_mesh.mp4?v=2026-10-29"
+                                                    type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <div class="slideshow-slide">
+                                            <video poster="/media/posters/gofish_simulation_solo.jpg?v=2026-10-29"
+                                                preload="metadata" muted playsinline
+                                                aria-label="GOFish physical simulation and ray tracing">
+                                                <source src="/media/gofish_simulation_solo.av1.mp4?v=2026-10-29"
+                                                    type='video/mp4; codecs="av01"'>
+                                                <source src="/media/gofish_simulation_solo.mp4?v=2026-10-29"
+                                                    type="video/mp4">
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slideshow-controls">
+                                    <button class="slideshow-prev" aria-label="Previous GOFish clip"><i
+                                            class="fa fa-chevron-left"></i></button>
+                                    <button class="slideshow-next" aria-label="Next GOFish clip"><i
+                                            class="fa fa-chevron-right"></i></button>
+                                </div>
                             </div>
                         </td>
 
@@ -625,8 +657,6 @@
                                 <a href="https://github.com/tuallen/GOFish" class="button">CODE <i
                                         class="fa-brands fa-github"></i>
                                     <span id="stars-tuallen-gofish"></span></a>
-                                <a href="https://huggingface.co/datasets/AllenTu/GOFish-scenes" class="button">MODELS <i
-                                        class="fa fa-download"></i></a>
                                 <a href="https://3dgofish.github.io/" class="button">WEBSITE <i
                                         class="fa fa-laptop"></i></a>
                                 <div class="spacer"></div>

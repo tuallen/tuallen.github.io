@@ -1085,6 +1085,14 @@ section > h2 .button.heading-btn {
   user-select: none;
 }
 
+.slideshow-slide > video {
+  width: 100%;
+  height: var(--slideshow-height, auto);
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
 .slideshow-controls {
   display: flex;
   align-items: center;
