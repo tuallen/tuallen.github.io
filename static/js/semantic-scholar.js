@@ -1,8 +1,11 @@
 /* ---- Semantic Scholar citation widgets ---- */
 
-// Maps display slug -> paper ID (used for cache keying and fallback)
+// Maps display slug -> Semantic Scholar paper identifier (used for cache
+// keying and fallback). Corpus IDs are stable across paper merges, while the
+// older entries retain their canonical hash IDs.
 const S2_PAPERS = {
-    "ridesplat": "afb95485b81c582de35da64382a6ce30f4c57227",
+    "gofish": "CorpusId:295318932",
+    "ridesplat": "CorpusId:294364883",
     "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9",
     "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
     "speede3dgs": "d1cebed3f0845908f4139149daf9bd40b7505e5b",
@@ -18,12 +21,22 @@ const CACHE_TTL = 12 * 60 * 60 * 1000; // 12 hours
 
 async function fetchAllCites() {
     const response = await fetch(
-        `https://api.semanticscholar.org/graph/v1/author/${S2_AUTHOR_ID}/papers?fields=citationCount&limit=50`
+        `https://api.semanticscholar.org/graph/v1/author/${S2_AUTHOR_ID}/papers?fields=citationCount,corpusId&limit=50`
     );
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const { data } = await response.json();
-    // Return a map of paperId -> citationCount
-    return Object.fromEntries(data.map(p => [p.paperId, p.citationCount ?? 0]));
+
+    // Index each result by both identifier forms so new corpus-ID mappings and
+    // existing canonical-hash mappings share the same one-request data source.
+    const citesById = {};
+    data.forEach(paper => {
+        const count = paper.citationCount ?? 0;
+        citesById[paper.paperId] = count;
+        if (paper.corpusId != null) {
+            citesById[`CorpusId:${paper.corpusId}`] = count;
+        }
+    });
+    return citesById;
 }
 
 function updateCitationDisplay(slug, count) {

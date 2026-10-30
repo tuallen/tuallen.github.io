@@ -33,7 +33,7 @@ from typing import Dict, List, Optional, Tuple
 # unaffected.
 ASSET_EXTS = [
     "css", "js", "pdf", "bib",
-    "ico", "png", "svg", "webp", "jpg", "jpeg", "gif",
+    "ico", "png", "svg", "avif", "webp", "jpg", "jpeg", "gif",
     "mp4", "webm", "woff2",
 ]
 _EXT_ALT = "|".join(ASSET_EXTS)
@@ -41,11 +41,12 @@ _EXT_ALT = "|".join(ASSET_EXTS)
 # href="/path/asset.ext", optionally already versioned. Requiring the closing
 # quote right after the extension (or an existing ?v=) leaves URLs that carry
 # real query parameters alone, e.g. pdfviewer.html?file=...
-# Beyond href/src: data-link is the URL slideshow.js opens on click, and poster
-# is the still frame a <video> paints before playback. Both are real asset
+# Beyond href/src: data-link is the URL slideshow.js opens on click; poster is
+# the still frame a <video> paints before playback; and data-src/data-poster are
+# deferred media references hydrated by slideshow.js. All are real asset
 # references and need versioning too.
 HTML_ATTR_RE = re.compile(
-    r'(?P<attr>href|src|data-link|poster)="(?P<url>[^"]+?\.(?:' + _EXT_ALT + r'))'
+    r'(?P<attr>data-src|data-poster|data-link|href|src|poster)="(?P<url>[^"]+?\.(?:' + _EXT_ALT + r'))'
     r'(?:\?v=[^"]*)?"'
 )
 
