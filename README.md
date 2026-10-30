@@ -26,7 +26,7 @@ Huge thanks to her for open-sourcing a clean, well-structured starting point.
 - **Academicons** — Academic-specific icons (ORCID, arXiv, DBLP, etc.), also self-hosted as a subset
 - **Inter** — Body typeface, self-hosted as a variable font (no Google Fonts request)
 - **Custom SVG icon system** — Inline SVG masks for institutional and organizational logos
-- **Modern media formats** — WebP with PNG/JPG fallbacks, plus AV1 video with fast-start H.264 fallbacks
+- **Modern media formats** — AVIF/WebP with PNG/JPG fallbacks, plus AV1 video with fast-start H.264 fallbacks
 - **Google Analytics** — Lightweight traffic monitoring
 
 ---
@@ -38,18 +38,18 @@ On top of the original template, I’ve introduced a number of custom features a
 ### Interactive Media
 
 - **Image and video slideshows** (`slideshow.js`)
-  Swipable carousels with keyboard navigation, touch/mouse drag, and dot indicators. Image slides auto-advance on a timer only while visible. GOFish video slides advance when the active clip ends, pause off-screen, and loop the focused clip instead of advancing while hover zoom is active. Used for research highlight teasers and the Conference Gallery page.
+  Swipable carousels with keyboard navigation, touch/mouse drag, and dot indicators. Image slides auto-advance on a timer only while visible. GOFish video slides advance when the active clip ends, pause off-screen, and loop the focused clip instead of advancing while hover zoom is active. Inactive video sources are hydrated only when selected, so they incur no media request up front. Used for research highlight teasers and the Conference Gallery page.
   The track is a true ring: stepping past the last slide moves the images left like any other forward step instead of rewinding the whole strip, and stepping back off the first moves them right. Dots take whichever way round is shorter, so the last dot is one step from the first — the transition is a fixed 0.4s whatever the distance, so a jump the long way round the 9-image gallery would sweep 8 slides in that time. Rather than clone slides — the video carousel's slides own `<video>` ids a comparison slider has already bound a canvas to — the slides about to be crossed are shifted a strip width to the far end for the length of the animation, which places them beside the current slide in ring order. That shift is a transform, so no flex item's box moves and the strip's layout is untouched; the offsets are swapped back for the equivalent in-bounds ones on `transitionend`, while only the on-screen slide is visible, making the swap unobservable. A move that stays inside the strip skips all of this and writes the one transform it always did, so the extra work — the shift and the single forced reflow that lands it — is paid only on a wrap.
 - **Zoom containers** (`zoom-containers.js`)  
   Click-to-expand images and videos without leaving the page
 - **Video comparison sliders** (`video_comparison.js`)  
-  Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations. On the 3D/4D page the sliders share one slot as a carousel (`.video-slideshow`) so they don't stack vertically, and only the visible comparison plays. Navigation is arrows/dots/arrow keys only — drag-to-swipe would conflict with dragging the split itself. It wraps around the same way the image carousels do, sharing their ring logic.
+  Interactive side-by-side video comparisons with draggable sliders for qualitative research demonstrations. On the 3D/4D page the sliders share one slot as a carousel (`.video-slideshow`) so they don't stack vertically, and only the visible comparison loads and plays. Navigation is arrows/dots/arrow keys only — drag-to-swipe would conflict with dragging the split itself. It wraps around the same way the image carousels do, sharing their ring logic.
 - **Custom PDF Viewer** (`pdf-modal.js`, `pdfviewer.html`)  
   Full-screen in-page PDF viewer for any `.pdf` link site-wide. Powered by a self-hosted PDF.js instance, it avoids native browser limitations. It features a sleek Edge-style top toolbar with page shadows, custom controls (zoom, page navigation, fit width/page, rotate, print, and download), and comprehensive keyboard shortcut support. The viewer visually mirrors the Microsoft Edge PDF experience, including an automatic system-aware light/dark theme that adapts to OS preferences independently of the main site theme. It intelligently intercepts external links inside the PDF to open in new tabs and auto-zooms landscape posters.
 - **Image viewer modal** (`image-modal.js`)  
   Lightweight modal for standalone image links (`.jpg`, `.png`, `.webp`, etc.). The modal shrink-wraps around the image up to 95% of the viewport while maintaining aspect ratio. Matches the theme of the PDF and BibTeX modals. Intercepts image links automatically site-wide; title is read from the `title` attribute, the wrapped `<img>`'s `alt`, or the filename as a fallback.
 - **Lazy loading**  
-  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos use `preload="metadata"` with lightweight poster frames and begin playback/decoding only when scrolled into view. Inactive carousel videos remain paused.
+  Images use `loading="lazy"`. `loading` is a no-op on `<video>`, so thumbnail videos combine explicit dimensions, lightweight poster frames, and `preload="none"`; playback and downloading begin only when a card scrolls into view. Inactive carousel sources are not attached until selected.
 
 ### Motion & Interaction Polish
 
@@ -144,7 +144,7 @@ Monochrome icons are implemented using `mask-image` so they inherit text color, 
 - **Semantic HTML5** — one `<h1>` per page with sections as `<h2>` (the accent-bar styling lives on `.section-heading`, so heading level follows the document outline rather than the design), a `main` landmark on each page's content `<section>`, and an accessible name on every link, button and control
 - **Keyboard access** — a skip link as the first tab stop, since the header contributes 16 tab stops before the content begins, and a `:focus-visible` ring on the slideshows, which are `tabindex="0"` and arrow-key navigable but set `outline: none`
 - **Styling in stylesheets** — repeated inline styles live in classes instead (`.section-heading`/`.has-action` for headings, `.teaser-cell` for highlight-row media cells, `.tight-under-heading` for content pulled up under a heading), which is what let the heading levels change without touching a single visual rule
-- **Optimized media** — images and videos are sized for their displayed and hover-zoomed dimensions, with AV1 preferred for compact delivery and fast-start H.264 retained for compatibility
+- **Optimized media** — gallery photos use display-sized AVIF where it beats the original, videos are sized for their displayed and hover-zoomed dimensions, and AV1 is preferred over separately optimized fast-start H.264 compatibility copies
 - **Cache busting** — Automated versioning system for static assets to ensure browsers load latest versions
 
 One deliberate non-change: `components/header.html` is a fragment that returns 200,
@@ -162,7 +162,7 @@ path, which GitHub Pages cannot set per-file. Left crawlable on purpose.
 ├── hub/                    # Link hub page
 ├── 3d/                     # 3D/4D research portfolio
 ├── biometrics/             # Biometric recognition research
-├── gallery/                # Conference gallery (CVPR, FG slideshows)
+├── gallery/                # Conference gallery with AVIF delivery copies and JPG originals
 ├── bibtex/                 # BibTeX references page
 ├── components/             # Reusable HTML components
 │   ├── header.html         # Shared header with navigation
@@ -240,7 +240,7 @@ This site uses modern web standards and is optimized for:
 - **Safari** (latest)
 
 Graceful degradation is implemented for older browsers:
-- WebP images fall back to PNG/JPG
+- AVIF/WebP images fall back to PNG/JPG
 - AV1 videos fall back to H.264
 - CSS mask-image icons degrade to standard text
 - JavaScript features are progressively enhanced

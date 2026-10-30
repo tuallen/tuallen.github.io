@@ -125,6 +125,30 @@ function initVideoSlideshow(container) {
     const prevBtn = container.querySelector(".slideshow-prev");
     const nextBtn = container.querySelector(".slideshow-next");
     const videos = slides.map(s => s.querySelector("video"));
+    let inView = false;
+
+    // Comparison videos keep their URLs in data-src so the browser cannot fetch
+    // every slide while only one is visible. Hydrate the selected video shortly
+    // before the slideshow reaches the viewport; its H.264 source remains the
+    // compatibility fallback when AV1 is unavailable.
+    function loadAndPlay(v) {
+        if (!v) return;
+        const canvas = v.parentElement?.querySelector("canvas[data-poster]");
+        if (canvas && !canvas.dataset.posterLoaded) {
+            canvas.style.backgroundImage = `url("${canvas.dataset.poster}")`;
+            canvas.dataset.posterLoaded = "true";
+        }
+        if (!v.dataset.slideshowLoaded) {
+            v.querySelectorAll("source[data-src]").forEach(source => {
+                source.src = source.dataset.src;
+                delete source.dataset.src;
+            });
+            v.dataset.slideshowLoaded = "true";
+            v.load();
+        }
+        v.dataset.slideshowStarted = "true";
+        v.play().catch(() => { });
+    }
 
     slides.forEach((_, i) => {
         const dot = document.createElement("button");
@@ -148,7 +172,7 @@ function initVideoSlideshow(container) {
         // a paused slide still looks like a paused video rather than a blank box.
         videos.forEach((v, i) => {
             if (!v) return;
-            if (i === index) v.play().catch(() => { });
+            if (i === index && inView) loadAndPlay(v);
             else pauseOnceReady(v);
         });
     });
@@ -157,6 +181,7 @@ function initVideoSlideshow(container) {
     // handler, so pausing before that runs would leave the canvas blank
     // forever. Wait for it to report ready (and paint one frame), then pause.
     function pauseOnceReady(v) {
+        if (!v.dataset.slideshowStarted) return;
         if (v.dataset.comparisonReady) {
             requestAnimationFrame(() => {
                 if (videos[ring.current] !== v) v.pause();
@@ -187,19 +212,16 @@ function initVideoSlideshow(container) {
     // Pause everything while the whole slideshow is off screen.
     new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            inView = entry.isIntersecting;
+            if (inView) {
                 const vid = videos[ring.current];
-                if (vid) vid.play().catch(() => { });
+                loadAndPlay(vid);
                 videos.forEach((v, i) => { if (v && i !== ring.current) pauseOnceReady(v); });
             } else {
                 videos.forEach(v => v && v.pause());
             }
         });
-    }, { threshold: 0.1 }).observe(container);
-
-    // Every slide autoplays so each slider can size its canvas and paint a first
-    // frame; the off-screen ones are paused as soon as they report ready.
-    videos.forEach((v, i) => { if (v && i !== 0) pauseOnceReady(v); });
+    }, { threshold: 0, rootMargin: "300px 0px" }).observe(container);
 }
 
 function initSlideshow(container) {
@@ -228,8 +250,8 @@ function initSlideshow(container) {
     const refVideo = videos[aspectRef] || videos[0];
 
     function calcHeight() {
-        const sourceWidth = refImg?.naturalWidth || refVideo?.videoWidth;
-        const sourceHeight = refImg?.naturalHeight || refVideo?.videoHeight;
+        const sourceWidth = refImg?.naturalWidth || refVideo?.videoWidth || refVideo?.width;
+        const sourceHeight = refImg?.naturalHeight || refVideo?.videoHeight || refVideo?.height;
         if (!sourceWidth || !sourceHeight) return;
         const ratio = sourceHeight / sourceWidth;
         const displayHeight = Math.round(container.offsetWidth * ratio);
@@ -240,7 +262,7 @@ function initSlideshow(container) {
         if (refImg.complete) calcHeight();
         else refImg.addEventListener("load", calcHeight);
     } else if (refVideo) {
-        if (refVideo.readyState >= HTMLMediaElement.HAVE_METADATA) calcHeight();
+        if ((refVideo.width && refVideo.height) || refVideo.readyState >= HTMLMediaElement.HAVE_METADATA) calcHeight();
         else refVideo.addEventListener("loadedmetadata", calcHeight, { once: true });
     }
 
@@ -260,12 +282,25 @@ function initSlideshow(container) {
         if (advanceOnEnd) syncVideos(index, true);
     });
 
+    function ensureVideoLoaded(video) {
+        if (!video || video.dataset.slideshowLoaded) return;
+        let hydrated = false;
+        video.querySelectorAll("source[data-src]").forEach(source => {
+            source.src = source.dataset.src;
+            delete source.dataset.src;
+            hydrated = true;
+        });
+        video.dataset.slideshowLoaded = "true";
+        if (hydrated) video.load();
+    }
+
     function syncVideos(index, restart) {
         videos.forEach((video, i) => {
             if (i !== index) {
                 video.pause();
                 return;
             }
+            ensureVideoLoaded(video);
             if (restart) {
                 try { video.currentTime = 0; } catch { }
             }
