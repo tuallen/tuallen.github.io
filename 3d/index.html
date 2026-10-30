@@ -248,43 +248,48 @@
                         </td>
                     </tr> -->
 
-                    <!-- GOFISH RESEARCH HIGHLIGHT (temporarily hidden until release)
+                    <!-- GOFISH RESEARCH HIGHLIGHT -->
                     <tr class="highlight-row">
-                        Teaser
+                        <!-- Teaser -->
                         <td class="teaser-cell">
                             <div class="video-container">
                                 <a href="https://3dgofish.github.io/" aria-label="GOFish project page">
                                     <video poster="/media/posters/gofish_social_all_three.jpg?v=2026-10-29"
-                                        preload="metadata" class="video-thumbnail"
-                                        src="/media/gofish_social_all_three.mp4?v=2026-10-29" muted loop
-                                        loading="lazy"></video>
+                                        preload="metadata" class="video-thumbnail" muted loop loading="lazy">
+                                        <source src="/media/gofish_social_all_three.av1.mp4?v=2026-10-29"
+                                            type='video/mp4; codecs="av01"'>
+                                        <source src="/media/gofish_social_all_three.mp4?v=2026-10-29"
+                                            type="video/mp4">
+                                    </video>
                                 </a>
                             </div>
                         </td>
 
-                        TITLE AND INFO
+                        <!-- TITLE AND INFO -->
                         <td>
                             <div class="indexWorkText">
-                                Title + Link
+                                <!-- Title + Link -->
                                 <b><a href="https://3dgofish.github.io/">GOFish: Full Field&#8209;of&#8209;View
                                         Gaussian Splatting and Mesh Extraction</a></b>
                                 <br>
-                                <a href="" class="button">PAPER <i
+                                <a href="https://arxiv.org/abs/2610.37818" class="button">PAPER <i
                                         class="ai ai-arxiv"></i></a>
                                 <a href="https://github.com/tuallen/GOFish" class="button">CODE <i
                                         class="fa-brands fa-github"></i>
                                     <span id="stars-tuallen-gofish"></span></a>
+                                <a href="https://huggingface.co/datasets/AllenTu/GOFish-scenes" class="button">MODELS <i
+                                        class="fa fa-download"></i></a>
                                 <a href="https://3dgofish.github.io/" class="button">WEBSITE <i
                                         class="fa fa-laptop"></i></a>
                                 <div class="spacer"></div>
 
-                                Description
+                                <!-- Description -->
                                 Reconstruct simulation-ready 3D digital twins directly from fisheye imagery, combining
                                 photorealistic Gaussian Splatting over the camera's full field of view with an aligned
                                 mesh for collisions.
                                 <div class="spacer"></div>
 
-                                Collaborators
+                                <!-- Collaborators -->
                                 <strong>Allen Tu</strong>,
                                 <a href="https://scholar.google.com/citations?user=R14csHAAAAAJ">Meher Gitika Karumuri</a>,
                                 <a href="https://shifanzhu.github.io/">Shifan Zhu</a>,
@@ -296,7 +301,7 @@
                             </div>
                         </td>
                     </tr>
-                    GOFISH RESEARCH HIGHLIGHT -->
+                    <!-- END GOFISH RESEARCH HIGHLIGHT -->
 
                     <tr class="highlight-row">
                         <!-- Teaser -->
@@ -619,7 +624,7 @@
             <h2 class="section-heading">Acknowledgements</h2>
             <p>
                 This research is based upon work supported by the Office of the Director of National Intelligence
-                (ODNI), Intelligence Advanced Research Projects Activity (IARPA), via IARPA R&D Contract No.
+                (ODNI), Intelligence Advanced Research Projects Activity (IARPA), via IARPA R&amp;D Contract No.
                 140D0423C0076. The views and conclusions contained herein are those of the authors and should
                 not be interpreted as necessarily representing the official policies or endorsements, either
                 expressed or implied, of the ODNI, IARPA, or the U.S. Government. The U.S. Government is
@@ -654,10 +659,13 @@
 
             <div class="modal-bibtex-container">
                 <pre class="bibtex-code" id="modal-bibtex-content">@misc{Tu2026GOFish,
-    author = {Tu, Allen and Karumuri, Meher Gitika and Zhu, Shifan and Wang, Hailing and Lin, Yen-Liang and Held, David and Zwicker, Matthias and Goldstein, Tom},
-    title  = {{GOFish}: Full Field-of-View Gaussian Splatting and Mesh Extraction},
-    year   = {2026},
-    url    = {https://3dgofish.github.io/}
+    author        = {Tu, Allen and Karumuri, Meher Gitika and Zhu, Shifan and Wang, Hailing and Lin, Yen-Liang and Held, David and Zwicker, Matthias and Goldstein, Tom},
+    title         = {{GOFish}: Full Field-of-View Gaussian Splatting and Mesh Extraction},
+    year          = {2026},
+    eprint        = {2610.37818},
+    archivePrefix = {arXiv},
+    primaryClass  = {cs.CV},
+    url           = {https://arxiv.org/abs/2610.37818}
 }
 
 @misc{Hayes2026RIDESplat,
