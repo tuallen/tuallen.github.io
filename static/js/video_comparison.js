@@ -33,6 +33,12 @@ function playVids(videoId) {
         }
 
         videoMerge.addEventListener("mousemove", trackLocation, false);
+        videoMerge.addEventListener("mouseleave", function () {
+            if (window.matchMedia &&
+                !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+            position = 0.5;
+            redrawIfIdle();
+        }, { passive: true });
         videoMerge.addEventListener("touchstart", trackLocationTouch, false);
         videoMerge.addEventListener("touchmove", trackLocationTouch, false);
 
