@@ -19,11 +19,13 @@ async function fetchStars(repo) {
     return stargazers_count ?? 0;
 }
 
+// A repo can back more than one card (TransFIRA and TransFIRA+ share a repo), so
+// extra badges carry data-stars="<slug>" instead of a second, duplicate id.
 function updateStarsDisplay(slug, count) {
-    const span = document.getElementById(`stars-${slug}`);
-    if (span && count != null && count > 0) {
+    if (count == null || count <= 0) return;
+    document.querySelectorAll(`#stars-${slug}, [data-stars="${slug}"]`).forEach((span) => {
         span.textContent = ` ${count}`;
-    }
+    });
 }
 
 (async () => {
