@@ -5,6 +5,7 @@
 // older entries retain their canonical hash IDs.
 const S2_PAPERS = {
     "gofish": "CorpusId:295318932",
+    "transfiraplus": "CorpusId:296004706",
     "ridesplat": "CorpusId:294364883",
     "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9",
     "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
@@ -39,11 +40,13 @@ async function fetchAllCites() {
     return citesById;
 }
 
+// A paper can appear on a page more than once, so extra badges carry
+// data-cites="<slug>" instead of a second, duplicate id.
 function updateCitationDisplay(slug, count) {
-    const span = document.getElementById(`cites-${slug}`);
-    if (span && count != null && count > 0) {
+    if (count == null || count <= 0) return;
+    document.querySelectorAll(`#cites-${slug}, [data-cites="${slug}"]`).forEach((span) => {
         span.textContent = ` ${count}`;
-    }
+    });
 }
 
 (async () => {
