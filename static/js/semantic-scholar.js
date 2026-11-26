@@ -8,6 +8,7 @@ const S2_PAPERS = {
     "transfiraplus": "CorpusId:296004706",
     "looking-right": "CorpusId:296144114",
     "recallworld": "CorpusId:296204823",
+    "dreamtour": "CorpusId:296256319",
     "ridesplat": "CorpusId:294364883",
     "pup3dgs": "3046a843ca616b00c6c11f1fec3a1585ed8fd7c9",
     "speedy-splat": "941ada3e24e6f54bb49cfaeff998f4f5cbac5a38",
